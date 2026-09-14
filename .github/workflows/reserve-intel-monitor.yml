@@ -1,0 +1,82 @@
+name: Reserve Intel Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 6 hours, offset from the top of the hour.
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: reserve-intel-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out content repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate source registry
+        run: |
+          python automation/validate_sources.py automation/reserve-intel-sources.json
+
+      - name: Self-test monitor
+        run: |
+          python automation/check_sources.py --self-test
+
+      - name: Check official Reserve Intel sources
+        id: monitor
+        run: |
+          python automation/check_sources.py \
+            --registry automation/reserve-intel-sources.json \
+            --state automation/source-state.json \
+            --report automation/monitor-report.md
+
+      - name: Save monitor state
+        run: |
+          if git diff --quiet -- automation/source-state.json automation/monitor-report.md; then
+            echo "No monitor-state changes to commit."
+            exit 0
+          fi
+
+          git config user.name "reserve-intel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add automation/source-state.json automation/monitor-report.md
+          git commit -m "Update Reserve Intel monitor state"
+
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+
+      - name: Open review issue for detected changes
+        if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.review_items == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_COUNT: ${{ steps.monitor.outputs.candidate_count }}
+          CHANGED_SOURCE_COUNT: ${{ steps.monitor.outputs.changed_source_count }}
+        run: |
+          TITLE="Reserve Intel review: ${CANDIDATE_COUNT} candidate(s), ${CHANGED_SOURCE_COUNT} changed source(s)"
+          gh issue create \
+            --title "$TITLE" \
+            --body-file automation/monitor-report.md
+
+      - name: Upload monitor report
+        uses: actions/upload-artifact@v4
+        with:
+          name: reserve-intel-monitor-report
+          path: automation/monitor-report.md
+          if-no-files-found: error
+          retention-days: 30
