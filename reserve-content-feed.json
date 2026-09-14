@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-14T13:25:00Z",
+  "intelArticles": [
+    {
+      "id": "intel-retirement-fairness",
+      "publishedAt": "2026-09-13T13:00:00Z",
+      "updatedAt": "2026-09-14T14:00:00Z",
+      "title": "Reserve Retirement Fairness Act — Tracking Update",
+      "category": "Retirement",
+      "status": "PROPOSED",
+      "priority": "HIGH",
+      "summary": "Mock tracking article for proposed legislation affecting Reserve retirement eligibility and timing.",
+      "whyItMatters": "Retirement legislation can change when qualifying Reserve service produces retired-pay eligibility. Salty Dog should distinguish proposals from enacted law and implementation guidance.",
+      "details": "This is sample IT-1 content for interface testing only. The production article will summarize the latest verified legislative status, explain the Reserve-specific effect, identify what has and has not changed, and link directly to the authoritative source.",
+      "effectiveDate": null,
+      "sourceName": "Sample legislative source",
+      "sourceURL": "https://www.congress.gov/",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": true,
+      "isActive": true
+    },
+    {
+      "id": "intel-duty-status-reform",
+      "publishedAt": "2026-09-11T18:00:00Z",
+      "updatedAt": null,
+      "title": "NDAA Reserve Duty Status Reform",
+      "category": "Legislation / NDAA",
+      "status": "TRACKING",
+      "priority": "HIGH",
+      "summary": "Mock NDAA item showing how Salty Dog can track proposed simplification of Reserve duty categories.",
+      "whyItMatters": "Any future duty-status reform could affect how IDT, active-duty periods, pay, points, benefits, and app terminology are displayed.",
+      "details": "This sample article demonstrates the future Intel format: what is being discussed, current legislative status, what would change if enacted, likely implementation dependencies, and which Salty Dog tools might need to be updated.",
+      "effectiveDate": null,
+      "sourceName": "Sample NDAA source",
+      "sourceURL": "https://www.congress.gov/",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
+    {
+      "id": "intel-fy27-pay",
+      "publishedAt": "2026-09-09T12:00:00Z",
+      "updatedAt": null,
+      "title": "FY27 Military Pay & Drill Pay Watch",
+      "category": "Pay & Benefits",
+      "status": "TRACKING",
+      "priority": "NORMAL",
+      "summary": "Mock pay-watch article for annual military basic-pay and corresponding drill-pay changes.",
+      "whyItMatters": "Changes to basic pay flow directly into Reserve drill compensation and can affect the Pay Tracker once official tables are published.",
+      "details": "This placeholder will eventually show the proposed, authorized, and final published pay changes separately so users can tell the difference between an estimate and an effective pay table.",
+      "effectiveDate": null,
+      "sourceName": "Sample DoD source",
+      "sourceURL": "https://www.dfas.mil/",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
+    {
+      "id": "intel-annual-training",
+      "publishedAt": "2026-09-07T15:00:00Z",
+      "updatedAt": null,
+      "title": "Annual Training Requirement Update",
+      "category": "Training & Readiness",
+      "status": "TRACKING",
+      "priority": "NORMAL",
+      "summary": "Mock readiness article for changes to annual Reserve training or participation guidance.",
+      "whyItMatters": "Changes to required training can affect individual readiness, command deadlines, and the Admin Gouge experience inside Salty Dog.",
+      "details": "Production Intel can use this format for NAVADMIN, RESPERSMAN, CNAFR, NRC, or command-level guidance after the source has been verified and the effective date is known.",
+      "effectiveDate": null,
+      "sourceName": "Sample Navy Reserve source",
+      "sourceURL": "https://www.mynavyhr.navy.mil/",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "SELRES",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
+    {
+      "id": "intel-va-pay",
+      "publishedAt": "2026-09-05T16:00:00Z",
+      "updatedAt": null,
+      "title": "VA Disability Compensation Pay Watch",
+      "category": "VA / Veteran Benefits",
+      "status": "TRACKING",
+      "priority": "NORMAL",
+      "summary": "Mock benefits article for annual VA compensation changes that may affect Reservists receiving disability pay.",
+      "whyItMatters": "Reserve members receiving VA compensation may want one place to follow annual rate changes and related Reserve drill-pay offset guidance.",
+      "details": "This IT-1 sample does not state a real rate change. Production content will use verified VA sources and will clearly separate published rates from projections or pending legislation.",
+      "effectiveDate": null,
+      "sourceName": "Sample VA source",
+      "sourceURL": "https://www.va.gov/",
+      "audience": {
+        "service": "ALL",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    }
+  ],
+  "tipperMessages": []
+}
