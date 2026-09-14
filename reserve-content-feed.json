@@ -1,7 +1,76 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14T14:10:00Z",
+  "generatedAt": "2026-09-14T14:35:00Z",
   "intelArticles": [
+    {
+      "id": "intel-navadmin-204-26-cyber",
+      "publishedAt": "2026-08-31T18:38:00Z",
+      "updatedAt": "2026-09-14T14:35:00Z",
+      "title": "NAVADMIN 204/26 — Cyber Awareness Moves to Every 3 Years for Military Personnel",
+      "category": "Training & Readiness",
+      "status": "EFFECTIVE",
+      "priority": "HIGH",
+      "summary": "Effective immediately, active-duty and Reserve military personnel complete the Cybersecurity Awareness Challenge when first granted network access and every three years thereafter instead of annually.",
+      "whyItMatters": "This changes a recurring Navy training requirement that Reservists may track through command readiness tools. Salty Dog should no longer assume Cyber Awareness is due every fiscal year for military members.",
+      "details": "NAVADMIN 204/26 modifies NAVADMIN 084/26. Effective immediately, all active-duty and Reserve military personnel must complete the Department of War Cybersecurity Awareness Challenge upon initial granting of network access and every three years thereafter. This supersedes the prior annual fiscal-year requirement for military personnel. Civilian employees and contractors remain on an annual requirement. FLTMPS and TWMS are being updated for the new three-year periodicity; until those updates are complete, commands are directed to locally track personnel who completed the training within the preceding 36 months so network access is not incorrectly suspended.",
+      "effectiveDate": "2026-08-31T18:38:00Z",
+      "sourceName": "NAVADMIN 204/26 — MyNavyHR",
+      "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
+    {
+      "id": "intel-navadmin-200-26-cbrn-mask",
+      "publishedAt": "2026-08-20T16:48:00Z",
+      "updatedAt": "2026-09-14T14:35:00Z",
+      "title": "NAVADMIN 200/26 — Annual CBRN Mask Fit Training Required for Reservists",
+      "category": "Training & Readiness",
+      "status": "EFFECTIVE",
+      "priority": "HIGH",
+      "summary": "All Active and Reserve Navy personnel must complete annual CBRN protective-mask fit and seal training, with Reserve component implementation plans and readiness tracking required.",
+      "whyItMatters": "This creates a recurring annual readiness requirement that can affect Reserve training plans and should eventually be represented in Salty Dog's readiness/admin tracking.",
+      "details": "NAVADMIN 200/26 establishes annual CBRN mask fit and seal training for all Navy personnel, including Reserve personnel. Training includes approved fit testing and a negative-pressure seal check, inspection and preventive maintenance of protective equipment, mask donning, clearing, adjustment and use, plus command-applicable confidence training. For Type I, III and VI duty, ashore and Reserve component commanders were directed to submit implementation plans and strive to have personnel complete the requirement no later than December 31, 2026. Annual completion is documented in FLTMPS.",
+      "effectiveDate": "2026-08-20T16:48:00Z",
+      "sourceName": "NAVADMIN 200/26 — MyNavyHR",
+      "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26200.pdf",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
+    {
+      "id": "intel-navadmin-106-26-continuation",
+      "publishedAt": "2026-05-06T13:44:00Z",
+      "updatedAt": "2026-09-14T14:35:00Z",
+      "title": "NAVADMIN 106/26 — FY27 Reserve Officer Continuation Moves to Semiannual Boards",
+      "category": "Admin",
+      "status": "EFFECTIVE",
+      "priority": "NORMAL",
+      "summary": "Beginning in FY27, eligible Reserve officer retention and continuation cases move from monthly panels to two semiannual boards, with the first FY27 package deadline on November 15, 2026.",
+      "whyItMatters": "Reserve officers approaching statutory attrition because of age, promotion failures, or years of service now have fewer board opportunities and firm package deadlines to plan around.",
+      "details": "NAVADMIN 106/26 applies to eligible Selected Reserve, Individual Ready Reserve and Standby Reserve-Active officers; TAR officers are handled separately. Beginning October 1, 2026, the process transitions from monthly panels to semiannual boards. The FY27 boards convene January 18, 2027 and July 19, 2027. For the January board, eligible attrition dates run from February 1 through July 31, 2027 and packages are due by 2359 CST on November 15, 2026. For the July board, eligible attrition dates run from August 1, 2027 through January 31, 2028 and packages are due by 2359 CST on May 15, 2027. Late packages are not accepted.",
+      "effectiveDate": "2026-10-01T05:00:00Z",
+      "sourceName": "NAVADMIN 106/26 — MyNavyHR",
+      "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26106.pdf",
+      "audience": {
+        "service": "USN",
+        "reserveStatus": "ALL",
+        "trainingWing": null,
+        "squadron": null
+      },
+      "isPinned": false,
+      "isActive": true
+    },
     {
       "id": "intel-retirement-fairness",
       "publishedAt": "2026-08-24T16:00:00Z",
