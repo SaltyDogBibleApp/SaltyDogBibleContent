@@ -8,8 +8,8 @@
 
 | Field | Proposed value |
 | --- | --- |
-| Category | Policy |
-| Status | TRACKING |
+| Category | Training & Readiness |
+| Status | EFFECTIVE |
 | Priority | HIGH |
 | Service | USN |
 | Reserve status | ALL |
@@ -18,15 +18,23 @@
 
 ### Summary
 
-Automated draft from an official source: MODIFICATION TO NAVADMIN 084/26 - FISCAL YEAR 2026 CYBERSECURITY AWARENESS CHALLENGE TRAINING REQUIREMENTS. Review the source before publishing any policy conclusion.
+Effective immediately, the frequency for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is changed for all active duty and reserve military personnel. a. Military personnel are now required to complete the CAC upon initial granting of network access and every three years thereafter. b. This supersedes the annual fiscal year requirement previously directed in paragraph 2 of reference (a).
 
 ### Why It Matters
 
-This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: CYBERSECURITY.
+Effective immediately, the frequency for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is changed for all active duty and reserve military personnel. a. Until system updates are complete, commands must locally track and document compliance for military personnel who have completed the training within the preceding 36 months to ensure network access is not erroneously suspended.
 
 ### Details
 
-This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.
+Purpose. This NAVADMIN modifies reference (a) to align Department of the Navy cybersecurity training requirements with the updated guidance provided in references (b) and (c).
+
+Policy Update. Effective immediately, the periodicity for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is officially changed for all active duty and reserve military personnel. a. Military personnel are now required to complete the CAC upon initial granting of network access and every three (3) years thereafter. b. This supersedes the annual fiscal year requirement previously directed in paragraph 2 of reference (a).
+
+Civilian and Contractor Personnel. The relaxed periodicity applies strictly to military personnel per reference (c). Department of the Navy civilian employees and contractors must continue to complete the CAC on an annual basis to maintain compliance with the Federal Information Security Modernization Act (FISMA).
+
+Training Systems Configuration. a. Fleet Training Management and Planning System (FLTMPS) and Total Workforce Management Services (TWMS) are currently being updated to reflect this three-year periodicity for military members. b. Until system updates are complete, commands shall locally track and document compliance for military personnel who have completed the training within the preceding 36 months to ensure network access is not erroneously suspended.
+
+Network Access Restrictions. Echelon II Command Information Officers (CIOs) will ensure that automated network account disablement scripts account for this modified periodicity for military accounts.
 
 ### Official Source
 
