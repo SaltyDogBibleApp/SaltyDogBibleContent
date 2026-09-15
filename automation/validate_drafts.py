@@ -9,6 +9,7 @@ VALID_STATUSES={"TRACKING","PROPOSED","INTRODUCED","COMMITTEE","PASSED HOUSE","P
 VALID_PRIORITIES={"NORMAL","HIGH"}
 VALID_SERVICES={"ALL","USN","USMC"}
 VALID_RESERVE_STATUSES={"ALL","SELRES","VTU"}
+VALID_APP_IMPACT_FEATURES={"Drill / Orders","Pay Tracker","Points & Retirement","Readiness Tracker","VA Disability","Admin Gouge"}
 CHECKLIST={"sourceOpenedAndRead","factsVerifiedAgainstSource","statusVerified","effectiveDateVerified","audienceVerified","summaryRewrittenFromSource","whyItMattersRewrittenFromSource","detailsRewrittenFromSource","approvedForPublication"}
 
 def fail(msg): raise ValueError(msg)
@@ -24,6 +25,24 @@ def validate(payload,name):
     if payload.get("draftStatus") != "PENDING_HUMAN_REVIEW": fail(f"{name}: wrong draftStatus.")
     if payload.get("requiresHumanReview") is not True: fail(f"{name}: requiresHumanReview must be true.")
     if payload.get("publishReady") is not False: fail(f"{name}: publishReady must be false.")
+
+
+    impact=payload.get("appImpact")
+    if impact is not None:
+        if not isinstance(impact,dict): fail(f"{name}: appImpact must be an object.")
+        if not isinstance(impact.get("requiresReview"),bool): fail(f"{name}: appImpact.requiresReview must be boolean.")
+        features=impact.get("features")
+        if not isinstance(features,list): fail(f"{name}: appImpact.features must be an array.")
+        if any(not isinstance(feature,str) or feature not in VALID_APP_IMPACT_FEATURES for feature in features):
+            fail(f"{name}: appImpact.features contains an unsupported feature.")
+        if len(features) != len(set(features)): fail(f"{name}: appImpact.features contains duplicates.")
+        if impact["requiresReview"] != bool(features):
+            fail(f"{name}: appImpact.requiresReview must match whether features are present.")
+        basis=impact.get("basis")
+        if not isinstance(basis,list) or any(not isinstance(item,str) or not item.strip() for item in basis):
+            fail(f"{name}: appImpact.basis must be an array of non-empty strings.")
+        note=impact.get("note")
+        if not isinstance(note,str) or not note.strip(): fail(f"{name}: appImpact.note must be a non-empty string.")
 
     ev=payload.get("sourceEvidence")
     if not isinstance(ev,dict): fail(f"{name}: sourceEvidence missing.")
