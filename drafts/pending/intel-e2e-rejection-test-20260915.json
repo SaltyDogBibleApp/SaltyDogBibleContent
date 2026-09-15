@@ -1,0 +1,49 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "appImpact": {
+    "requiresReview": true,
+    "features": ["Pay Tracker"],
+    "basis": ["controlled rejection lifecycle test"],
+    "note": "TEST ONLY. This item must be rejected and must never be published."
+  },
+  "sourceEvidence": {
+    "sourceType": "pay_tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "listedDate": "09/15/2026",
+    "reserveSignals": ["DRILL PAY"],
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-e2e-rejection-test-20260915",
+    "title": "TEST ONLY — Reserve Intel Rejection Lifecycle",
+    "category": "Pay & Benefits",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Controlled test of the Reserve Intel rejected-review lifecycle.",
+    "whyItMatters": "This test verifies that closing a review PR without merging archives the draft as rejected.",
+    "details": "TEST ONLY. This draft must be closed without merge and must never be published to the live Reserve Intel feed.",
+    "sourceName": "DFAS Military Pay Tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "audience": {
+      "service": "ALL",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isActive": false
+  }
+}
