@@ -127,6 +127,9 @@ def parse_monitor_report(text):
             "signals": parse_csvish(fields.get("reserve signals","")),
             "categoryHints": parse_csvish(fields.get("category hints","")),
             "listedDate": fields.get("listed date") or None,
+            "detectionKind": fields.get("detection") or "new_item",
+            "sourceFingerprint": fields.get("source fingerprint") or None,
+            "previousFingerprint": fields.get("previous fingerprint") or None,
         })
     return results
 
@@ -190,7 +193,10 @@ def app_impact(candidate):
     }
 
 def make_draft(candidate, detected_at):
-    article_id = f"intel-{slugify(candidate['title'])[:64]}-{short_hash(candidate['sourceURL'])}"
+    identity_seed = candidate["sourceURL"]
+    if candidate.get("sourceFingerprint"):
+        identity_seed += "|" + candidate["sourceFingerprint"]
+    article_id = f"intel-{slugify(candidate['title'])[:64]}-{short_hash(identity_seed)}"
     signals = ", ".join(candidate.get("signals",[]))
     signal_phrase = f" Detected Reserve signals: {signals}." if signals else ""
     return {
@@ -207,6 +213,9 @@ def make_draft(candidate, detected_at):
             "listedDate":candidate.get("listedDate"),
             "reserveSignals":candidate.get("signals",[]),
             "categoryHints":candidate.get("categoryHints",[]),
+            "detectionKind":candidate.get("detectionKind","new_item"),
+            "sourceFingerprint":candidate.get("sourceFingerprint"),
+            "previousFingerprint":candidate.get("previousFingerprint"),
             "officialHostVerified":host_is_official(candidate["sourceURL"]),
         },
         "reviewChecklist":{
@@ -290,6 +299,37 @@ def main():
         assert neutral["appImpact"]["requiresReview"] is False
         assert neutral["appImpact"]["features"] == []
         assert neutral["appImpact"]["basis"] == []
+
+        pay_change_report = """# Reserve Intel Monitor Report
+
+## New potentially relevant items
+
+### DFAS Military Pay Tables — source content changed
+
+- Source: **DFAS Military Pay Tables**
+- Type: `pay_tables`
+- URL: https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/
+- Reserve signals: DRILL PAY, BASIC PAY
+- Category hints: Pay & Benefits
+- Detection: `source_changed_in_place`
+- Source fingerprint: `fingerprint-new`
+- Previous fingerprint: `fingerprint-old`
+
+## Publishing safety
+"""
+        pay_candidates = parse_monitor_report(pay_change_report)
+        assert len(pay_candidates) == 1
+        pay_draft = make_draft(pay_candidates[0], "2026-09-15T14:00:00Z")
+        assert pay_draft["sourceEvidence"]["detectionKind"] == "source_changed_in_place"
+        assert pay_draft["sourceEvidence"]["sourceFingerprint"] == "fingerprint-new"
+        assert pay_draft["sourceEvidence"]["previousFingerprint"] == "fingerprint-old"
+        assert pay_draft["articleDraft"]["category"] == "Pay & Benefits"
+        assert "Pay Tracker" in pay_draft["appImpact"]["features"]
+
+        changed_again = dict(pay_candidates[0])
+        changed_again["sourceFingerprint"] = "fingerprint-newer"
+        second_pay_draft = make_draft(changed_again, "2026-09-16T14:00:00Z")
+        assert second_pay_draft["articleDraft"]["id"] != pay_draft["articleDraft"]["id"]
 
         print("SELF-TEST PASSED")
         return 0
