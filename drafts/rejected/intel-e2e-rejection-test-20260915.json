@@ -1,19 +1,25 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
+  "draftStatus": "REJECTED",
+  "requiresHumanReview": false,
   "publishReady": false,
   "appImpact": {
     "requiresReview": true,
-    "features": ["Pay Tracker"],
-    "basis": ["controlled rejection lifecycle test"],
+    "features": [
+      "Pay Tracker"
+    ],
+    "basis": [
+      "controlled rejection lifecycle test"
+    ],
     "note": "TEST ONLY. This item must be rejected and must never be published."
   },
   "sourceEvidence": {
     "sourceType": "pay_tables",
     "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
     "listedDate": "09/15/2026",
-    "reserveSignals": ["DRILL PAY"],
+    "reserveSignals": [
+      "DRILL PAY"
+    ],
     "officialHostVerified": true
   },
   "reviewChecklist": {
@@ -45,5 +51,13 @@
       "squadron": null
     },
     "isActive": false
+  },
+  "rejectedAt": "2026-09-15T23:04:47Z",
+  "rejection": {
+    "reason": "review_pr_closed_without_merge",
+    "pullRequestNumber": "6",
+    "pullRequestURL": "https://github.com/SaltyDogBibleApp/SaltyDogBibleContent/pull/6",
+    "pullRequestTitle": "Reserve Intel Review: TEST ONLY — Reserve Intel Rejection Lifecycle",
+    "reviewBodySHA256": "7e07f50c1ee0ff054cc4659149904f3ab0dadf5cc6c7412c8e860d0da26b01f5"
   }
 }
