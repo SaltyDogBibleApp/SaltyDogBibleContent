@@ -1,0 +1,97 @@
+name: Reserve Intel Review PR
+
+on:
+  workflow_run:
+    workflows: ["Reserve Intel Monitor"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: reserve-intel-review-pr
+  cancel-in-progress: false
+
+jobs:
+  create-review-prs:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate pending drafts
+        run: |
+          python automation/validate_drafts.py drafts/pending
+
+      - name: Create human-readable review PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          DRAFTS=(drafts/pending/*.json)
+
+          if [ ${#DRAFTS[@]} -eq 0 ]; then
+            echo "No pending Reserve Intel drafts."
+            exit 0
+          fi
+
+          gh label create reserve-intel-review \
+            --color 0969DA \
+            --description "Human review required before Reserve Intel publication" \
+            2>/dev/null || true
+
+          for DRAFT in "${DRAFTS[@]}"; do
+            ARTICLE_ID="$(basename "$DRAFT" .json)"
+            BRANCH="reserve-intel-review/${ARTICLE_ID}"
+
+            # A prior PR (open, merged, or closed) means this exact draft has already
+            # entered the review workflow. Do not create duplicates.
+            EXISTING="$(gh pr list \
+              --state all \
+              --head "$BRANCH" \
+              --json number \
+              --jq 'length')"
+
+            if [ "$EXISTING" != "0" ]; then
+              echo "Review PR already exists for ${ARTICLE_ID}; skipping."
+              continue
+            fi
+
+            git switch -C "$BRANCH" origin/main
+
+            REVIEW_FILE="reviews/pending/${ARTICLE_ID}.md"
+            META_FILE="/tmp/${ARTICLE_ID}-metadata.json"
+
+            python automation/prepare_review_pr.py \
+              --draft "$DRAFT" \
+              --output "$REVIEW_FILE" \
+              --metadata "$META_FILE"
+
+            TITLE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["title"])' "$META_FILE")"
+
+            git add "$REVIEW_FILE"
+            git commit -m "Create Reserve Intel review for ${ARTICLE_ID}"
+            git push --force-with-lease origin "$BRANCH"
+
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "Reserve Intel Review: ${TITLE}" \
+              --body-file "$REVIEW_FILE" \
+              --label reserve-intel-review \
+              --draft
+
+            git switch main
+            git reset --hard origin/main
+          done
