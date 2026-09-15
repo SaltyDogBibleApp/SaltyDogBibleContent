@@ -399,6 +399,38 @@ def source_fingerprint(page_text: str, items: list[dict]) -> str:
     return sha256_text(json.dumps(stable, sort_keys=True, ensure_ascii=False))
 
 
+def in_place_change_candidate(
+    source: dict,
+    page_text: str,
+    final_url: str,
+    fingerprint: str,
+    previous_fingerprint: str | None,
+) -> dict | None:
+    """
+    Promote selected in-place source changes into normal pending-draft candidates.
+
+    Start conservatively with DFAS pay tables only. Other source types continue
+    to surface as changed-source review items until they have dedicated
+    source-specific enrichment.
+    """
+    if source.get("sourceType") != "pay_tables":
+        return None
+
+    signals = signal_matches(page_text, source.get("reserveSignals", []))
+    return {
+        "sourceName": source["name"],
+        "sourceType": source["sourceType"],
+        "title": f"{source['name']} — source content changed",
+        "date": "",
+        "url": final_url or source["url"],
+        "signals": signals,
+        "categoryHints": source.get("categories", [])[:4],
+        "detectionKind": "source_changed_in_place",
+        "sourceFingerprint": fingerprint,
+        "previousFingerprint": previous_fingerprint,
+    }
+
+
 def load_json(path: Path, default):
     if not path.exists():
         return default
@@ -458,6 +490,12 @@ def report_markdown(
             ]
             if item.get("date"):
                 lines.append(f"- Listed date: {item['date']}")
+            if item.get("detectionKind"):
+                lines.append(f"- Detection: `{item['detectionKind']}`")
+            if item.get("sourceFingerprint"):
+                lines.append(f"- Source fingerprint: `{item['sourceFingerprint']}`")
+            if item.get("previousFingerprint"):
+                lines.append(f"- Previous fingerprint: `{item['previousFingerprint']}`")
             lines += [
                 "",
                 "**Human review required. Detection does not mean this item should be published.**",
@@ -469,9 +507,18 @@ def report_markdown(
     if changed_sources:
         lines += ["## Official sources changed in place", ""]
         for source in changed_sources:
-            lines.append(f"- **{source['name']}** — {source['url']}")
+            lines += [
+                f"### {source['name']}",
+                "",
+                f"- Type: `{source.get('sourceType', 'unknown')}`",
+                f"- URL: {source['url']}",
+                f"- Category hints: {', '.join(source.get('categoryHints', [])) or 'Review required'}",
+                f"- Source fingerprint: `{source.get('sourceFingerprint', '')}`",
+            ]
+            if source.get("previousFingerprint"):
+                lines.append(f"- Previous fingerprint: `{source['previousFingerprint']}`")
+            lines.append("")
         lines += [
-            "",
             "These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.",
             "",
         ]
@@ -578,12 +625,27 @@ def run_monitor(args) -> int:
                     )
 
                 if previous.get("fingerprint") != fingerprint and not new_items:
+                    previous_fingerprint = previous.get("fingerprint")
                     changed_sources.append(
                         {
                             "name": source["name"],
                             "url": source["url"],
+                            "sourceType": source["sourceType"],
+                            "categoryHints": source.get("categories", [])[:4],
+                            "sourceFingerprint": fingerprint,
+                            "previousFingerprint": previous_fingerprint,
                         }
                     )
+
+                    in_place_candidate = in_place_change_candidate(
+                        source,
+                        page_text,
+                        final_url,
+                        fingerprint,
+                        previous_fingerprint,
+                    )
+                    if in_place_candidate is not None:
+                        candidates.append(in_place_candidate)
 
             state["sources"][source_id] = {
                 "name": source["name"],
@@ -802,6 +864,42 @@ def self_test() -> int:
         cadence_run_time,
         False,
     )
+
+    # In-place change promotion is intentionally limited to DFAS pay tables for now.
+    pay_source = {
+        "name": "DFAS Military Pay Tables",
+        "sourceType": "pay_tables",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+        "reserveSignals": ["DRILL PAY", "BASIC PAY", "AVIATION INCENTIVE PAY"],
+        "categories": ["Pay & Benefits"],
+    }
+    pay_candidate = in_place_change_candidate(
+        pay_source,
+        "2027 DRILL PAY BASIC PAY AVIATION INCENTIVE PAY",
+        pay_source["url"],
+        "new-fingerprint",
+        "old-fingerprint",
+    )
+    assert pay_candidate is not None
+    assert pay_candidate["sourceType"] == "pay_tables"
+    assert pay_candidate["detectionKind"] == "source_changed_in_place"
+    assert pay_candidate["sourceFingerprint"] == "new-fingerprint"
+    assert pay_candidate["signals"] == ["DRILL PAY", "BASIC PAY", "AVIATION INCENTIVE PAY"]
+
+    non_pay_source = {
+        "name": "Navy Reserve RESPERSMAN",
+        "sourceType": "reserve_guidance",
+        "url": "https://www.navyreserve.navy.mil/",
+        "reserveSignals": ["RESERVE"],
+        "categories": ["Policy"],
+    }
+    assert in_place_change_candidate(
+        non_pay_source,
+        "RESERVE",
+        non_pay_source["url"],
+        "new",
+        "old",
+    ) is None
 
     print("SELF-TEST PASSED")
     return 0
