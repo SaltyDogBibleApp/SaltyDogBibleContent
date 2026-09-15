@@ -4,7 +4,7 @@
 > Merging this pull request is the approval action. The publish workflow will
 > refuse to publish unless every approval checkbox below is checked.
 
-## MODIFICATION TO NAVADMIN 084/26 - FISCAL YEAR 2026 CYBERSECURITY AWARENESS CHALLENGE TRAINING REQUIREMENTS
+## Cybersecurity Awareness Training Changes to Every 3 Years
 
 | Field | Proposed value |
 | --- | --- |
@@ -18,23 +18,19 @@
 
 ### Summary
 
-Effective immediately, the frequency for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is changed for all active duty and reserve military personnel. a. Military personnel are now required to complete the CAC upon initial granting of network access and every three years thereafter. b. This supersedes the annual fiscal year requirement previously directed in paragraph 2 of reference (a).
+Navy Cybersecurity Awareness Challenge (CAC) training for active-duty and Reserve military personnel is no longer an annual requirement. Effective immediately, members must complete CAC when initially granted network access and every three years thereafter.
 
 ### Why It Matters
 
-Effective immediately, the frequency for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is changed for all active duty and reserve military personnel. a. Until system updates are complete, commands must locally track and document compliance for military personnel who have completed the training within the preceding 36 months to ensure network access is not erroneously suspended.
+Reservists who completed CAC within the previous 36 months fall within the new three-year training cycle. Until Navy training systems are updated, commands must locally track and document qualifying military personnel so compliant members do not have network access erroneously suspended.
 
 ### Details
 
-Purpose. This NAVADMIN modifies reference (a) to align Department of the Navy cybersecurity training requirements with the updated guidance provided in references (b) and (c).
+NAVADMIN 204/26 modifies NAVADMIN 084/26 and changes Cybersecurity Awareness Challenge training for active-duty and Reserve military personnel. Military members must complete CAC when initially granted network access and every three years thereafter, replacing the previous annual fiscal-year requirement.
 
-Policy Update. Effective immediately, the periodicity for the Department of War (DoW) Cybersecurity Awareness Challenge (CAC) training is officially changed for all active duty and reserve military personnel. a. Military personnel are now required to complete the CAC upon initial granting of network access and every three (3) years thereafter. b. This supersedes the annual fiscal year requirement previously directed in paragraph 2 of reference (a).
+The relaxed training frequency applies to military personnel. Civilian employees and contractors remain subject to annual CAC training.
 
-Civilian and Contractor Personnel. The relaxed periodicity applies strictly to military personnel per reference (c). Department of the Navy civilian employees and contractors must continue to complete the CAC on an annual basis to maintain compliance with the Federal Information Security Modernization Act (FISMA).
-
-Training Systems Configuration. a. Fleet Training Management and Planning System (FLTMPS) and Total Workforce Management Services (TWMS) are currently being updated to reflect this three-year periodicity for military members. b. Until system updates are complete, commands shall locally track and document compliance for military personnel who have completed the training within the preceding 36 months to ensure network access is not erroneously suspended.
-
-Network Access Restrictions. Echelon II Command Information Officers (CIOs) will ensure that automated network account disablement scripts account for this modified periodicity for military accounts.
+FLTMPS and TWMS are being updated to reflect the three-year military training cycle. Until those updates are complete, commands must locally track and document military personnel who completed CAC within the preceding 36 months. Echelon II CIOs must ensure automated account-disablement processes account for the modified frequency.
 
 ### Official Source
 
