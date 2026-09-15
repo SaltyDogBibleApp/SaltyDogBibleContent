@@ -63,6 +63,15 @@ def render_markdown(payload: dict) -> str:
     impact_features = impact.get("features") or []
     impact_basis = impact.get("basis") or []
 
+    source_type = evidence.get("sourceType") or "unknown"
+    has_enrichment = isinstance(payload.get("enrichment"), dict)
+    has_shaping = isinstance(payload.get("shaping"), dict)
+    automated_navadmin_review = (
+        source_type == "navadmin"
+        and has_enrichment
+        and has_shaping
+    )
+
     lines = [
         "# Reserve Intel Review",
         "",
@@ -70,6 +79,31 @@ def render_markdown(payload: dict) -> str:
         "> Merging this pull request is the approval action. The publish workflow will",
         "> refuse to publish unless every approval checkbox below is checked.",
         "",
+    ]
+
+    if automated_navadmin_review:
+        lines += [
+            "### Review Mode",
+            "",
+            "- Source-specific automation: **NAVADMIN enrichment + article shaping applied**",
+            "- Human source verification: **Still required before approval**",
+            "",
+        ]
+    else:
+        lines += [
+            "### Review Mode",
+            "",
+            "> **Manual source review required.** Automated source-specific enrichment and",
+            f"> shaping are not currently available for source type `{source_type}`.",
+            "> The draft below was created from detection metadata and must be verified",
+            "> and rewritten from the official source before approval.",
+            "",
+            "- Source-specific automation: **Not applied**",
+            "- Human source verification and rewrite: **Required before approval**",
+            "",
+        ]
+
+    lines += [
         f"## {article['title']}",
         "",
         "| Field | Proposed value |",
@@ -102,7 +136,7 @@ def render_markdown(payload: dict) -> str:
         "",
         "### Detection Evidence",
         "",
-        f"- Source type: `{evidence.get('sourceType', 'unknown')}`",
+        f"- Source type: `{source_type}`",
         f"- Listed date: {evidence.get('listedDate') or 'Not supplied'}",
         f"- Reserve signals: {', '.join(evidence.get('reserveSignals', [])) or 'None'}",
         f"- Official host verified: {'Yes' if evidence.get('officialHostVerified') else 'No'}",
