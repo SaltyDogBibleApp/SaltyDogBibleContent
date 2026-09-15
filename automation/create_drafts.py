@@ -23,6 +23,56 @@ HIGH_PRIORITY_SIGNALS = {
     "CONTINUATION","CYBERSECURITY","CBRN","DUTY STATUS","NDAA",
 }
 
+APP_IMPACT_FEATURES = (
+    "Drill / Orders",
+    "Pay Tracker",
+    "Points & Retirement",
+    "Readiness Tracker",
+    "VA Disability",
+    "Admin Gouge",
+)
+
+APP_IMPACT_BY_CATEGORY = {
+    "Pay & Benefits": ("Pay Tracker",),
+    "Retirement": ("Points & Retirement",),
+    "VA / Veteran Benefits": ("VA Disability",),
+    "Training & Readiness": ("Readiness Tracker",),
+    "Admin": ("Admin Gouge",),
+    "Policy": ("Admin Gouge",),
+}
+
+APP_IMPACT_BY_SIGNAL = {
+    "DRILL PAY": ("Drill / Orders", "Pay Tracker"),
+    "ANNUAL TRAINING": ("Drill / Orders",),
+    "DUTY STATUS": ("Drill / Orders", "Pay Tracker", "Points & Retirement"),
+    "RETIREMENT": ("Points & Retirement",),
+    "CYBERSECURITY": ("Readiness Tracker", "Admin Gouge"),
+    "CBRN": ("Readiness Tracker",),
+    "NDAA": ("Admin Gouge",),
+    "CONTINUATION": ("Admin Gouge",),
+}
+
+APP_IMPACT_KEYWORDS = {
+    "Drill / Orders": (
+        "AFTP", "ADT", "IDT", "ANNUAL TRAINING", "DRILL", "DUTY STATUS", "ORDERS",
+    ),
+    "Pay Tracker": (
+        "DRILL PAY", "PAY TABLE", "COMPENSATION", "ALLOWANCE", "PER DIEM",
+    ),
+    "Points & Retirement": (
+        "RETIREMENT", "RETIRE", "RETIREMENT POINT", "QUALIFYING YEAR",
+    ),
+    "Readiness Tracker": (
+        "READINESS", "TRAINING", "CYBERSECURITY", "CYBER", "CBRN", "PRT", "FITNESS",
+    ),
+    "VA Disability": (
+        "VA BENEFIT", "VETERAN BENEFIT", "DISABILITY",
+    ),
+    "Admin Gouge": (
+        "SGLI", "OMPF", "NSIPS", "RESPERSMAN", "ADMINISTRATIVE", "ADMIN POLICY",
+    ),
+}
+
 def utc_now_iso():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00","Z")
 
@@ -96,6 +146,49 @@ def audience(candidate):
     service = "USN" if st in {"navadmin","reserve_guidance"} or "navy" in sn else "ALL"
     return {"service":service,"reserveStatus":"ALL","trainingWing":None,"squadron":None}
 
+
+def app_impact(candidate):
+    """Return informational app-impact metadata for human review only."""
+    features = set()
+    basis = []
+
+    category = choose_category(candidate)
+    category_features = APP_IMPACT_BY_CATEGORY.get(category, ())
+    if category_features:
+        features.update(category_features)
+        basis.append(f"category: {category}")
+
+    signals = {s.upper() for s in candidate.get("signals", [])}
+    for signal in sorted(signals):
+        signal_features = APP_IMPACT_BY_SIGNAL.get(signal, ())
+        if signal_features:
+            features.update(signal_features)
+            basis.append(f"signal: {signal}")
+
+    searchable = " ".join(
+        [
+            candidate.get("title", ""),
+            candidate.get("sourceName", ""),
+            " ".join(candidate.get("categoryHints", [])),
+        ]
+    ).upper()
+    for feature, keywords in APP_IMPACT_KEYWORDS.items():
+        matched = next((keyword for keyword in keywords if keyword in searchable), None)
+        if matched:
+            features.add(feature)
+            basis.append(f"keyword: {matched}")
+
+    ordered_features = [feature for feature in APP_IMPACT_FEATURES if feature in features]
+    return {
+        "requiresReview": bool(ordered_features),
+        "features": ordered_features,
+        "basis": list(dict.fromkeys(basis)),
+        "note": (
+            "Automated first-pass only. Human review is required before making any "
+            "Salty Dog Bible app or content change."
+        ),
+    }
+
 def make_draft(candidate, detected_at):
     article_id = f"intel-{slugify(candidate['title'])[:64]}-{short_hash(candidate['sourceURL'])}"
     signals = ", ".join(candidate.get("signals",[]))
@@ -106,6 +199,7 @@ def make_draft(candidate, detected_at):
         "requiresHumanReview":True,
         "publishReady":False,
         "detectedAt":detected_at,
+        "appImpact":app_impact(candidate),
         "sourceEvidence":{
             "sourceName":candidate["sourceName"],
             "sourceType":candidate["sourceType"],
@@ -177,6 +271,9 @@ def main():
         assert d["articleDraft"]["category"] == "Training & Readiness"
         assert d["articleDraft"]["priority"] == "HIGH"
         assert d["articleDraft"]["isActive"] is False
+        assert d["appImpact"]["requiresReview"] is True
+        assert "Readiness Tracker" in d["appImpact"]["features"]
+        assert "Admin Gouge" in d["appImpact"]["features"]
         print("SELF-TEST PASSED")
         return 0
 
