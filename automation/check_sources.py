@@ -23,7 +23,7 @@ import os
 from pathlib import Path
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Iterable
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse
@@ -112,6 +112,63 @@ def now_utc() -> datetime:
 
 def iso_z(value: datetime) -> str:
     return value.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def parse_iso_datetime(value: str | None) -> datetime | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+
+    text = value.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+
+    return parsed.astimezone(timezone.utc)
+
+
+def source_check_interval_hours(registry: dict, source: dict) -> float:
+    value = source.get(
+        "checkIntervalHours",
+        registry.get("defaultCheckIntervalHours", 24),
+    )
+
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+        raise ValueError(
+            f"Invalid check interval for source {source.get('id', '<unknown>')}: {value!r}"
+        )
+
+    return float(value)
+
+
+def source_is_due(
+    registry: dict,
+    source: dict,
+    previous: dict | None,
+    run_time: datetime,
+    bootstrap: bool,
+) -> bool:
+    # Baseline initialization and newly added sources are always checked.
+    if bootstrap or previous is None:
+        return True
+
+    # A failed source gets retried on the next monitor run instead of waiting
+    # through its normal 12/24-hour cadence.
+    if previous.get("lastError"):
+        return True
+
+    last_checked = parse_iso_datetime(previous.get("lastCheckedAt"))
+    if last_checked is None:
+        return True
+
+    interval = timedelta(hours=source_check_interval_hours(registry, source))
+    return run_time >= last_checked + interval
 
 
 def host_is_approved(url: str) -> bool:
@@ -363,11 +420,18 @@ def report_markdown(
     candidates: list[dict],
     changed_sources: list[dict],
     errors: list[dict],
+    checked_source_count: int,
+    skipped_source_count: int,
 ) -> str:
     lines = [
         "# Reserve Intel Monitor Report",
         "",
         f"Run time: **{iso_z(run_time)}**",
+        "",
+        "## Source check cadence",
+        "",
+        f"- Checked this run: {checked_source_count}",
+        f"- Skipped until configured interval: {skipped_source_count}",
         "",
     ]
 
@@ -453,6 +517,8 @@ def run_monitor(args) -> int:
     candidates: list[dict] = []
     changed_sources: list[dict] = []
     errors: list[dict] = []
+    checked_source_count = 0
+    skipped_source_count = 0
 
     for source in registry["sources"]:
         if not source.get("enabled", False):
@@ -462,6 +528,11 @@ def run_monitor(args) -> int:
         previous = state.setdefault("sources", {}).get(source_id)
 
         try:
+            if not source_is_due(registry, source, previous, run_time, bootstrap):
+                skipped_source_count += 1
+                continue
+
+            checked_source_count += 1
             raw_html, final_url = fetch_html(source["url"])
             page_text, links = parse_page(raw_html, final_url)
             items = extract_items(source, page_text, links, final_url)
@@ -550,7 +621,15 @@ def run_monitor(args) -> int:
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
-        report_markdown(run_time, bootstrap, candidates, changed_sources, errors) + "\n",
+        report_markdown(
+            run_time,
+            bootstrap,
+            candidates,
+            changed_sources,
+            errors,
+            checked_source_count,
+            skipped_source_count,
+        ) + "\n",
         encoding="utf-8",
     )
 
@@ -562,6 +641,8 @@ def run_monitor(args) -> int:
             "candidate_count": str(len(candidates)),
             "changed_source_count": str(len(changed_sources)),
             "error_count": str(len(errors)),
+            "checked_source_count": str(checked_source_count),
+            "skipped_source_count": str(skipped_source_count),
         },
         args.github_output,
     )
@@ -569,7 +650,8 @@ def run_monitor(args) -> int:
     print(
         f"Monitor complete: bootstrap={bootstrap}, "
         f"candidates={len(candidates)}, "
-        f"changed_sources={len(changed_sources)}, errors={len(errors)}"
+        f"changed_sources={len(changed_sources)}, errors={len(errors)}, "
+        f"checked_sources={checked_source_count}, skipped_sources={skipped_source_count}"
     )
     return 0
 
@@ -641,6 +723,86 @@ def self_test() -> int:
         {"title": "NAVY RESERVE PROMOTIONS TO THE PERMANENT GRADES OF CAPTAIN"},
     )
 
+    # Cadence regression fixtures.
+    cadence_registry = {"defaultCheckIntervalHours": 12}
+    cadence_run_time = datetime(2026, 9, 15, 12, 0, tzinfo=timezone.utc)
+
+    six_hour_source = {
+        "id": "six-hour-source",
+        "checkIntervalHours": 6,
+    }
+    twelve_hour_source = {
+        "id": "twelve-hour-source",
+    }
+
+    assert source_is_due(
+        cadence_registry,
+        six_hour_source,
+        {"lastCheckedAt": "2026-09-15T06:00:00Z", "lastError": None},
+        cadence_run_time,
+        False,
+    )
+    assert not source_is_due(
+        cadence_registry,
+        six_hour_source,
+        {"lastCheckedAt": "2026-09-15T07:00:00Z", "lastError": None},
+        cadence_run_time,
+        False,
+    )
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": "2026-09-15T00:00:00Z", "lastError": None},
+        cadence_run_time,
+        False,
+    )
+    assert not source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": "2026-09-15T01:00:00Z", "lastError": None},
+        cadence_run_time,
+        False,
+    )
+
+    # Missing/malformed timestamps and prior failures are conservatively retried.
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": None, "lastError": None},
+        cadence_run_time,
+        False,
+    )
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": "not-a-date", "lastError": None},
+        cadence_run_time,
+        False,
+    )
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": "2026-09-15T11:30:00Z", "lastError": "temporary failure"},
+        cadence_run_time,
+        False,
+    )
+
+    # Bootstrap and newly added sources must always establish a baseline.
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        {"lastCheckedAt": "2026-09-15T11:30:00Z", "lastError": None},
+        cadence_run_time,
+        True,
+    )
+    assert source_is_due(
+        cadence_registry,
+        twelve_hour_source,
+        None,
+        cadence_run_time,
+        False,
+    )
+
     print("SELF-TEST PASSED")
     return 0
 
@@ -662,4 +824,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
