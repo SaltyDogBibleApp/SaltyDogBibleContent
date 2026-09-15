@@ -59,6 +59,9 @@ def render_markdown(payload: dict) -> str:
     article = payload["articleDraft"]
     audience = article.get("audience") or {}
     evidence = payload.get("sourceEvidence") or {}
+    impact = payload.get("appImpact") or {}
+    impact_features = impact.get("features") or []
+    impact_basis = impact.get("basis") or []
 
     lines = [
         "# Reserve Intel Review",
@@ -103,6 +106,16 @@ def render_markdown(payload: dict) -> str:
         f"- Listed date: {evidence.get('listedDate') or 'Not supplied'}",
         f"- Reserve signals: {', '.join(evidence.get('reserveSignals', [])) or 'None'}",
         f"- Official host verified: {'Yes' if evidence.get('officialHostVerified') else 'No'}",
+        "",
+        "### Potential Salty Dog Bible Impact",
+        "",
+        "> **Informational only.** These tags are an automated first-pass for the reviewer.",
+        "> They do not change app behavior, app content, or the live Reserve Intel feed.",
+        "",
+        f"- App review recommended: {'Yes' if impact.get('requiresReview') else 'No'}",
+        f"- Potentially affected features: {', '.join(impact_features) or 'None identified'}",
+        f"- Tagging basis: {', '.join(impact_basis) or 'No specific app-impact match'}",
+        f"- Note: {impact.get('note') or 'Human review is required before making any app change.'}",
         "",
         "## Approval Checklist",
         "",
