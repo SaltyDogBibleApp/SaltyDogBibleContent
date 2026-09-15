@@ -1,8 +1,8 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
-  "publishReady": false,
+  "draftStatus": "PUBLISHED",
+  "requiresHumanReview": false,
+  "publishReady": true,
   "detectedAt": "2026-09-15T15:17:01Z",
   "sourceEvidence": {
     "sourceName": "MyNavyHR NAVADMIN",
@@ -35,7 +35,7 @@
   "articleDraft": {
     "id": "intel-modification-to-navadmin-084-26-fiscal-year-2026-cybersecurity-a-a282de7970",
     "publishedAt": "2026-09-15T15:17:01Z",
-    "updatedAt": "2026-09-15T16:38:16Z",
+    "updatedAt": "2026-09-15T16:41:40Z",
     "title": "Cybersecurity Awareness Training Changes to Every 3 Years",
     "category": "Training & Readiness",
     "status": "EFFECTIVE",
@@ -53,7 +53,7 @@
       "squadron": null
     },
     "isPinned": false,
-    "isActive": false
+    "isActive": true
   },
   "enrichment": {
     "schemaVersion": 1,
@@ -80,5 +80,6 @@
     "sourceTextSHA256": "0a9c539432c0c6c24ce786fb9676375bcd02673e2e5b41227714f9fc3d6b7f3f",
     "specializedTemplate": "cybersecurity-awareness-three-year-cycle",
     "humanReviewStillRequired": true
-  }
+  },
+  "approvedAt": "2026-09-15T16:41:40Z"
 }
