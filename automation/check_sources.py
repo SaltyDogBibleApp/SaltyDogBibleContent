@@ -46,6 +46,7 @@ APPROVED_HOST_SUFFIXES = {
 
 NAVADMIN_ID_RE = re.compile(r"^\d{3}/\d{2}$")
 NAVADMIN_DATE_RE = re.compile(r"\b\d{1,2}/\d{1,2}/\d{4}\b")
+NAVADMIN_URL_RE = re.compile(r"NAV(?P<year>\d{2})(?P<number>\d{3})\.pdf", re.I)
 
 NAVADMIN_IGNORE_TITLE_PATTERNS = [
     re.compile(r"NAVY RESERVE PROMOTIONS TO THE PERMANENT GRADES", re.I),
@@ -193,12 +194,28 @@ def navadmin_items(
     from being mistaken for its own table row.
     """
     linked_rows: list[tuple[str, str]] = []
+    seen_nav_ids: set[str] = set()
+
     for link in links:
         label = normalize_whitespace(link["title"])
-        if NAVADMIN_ID_RE.fullmatch(label):
-            linked_rows.append((label, link["url"]))
+        nav_id: str | None = None
 
-    # Fallback only for unusual markup/test fixtures.
+        if NAVADMIN_ID_RE.fullmatch(label):
+            nav_id = label
+        else:
+            # MyNavyHR NAVADMIN PDF links commonly encode the message as
+            # NAV<YY><NNN>.pdf, for example NAV26204.pdf -> 204/26.
+            url_match = NAVADMIN_URL_RE.search(link["url"])
+            if url_match:
+                nav_id = f"{url_match.group('number')}/{url_match.group('year')}"
+
+        if nav_id and nav_id not in seen_nav_ids:
+            seen_nav_ids.add(nav_id)
+            linked_rows.append((nav_id, link["url"]))
+
+    # Fallback only for unusual markup/test fixtures. When this fallback is used,
+    # the item URL will remain the index URL, but relevance is still determined
+    # only from the individual item's title so adjacent NAVADMIN text cannot leak in.
     if not linked_rows:
         ids = re.findall(r"\b\d{3}/\d{2}\b", page_text)
         linked_rows = [(value, fallback_url) for value in dict.fromkeys(ids)]
@@ -295,6 +312,24 @@ def ignored_item(source: dict, item: dict) -> bool:
     if source["sourceType"] != "navadmin":
         return False
     return any(pattern.search(item.get("title", "")) for pattern in NAVADMIN_IGNORE_TITLE_PATTERNS)
+
+
+def candidate_signal_text(source: dict, item: dict, page_text: str) -> str:
+    """
+    Return the text used for relevance-signal matching.
+
+    NAVADMIN is a broad index page containing many unrelated messages. For a
+    NAVADMIN candidate, use only that message's own title. Using the entire page
+    can leak words such as RESERVE, TAR, or CONTINUATION from neighboring
+    messages and create false positives.
+
+    Other registry sources are deliberately narrower, so they may continue to
+    use a limited page-text window in addition to the item title.
+    """
+    title = item.get("title", "")
+    if source.get("sourceType") == "navadmin":
+        return title
+    return f"{title} {page_text[:3000]}"
 
 
 def source_fingerprint(page_text: str, items: list[dict]) -> str:
@@ -444,7 +479,11 @@ def run_monitor(args) -> int:
                     if ignored_item(source, item):
                         continue
 
-                    candidate_text = f"{item.get('title', '')} {page_text[:3000]}"
+                    candidate_text = candidate_signal_text(
+                        source,
+                        item,
+                        page_text,
+                    )
                     signals = signal_matches(
                         candidate_text,
                         source.get("reserveSignals", [])
@@ -536,43 +575,70 @@ def run_monitor(args) -> int:
 
 
 def self_test() -> int:
+    # Regression fixture: 205/26 is unrelated to Reserve Intel while adjacent
+    # 204/26 is cybersecurity-related. The broad index page contains Reserve
+    # words elsewhere, so only item-level matching may qualify 204/26.
     html_fixture = """
     <html><body>
-      <a href="/nav208.pdf">208/26</a>
-      ORDER TO ACCOUNT FOR PERSONNEL ICO HURRICANE LOWELL 09/08/2026
-      <a href="/nav204.pdf">204/26</a>
+      <a href="/Portals/55/Messages/NAVADMIN/NAV2026/NAV26205.pdf">205/26</a>
+      FISCAL YEAR 2027 VICE ADMIRAL JAMES BOND STOCKDALE LEADERSHIP AWARD
+      09/01/2026
+
+      <a href="/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf">204/26</a>
       MODIFICATION TO NAVADMIN 084/26 - FISCAL YEAR 2026 CYBERSECURITY
       AWARENESS CHALLENGE TRAINING REQUIREMENTS 08/31/2026
-      <a href="/nav200.pdf">200/26</a>
+
+      <a href="/Portals/55/Messages/NAVADMIN/NAV2026/NAV26200.pdf">200/26</a>
       IMPLEMENTATION OF MANDATORY ANNUAL CBRN PROTECTIVE MASK FIT TRAINING
       AND TESTING 08/20/2026
+
+      <p>Elsewhere on this broad index: RESERVE TAR CONTINUATION SELRES.</p>
     </body></html>
     """
-    page_text, links = parse_page(
-        html_fixture,
-        "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/",
-    )
-    items = navadmin_items(
-        page_text,
-        links,
-        "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/",
-    )
+
+    base_url = "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
+    page_text, links = parse_page(html_fixture, base_url)
+    items = navadmin_items(page_text, links, base_url)
 
     assert [item["id"] for item in items] == [
-        "NAVADMIN-208/26",
+        "NAVADMIN-205/26",
         "NAVADMIN-204/26",
         "NAVADMIN-200/26",
     ]
-    assert "084/26" in items[1]["title"]
-    assert "CYBERSECURITY" in items[1]["title"]
-    assert signal_matches(items[1]["title"], ["CYBERSECURITY"]) == ["CYBERSECURITY"]
 
-    ignored = {
-        "sourceType": "navadmin"
+    # Specific authoritative document URLs must be preserved.
+    assert items[0]["url"].endswith("NAV26205.pdf")
+    assert items[1]["url"].endswith("NAV26204.pdf")
+    assert items[2]["url"].endswith("NAV26200.pdf")
+
+    source = {
+        "sourceType": "navadmin",
+        "reserveSignals": [
+            "RESERVE",
+            "TAR",
+            "CONTINUATION",
+            "SELRES",
+            "CYBERSECURITY",
+            "CBRN",
+        ],
     }
+
+    stockdale_text = candidate_signal_text(source, items[0], page_text)
+    cyber_text = candidate_signal_text(source, items[1], page_text)
+    cbrn_text = candidate_signal_text(source, items[2], page_text)
+
+    # The Stockdale award must NOT inherit Reserve words from neighboring rows.
+    assert signal_matches(stockdale_text, source["reserveSignals"]) == []
+
+    # The two genuinely relevant titles still match their own signals.
+    assert signal_matches(cyber_text, source["reserveSignals"]) == ["CYBERSECURITY"]
+    assert signal_matches(cbrn_text, source["reserveSignals"]) == ["CBRN"]
+
+    # Preserve existing protection against recurring promotion bulletins.
+    ignored = {"sourceType": "navadmin"}
     assert ignored_item(
         ignored,
-        {"title": "NAVY RESERVE PROMOTIONS TO THE PERMANENT GRADES OF CAPTAIN"}
+        {"title": "NAVY RESERVE PROMOTIONS TO THE PERMANENT GRADES OF CAPTAIN"},
     )
 
     print("SELF-TEST PASSED")
@@ -596,3 +662,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
