@@ -1,0 +1,57 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-15T15:17:01Z",
+  "sourceEvidence": {
+    "sourceName": "MyNavyHR NAVADMIN",
+    "sourceType": "navadmin",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf?ver=Z0SgLUjWKMJuHZr8CPoubQ%3d%3d",
+    "listedDate": "08/31/2026",
+    "reserveSignals": [
+      "CYBERSECURITY"
+    ],
+    "categoryHints": [
+      "Policy",
+      "Training & Readiness",
+      "Admin",
+      "Pay & Benefits"
+    ],
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-modification-to-navadmin-084-26-fiscal-year-2026-cybersecurity-a-a282de7970",
+    "publishedAt": "2026-09-15T15:17:01Z",
+    "updatedAt": "2026-09-15T15:17:01Z",
+    "title": "MODIFICATION TO NAVADMIN 084/26 - FISCAL YEAR 2026 CYBERSECURITY AWARENESS CHALLENGE TRAINING REQUIREMENTS",
+    "category": "Policy",
+    "status": "TRACKING",
+    "priority": "HIGH",
+    "summary": "Automated draft from an official source: MODIFICATION TO NAVADMIN 084/26 - FISCAL YEAR 2026 CYBERSECURITY AWARENESS CHALLENGE TRAINING REQUIREMENTS. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: CYBERSECURITY.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "MyNavyHR NAVADMIN",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf?ver=Z0SgLUjWKMJuHZr8CPoubQ%3d%3d",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}
