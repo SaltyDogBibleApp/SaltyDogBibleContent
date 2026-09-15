@@ -1,0 +1,92 @@
+name: Archive Rejected Reserve Intel
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: reserve-intel-rejection
+  cancel-in-progress: false
+
+jobs:
+  archive-rejected:
+    if: >
+      github.event.pull_request.merged == false &&
+      startsWith(github.event.pull_request.head.ref, 'reserve-intel-review/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Self-test rejection archive
+        run: |
+          python automation/archive_rejected_draft.py --self-test
+
+      - name: Capture rejected PR body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          printf '%s\n' "$PR_BODY" > /tmp/reserve-intel-rejection.md
+
+      - name: Archive rejected draft
+        env:
+          REVIEW_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          ARTICLE_ID="${REVIEW_BRANCH#reserve-intel-review/}"
+          DRAFT="drafts/pending/${ARTICLE_ID}.json"
+          REJECTED_DRAFT="drafts/rejected/${ARTICLE_ID}.json"
+          REVIEW_MARKER="reviews/pending/${ARTICLE_ID}.md"
+
+          if [ -f "$REJECTED_DRAFT" ]; then
+            echo "Rejected draft is already archived: $REJECTED_DRAFT"
+            exit 0
+          fi
+
+          if [ ! -f "$DRAFT" ]; then
+            echo "Pending draft not found and no rejected archive exists: $DRAFT"
+            exit 1
+          fi
+
+          python automation/archive_rejected_draft.py \
+            --draft "$DRAFT" \
+            --rejected-dir drafts/rejected \
+            --review-body-file /tmp/reserve-intel-rejection.md \
+            --review-marker "$REVIEW_MARKER" \
+            --review-rejected-dir reviews/rejected \
+            --pr-number "$PR_NUMBER" \
+            --pr-url "$PR_URL" \
+            --pr-title "$PR_TITLE"
+
+      - name: Commit rejection archive
+        run: |
+          git config user.name "reserve-intel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add drafts reviews
+
+          if git diff --cached --quiet; then
+            echo "No rejection archive changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Archive rejected Reserve Intel review"
+
+          git pull --rebase origin main
+          git push origin HEAD:main
