@@ -39,6 +39,58 @@ def utc_now_iso() -> str:
     )
 
 
+
+def normalize_iso_datetime(value: object, field_name: str, *, allow_none: bool = False) -> str | None:
+    if value is None:
+        if allow_none:
+            return None
+        raise ValueError(f"{field_name} is required.")
+
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{field_name} must be a non-empty date string.")
+
+    raw = value.strip()
+
+    # Accept the date-only form produced by some source parsers and normalize it
+    # to midnight UTC so the iOS feed decoder receives one consistent format.
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw):
+        try:
+            parsed = datetime.strptime(raw, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        except ValueError as exc:
+            raise ValueError(f"{field_name} contains an invalid calendar date: {raw}") from exc
+        return parsed.isoformat().replace("+00:00", "Z")
+
+    # Accept ISO-8601 date-times. A trailing Z is converted for fromisoformat,
+    # then every accepted value is emitted in UTC with a Z suffix.
+    try:
+        parsed = datetime.fromisoformat(raw[:-1] + "+00:00" if raw.endswith("Z") else raw)
+    except ValueError as exc:
+        raise ValueError(f"{field_name} must be ISO-8601: {raw}") from exc
+
+    if parsed.tzinfo is None:
+        raise ValueError(f"{field_name} must include a timezone: {raw}")
+
+    return (
+        parsed.astimezone(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
+
+
+def normalize_article_dates(article: dict) -> None:
+    article["publishedAt"] = normalize_iso_datetime(
+        article.get("publishedAt"),
+        "articleDraft.publishedAt",
+    )
+    article["effectiveDate"] = normalize_iso_datetime(
+        article.get("effectiveDate"),
+        "articleDraft.effectiveDate",
+        allow_none=True,
+    )
+
+    # updatedAt is always refreshed at publication, so no draft value is trusted.
+
 def checkbox_checked(body: str, label: str) -> bool:
     pattern = re.compile(
         r"(?mi)^\s*-\s*\[[xX]\]\s*" + re.escape(label) + r"\s*$"
@@ -108,6 +160,8 @@ def publish(
             raise ValueError(
                 f"An article with this sourceURL already exists in the live feed: {source_url}"
             )
+
+    normalize_article_dates(article)
 
     now = utc_now_iso()
     article["isActive"] = True
