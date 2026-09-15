@@ -1,0 +1,49 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "appImpact": {
+    "requiresReview": true,
+    "features": ["Pay Tracker"],
+    "basis": ["controlled end-to-end test"],
+    "note": "TEST ONLY. Human review required. Do not publish."
+  },
+  "sourceEvidence": {
+    "sourceType": "pay_tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "listedDate": "09/15/2026",
+    "reserveSignals": ["DRILL PAY"],
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-e2e-pay-tables-20260915",
+    "title": "TEST ONLY — DFAS Pay Tables Review Routing",
+    "category": "Pay & Benefits",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Controlled end-to-end test of the Reserve Intel non-NAVADMIN review workflow.",
+    "whyItMatters": "This test verifies that a DFAS pay-table draft is routed to manual human review instead of NAVADMIN enrichment.",
+    "details": "TEST ONLY. This draft exists solely to validate GitHub Review PR automation and must not be published.",
+    "sourceName": "DFAS Military Pay Tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "audience": {
+      "service": "ALL",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isActive": false
+  }
+}
