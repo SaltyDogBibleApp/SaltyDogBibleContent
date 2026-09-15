@@ -64,6 +64,7 @@ jobs:
           # Preserve the current enrichment/review helpers before switching to
           # any older review branch. Legacy PR branches may predate these files.
           cp automation/enrich_navadmin_draft.py /tmp/enrich_navadmin_draft.py
+          cp automation/shape_navadmin_article.py /tmp/shape_navadmin_article.py
           cp automation/validate_drafts.py /tmp/validate_drafts.py
           cp automation/prepare_review_pr.py /tmp/prepare_review_pr.py
 
@@ -89,21 +90,30 @@ jobs:
               git fetch origin "$BRANCH"
               git switch -C "$BRANCH" "origin/$BRANCH"
 
-              # Upgrade older pre-enrichment PRs exactly once.
-              # If enrichment is already present, do not touch the PR body so
-              # reviewer checkbox state is preserved.
+              # Upgrade older review PRs in stages:
+              # - no enrichment -> enrich + shape
+              # - enriched but not shaped -> shape only
+              # - already shaped -> leave untouched so reviewer checkbox state is preserved
               ALREADY_ENRICHED="$(python -c 'import json,sys; p=json.load(open(sys.argv[1])); print("true" if isinstance(p.get("enrichment"), dict) else "false")' "$DRAFT")"
+              ALREADY_SHAPED="$(python -c 'import json,sys; p=json.load(open(sys.argv[1])); print("true" if isinstance(p.get("shaping"), dict) else "false")' "$DRAFT")"
 
-              if [ "$ALREADY_ENRICHED" = "true" ]; then
-                echo "Existing review PR is already enriched; leaving it unchanged."
+              if [ "$ALREADY_SHAPED" = "true" ]; then
+                echo "Existing review PR is already shaped; leaving it unchanged."
                 git switch main
                 git reset --hard origin/main
                 continue
               fi
 
-              echo "Upgrading existing review PR with source-grounded enrichment."
+              if [ "$ALREADY_ENRICHED" != "true" ]; then
+                echo "Upgrading existing review PR with source-grounded enrichment."
+                python /tmp/enrich_navadmin_draft.py \
+                  --draft "$DRAFT"
+              else
+                echo "Existing review PR is already enriched."
+              fi
 
-              python /tmp/enrich_navadmin_draft.py \
+              echo "Applying human-friendly Reserve Intel article shaping."
+              python /tmp/shape_navadmin_article.py \
                 --draft "$DRAFT"
 
               python /tmp/validate_drafts.py "$DRAFT"
@@ -121,7 +131,7 @@ jobs:
               git add "$DRAFT" "$REVIEW_FILE"
 
               if ! git diff --cached --quiet; then
-                git commit -m "Enrich Reserve Intel review for ${ARTICLE_ID}"
+                git commit -m "Shape Reserve Intel review for ${ARTICLE_ID}"
                 git push --force-with-lease origin "$BRANCH"
               fi
 
@@ -144,27 +154,31 @@ jobs:
             git switch -C "$BRANCH" origin/main
 
             # Enrich the exact pending draft from its official NAVADMIN source.
-            python automation/enrich_navadmin_draft.py \
+            python /tmp/enrich_navadmin_draft.py \
               --draft "$DRAFT"
 
-            # Revalidate after enrichment. All human approval gates must remain locked.
+            # Convert source extraction into concise, Reserve-focused article copy.
+            python /tmp/shape_navadmin_article.py \
+              --draft "$DRAFT"
+
+            # Revalidate after enrichment + shaping. All human approval gates stay locked.
             python /tmp/validate_drafts.py "$DRAFT"
 
             REVIEW_FILE="reviews/pending/${ARTICLE_ID}.md"
             META_FILE="/tmp/${ARTICLE_ID}-metadata.json"
 
-            python automation/prepare_review_pr.py \
+            python /tmp/prepare_review_pr.py \
               --draft "$DRAFT" \
               --output "$REVIEW_FILE" \
               --metadata "$META_FILE"
 
             TITLE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["title"])' "$META_FILE")"
 
-            # Commit BOTH the enriched draft and the readable review page.
+            # Commit BOTH the enriched/shaped draft and the readable review page.
             # Merging the PR must place the reviewed enriched draft on main
             # before the publication workflow runs.
             git add "$DRAFT" "$REVIEW_FILE"
-            git commit -m "Create enriched Reserve Intel review for ${ARTICLE_ID}"
+            git commit -m "Create shaped Reserve Intel review for ${ARTICLE_ID}"
             git push --force-with-lease origin "$BRANCH"
 
             gh pr create \
@@ -178,3 +192,4 @@ jobs:
             git switch main
             git reset --hard origin/main
           done
+
