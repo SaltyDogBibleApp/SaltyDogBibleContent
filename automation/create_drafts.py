@@ -69,7 +69,7 @@ APP_IMPACT_KEYWORDS = {
         "VA BENEFIT", "VETERAN BENEFIT", "DISABILITY",
     ),
     "Admin Gouge": (
-        "SGLI", "OMPF", "NSIPS", "RESPERSMAN", "ADMINISTRATIVE", "ADMIN POLICY",
+        "SGLI", "OMPF", "NSIPS", "RESPERSMAN", "ADMIN POLICY",
     ),
 }
 
@@ -274,6 +274,23 @@ def main():
         assert d["appImpact"]["requiresReview"] is True
         assert "Readiness Tracker" in d["appImpact"]["features"]
         assert "Admin Gouge" in d["appImpact"]["features"]
+
+        neutral = make_draft(
+            {
+                "title": "General Navy Administrative Notice",
+                "sourceName": "MyNavyHR",
+                "sourceType": "navadmin",
+                "sourceURL": "https://www.mynavyhr.navy.mil/general.pdf",
+                "signals": [],
+                "categoryHints": ["Other"],
+                "listedDate": "9/15/2026",
+            },
+            "2026-09-15T14:00:00Z",
+        )
+        assert neutral["appImpact"]["requiresReview"] is False
+        assert neutral["appImpact"]["features"] == []
+        assert neutral["appImpact"]["basis"] == []
+
         print("SELF-TEST PASSED")
         return 0
 
