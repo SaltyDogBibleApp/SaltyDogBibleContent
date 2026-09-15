@@ -51,6 +51,11 @@ jobs:
             --description "Human review required before Reserve Intel publication" \
             2>/dev/null || true
 
+          # GitHub-hosted runners do not have a commit identity configured.
+          # Set the bot identity before creating the review branch commit.
+          git config user.name "reserve-intel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           for DRAFT in "${DRAFTS[@]}"; do
             ARTICLE_ID="$(basename "$DRAFT" .json)"
             BRANCH="reserve-intel-review/${ARTICLE_ID}"
