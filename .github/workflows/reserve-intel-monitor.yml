@@ -37,20 +37,19 @@ jobs:
         run: |
           python automation/check_sources.py --self-test
 
+      - name: Self-test draft generator
+        run: |
+          python automation/create_drafts.py --self-test
+
       - name: Check official Reserve Intel sources
         id: monitor
         run: |
-          python automation/check_sources.py \
-            --registry automation/reserve-intel-sources.json \
-            --state automation/source-state.json \
-            --report automation/monitor-report.md
+          python automation/check_sources.py             --registry automation/reserve-intel-sources.json             --state automation/source-state.json             --report automation/monitor-report.md
 
       - name: Generate pending Intel drafts
         if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.candidate_count != '0'
         run: |
-          python automation/create_drafts.py \
-            --report automation/monitor-report.md \
-            --output-dir drafts/pending
+          python automation/create_drafts.py             --report automation/monitor-report.md             --output-dir drafts/pending
 
       - name: Validate pending Intel drafts
         if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.candidate_count != '0'
@@ -88,9 +87,7 @@ jobs:
           CHANGED_SOURCE_COUNT: ${{ steps.monitor.outputs.changed_source_count }}
         run: |
           TITLE="Reserve Intel review: ${CANDIDATE_COUNT} candidate(s), ${CHANGED_SOURCE_COUNT} changed source(s)"
-          gh issue create \
-            --title "$TITLE" \
-            --body-file automation/monitor-report.md
+          gh issue create             --title "$TITLE"             --body-file automation/monitor-report.md
 
       - name: Upload monitor report
         uses: actions/upload-artifact@v4
@@ -108,3 +105,4 @@ jobs:
           path: drafts/pending
           if-no-files-found: warn
           retention-days: 30
+
