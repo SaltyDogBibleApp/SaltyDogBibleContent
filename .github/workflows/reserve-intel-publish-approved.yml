@@ -1,0 +1,76 @@
+name: Publish Approved Reserve Intel
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: reserve-intel-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'reserve-intel-review/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out approved main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Capture PR approval body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          printf '%s\n' "$PR_BODY" > /tmp/reserve-intel-approval.md
+
+      - name: Publish approved article
+        env:
+          REVIEW_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          ARTICLE_ID="${REVIEW_BRANCH#reserve-intel-review/}"
+          DRAFT="drafts/pending/${ARTICLE_ID}.json"
+          REVIEW_MARKER="reviews/pending/${ARTICLE_ID}.md"
+
+          if [ ! -f "$DRAFT" ]; then
+            echo "Pending draft not found: $DRAFT"
+            exit 1
+          fi
+
+          python automation/publish_approved_draft.py \
+            --draft "$DRAFT" \
+            --feed reserve-content-feed.json \
+            --approval-body-file /tmp/reserve-intel-approval.md \
+            --published-dir drafts/published \
+            --review-marker "$REVIEW_MARKER" \
+            --review-published-dir reviews/published
+
+      - name: Commit publication
+        run: |
+          git config user.name "reserve-intel-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add reserve-content-feed.json drafts reviews
+
+          if git diff --cached --quiet; then
+            echo "No publication changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Publish approved Reserve Intel article"
+          git pull --rebase origin main
+          git push origin HEAD:main
