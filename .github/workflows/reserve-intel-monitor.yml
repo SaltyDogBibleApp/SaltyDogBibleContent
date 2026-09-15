@@ -45,20 +45,37 @@ jobs:
             --state automation/source-state.json \
             --report automation/monitor-report.md
 
-      - name: Save monitor state
+      - name: Generate pending Intel drafts
+        if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.candidate_count != '0'
+        run: |
+          python automation/create_drafts.py \
+            --report automation/monitor-report.md \
+            --output-dir drafts/pending
+
+      - name: Validate pending Intel drafts
+        if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.candidate_count != '0'
+        run: |
+          python automation/validate_drafts.py drafts/pending
+
+      - name: Save monitor state and pending drafts
         run: |
           git config user.name "reserve-intel-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Stage first so both new/untracked files and later modifications are detected.
+          # Stage monitor state/report first.
           git add automation/source-state.json automation/monitor-report.md
 
+          # Pending drafts are review-only. Add them when the directory exists.
+          if [ -d "drafts/pending" ]; then
+            git add drafts/pending
+          fi
+
           if git diff --cached --quiet; then
-            echo "No monitor-state changes to commit."
+            echo "No monitor-state or draft changes to commit."
             exit 0
           fi
 
-          git commit -m "Update Reserve Intel monitor state"
+          git commit -m "Update Reserve Intel monitor state and drafts"
 
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
@@ -81,4 +98,13 @@ jobs:
           name: reserve-intel-monitor-report
           path: automation/monitor-report.md
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload pending Intel drafts
+        if: steps.monitor.outputs.bootstrap != 'true' && steps.monitor.outputs.candidate_count != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: reserve-intel-pending-drafts
+          path: drafts/pending
+          if-no-files-found: warn
           retention-days: 30
