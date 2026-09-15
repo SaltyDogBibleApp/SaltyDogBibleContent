@@ -30,6 +30,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install enrichment dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r automation/requirements-enrichment.txt
+
       - name: Validate pending drafts
         run: |
           python automation/validate_drafts.py drafts/pending
@@ -60,20 +65,84 @@ jobs:
             ARTICLE_ID="$(basename "$DRAFT" .json)"
             BRANCH="reserve-intel-review/${ARTICLE_ID}"
 
-            # A prior PR (open, merged, or closed) means this exact draft has already
-            # entered the review workflow. Do not create duplicates.
-            EXISTING="$(gh pr list \
+            OPEN_PR="$(gh pr list \
+              --state open \
+              --head "$BRANCH" \
+              --json number \
+              --jq '.[0].number // empty')"
+
+            PRIOR_PR_COUNT="$(gh pr list \
               --state all \
               --head "$BRANCH" \
               --json number \
               --jq 'length')"
 
-            if [ "$EXISTING" != "0" ]; then
-              echo "Review PR already exists for ${ARTICLE_ID}; skipping."
+            if [ -n "$OPEN_PR" ]; then
+              echo "Open review PR #${OPEN_PR} already exists for ${ARTICLE_ID}."
+
+              git fetch origin "$BRANCH"
+              git switch -C "$BRANCH" "origin/$BRANCH"
+
+              # Upgrade older pre-enrichment PRs exactly once.
+              # If enrichment is already present, do not touch the PR body so
+              # reviewer checkbox state is preserved.
+              ALREADY_ENRICHED="$(python -c 'import json,sys; p=json.load(open(sys.argv[1])); print("true" if isinstance(p.get("enrichment"), dict) else "false")' "$DRAFT")"
+
+              if [ "$ALREADY_ENRICHED" = "true" ]; then
+                echo "Existing review PR is already enriched; leaving it unchanged."
+                git switch main
+                git reset --hard origin/main
+                continue
+              fi
+
+              echo "Upgrading existing review PR with source-grounded enrichment."
+
+              python automation/enrich_navadmin_draft.py \
+                --draft "$DRAFT"
+
+              python automation/validate_drafts.py "$DRAFT"
+
+              REVIEW_FILE="reviews/pending/${ARTICLE_ID}.md"
+              META_FILE="/tmp/${ARTICLE_ID}-metadata.json"
+
+              python automation/prepare_review_pr.py \
+                --draft "$DRAFT" \
+                --output "$REVIEW_FILE" \
+                --metadata "$META_FILE"
+
+              TITLE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["title"])' "$META_FILE")"
+
+              git add "$DRAFT" "$REVIEW_FILE"
+
+              if ! git diff --cached --quiet; then
+                git commit -m "Enrich Reserve Intel review for ${ARTICLE_ID}"
+                git push --force-with-lease origin "$BRANCH"
+              fi
+
+              gh pr edit "$OPEN_PR" \
+                --title "Reserve Intel Review: ${TITLE}" \
+                --body-file "$REVIEW_FILE"
+
+              git switch main
+              git reset --hard origin/main
+              continue
+            fi
+
+            # A previously closed PR is treated as an explicit rejection and is
+            # not silently recreated.
+            if [ "$PRIOR_PR_COUNT" != "0" ]; then
+              echo "A prior closed/merged review exists for ${ARTICLE_ID}; skipping."
               continue
             fi
 
             git switch -C "$BRANCH" origin/main
+
+            # Enrich the exact pending draft from its official NAVADMIN source.
+            python automation/enrich_navadmin_draft.py \
+              --draft "$DRAFT"
+
+            # Revalidate after enrichment. All human approval gates must remain locked.
+            python automation/validate_drafts.py "$DRAFT"
 
             REVIEW_FILE="reviews/pending/${ARTICLE_ID}.md"
             META_FILE="/tmp/${ARTICLE_ID}-metadata.json"
@@ -85,8 +154,11 @@ jobs:
 
             TITLE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["title"])' "$META_FILE")"
 
-            git add "$REVIEW_FILE"
-            git commit -m "Create Reserve Intel review for ${ARTICLE_ID}"
+            # Commit BOTH the enriched draft and the readable review page.
+            # Merging the PR must place the reviewed enriched draft on main
+            # before the publication workflow runs.
+            git add "$DRAFT" "$REVIEW_FILE"
+            git commit -m "Create enriched Reserve Intel review for ${ARTICLE_ID}"
             git push --force-with-lease origin "$BRANCH"
 
             gh pr create \
