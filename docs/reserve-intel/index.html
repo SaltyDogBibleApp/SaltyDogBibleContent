@@ -20,7 +20,7 @@
 
   <div id="preview-banner" class="preview-banner hidden">
     <strong>Demo Mode</strong>
-    <span>Demo edits stay in the browser. Real pending articles can use Save Draft when the Codespace Save service is connected. Reject and Approve remain preview-only.</span>
+    <span>Demo edits stay in the browser. Real pending articles can Save Draft and Reject when the Codespace review service is connected. Approve remains preview-only.</span>
   </div>
 
   <main class="layout">
@@ -195,6 +195,34 @@
       </article>
     </section>
   </main>
+
+
+  <div id="reject-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="reject-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow">REJECT REVIEW</div>
+          <h2 id="reject-modal-title">Reject this Reserve Intel article?</h2>
+        </div>
+        <button id="reject-modal-close" class="modal-close" type="button" aria-label="Close rejection dialog">×</button>
+      </div>
+
+      <p id="reject-modal-article" class="modal-article-title"></p>
+      <p class="modal-warning">
+        This closes the matching GitHub Review PR without merging it. The existing rejection workflow will handle archival.
+        Any unsaved browser edits are not saved before rejection.
+      </p>
+
+      <label for="reject-reason" class="modal-label">Rejection reason <span class="optional-label">(optional)</span></label>
+      <textarea id="reject-reason" class="editor-textarea reject-reason" rows="5"
+        placeholder="Example: Source does not support the stated effective date."></textarea>
+
+      <div class="modal-actions">
+        <button id="reject-modal-cancel" class="button secondary" type="button">Cancel</button>
+        <button id="reject-modal-confirm" class="button danger solid-danger" type="button">Reject Article</button>
+      </div>
+    </div>
+  </div>
 
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
