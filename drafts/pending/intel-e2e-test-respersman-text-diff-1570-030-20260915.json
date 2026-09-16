@@ -48,9 +48,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Synthetic RESPERSMAN text-diff E2E placeholder.",
-    "whyItMatters": "Synthetic test only.",
-    "details": "Synthetic test only.",
+    "summary": "The Reserve Intel monitor detected a new version of RESPERSMAN 1570-030 at its official Navy Reserve PDF URL. The current PDF was re-fetched and matches the fingerprint captured at detection. A normalized extracted-text comparison is available for human review. No automated conclusion has been made about the policy meaning or effect of those differences.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for RESPERSMAN 1570-030: detection kind `linked_document_changed`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Tue, 16 Apr 2024 13:16:27 GMT; downloaded size: 1,689,319 bytes. Extracted-text comparison: 1 removed line(s), 1 added line(s), 1 change hunk(s). HTTP Last-Modified metadata is not treated as a policy effective date or revision date. Prior and current normalized extracted-text snapshots are available. Automation identified extraction-level additions and removals for human review, but it has not determined the meaning, applicability, or policy effect of those differences. PDF layout/extraction can also create apparent text changes. Human comparison of the official source is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESPERSMAN",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
@@ -62,5 +62,73 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-09-16T03:08:22Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
+    "detectedFingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+    "observedFingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Tue, 16 Apr 2024 13:16:27 GMT",
+    "contentLength": 1689319,
+    "etag": null,
+    "documentKind": "RESPERSMAN",
+    "documentIdentifier": "1570-030",
+    "sourceFilename": "1570-030.pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/1b4a25b414fb43e9d33a/c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "57a6727f92504ddcb84ead238277b5d21c39f26d59cc16d734118c0dff3ece56",
+      "pageCount": 4,
+      "pagesWithText": 4,
+      "characterCount": 7055,
+      "lineCount": 128,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": true,
+      "policyInterpretationClaimed": false,
+      "note": "This comparison is based on normalized text extracted from two PDF versions. PDF layout or extraction behavior can create apparent text differences. Human review of the official source is required before describing policy effect.",
+      "previousSnapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/1b4a25b414fb43e9d33a/0000000000000000000000000000000000000000000000000000000000000001.json",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/1b4a25b414fb43e9d33a/c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3.json",
+      "extractedTextChanged": true,
+      "previousTextSHA256": "e35f0c226b3c7049899d97fc7391d49ecf837d2c0bf76538085b8f14d64b4e68",
+      "currentTextSHA256": "57a6727f92504ddcb84ead238277b5d21c39f26d59cc16d734118c0dff3ece56",
+      "previousPageCount": 4,
+      "currentPageCount": 4,
+      "previousExtractionStatus": "ok",
+      "currentExtractionStatus": "ok",
+      "removedLineCount": 1,
+      "addedLineCount": 1,
+      "totalHunkCount": 1,
+      "shownHunkCount": 1,
+      "hunksTruncated": false,
+      "hunks": [
+        {
+          "kind": "replace",
+          "oldStartLine": 23,
+          "newStartLine": 23,
+          "oldPage": 1,
+          "newPage": 1,
+          "nearbyHeadingHeuristic": "Individual Inactive Duty Trainin2 Record Maintenance",
+          "removed": [
+            "• Required non-IDT orders to be maintained in the"
+          ],
+          "added": [
+            "• Removed the requirement for non-IDT orders to be maintained in the"
+          ],
+          "removedPreviewTruncated": false,
+          "addedPreviewTruncated": false
+        }
+      ]
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "Prior and current normalized extracted-text snapshots are available. Automation identified extraction-level additions and removals for human review, but it has not determined the meaning, applicability, or policy effect of those differences. PDF layout/extraction can also create apparent text changes. Human comparison of the official source is required."
   }
 }
