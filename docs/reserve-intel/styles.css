@@ -1,4 +1,3 @@
-
 :root {
   color-scheme: light;
   --bg: #f4f6f8;
@@ -658,5 +657,174 @@ h2 {
   .action-buttons {
     width: 100%;
     flex-wrap: wrap;
+  }
+}
+
+
+/* Phase 2B desktop editorial layout */
+.layout {
+  grid-template-columns: 300px minmax(0, 1fr);
+}
+
+.queue-panel {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.article-panel {
+  padding: 30px 32px 64px;
+}
+
+.article-view {
+  max-width: none;
+  margin: 0;
+}
+
+.article-header {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.article-title-block {
+  width: 100%;
+}
+
+.title-input {
+  min-height: 82px;
+  resize: vertical;
+  overflow: auto;
+  white-space: normal;
+}
+
+.content-grid {
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+}
+
+.metadata-panel {
+  top: 106px;
+  align-self: start;
+}
+
+.editor-actions {
+  position: static;
+  margin-top: 0;
+  display: block;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: none;
+}
+
+.editor-actions .section-title-row {
+  margin-bottom: 8px;
+}
+
+.action-note {
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.action-buttons .button {
+  width: 100%;
+  min-height: 40px;
+}
+
+.action-buttons .button.primary {
+  grid-column: 1 / -1;
+}
+
+.preview-only-pill {
+  background: #fff3cf;
+  color: #725619;
+  border: 1px solid #ead497;
+  border-radius: 999px;
+  padding: 4px 7px;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .06em;
+}
+
+.source-open-button {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.compact-list .queue-card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #fbfcfd;
+  box-shadow: none;
+}
+
+.compact-list .queue-card-title {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.compact-list .queue-card-meta {
+  font-size: 10px;
+}
+
+.content-main .content-section {
+  scroll-margin-top: 112px;
+}
+
+/* Keep the inspector beside the editor on normal Mac desktop widths,
+   then stack it cleanly when the browser window gets narrower. */
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+
+  .article-panel {
+    padding: 26px 24px 56px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metadata-panel {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #metadata-editor-card {
+    grid-column: 1 / -1;
+  }
+
+  #editor-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .metadata-panel {
+    grid-template-columns: 1fr;
+  }
+
+  #metadata-editor-card,
+  #editor-actions {
+    grid-column: auto;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons .button.primary {
+    grid-column: auto;
+  }
+
+  .title-input {
+    font-size: 21px;
   }
 }
