@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Reserve Intel Dashboard",
+      "type": "shell",
+      "command": "python automation/start_review_dashboard.py",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean Reserve Intel Runtime Files",
+      "type": "shell",
+      "command": "rm -f docs/reserve-intel/data.json && rm -rf automation/__pycache__",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
