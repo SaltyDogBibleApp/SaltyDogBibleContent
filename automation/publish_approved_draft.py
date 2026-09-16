@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Salty Dog Bible — publish a merged/approved Reserve Intel draft (IT-2D.5).
@@ -8,6 +9,7 @@ Hard safety gate:
 - refuses duplicate article IDs and ambiguous source matches
 - updates an existing active article when the authoritative source identity matches
 - only then activates the article and updates reserve-content-feed.json
+- archives the authoritative checked PR body and a machine-readable approval snapshot
 """
 
 from __future__ import annotations
@@ -23,14 +25,21 @@ import sys
 import tempfile
 from urllib.parse import unquote, urlsplit, urlunsplit
 
-CHECKS = [
-    "I opened the official source.",
-    "I verified the facts against the official source.",
-    "I verified the status and effective date.",
-    "I verified the intended audience.",
-    "I reviewed the title, summary, Why It Matters, and details.",
-    "I approve publication to Reserve Intel.",
+APPROVAL_CHECKS = [
+    ("sourceOpenedAndRead", "I opened the official source."),
+    ("factsVerifiedAgainstSource", "I verified the facts against the official source."),
+    ("statusAndEffectiveDateVerified", "I verified the status and effective date."),
+    ("audienceVerified", "I verified the intended audience."),
+    (
+        "contentReviewedForPublication",
+        "I reviewed the title, summary, Why It Matters, and details.",
+    ),
+    ("approvedForPublication", "I approve publication to Reserve Intel."),
 ]
+
+# Keep the existing label-only list for compatibility with the publication gate
+# and any callers/tests that refer to CHECKS.
+CHECKS = [label for _, label in APPROVAL_CHECKS]
 
 
 NAVADMIN_FILENAME_RE = re.compile(
@@ -229,6 +238,15 @@ def checkbox_checked(body: str, label: str) -> bool:
     return bool(pattern.search(body))
 
 
+def approval_checklist_snapshot(body: str) -> dict[str, bool]:
+    """Return a stable machine-readable snapshot of the six PR approval checks."""
+
+    return {
+        key: checkbox_checked(body, label)
+        for key, label in APPROVAL_CHECKS
+    }
+
+
 def verify_approval_body(body: str) -> None:
     missing = [label for label in CHECKS if not checkbox_checked(body, label)]
     if missing:
@@ -335,6 +353,11 @@ def publish(
     archived["requiresHumanReview"] = False
     archived["publishReady"] = True
     archived["approvedAt"] = now
+    archived["publicationApproval"] = {
+        "source": "merged_pull_request_body",
+        "approvedAt": now,
+        "checks": approval_checklist_snapshot(approval_body),
+    }
     archived["articleDraft"] = article
 
     published_path = published_dir / draft_path.name
@@ -346,10 +369,16 @@ def publish(
 
     if review_marker and review_marker.exists() and review_published_dir:
         review_published_dir.mkdir(parents=True, exist_ok=True)
-        shutil.move(
-            str(review_marker),
-            str(review_published_dir / review_marker.name),
+
+        # The pending review file contains the original unchecked checklist.
+        # The merged PR body is the authoritative approval record, so archive
+        # that final checked body instead of merely moving the stale preview.
+        published_review_path = review_published_dir / review_marker.name
+        published_review_path.write_text(
+            approval_body.rstrip() + "\n",
+            encoding="utf-8",
         )
+        review_marker.unlink()
 
     return published_article_id
 
@@ -402,6 +431,13 @@ def self_test() -> int:
         feed_path = root / "feed.json"
         draft_path = root / "pending" / "navadmin-204-update.json"
         published_dir = root / "published"
+        review_marker = root / "reviews" / "pending" / "navadmin-204-update.md"
+        review_published_dir = root / "reviews" / "published"
+        review_marker.parent.mkdir(parents=True, exist_ok=True)
+        review_marker.write_text(
+            "\n".join(f"- [ ] {label}" for label in CHECKS) + "\n",
+            encoding="utf-8",
+        )
 
         existing = {
             "id": "intel-navadmin-204-26-cyber",
@@ -469,8 +505,8 @@ def self_test() -> int:
             feed_path,
             approval_body,
             published_dir,
-            None,
-            None,
+            review_marker,
+            review_published_dir,
         )
 
         updated_feed = load_json(feed_path)
@@ -490,6 +526,21 @@ def self_test() -> int:
         archived = load_json(published_dir / "navadmin-204-update.json")
         assert archived["articleDraft"]["id"] == "intel-navadmin-204-26-cyber"
         assert archived["articleDraft"]["publishedAt"] == "2026-08-31T18:38:00Z"
+
+        approval_archive = archived["publicationApproval"]
+        assert approval_archive["source"] == "merged_pull_request_body"
+        assert approval_archive["approvedAt"] == archived["approvedAt"]
+        assert approval_archive["checks"] == {
+            key: True for key, _ in APPROVAL_CHECKS
+        }
+
+        published_review = (
+            review_published_dir / "navadmin-204-update.md"
+        ).read_text(encoding="utf-8")
+        assert not review_marker.exists()
+        for label in CHECKS:
+            assert f"- [x] {label}" in published_review
+        assert "- [ ]" not in published_review
 
         # NAVADMIN identity is a backup when the canonical URL path changes.
         feed_path_2 = root / "feed-identity.json"
