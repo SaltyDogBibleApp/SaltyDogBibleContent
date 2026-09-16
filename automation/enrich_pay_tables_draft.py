@@ -47,9 +47,9 @@ SECTION_HEADINGS = (
 )
 
 MONTHS = (
-    "January|February|March|April|May|June|July|August|September|October|"
-    "November|December|Jan\.?|Feb\.?|Mar\.?|Apr\.?|Jun\.?|Jul\.?|"
-    "Aug\.?|Sep\.?|Sept\.?|Oct\.?|Nov\.?|Dec\.?"
+    r"January|February|March|April|May|June|July|August|September|October|"
+    r"November|December|Jan\.?|Feb\.?|Mar\.?|Apr\.?|Jun\.?|Jul\.?|"
+    r"Aug\.?|Sep\.?|Sept\.?|Oct\.?|Nov\.?|Dec\.?"
 )
 
 EFFECTIVE_DATE_RE = re.compile(
