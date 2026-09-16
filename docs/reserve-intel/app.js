@@ -1,10 +1,3 @@
-
-
-  }
-}
-
-bindEditorEvents();
-load();
 const state = {
   data: null,
   selectedId: null,
