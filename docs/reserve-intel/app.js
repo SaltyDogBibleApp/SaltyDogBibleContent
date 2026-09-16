@@ -4,6 +4,9 @@ const state = {
   selectedId: null,
   selectedKind: null,
   dirty: false,
+  saveServiceAvailable: false,
+  saveServiceRepository: null,
+  saving: false,
 };
 
 const CATEGORIES = [
@@ -426,15 +429,35 @@ function editorSnapshot() {
   };
 }
 
-function saveDraftLocally() {
-  if (state.selectedKind !== "pending") return;
-  const item = findItem(state.selectedId, "pending");
-  if (!item) return;
+function validateEditorSnapshot(snapshot) {
+  const required = [
+    ["Title", snapshot.title],
+    ["Summary", snapshot.summary],
+    ["Why It Matters", snapshot.whyItMatters],
+    ["Details", snapshot.details],
+  ];
 
-  const snapshot = editorSnapshot();
-  Object.assign(item, snapshot);
-  item.audience = snapshot.audience;
+  const missing = required.filter(([, value]) => !value).map(([label]) => label);
+  if (missing.length) {
+    throw new Error(`Complete these fields before saving: ${missing.join(", ")}`);
+  }
+}
 
+function applySavedArticleToItem(item, article) {
+  const preserved = {
+    _sourceFile: item._sourceFile,
+    _reviewBranch: item._reviewBranch,
+    _contentOrigin: item._contentOrigin,
+    _saveEligible: item._saveEligible,
+    _demo: item._demo,
+    reviewChecklist: item.reviewChecklist,
+    textComparison: item.textComparison,
+  };
+
+  Object.assign(item, article, preserved);
+}
+
+function rerenderSelectedPending(item) {
   setDirty(false);
   renderQueues();
   document.querySelectorAll(".queue-card").forEach((card) => {
@@ -444,7 +467,153 @@ function saveDraftLocally() {
     );
   });
   renderArticle(item, "pending");
-  showToast("Draft changes saved in this browser preview only. GitHub was not changed.", "success");
+}
+
+function saveDemoLocally(item, snapshot) {
+  Object.assign(item, snapshot);
+  item.audience = snapshot.audience;
+  rerenderSelectedPending(item);
+  showToast("Demo draft saved in this browser only. GitHub was not changed.", "success");
+}
+
+async function saveDraft() {
+  if (state.selectedKind !== "pending" || state.saving) return;
+
+  const item = findItem(state.selectedId, "pending");
+  if (!item) return;
+
+  const snapshot = editorSnapshot();
+
+  try {
+    validateEditorSnapshot(snapshot);
+  } catch (error) {
+    showToast(error.message, "warning");
+    return;
+  }
+
+  if (item._demo === true) {
+    saveDemoLocally(item, snapshot);
+    return;
+  }
+
+  if (item._saveEligible !== true) {
+    showToast("This review branch is not ready for safe saving yet. Regenerate the dashboard after the Review PR is created.", "warning");
+    return;
+  }
+
+  if (!state.saveServiceAvailable) {
+    showToast("Save service is unavailable. Start review_dashboard_server.py instead of python -m http.server.", "warning");
+    return;
+  }
+
+  state.saving = true;
+  configureActions(item);
+
+  try {
+    const response = await fetch("/api/reserve-intel/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        articleId: item.id,
+        sourceFile: item._sourceFile,
+        reviewBranch: item._reviewBranch,
+        articleDraftPatch: snapshot,
+      }),
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || `Save failed with HTTP ${response.status}`);
+    }
+
+    applySavedArticleToItem(item, payload.article);
+    item._contentOrigin = "reviewBranch";
+    item._saveEligible = true;
+    rerenderSelectedPending(item);
+
+    if (payload.changed === false) {
+      showToast("No changes to save. The review branch already matches the editor.", "success");
+    } else {
+      const shortSha = payload.commitSha ? payload.commitSha.slice(0, 7) : null;
+      showToast(
+        shortSha
+          ? `Saved to the review branch in commit ${shortSha}.`
+          : "Saved to the review branch.",
+        "success"
+      );
+    }
+  } catch (error) {
+    showToast(error.message || "Save failed.", "warning");
+  } finally {
+    state.saving = false;
+    configureActions(item);
+  }
+}
+
+async function checkSaveService() {
+  const status = byId("save-service-status");
+
+  try {
+    const response = await fetch("/api/reserve-intel/health", { cache: "no-store" });
+    const payload = await response.json();
+
+    if (!response.ok || payload?.ok !== true || payload?.saveEnabled !== true) {
+      throw new Error("Save service unavailable");
+    }
+
+    state.saveServiceAvailable = true;
+    state.saveServiceRepository = payload.repository || null;
+    status.textContent = "Save service connected";
+    status.className = "service-status connected";
+  } catch {
+    state.saveServiceAvailable = false;
+    state.saveServiceRepository = null;
+    status.textContent = "Save service unavailable";
+    status.className = "service-status unavailable";
+  }
+}
+
+function configureActions(item) {
+  const saveButton = byId("save-draft-button");
+  const modePill = byId("action-mode-pill");
+  const actionNote = byId("action-note");
+
+  if (!item || state.selectedKind !== "pending") return;
+
+  if (item._demo === true) {
+    saveButton.disabled = state.saving;
+    saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
+    modePill.textContent = "DEMO";
+    modePill.className = "preview-only-pill";
+    actionNote.textContent = "Demo Save stays in this browser. Reject and Approve are preview-only.";
+    return;
+  }
+
+  const ready = item._saveEligible === true;
+  const connected = state.saveServiceAvailable === true;
+
+  saveButton.disabled = state.saving || !ready || !connected;
+  saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
+
+  if (ready && connected) {
+    modePill.textContent = "SAVE LIVE";
+    modePill.className = "preview-only-pill live-save";
+    actionNote.textContent = `Save Draft commits only the allowed editorial fields to ${item._reviewBranch}. Reject and Approve remain preview-only.`;
+  } else if (!ready) {
+    modePill.textContent = "WAITING";
+    modePill.className = "preview-only-pill waiting";
+    actionNote.textContent = "The enriched review branch is not available yet. Regenerate the dashboard after the Review PR is created.";
+  } else {
+    modePill.textContent = "SAVE OFFLINE";
+    modePill.className = "preview-only-pill waiting";
+    actionNote.textContent = "Start automation/review_dashboard_server.py to enable real Save Draft. Reject and Approve remain preview-only.";
+  }
 }
 
 function previewReject() {
@@ -484,6 +653,7 @@ function renderArticle(item, kind) {
   if (editable) {
     populateEditor(item);
     setDirty(false);
+    configureActions(item);
   }
 
   const sourceButton = byId("source-button");
@@ -532,13 +702,15 @@ function bindEditorEvents() {
     setDirty(true);
   });
 
-  byId("save-draft-button").addEventListener("click", saveDraftLocally);
+  byId("save-draft-button").addEventListener("click", saveDraft);
   byId("reject-button").addEventListener("click", previewReject);
   byId("approve-button").addEventListener("click", previewApprove);
 }
 
 async function load() {
   try {
+    await checkSaveService();
+
     const response = await fetch(`data.json?ts=${Date.now()}`, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
