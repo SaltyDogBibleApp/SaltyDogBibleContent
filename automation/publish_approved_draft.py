@@ -9,7 +9,6 @@ Hard safety gate:
 - refuses duplicate article IDs and ambiguous source matches
 - updates an existing active article when the authoritative source identity matches
 - only then activates the article and updates reserve-content-feed.json
-- archives the authoritative checked PR body and a machine-readable approval snapshot
 """
 
 from __future__ import annotations
@@ -20,7 +19,6 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
-import shutil
 import sys
 import tempfile
 from urllib.parse import unquote, urlsplit, urlunsplit
@@ -37,8 +35,6 @@ APPROVAL_CHECKS = [
     ("approvedForPublication", "I approve publication to Reserve Intel."),
 ]
 
-# Keep the existing label-only list for compatibility with the publication gate
-# and any callers/tests that refer to CHECKS.
 CHECKS = [label for _, label in APPROVAL_CHECKS]
 
 
@@ -239,8 +235,7 @@ def checkbox_checked(body: str, label: str) -> bool:
 
 
 def approval_checklist_snapshot(body: str) -> dict[str, bool]:
-    """Return a stable machine-readable snapshot of the six PR approval checks."""
-
+    """Return a machine-readable snapshot of the six PR approval checks."""
     return {
         key: checkbox_checked(body, label)
         for key, label in APPROVAL_CHECKS
@@ -370,9 +365,8 @@ def publish(
     if review_marker and review_marker.exists() and review_published_dir:
         review_published_dir.mkdir(parents=True, exist_ok=True)
 
-        # The pending review file contains the original unchecked checklist.
-        # The merged PR body is the authoritative approval record, so archive
-        # that final checked body instead of merely moving the stale preview.
+        # The merged PR body is the authoritative approval record. Archive that
+        # checked body instead of moving the original unchecked review preview.
         published_review_path = review_published_dir / review_marker.name
         published_review_path.write_text(
             approval_body.rstrip() + "\n",
