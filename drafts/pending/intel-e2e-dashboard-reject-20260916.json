@@ -1,0 +1,43 @@
+{
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "sourceEvidence": {
+    "officialHostVerified": true,
+    "testOnly": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-e2e-dashboard-reject-20260916",
+    "publishedAt": "2026-09-16T00:00:00Z",
+    "updatedAt": "2026-09-16T00:00:00Z",
+    "title": "Dashboard Reject E2E Test",
+    "category": "Admin",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Synthetic article used only to test rejection from the Reserve Intel Mac dashboard.",
+    "whyItMatters": "This verifies that Reject closes the Review PR without merging or publishing the test article.",
+    "details": "Test-only content. This article must never appear in the live Reserve Intel feed.",
+    "effectiveDate": null,
+    "sourceName": "Synthetic Reject E2E Test Source",
+    "sourceURL": "https://example.com/reserve-intel-reject-e2e",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}
