@@ -2,7 +2,7 @@
 """
 Generate Reserve Intel review dashboard data.
 
-Phase 2A remains read-only with respect to the repository's review pipeline:
+Phase 2B remains read-only with respect to the repository's review pipeline:
 - reads pending draft JSON
 - reads the live Reserve Intel feed for recently published items
 - writes docs/reserve-intel/data.json
@@ -130,7 +130,7 @@ def pending_item(path: Path) -> dict[str, Any]:
 
 
 def demo_pending_item() -> dict[str, Any]:
-    """Return a dashboard-only fake article for exercising the Phase 2A editor."""
+    """Return a dashboard-only fake article for exercising the Phase 2B editor."""
     return {
         "id": "demo-reserve-intel-editor-preview",
         "title": "Demo Review — Reserve Training Requirement Update",
@@ -288,4 +288,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
