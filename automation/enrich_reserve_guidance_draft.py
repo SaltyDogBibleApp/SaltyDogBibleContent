@@ -58,7 +58,7 @@ SECTION_HEADING_RE = re.compile(
     r"procedures?|requirements?|definitions?|administration|training|"
     r"records?|reporting|eligibility|applicability|references?|overview|"
     r"general information|action|discussion|table of contents)"
-    r"(?:\s*[:\-–—]\s*.*|\s+.*)?$",
+    r"(?:\s*[:\-–—]\s*[^.!?;]{1,100})?$",
     re.I,
 )
 
@@ -885,6 +885,23 @@ def self_test() -> int:
         "Individual Inactive Duty Trainin2 Record Maintenance"
     )
     assert nearby_heading(["J. A. s@oMMER", "Deputy"], 1) is None
+
+    # Sentence fragments that merely begin with a section-like word must not
+    # outrank the actual article title. This mirrors the real 1570-030 text
+    # extraction where a wrapped bullet line begins with "Record Maintenance".
+    wrapped_body_fixture = [
+        "Article Title",
+        "Individual Inactive Duty Trainin2 Record Maintenance",
+        "• Simplifies and updates existing Individual Inactive Duty (IDT) Training",
+        "Record Maintenance procedures and responsibilities.",
+        "• Removed the requirement for non-IDT orders to be maintained in the",
+    ]
+    assert nearby_heading(wrapped_body_fixture, len(wrapped_body_fixture) - 1) == (
+        "Individual Inactive Duty Trainin2 Record Maintenance"
+    )
+    assert structural_heading_candidate(
+        ["Record Maintenance procedures and responsibilities."], 0
+    ) is None
     assert enriched["enrichment"]["currentTextEvidence"]["available"] is True
     assert enriched["articleDraft"]["effectiveDate"] is None
     assert enriched["articleDraft"]["isActive"] is False
