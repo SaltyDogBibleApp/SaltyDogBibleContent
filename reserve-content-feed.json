@@ -1,30 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-16T14:59:04Z",
+  "generatedAt": "2026-09-16T03:28:45Z",
   "intelArticles": [
-    {
-      "id": "intel-e2e-dashboard-approve-20260916",
-      "publishedAt": "2026-09-16T00:00:00Z",
-      "updatedAt": "2026-09-16T14:59:04Z",
-      "title": "Dashboard Approve E2E Test",
-      "category": "Admin",
-      "status": "TRACKING",
-      "priority": "NORMAL",
-      "summary": "Synthetic article used only to test approval from the Reserve Intel Mac dashboard.",
-      "whyItMatters": "This verifies the dashboard approval, PR merge, and existing publication workflow end to end.",
-      "details": "Test-only content. It will be removed from the live Reserve Intel feed immediately after the E2E test.",
-      "effectiveDate": null,
-      "sourceName": "Synthetic Approve E2E Test Source",
-      "sourceURL": "https://example.com/reserve-intel-approve-e2e",
-      "audience": {
-        "service": "USN",
-        "reserveStatus": "ALL",
-        "trainingWing": null,
-        "squadron": null
-      },
-      "isPinned": false,
-      "isActive": true
-    },
     {
       "id": "intel-navadmin-204-26-cyber",
       "publishedAt": "2026-08-31T18:38:00Z",
