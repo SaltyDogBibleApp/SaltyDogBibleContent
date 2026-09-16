@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,6 +17,11 @@
       <span id="generated-at">Loading…</span>
     </div>
   </header>
+
+  <div id="preview-banner" class="preview-banner hidden">
+    <strong>Phase 2A Preview</strong>
+    <span>Edits and action buttons are browser-only. Nothing here writes to GitHub or publishes content.</span>
+  </div>
 
   <main class="layout">
     <aside class="queue-panel">
@@ -49,9 +55,13 @@
 
       <article id="article-view" class="article-view hidden">
         <div class="article-header">
-          <div>
+          <div class="article-title-block">
             <div id="article-kicker" class="eyebrow"></div>
             <h2 id="article-title"></h2>
+            <div id="title-editor-wrap" class="field-block hidden">
+              <label for="edit-title">Title</label>
+              <input id="edit-title" class="text-input title-input" type="text" autocomplete="off">
+            </div>
           </div>
           <a id="source-button" class="button secondary" target="_blank" rel="noopener noreferrer">
             Open Official Source
@@ -65,16 +75,19 @@
             <section class="content-section">
               <h3>Summary</h3>
               <p id="article-summary"></p>
+              <textarea id="edit-summary" class="editor-textarea hidden" rows="5"></textarea>
             </section>
 
             <section class="content-section">
               <h3>Why It Matters</h3>
               <p id="article-why"></p>
+              <textarea id="edit-why" class="editor-textarea hidden" rows="6"></textarea>
             </section>
 
             <section class="content-section">
               <h3>Details</h3>
               <div id="article-details" class="preline"></div>
+              <textarea id="edit-details" class="editor-textarea details-editor hidden" rows="12"></textarea>
             </section>
 
             <section id="evidence-section" class="content-section hidden">
@@ -91,9 +104,63 @@
           </div>
 
           <aside class="metadata-panel">
-            <div class="metadata-card">
+            <div id="metadata-display-card" class="metadata-card">
               <h3>Article Metadata</h3>
               <dl id="metadata-list"></dl>
+            </div>
+
+            <div id="metadata-editor-card" class="metadata-card hidden">
+              <div class="section-title-row">
+                <h3>Article Settings</h3>
+                <span id="dirty-pill" class="dirty-pill hidden">UNSAVED</span>
+              </div>
+
+              <div class="control-group">
+                <label>Priority</label>
+                <div id="priority-control" class="segmented-control"></div>
+              </div>
+
+              <div class="control-group">
+                <label for="edit-category">Category</label>
+                <select id="edit-category" class="select-input"></select>
+              </div>
+
+              <div class="control-group">
+                <label for="edit-status">Status</label>
+                <select id="edit-status" class="select-input"></select>
+              </div>
+
+              <div class="control-group">
+                <label for="edit-effective-date">Effective Date</label>
+                <input id="edit-effective-date" class="text-input" type="date">
+                <button id="clear-effective-date" class="link-button" type="button">Clear date</button>
+              </div>
+
+              <div class="control-group">
+                <label>Service</label>
+                <div id="service-control" class="segmented-control"></div>
+              </div>
+
+              <div class="control-group">
+                <label>Reserve Status</label>
+                <div id="reserve-status-control" class="segmented-control"></div>
+              </div>
+
+              <div class="control-group two-column-controls">
+                <div>
+                  <label for="edit-training-wing">Training Wing</label>
+                  <input id="edit-training-wing" class="text-input" type="text" placeholder="All">
+                </div>
+                <div>
+                  <label for="edit-squadron">Squadron</label>
+                  <input id="edit-squadron" class="text-input" type="text" placeholder="All">
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label>Pinned</label>
+                <div id="pinned-control" class="segmented-control"></div>
+              </div>
             </div>
 
             <div class="metadata-card">
@@ -102,15 +169,29 @@
             </div>
 
             <div class="metadata-card">
-              <h3>Source</h3>
+              <div class="section-title-row">
+                <h3>Source</h3>
+                <span class="read-only-pill">READ ONLY</span>
+              </div>
               <div id="source-name" class="source-name"></div>
               <div id="source-url" class="source-url"></div>
             </div>
           </aside>
         </div>
+
+        <div id="editor-actions" class="editor-actions hidden">
+          <div class="action-note">Preview actions only — no repository changes are made.</div>
+          <div class="action-buttons">
+            <button id="save-draft-button" class="button secondary" type="button">Save Draft</button>
+            <button id="reject-button" class="button danger" type="button">Reject</button>
+            <button id="approve-button" class="button primary" type="button">Approve for Publication</button>
+          </div>
+        </div>
       </article>
     </section>
   </main>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
