@@ -1,11 +1,13 @@
 {
+  "draftSchemaVersion": 1,
   "draftStatus": "PENDING_HUMAN_REVIEW",
   "requiresHumanReview": true,
   "publishReady": false,
   "sourceEvidence": {
     "officialHostVerified": true,
     "sourceType": "other",
-    "testOnly": true
+    "testOnly": true,
+    "sourceURL": "https://example.com/reserve-intel-approve-e2e"
   },
   "reviewChecklist": {
     "sourceOpenedAndRead": false,
