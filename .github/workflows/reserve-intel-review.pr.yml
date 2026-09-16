@@ -62,11 +62,13 @@ jobs:
           cp automation/check_sources.py /tmp/check_sources.py
           cp automation/enrich_navadmin_draft.py /tmp/enrich_navadmin_draft.py
           cp automation/enrich_pay_tables_draft.py /tmp/enrich_pay_tables_draft.py
+          cp automation/enrich_reserve_guidance_draft.py /tmp/enrich_reserve_guidance_draft.py
           cp automation/shape_navadmin_article.py /tmp/shape_navadmin_article.py
           cp automation/validate_drafts.py /tmp/validate_drafts.py
           cp automation/prepare_review_pr.py /tmp/prepare_review_pr.py
 
           python /tmp/enrich_pay_tables_draft.py --self-test
+          python /tmp/enrich_reserve_guidance_draft.py --self-test
 
           for DRAFT in "${DRAFTS[@]}"; do
             ARTICLE_ID="$(basename "$DRAFT" .json)"
@@ -127,6 +129,48 @@ jobs:
 
                 if ! git diff --cached --quiet; then
                   git commit -m "Enrich Reserve Intel review for ${ARTICLE_ID}"
+                  git push --force-with-lease origin "$BRANCH"
+                fi
+
+                gh pr edit "$OPEN_PR" \
+                  --title "Reserve Intel Review: ${TITLE}" \
+                  --body-file "$REVIEW_FILE"
+
+                git switch main
+                git reset --hard origin/main
+                continue
+              fi
+
+              if [ "$SOURCE_TYPE" = "reserve_guidance" ]; then
+                ALREADY_RESERVE_GUIDANCE_ENRICHED="$(python -c 'import json,sys; p=json.load(open(sys.argv[1])); e=p.get("enrichment"); print("true" if isinstance(e,dict) and e.get("sourceType")=="reserve_guidance" else "false")' "$DRAFT")"
+
+                if [ "$ALREADY_RESERVE_GUIDANCE_ENRICHED" = "true" ]; then
+                  echo "Existing Navy Reserve guidance review PR is already enriched; leaving it unchanged."
+                  git switch main
+                  git reset --hard origin/main
+                  continue
+                fi
+
+                echo "Upgrading existing Navy Reserve guidance review PR with fingerprint-verified enrichment."
+                python /tmp/enrich_reserve_guidance_draft.py \
+                  --input "$DRAFT"
+
+                python /tmp/validate_drafts.py "$DRAFT"
+
+                REVIEW_FILE="reviews/pending/${ARTICLE_ID}.md"
+                META_FILE="/tmp/${ARTICLE_ID}-metadata.json"
+
+                python /tmp/prepare_review_pr.py \
+                  --draft "$DRAFT" \
+                  --output "$REVIEW_FILE" \
+                  --metadata "$META_FILE"
+
+                TITLE="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["title"])' "$META_FILE")"
+
+                git add "$DRAFT" "$REVIEW_FILE"
+
+                if ! git diff --cached --quiet; then
+                  git commit -m "Enrich Navy Reserve guidance review for ${ARTICLE_ID}"
                   git push --force-with-lease origin "$BRANCH"
                 fi
 
@@ -219,6 +263,9 @@ jobs:
             elif [ "$SOURCE_TYPE" = "pay_tables" ]; then
               python /tmp/enrich_pay_tables_draft.py \
                 --draft "$DRAFT"
+            elif [ "$SOURCE_TYPE" = "reserve_guidance" ]; then
+              python /tmp/enrich_reserve_guidance_draft.py \
+                --input "$DRAFT"
             else
               echo "No automated enrichment/shaping is configured for source type ${SOURCE_TYPE}."
               echo "Creating a manual-review PR from the validated pending draft."
@@ -242,6 +289,8 @@ jobs:
               git commit -m "Create shaped Reserve Intel review for ${ARTICLE_ID}"
             elif [ "$SOURCE_TYPE" = "pay_tables" ]; then
               git commit -m "Create enriched Reserve Intel review for ${ARTICLE_ID}"
+            elif [ "$SOURCE_TYPE" = "reserve_guidance" ]; then
+              git commit -m "Create enriched Navy Reserve guidance review for ${ARTICLE_ID}"
             else
               git commit -m "Create manual Reserve Intel review for ${ARTICLE_ID}"
             fi
@@ -259,4 +308,5 @@ jobs:
             git switch main
             git reset --hard origin/main
           done
+
 
