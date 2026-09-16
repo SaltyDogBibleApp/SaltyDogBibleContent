@@ -1,21 +1,26 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-09-16T11:27:31Z**
+Run time: **2026-09-16T16:50:56Z**
 
 ## Source check cadence
 
-- Checked this run: 2
-- Skipped until configured interval: 5
+- Checked this run: 1
+- Skipped until configured interval: 6
 
 ## New potentially relevant items
 
 None detected.
 
-## Official sources changed in place
+## Source-check errors
 
-- **MyNavyHR NAVADMIN** — https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/
-
-These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
+- **Navy Reserve RESPERSMAN — Open PDF** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1100-050** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1100-060** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 3060-020** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1300-070** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1001-020** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1001-030** — The read operation timed out
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1040-010** — The read operation timed out
 
 ## Publishing safety
 
