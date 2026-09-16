@@ -1,7 +1,8 @@
 
+
 #!/usr/bin/env python3
 """
-Serve the Reserve Intel dashboard and provide a narrowly scoped Save Draft API.
+Serve the Reserve Intel dashboard and provide narrowly scoped review actions.
 
 Security / safety properties:
 - GitHub credentials remain in the Codespace; they are never sent to the browser.
@@ -23,6 +24,8 @@ Security / safety properties:
   PR body, marks a draft PR ready when necessary, and merges that exact head SHA.
 - The dashboard never writes reserve-content-feed.json; the existing merged-PR
   publication workflow remains the only publication path.
+- Dashboard data is regenerated from origin/main after successful actions so the
+  browser can be refreshed without another terminal generation command.
 """
 
 from __future__ import annotations
@@ -38,6 +41,8 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
+import time
 from typing import Any
 from urllib.parse import quote, urlparse
 
@@ -70,6 +75,12 @@ SERVICES = {"ALL", "USN", "USMC"}
 RESERVE_STATUSES = {"ALL", "SELRES", "VTU"}
 
 REVIEW_BRANCH_PREFIX = "reserve-intel-review/"
+DASHBOARD_GENERATOR = Path("automation/generate_review_dashboard.py")
+DASHBOARD_OUTPUT = Path("docs/reserve-intel/data.json")
+DASHBOARD_PENDING_DIR = Path("drafts/pending")
+DASHBOARD_FEED = Path("reserve-content-feed.json")
+DASHBOARD_MAIN_REF = "origin/main"
+
 MAX_REQUEST_BYTES = 128 * 1024
 MAX_TITLE = 300
 MAX_SUMMARY = 4000
@@ -112,6 +123,139 @@ def detect_repo_slug() -> str:
         raise SaveError(detail)
 
     return result.stdout.strip()
+
+
+def fetch_origin(root: Path) -> None:
+    result = subprocess.run(
+        ["git", "fetch", "origin"],
+        cwd=root,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "git fetch origin failed."
+        raise SaveError(detail)
+
+
+def filter_suppressed_pending(
+    payload: dict[str, Any],
+    suppressed_article_ids: set[str],
+) -> tuple[dict[str, Any], int]:
+    """Hide already actioned reviews while GitHub workflows finish updating main."""
+    pending = payload.get("pending")
+    if not isinstance(pending, list) or not suppressed_article_ids:
+        return payload, 0
+
+    filtered = [
+        item
+        for item in pending
+        if not (
+            isinstance(item, dict)
+            and isinstance(item.get("id"), str)
+            and item.get("id") in suppressed_article_ids
+        )
+    ]
+    removed = len(pending) - len(filtered)
+    payload["pending"] = filtered
+    return payload, removed
+
+
+def refresh_dashboard_data(
+    root: Path,
+    repo: str,
+    suppressed_article_ids: set[str] | None = None,
+) -> dict[str, Any]:
+    """Fetch origin/main and rebuild dashboard data without changing the checkout."""
+    fetch_origin(root)
+
+    env = os.environ.copy()
+    env["GITHUB_REPOSITORY"] = repo
+
+    command = [
+        sys.executable,
+        str(DASHBOARD_GENERATOR),
+        "--pending-dir",
+        str(DASHBOARD_PENDING_DIR),
+        "--feed",
+        str(DASHBOARD_FEED),
+        "--output",
+        str(DASHBOARD_OUTPUT),
+        "--main-ref",
+        DASHBOARD_MAIN_REF,
+    ]
+    result = subprocess.run(
+        command,
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "Dashboard regeneration failed."
+        raise SaveError(detail)
+
+    output_path = root / DASHBOARD_OUTPUT
+    try:
+        payload = json.loads(output_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SaveError("Regenerated dashboard data could not be read.") from exc
+
+    if not isinstance(payload, dict):
+        raise SaveError("Regenerated dashboard data has an invalid root.")
+
+    payload, suppressed_count = filter_suppressed_pending(
+        payload,
+        set(suppressed_article_ids or set()),
+    )
+    if suppressed_count:
+        output_path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+
+    pending = payload.get("pending")
+    published = payload.get("published")
+    return {
+        "ok": True,
+        "mainRef": DASHBOARD_MAIN_REF,
+        "pending": len(pending) if isinstance(pending, list) else None,
+        "published": len(published) if isinstance(published, list) else None,
+        "suppressedPending": suppressed_count,
+    }
+
+
+def refresh_server_dashboard(server: ThreadingHTTPServer) -> dict[str, Any]:
+    root = Path(getattr(server, "dashboard_root"))
+    repo = getattr(server, "repo_slug")
+    suppressed = set(getattr(server, "suppressed_article_ids", set()))
+    lock = getattr(server, "dashboard_refresh_lock")
+    with lock:
+        return refresh_dashboard_data(root, repo, suppressed)
+
+
+def schedule_followup_refreshes(server: ThreadingHTTPServer) -> None:
+    """Refresh again while GitHub publish/reject workflows settle on origin/main."""
+    def worker() -> None:
+        for delay in (8, 20, 45):
+            time.sleep(delay)
+            try:
+                info = refresh_server_dashboard(server)
+                print(
+                    "[dashboard-refresh] "
+                    f"origin/main refreshed after {delay}s: "
+                    f"pending={info.get('pending')} published={info.get('published')}"
+                )
+            except Exception as exc:
+                print(
+                    f"[dashboard-refresh] follow-up refresh failed after {delay}s: {exc}",
+                    file=sys.stderr,
+                )
+
+    threading.Thread(
+        target=worker,
+        name="reserve-intel-dashboard-refresh",
+        daemon=True,
+    ).start()
 
 
 def validate_pending_path(value: Any) -> str:
@@ -867,12 +1011,25 @@ def self_test() -> int:
         malformed_checklist_blocked = True
     assert malformed_checklist_blocked
 
+    filtered_payload, removed = filter_suppressed_pending(
+        {
+            "pending": [
+                {"id": "keep-me"},
+                {"id": "hide-me"},
+            ],
+            "published": [],
+        },
+        {"hide-me"},
+    )
+    assert removed == 1
+    assert [item["id"] for item in filtered_payload["pending"]] == ["keep-me"]
+
     print("SELF-TEST PASSED")
     return 0
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
-    server_version = "ReserveIntelDashboard/3C"
+    server_version = "ReserveIntelDashboard/4B"
 
     def _json_response(self, status: int, payload: dict[str, Any]) -> None:
         raw = (json.dumps(payload, ensure_ascii=False) + "\n").encode("utf-8")
@@ -895,6 +1052,8 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                     "repository": repo,
                     "approveEnabled": bool(repo),
                     "rejectEnabled": bool(repo),
+                    "autoRefreshEnabled": bool(repo),
+                    "dashboardMainRef": DASHBOARD_MAIN_REF,
                 },
             )
             return
@@ -929,10 +1088,37 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 
             if parsed.path == "/api/reserve-intel/save":
                 result = save_request(payload, repo)
+                action_removes_pending = False
             elif parsed.path == "/api/reserve-intel/reject":
                 result = reject_request(payload, repo)
+                action_removes_pending = True
             else:
                 result = approve_request(payload, repo)
+                action_removes_pending = True
+
+            article_id = payload.get("articleId")
+            if (
+                action_removes_pending
+                and isinstance(article_id, str)
+                and article_id.strip()
+            ):
+                suppressed = getattr(self.server, "suppressed_article_ids")
+                suppressed.add(article_id.strip())
+
+            try:
+                result["dashboardRefresh"] = refresh_server_dashboard(self.server)
+            except Exception as refresh_exc:
+                print(
+                    f"[dashboard-refresh] immediate refresh failed: {refresh_exc}",
+                    file=sys.stderr,
+                )
+                result["dashboardRefresh"] = {
+                    "ok": False,
+                    "error": str(refresh_exc),
+                }
+
+            if action_removes_pending:
+                schedule_followup_refreshes(self.server)
         except (UnicodeDecodeError, json.JSONDecodeError, SaveError) as exc:
             self._json_response(400, {"ok": False, "error": str(exc)})
             return
@@ -974,12 +1160,16 @@ def main() -> int:
 
     server = ThreadingHTTPServer((args.host, args.port), DashboardHandler)
     server.repo_slug = repo
+    server.dashboard_root = str(root)
+    server.suppressed_article_ids = set()
+    server.dashboard_refresh_lock = threading.Lock()
 
     print(f"Reserve Intel dashboard: http://{args.host}:{args.port}/docs/reserve-intel/")
     print(f"Repository: {repo}")
     print("Save Draft: ENABLED for eligible review-branch drafts")
     print("Reject: ENABLED for eligible review PRs")
     print("Approve: ENABLED for eligible review PRs")
+    print(f"Dashboard refresh: ENABLED from {DASHBOARD_MAIN_REF}")
     print("Press Ctrl-C to stop.")
 
     try:
