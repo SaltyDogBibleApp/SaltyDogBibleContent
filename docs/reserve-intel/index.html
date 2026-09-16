@@ -18,6 +18,34 @@
     </div>
   </header>
 
+  <section class="dashboard-ops" aria-label="Reserve Intel dashboard status">
+    <div class="ops-stat">
+      <span class="ops-label">Last refreshed</span>
+      <strong id="ops-refreshed" class="ops-value">Loading…</strong>
+    </div>
+    <div class="ops-stat">
+      <span class="ops-label">Pending reviews</span>
+      <strong id="ops-pending" class="ops-value">—</strong>
+    </div>
+    <div class="ops-stat">
+      <span class="ops-label">Published</span>
+      <strong id="ops-published" class="ops-value">—</strong>
+    </div>
+    <div class="ops-stat">
+      <span class="ops-label">Last publication</span>
+      <strong id="ops-last-published" class="ops-value">—</strong>
+    </div>
+    <div class="ops-stat">
+      <span class="ops-label">Source</span>
+      <strong id="ops-main-ref" class="ops-value">origin/main</strong>
+    </div>
+    <div class="ops-actions">
+      <button id="refresh-queue-button" class="button secondary ops-refresh-button" type="button">
+        Refresh Queue
+      </button>
+    </div>
+  </section>
+
   <div id="preview-banner" class="preview-banner hidden">
     <strong>Demo Mode</strong>
     <span>Demo edits stay in the browser. Real pending articles can Save Draft, Reject, and Approve when the Codespace review service is connected.</span>
