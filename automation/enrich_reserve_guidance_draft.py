@@ -1025,19 +1025,28 @@ def self_test() -> int:
     assert note_enriched["enrichment"]["documentKind"] == "COMNAVRESFORNOTE"
     assert note_enriched["enrichment"]["documentIdentifier"] is None
 
+    # CLI must leave evidence-root unset by default so enrich_draft()
+    # can select the correct source-specific evidence directory.
+    parser_defaults = build_arg_parser().parse_args(["--self-test"])
+    assert parser_defaults.evidence_root is None
+
     print("SELF-TEST PASSED")
     return 0
 
 
-def main() -> int:
+def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=None)
     parser.add_argument("--output", default=None)
     parser.add_argument("--monitor-path", default=None)
-    parser.add_argument("--evidence-root", default=str(DEFAULT_EVIDENCE_ROOT))
+    parser.add_argument("--evidence-root", default=None)
     parser.add_argument("--enriched-at", default=None)
     parser.add_argument("--self-test", action="store_true")
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> int:
+    args = build_arg_parser().parse_args()
 
     if args.self_test:
         return self_test()
@@ -1060,7 +1069,7 @@ def main() -> int:
             draft,
             monitor_module,
             args.enriched_at,
-            Path(args.evidence_root),
+            Path(args.evidence_root) if args.evidence_root else None,
         )
         atomic_write_json(output_path, enriched)
     except (json.JSONDecodeError, EnrichmentError, OSError) as exc:
