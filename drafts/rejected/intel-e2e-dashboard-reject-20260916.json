@@ -1,6 +1,6 @@
 {
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
+  "draftStatus": "REJECTED",
+  "requiresHumanReview": false,
   "publishReady": false,
   "sourceEvidence": {
     "officialHostVerified": true,
@@ -39,5 +39,13 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "rejectedAt": "2026-09-16T14:33:26Z",
+  "rejection": {
+    "reason": "review_pr_closed_without_merge",
+    "pullRequestNumber": "10",
+    "pullRequestURL": "https://github.com/SaltyDogBibleApp/SaltyDogBibleContent/pull/10",
+    "pullRequestTitle": "Reserve Intel Review: Dashboard Reject E2E Test",
+    "reviewBodySHA256": "b9751326d1cc11303e01c7e8c4bef1d41b836633976b36e0c01d1dd889c867d9"
   }
 }
