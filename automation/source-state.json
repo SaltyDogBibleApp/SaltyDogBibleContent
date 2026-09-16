@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T03:08:03Z",
+  "lastRunAt": "2026-09-16T04:45:35Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -538,7 +538,7 @@
         "NAVADMIN-209/26",
         "NAVADMIN-210/26"
       ],
-      "lastCheckedAt": "2026-09-15T22:11:42Z",
+      "lastCheckedAt": "2026-09-16T04:45:35Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
