@@ -1,5 +1,4 @@
 
-
 :root {
   color-scheme: light;
   --bg: #f4f6f8;
@@ -1017,32 +1016,44 @@ h2 {
 
 .approval-checklist {
   display: grid;
-  gap: 9px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
 }
 
 .approval-check {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr);
-  gap: 9px;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
   align-items: start;
-  padding: 10px 11px;
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  margin: 0;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: #fbfcfd;
   cursor: pointer;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .approval-check:hover {
   border-color: var(--border-strong);
+  background: #f7f9fb;
 }
 
 .approval-check input {
   margin: 2px 0 0;
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   accent-color: var(--accent);
+}
+
+.approval-check span {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .preview-only-pill.all-live {
