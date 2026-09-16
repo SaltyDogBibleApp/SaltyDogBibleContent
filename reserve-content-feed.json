@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-15T16:41:40Z",
+  "generatedAt": "2026-09-16T03:28:45Z",
   "intelArticles": [
     {
-      "id": "intel-modification-to-navadmin-084-26-fiscal-year-2026-cybersecurity-a-a282de7970",
-      "publishedAt": "2026-09-15T15:17:01Z",
-      "updatedAt": "2026-09-15T16:41:40Z",
+      "id": "intel-navadmin-204-26-cyber",
+      "publishedAt": "2026-08-31T18:38:00Z",
+      "updatedAt": "2026-09-16T03:28:45Z",
       "title": "Cybersecurity Awareness Training Changes to Every 3 Years",
       "category": "Training & Readiness",
       "status": "EFFECTIVE",
@@ -15,29 +15,6 @@
       "details": "NAVADMIN 204/26 modifies NAVADMIN 084/26 and changes Cybersecurity Awareness Challenge training for active-duty and Reserve military personnel. Military members must complete CAC when initially granted network access and every three years thereafter, replacing the previous annual fiscal-year requirement.\n\nThe relaxed training frequency applies to military personnel. Civilian employees and contractors remain subject to annual CAC training.\n\nFLTMPS and TWMS are being updated to reflect the three-year military training cycle. Until those updates are complete, commands must locally track and document military personnel who completed CAC within the preceding 36 months. Echelon II CIOs must ensure automated account-disablement processes account for the modified frequency.",
       "effectiveDate": "2026-08-31T00:00:00Z",
       "sourceName": "MyNavyHR NAVADMIN",
-      "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf?ver=Z0SgLUjWKMJuHZr8CPoubQ%3d%3d",
-      "audience": {
-        "service": "USN",
-        "reserveStatus": "ALL",
-        "trainingWing": null,
-        "squadron": null
-      },
-      "isPinned": false,
-      "isActive": true
-    },
-    {
-      "id": "intel-navadmin-204-26-cyber",
-      "publishedAt": "2026-08-31T18:38:00Z",
-      "updatedAt": "2026-09-14T14:35:00Z",
-      "title": "NAVADMIN 204/26 — Cyber Awareness Moves to Every 3 Years for Military Personnel",
-      "category": "Training & Readiness",
-      "status": "EFFECTIVE",
-      "priority": "HIGH",
-      "summary": "Effective immediately, active-duty and Reserve military personnel complete the Cybersecurity Awareness Challenge when first granted network access and every three years thereafter instead of annually.",
-      "whyItMatters": "This changes a recurring Navy training requirement that Reservists may track through command readiness tools. Salty Dog should no longer assume Cyber Awareness is due every fiscal year for military members.",
-      "details": "NAVADMIN 204/26 modifies NAVADMIN 084/26. Effective immediately, all active-duty and Reserve military personnel must complete the Department of War Cybersecurity Awareness Challenge upon initial granting of network access and every three years thereafter. This supersedes the prior annual fiscal-year requirement for military personnel. Civilian employees and contractors remain on an annual requirement. FLTMPS and TWMS are being updated for the new three-year periodicity; until those updates are complete, commands are directed to locally track personnel who completed the training within the preceding 36 months so network access is not incorrectly suspended.",
-      "effectiveDate": "2026-08-31T18:38:00Z",
-      "sourceName": "NAVADMIN 204/26 — MyNavyHR",
       "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf",
       "audience": {
         "service": "USN",
