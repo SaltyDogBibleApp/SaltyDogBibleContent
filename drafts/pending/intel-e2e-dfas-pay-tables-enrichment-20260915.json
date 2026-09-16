@@ -51,14 +51,14 @@
   "articleDraft": {
     "id": "intel-e2e-dfas-pay-tables-enrichment-20260915",
     "publishedAt": "2026-09-15T23:29:40Z",
-    "updatedAt": "2026-09-15T23:29:40Z",
-    "title": "E2E TEST \u2014 DFAS Military Pay Tables enrichment",
+    "updatedAt": "2026-09-16T00:17:15Z",
+    "title": "E2E TEST — DFAS Military Pay Tables enrichment",
     "category": "Pay & Benefits",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Automated draft from an official source: DFAS Military Pay Tables \u2014 source content changed. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: DRILL PAY, BASIC PAY, AVIATION INCENTIVE PAY, BAS, ALLOWANCE.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "DFAS's official Military Pay Tables source was refetched for this review. The current page matches the fingerprint captured by Reserve Intel monitoring. Human review is still required to identify and verify the specific pay-table change before publication.",
+    "whyItMatters": "DFAS publishes authoritative military pay, Reserve drill pay, allowances, and incentive-pay information that may affect Salty Dog Bible pay-related features. The current source contains reserve/pay signals that warrant review, but those signals do not prove which specific value changed.",
+    "details": "Current DFAS source snapshot captured 30 relevant pay-related link(s). Examples: Commissioned Officers; Commissioned Officers Credited with More Than 4 Years of Creditable Service; Warrant Officers; Enlisted Members; Commissioned Officers; Commissioned Officers Credited with More Than 4 Years of Creditable Service; Warrant Officers; Enlisted Members. Signals present on the current page: DRILL PAY, BASIC PAY, AVIATION INCENTIVE PAY, BAS, ALLOWANCE. The current DFAS page is source-grounded and the detected fingerprint was verified when available. The prior page body is not retained, so automation cannot safely identify which specific rate, table, date, or policy text changed. Before approval, open the official source, determine the exact table or rate that changed, verify the effective date and affected audience, and rewrite this article with those verified facts.",
     "effectiveDate": null,
     "sourceName": "DFAS Military Pay Tables",
     "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
@@ -70,5 +70,182 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "schemaVersion": 1,
+    "sourceType": "pay_tables",
+    "method": "dfas_pay_tables_snapshot",
+    "enrichedAt": "2026-09-16T00:17:15Z",
+    "fetchedURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "officialHostVerified": true,
+    "pageTextSHA256": "f652a6654af5df685883f16b5ab51131a40d9e311418df520c0df3df16075a40",
+    "monitorFingerprintExpected": "0922d2ad61558a1a60b47dc3662a8e8e2c369173b79ce45e1598ffc7f97a2077",
+    "monitorFingerprintObserved": "0922d2ad61558a1a60b47dc3662a8e8e2c369173b79ce45e1598ffc7f97a2077",
+    "monitorFingerprintMatch": true,
+    "currentSignalsPresent": [
+      "DRILL PAY",
+      "BASIC PAY",
+      "AVIATION INCENTIVE PAY",
+      "BAS",
+      "ALLOWANCE"
+    ],
+    "effectiveDateTextCandidates": [],
+    "postedDateTextCandidates": [
+      "Jan 2026",
+      "Dec 2025",
+      "Nov 2025",
+      "May 2026",
+      "Nov. 2025",
+      "Sep 2025",
+      "Oct. 2019",
+      "Aug. 2022",
+      "Jan. 2024",
+      "Oct. 2021",
+      "Mar 2025",
+      "Dec 2024",
+      "Aug 2025",
+      "April 2019",
+      "Oct 2025",
+      "Jul 2026",
+      "Sep. 2020",
+      "Mar 2026",
+      "Mar. 2026",
+      "Mar. 2024",
+      "Apr. 2026"
+    ],
+    "relevantLinks": [
+      {
+        "title": "Commissioned Officers",
+        "url": "https://www.dfas.mil/Military-Members/payentitlements/Pay-Tables/Basic-Pay/CO/"
+      },
+      {
+        "title": "Commissioned Officers Credited with More Than 4 Years of Creditable Service",
+        "url": "https://www.dfas.mil/Military-Members/payentitlements/Pay-Tables/Basic-Pay/CO_FE/"
+      },
+      {
+        "title": "Warrant Officers",
+        "url": "https://www.dfas.mil/Military-Members/payentitlements/Pay-Tables/Basic-Pay/WO/"
+      },
+      {
+        "title": "Enlisted Members",
+        "url": "https://www.dfas.mil/Military-Members/payentitlements/Pay-Tables/Basic-Pay/EM/"
+      },
+      {
+        "title": "Commissioned Officers",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Drill-Pay/Drill-Pay-CO/"
+      },
+      {
+        "title": "Commissioned Officers Credited with More Than 4 Years of Creditable Service",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Drill-Pay/Drill-Pay-CO_FE/"
+      },
+      {
+        "title": "Warrant Officers",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Drill-Pay/Drill-Pay_WO/"
+      },
+      {
+        "title": "Enlisted Members",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/Drill-Pay/Drill-Pay_E/"
+      },
+      {
+        "title": "Basic Allowance for Subsistence (BAS)",
+        "url": "https://www.dfas.mil/Military-Members/payentitlements/Pay-Tables/bas/"
+      },
+      {
+        "title": "Standard Initial Clothing Allowances",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA1"
+      },
+      {
+        "title": "Clothing Replacement Allowances",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA2"
+      },
+      {
+        "title": "Civilian Clothing Allowances - Officer & Enlisted",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA3"
+      },
+      {
+        "title": "Special Initial Clothing Allowances - Navy",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA4"
+      },
+      {
+        "title": "Special Initial Clothing Allowances - Air Force",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA5"
+      },
+      {
+        "title": "Special Initial Clothing Allowances - Space Force",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/CMA9/"
+      },
+      {
+        "title": "Supplementary Clothing Allowances - Navy",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA6"
+      },
+      {
+        "title": "Supplementary Clothing Allowances - Air Force",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA7"
+      },
+      {
+        "title": "Supplementary Clothing Allowances - Space Force",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/CMA10/"
+      },
+      {
+        "title": "Supplemental Clothing Allowances - Marine Corps",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/CMA8"
+      },
+      {
+        "title": "Army, Navy, Air Force Monthly Hazardous Duty Incentive Pay for Flying",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/HDIP_Fly_Army/"
+      },
+      {
+        "title": "Marine Corps Monthly Hazardous Duty Incentive Pay for Flying",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/HDIP_Fly_Marines/"
+      },
+      {
+        "title": "Maximum Officer Aviation Incentive Pay Rates",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP2"
+      },
+      {
+        "title": "Monthly Army Officer Aviation Incentive Pay Rates",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP3"
+      },
+      {
+        "title": "Monthly Navy Officer Aviation Incentive Pay Rates",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP8"
+      },
+      {
+        "title": "Monthly Navy Aviation Incentive Pay Rates for Officers in Administrative Milestone Billets",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP4"
+      },
+      {
+        "title": "Monthly Air Force Aviation Incentive Pay Rates",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP5"
+      },
+      {
+        "title": "Monthly Marine Corps Officer Aviation Incentive Pay Rates",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP6"
+      },
+      {
+        "title": "Monthly Critical Skill Incentive Pay Rates for Air Force Enlisted Flyers",
+        "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/AVIP7"
+      },
+      {
+        "title": "Army",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/CSP-Army/"
+      },
+      {
+        "title": "Navy/Marine Corps",
+        "url": "https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/CSP-Navy-MC/"
+      }
+    ],
+    "sectionSnippets": {
+      "Basic Pay Rates": "Basic Pay Rates: Commissioned Officers (Posted Jan 2026) Commissioned Officers Credited with More Than 4 Years of Creditable Service (Posted Jan 2026) Warrant Officers (Posted Jan 2026) Enlisted Members (Posted Jan 2026)",
+      "Drill Pay Rates": "Drill Pay Rates: Commissioned Officers (Posted Jan 2026) Commissioned Officers Credited with More Than 4 Years of Creditable Service (Posted Jan 2026) Warrant Officers (Posted Jan 2026) Enlisted Members (Posted Jan 2026",
+      "Basic Allowance for Subsistence": "Basic Allowance for Subsistence (BAS) (Posted Dec 2025) Clothing Monetary Allowances Standard Initial Clothing Allowances (Posted Nov 2025) Clothing Replacement Allowances (Posted Nov 2025) Civilian Clothing Allowances - Officer & Enlisted (Posted Nov 2025) Special Initial Clothing Allowances - Navy (Posted Nov 2025) Special Initial Clothing Allowances - Air Force (Posted Nov 2025) Special Initial Clothing Allowances - Space Force (Posted Nov 2025) Supplementary Clothing Allowances - Navy (Posted May 2026) Supplementary Clothing Allowances - Air Force (Posted Nov 2025) Supplementary Clothing Allowances - Space Force (Posted Nov 2025 Supplemen",
+      "Aviation Incentive Pays": "Aviation Incentive Pays Army, Navy, Air Force Monthly",
+      "Hazardous Duty Incentive Pay": "Hazardous Duty Incentive Pay for Flying (Posted Sep 2025) Marine Corps Monthly Hazardous Duty Incentive Pay for Flying (Posted Sep 2025) Maximum Officer Aviation Incentive Pay Rates (Posted Oct. 2019) Monthly Army Officer Aviation Incentive Pay Rates (Posted Oct. 2019) Monthly Navy Officer Aviation Incentive Pay Rates (Posted. Aug. 2022) Monthly Navy Aviation Incentive Pay Rates for Officers in Administrative Milestone Billets (Posted Oct. 2019) Monthly Air Force Aviation Incentive Pay Rates (Posted Oct. 2019) Monthly Marine Corps Officer Aviation Incentive Pay Rates (Posted Oct. 2019) Monthly Critical Skill Incentive Pay Rates for Air Force",
+      "Career Sea Pay": "Career Sea Pay Army (Posted Jan. 2024) Navy/Marine Corps (Posted Jan. 2024) Air Force (Posted Jan. 2024) Submarine Duty Pay (Posted Oct. 2021) Dive Duty Pay Rates (Posted Mar 2025) FICA Percentages, Maximum Taxable Wages, and Maximum Tax (Posted Dec 2024) FLPB Monthly Payment Calculated by Critical Skill Modality Proficiency (Posted May 2026) Hardship Duty Pay - Location (Posted Aug 2025) Hazardous Duty Incentive Pay Hazardous Duty Incentive Pay (HDIP) Rates other than aerial flights (Posted April 2019)",
+      "Health Professions Officers": "Health Professions Officers Critically Short Wartime Accession Bonus (CSWAB Dental and Medical Corps (Posted Oct 2025) Critically Short Wartime Accession Bonus (CSWAB Nurse Corps and Specialties (Posted Oct 2025) Dental Corps Board Certification Pay (BCP),Incentive Pay (IP) and Retention Bonus (RB) (Posted Oct 2025) Medical Corps Certification Pay,, Incentive Pay (IP) and /Retention Bonus (RB) (Posted Oct 2025) Nurse Corps Certification Pay,, Incentive Pay (IP) and Retention Bonus (RB) (Posted Oct 2025) Specialty Incentive Pay/Retention Bonus. (Posted Sep 2025) Dental Corps RC Accession Bonus/ Retention Bonus (Posted Sep 2025) Medical Corps R",
+      "Muster Duty Allowance": "Muster Duty Allowance (Posted Oct 2025) Pay Information Reference Combat Zone Tax Exclusion (CZTE) Information: Designated Combat Zone Areas (Posted Sep. 2020) Designated Direct Support Areas of a Combat Zone (CZ) (Posted Mar 2026) Qualified Hazardous Duty Areas ​ (Posted Mar. 2026 Imminent Danger Pay Areas (Posted May 2026) Junior Reserve Officers' Training Corps Instructor Pay : DSD Memo of 3/25/2024 States/Territories withholding agreements with the Treasury Department (Posted Mar. 2024) Duration of Authority (Posted Apr. 2026) Stay Connected Department of Defense Department of Veterans Affairs Military Employment Verification Warrior Care"
+    },
+    "changeAttribution": "The current DFAS page is source-grounded and the detected fingerprint was verified when available. The prior page body is not retained, so automation cannot safely identify which specific rate, table, date, or policy text changed.",
+    "humanReviewStillRequired": true
   }
 }
