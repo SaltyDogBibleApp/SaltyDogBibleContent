@@ -16,7 +16,13 @@ Security / safety properties:
   reserve-intel-review/<article_id> and whose base branch is main.
 - Reject closes that PR without merge and leaves archival to the existing
   reserve-intel-rejected-closed workflow.
-- Approve is intentionally not implemented here.
+- Approve is allowed only for the unique open Review PR whose head branch is
+  reserve-intel-review/<article_id> and whose base branch is main.
+- Approve requires an explicit browser confirmation, verifies the exact PR head
+  SHA and pending draft gates, checks all six existing approval checkboxes in the
+  PR body, marks a draft PR ready when necessary, and merges that exact head SHA.
+- The dashboard never writes reserve-content-feed.json; the existing merged-PR
+  publication workflow remains the only publication path.
 """
 
 from __future__ import annotations
@@ -71,6 +77,15 @@ MAX_WHY = 6000
 MAX_DETAILS = 20000
 MAX_TARGET = 120
 MAX_REJECT_REASON = 2000
+
+APPROVAL_CHECKS = [
+    "I opened the official source.",
+    "I verified the facts against the official source.",
+    "I verified the status and effective date.",
+    "I verified the intended audience.",
+    "I reviewed the title, summary, Why It Matters, and details.",
+    "I approve publication to Reserve Intel.",
+]
 
 ISO_MIDNIGHT_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T00:00:00Z$")
 
@@ -429,13 +444,13 @@ def find_unique_open_review_pr(repo: str, branch: str) -> dict[str, Any]:
 
     if not candidates:
         raise SaveError(
-            "No open Review PR matches this article. Reject is blocked until a unique open PR exists."
+            "No open Review PR matches this article. A unique open Review PR is required."
         )
 
     if len(candidates) != 1:
         numbers = ", ".join(str(pr.get("number")) for pr in candidates)
         raise SaveError(
-            f"Reject is blocked because more than one open Review PR matches this article: {numbers}"
+            f"More than one open Review PR matches this article: {numbers}"
         )
 
     pr = candidates[0]
@@ -507,6 +522,181 @@ def close_review_pr(repo: str, pr_number: int, comment: str) -> dict[str, Any]:
         raise SaveError("Safety check failed: rejected Review PR shows a merge timestamp.")
 
     return value
+
+
+
+def fetch_review_pr(repo: str, pr_number: int) -> dict[str, Any]:
+    api_path = f"repos/{repo}/pulls/{pr_number}"
+    value = gh_api_json(["--method", "GET", api_path])
+
+    head = value.get("head")
+    base = value.get("base")
+    if not isinstance(head, dict) or not isinstance(base, dict):
+        raise SaveError("Review PR is missing head/base metadata.")
+
+    return value
+
+
+def approve_pr_body(body: Any, article_id: str) -> str:
+    if not isinstance(body, str) or not body.strip():
+        raise SaveError("Review PR body is missing.")
+
+    marker = f"<!-- reserve-intel-article-id: {article_id} -->"
+    if marker not in body:
+        raise SaveError("Review PR body does not contain the expected Reserve Intel article marker.")
+
+    updated = body
+    missing: list[str] = []
+
+    for label in APPROVAL_CHECKS:
+        pattern = re.compile(
+            r"(?mi)^(\s*-\s*)\[[ xX]\](\s*" + re.escape(label) + r"\s*)$"
+        )
+        if not pattern.search(updated):
+            missing.append(label)
+            continue
+        updated = pattern.sub(r"\1[x]\2", updated, count=1)
+
+    if missing:
+        raise SaveError(
+            "Review PR approval checklist is incomplete or malformed: " + "; ".join(missing)
+        )
+
+    return updated
+
+
+def update_review_pr_body(repo: str, pr_number: int, body: str) -> None:
+    api_path = f"repos/{repo}/pulls/{pr_number}"
+    gh_api_json(
+        ["--method", "PATCH", api_path],
+        stdin_payload={"body": body},
+    )
+
+
+def mark_pr_ready(repo: str, pr_number: int) -> None:
+    result = subprocess.run(
+        ["gh", "pr", "ready", str(pr_number), "--repo", repo],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "Could not mark Review PR ready."
+        raise SaveError(detail)
+
+
+def merge_review_pr(repo: str, pr_number: int, head_sha: str, article_id: str) -> dict[str, Any]:
+    api_path = f"repos/{repo}/pulls/{pr_number}/merge"
+    result = gh_api_json(
+        ["--method", "PUT", api_path],
+        stdin_payload={
+            "sha": head_sha,
+            "merge_method": "merge",
+            "commit_title": f"Approve Reserve Intel review: {article_id}",
+        },
+    )
+
+    if result.get("merged") is not True:
+        message = result.get("message")
+        if not isinstance(message, str) or not message.strip():
+            message = "GitHub did not merge the Review PR."
+        raise SaveError(message)
+
+    return result
+
+
+def approve_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
+    article_id = payload.get("articleId")
+    if not isinstance(article_id, str) or not article_id.strip():
+        raise SaveError("articleId is required.")
+    article_id = article_id.strip()
+
+    if payload.get("approvalConfirmed") is not True:
+        raise SaveError("Explicit approval confirmation is required.")
+
+    source_file = validate_pending_path(payload.get("sourceFile"))
+    expected_branch = f"{REVIEW_BRANCH_PREFIX}{article_id}"
+
+    branch = payload.get("reviewBranch")
+    if branch != expected_branch:
+        raise SaveError("Review branch does not match the article ID.")
+
+    pr_summary = find_unique_open_review_pr(repo, branch)
+    pr_number = pr_summary["number"]
+    pr = fetch_review_pr(repo, pr_number)
+
+    head = pr.get("head")
+    base = pr.get("base")
+    head_ref = head.get("ref") if isinstance(head, dict) else None
+    head_sha = head.get("sha") if isinstance(head, dict) else None
+    base_ref = base.get("ref") if isinstance(base, dict) else None
+
+    if head_ref != branch or base_ref != "main":
+        raise SaveError("Review PR branch verification failed.")
+    if not isinstance(head_sha, str) or not head_sha:
+        raise SaveError("Review PR head SHA is missing.")
+    if pr.get("state") != "open":
+        raise SaveError("Review PR is not open.")
+    if pr.get("merged") is True or pr.get("merged_at") is not None:
+        raise SaveError("Review PR is already merged.")
+
+    labels = pr.get("labels")
+    label_names = {
+        label.get("name")
+        for label in labels
+        if isinstance(label, dict) and isinstance(label.get("name"), str)
+    } if isinstance(labels, list) else set()
+    if "reserve-intel-review" not in label_names:
+        raise SaveError("Review PR is missing the reserve-intel-review label.")
+
+    # Validate the exact immutable PR head that will be merged, not merely the
+    # current branch name. If the branch changes after this point, the merge API
+    # is constrained by the same head SHA and fails closed.
+    remote_draft, _ = fetch_remote_draft(repo, head_sha, source_file)
+
+    if remote_draft.get("draftStatus") != "PENDING_HUMAN_REVIEW":
+        raise SaveError("Remote draft is not pending human review.")
+    if remote_draft.get("requiresHumanReview") is not True:
+        raise SaveError("Remote draft must require human review.")
+    if remote_draft.get("publishReady") is not False:
+        raise SaveError("Remote draft is unexpectedly publish-ready.")
+
+    evidence = remote_draft.get("sourceEvidence")
+    if not isinstance(evidence, dict) or evidence.get("officialHostVerified") is not True:
+        raise SaveError("Official source host has not been verified.")
+
+    article = remote_draft.get("articleDraft")
+    if not isinstance(article, dict) or article.get("id") != article_id:
+        raise SaveError("Remote draft article ID does not match the requested article.")
+
+    approved_body = approve_pr_body(pr.get("body"), article_id)
+    update_review_pr_body(repo, pr_number, approved_body)
+
+    if pr.get("draft") is True:
+        mark_pr_ready(repo, pr_number)
+
+    merge_result = merge_review_pr(repo, pr_number, head_sha, article_id)
+    verified = fetch_review_pr(repo, pr_number)
+
+    verified_head = verified.get("head")
+    verified_base = verified.get("base")
+    if not isinstance(verified_head, dict) or not isinstance(verified_base, dict):
+        raise SaveError("Merged PR verification is missing head/base metadata.")
+    if verified_head.get("ref") != branch or verified_base.get("ref") != "main":
+        raise SaveError("Merged PR branch verification failed.")
+    if verified.get("merged") is not True or verified.get("merged_at") is None:
+        raise SaveError("Review PR merge could not be verified.")
+
+    return {
+        "ok": True,
+        "prNumber": pr_number,
+        "prURL": verified.get("html_url") or pr.get("html_url"),
+        "merged": True,
+        "mergedAt": verified.get("merged_at"),
+        "mergeCommitSha": merge_result.get("sha"),
+        "reviewHeadSha": head_sha,
+        "branch": branch,
+        "sourceFile": source_file,
+    }
 
 
 def reject_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
@@ -650,12 +840,39 @@ def self_test() -> int:
         too_long_blocked = True
     assert too_long_blocked
 
+    approval_body = (
+        "# Reserve Intel Review\n\n"
+        + "\n".join(f"- [ ] {label}" for label in APPROVAL_CHECKS)
+        + "\n\n<!-- reserve-intel-article-id: intel-test -->\n"
+    )
+    approved_body = approve_pr_body(approval_body, "intel-test")
+    for label in APPROVAL_CHECKS:
+        assert f"- [x] {label}" in approved_body
+
+    missing_marker_blocked = False
+    try:
+        approve_pr_body("\n".join(f"- [ ] {label}" for label in APPROVAL_CHECKS), "intel-test")
+    except SaveError:
+        missing_marker_blocked = True
+    assert missing_marker_blocked
+
+    malformed_checklist_blocked = False
+    try:
+        approve_pr_body(
+            "# Review\n- [ ] I opened the official source.\n"
+            "<!-- reserve-intel-article-id: intel-test -->\n",
+            "intel-test",
+        )
+    except SaveError:
+        malformed_checklist_blocked = True
+    assert malformed_checklist_blocked
+
     print("SELF-TEST PASSED")
     return 0
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
-    server_version = "ReserveIntelDashboard/3B"
+    server_version = "ReserveIntelDashboard/3C"
 
     def _json_response(self, status: int, payload: dict[str, Any]) -> None:
         raw = (json.dumps(payload, ensure_ascii=False) + "\n").encode("utf-8")
@@ -676,7 +893,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                     "ok": True,
                     "saveEnabled": bool(repo),
                     "repository": repo,
-                    "approveEnabled": False,
+                    "approveEnabled": bool(repo),
                     "rejectEnabled": bool(repo),
                 },
             )
@@ -685,7 +902,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path not in {"/api/reserve-intel/save", "/api/reserve-intel/reject"}:
+        if parsed.path not in {"/api/reserve-intel/save", "/api/reserve-intel/reject", "/api/reserve-intel/approve"}:
             self._json_response(404, {"ok": False, "error": "Unknown API endpoint."})
             return
 
@@ -712,8 +929,10 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 
             if parsed.path == "/api/reserve-intel/save":
                 result = save_request(payload, repo)
-            else:
+            elif parsed.path == "/api/reserve-intel/reject":
                 result = reject_request(payload, repo)
+            else:
+                result = approve_request(payload, repo)
         except (UnicodeDecodeError, json.JSONDecodeError, SaveError) as exc:
             self._json_response(400, {"ok": False, "error": str(exc)})
             return
@@ -760,7 +979,7 @@ def main() -> int:
     print(f"Repository: {repo}")
     print("Save Draft: ENABLED for eligible review-branch drafts")
     print("Reject: ENABLED for eligible review PRs")
-    print("Approve: PREVIEW ONLY")
+    print("Approve: ENABLED for eligible review PRs")
     print("Press Ctrl-C to stop.")
 
     try:
