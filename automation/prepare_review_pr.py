@@ -64,12 +64,19 @@ def render_markdown(payload: dict) -> str:
     impact_basis = impact.get("basis") or []
 
     source_type = evidence.get("sourceType") or "unknown"
-    has_enrichment = isinstance(payload.get("enrichment"), dict)
+    enrichment = payload.get("enrichment")
+    has_enrichment = isinstance(enrichment, dict)
     has_shaping = isinstance(payload.get("shaping"), dict)
+
     automated_navadmin_review = (
         source_type == "navadmin"
         and has_enrichment
         and has_shaping
+    )
+    automated_pay_tables_review = (
+        source_type == "pay_tables"
+        and has_enrichment
+        and enrichment.get("sourceType") == "pay_tables"
     )
 
     lines = [
@@ -87,6 +94,15 @@ def render_markdown(payload: dict) -> str:
             "",
             "- Source-specific automation: **NAVADMIN enrichment + article shaping applied**",
             "- Human source verification: **Still required before approval**",
+            "",
+        ]
+    elif automated_pay_tables_review:
+        lines += [
+            "### Review Mode",
+            "",
+            "- Source-specific automation: **DFAS pay-table enrichment applied**",
+            "- Automated change attribution: **Not claimed; prior source body is not retained**",
+            "- Human source verification and rewrite: **Required before approval**",
             "",
         ]
     else:
@@ -140,7 +156,54 @@ def render_markdown(payload: dict) -> str:
         f"- Listed date: {evidence.get('listedDate') or 'Not supplied'}",
         f"- Reserve signals: {', '.join(evidence.get('reserveSignals', [])) or 'None'}",
         f"- Official host verified: {'Yes' if evidence.get('officialHostVerified') else 'No'}",
-        "",
+    ]
+
+    if evidence.get("detectionKind"):
+        lines.append(f"- Detection kind: `{evidence['detectionKind']}`")
+    if evidence.get("sourceFingerprint"):
+        lines.append(f"- Source fingerprint: `{evidence['sourceFingerprint']}`")
+    if evidence.get("previousFingerprint"):
+        lines.append(f"- Previous fingerprint: `{evidence['previousFingerprint']}`")
+
+    lines.append("")
+
+    if automated_pay_tables_review:
+        relevant_links = enrichment.get("relevantLinks") or []
+        signals_present = enrichment.get("currentSignalsPresent") or []
+        effective_dates = enrichment.get("effectiveDateTextCandidates") or []
+        posted_dates = enrichment.get("postedDateTextCandidates") or []
+        match = enrichment.get("monitorFingerprintMatch")
+
+        if match is True:
+            fingerprint_status = "Yes"
+        elif match is False:
+            fingerprint_status = "No"
+        else:
+            fingerprint_status = "Not supplied / not applicable"
+
+        lines += [
+            "### DFAS Pay-Table Enrichment Evidence",
+            "",
+            f"- Enriched at: {enrichment.get('enrichedAt') or 'Not supplied'}",
+            f"- Fetched URL: {enrichment.get('fetchedURL') or article['sourceURL']}",
+            f"- Monitor fingerprint matched current source: {fingerprint_status}",
+            f"- Signals present in current source: {', '.join(signals_present) or 'None from configured list'}",
+            f"- Effective-date text found: {', '.join(effective_dates) or 'None detected'}",
+            f"- Posted-date text found: {', '.join(posted_dates[:10]) or 'None detected'}",
+            f"- Relevant pay-related links captured: {len(relevant_links)}",
+            f"- Change attribution: {enrichment.get('changeAttribution') or 'Human determination required.'}",
+            "",
+        ]
+
+        if relevant_links:
+            lines += ["Representative current DFAS links:", ""]
+            for item in relevant_links[:12]:
+                title = item.get("title") or item.get("url") or "DFAS link"
+                url = item.get("url") or ""
+                lines.append(f"- {title} — {url}")
+            lines.append("")
+
+    lines += [
         "### Potential Salty Dog Bible Impact",
         "",
         "> **Informational only.** These tags are an automated first-pass for the reviewer.",
