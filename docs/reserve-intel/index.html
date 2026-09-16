@@ -13,13 +13,14 @@
       <h1>Reserve Intel Review</h1>
     </div>
     <div class="topbar-meta">
+      <span id="save-service-status" class="service-status">Checking Save service…</span>
       <span id="generated-at">Loading…</span>
     </div>
   </header>
 
   <div id="preview-banner" class="preview-banner hidden">
-    <strong>Phase 2B Layout Preview</strong>
-    <span>Edits and action buttons are browser-only. Nothing here writes to GitHub or publishes content.</span>
+    <strong>Demo Mode</strong>
+    <span>Demo edits stay in the browser. Real pending articles can use Save Draft when the Codespace Save service is connected. Reject and Approve remain preview-only.</span>
   </div>
 
   <main class="layout">
@@ -162,9 +163,9 @@
             <div id="editor-actions" class="metadata-card editor-actions hidden">
               <div class="section-title-row">
                 <h3>Review Actions</h3>
-                <span class="preview-only-pill">PREVIEW ONLY</span>
+                <span id="action-mode-pill" class="preview-only-pill">PREVIEW ONLY</span>
               </div>
-              <div class="action-note">These buttons do not write to GitHub or publish content yet.</div>
+              <div id="action-note" class="action-note">Save Draft is available for real review-branch articles when the Save service is connected. Reject and Approve remain preview-only.</div>
               <div class="action-buttons">
                 <button id="save-draft-button" class="button secondary" type="button">Save Draft</button>
                 <button id="reject-button" class="button danger" type="button">Reject</button>
