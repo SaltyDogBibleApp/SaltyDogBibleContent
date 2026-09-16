@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Generate the read-only Reserve Intel review dashboard data.
+Generate Reserve Intel review dashboard data.
 
-Phase 1 is intentionally read-only:
+Phase 2A remains read-only with respect to the repository's review pipeline:
 - reads pending draft JSON
 - reads the live Reserve Intel feed for recently published items
 - writes docs/reserve-intel/data.json
+- optionally injects one dashboard-only demo pending article with --demo
 - never modifies drafts, reviews, or reserve-content-feed.json
 """
 
@@ -124,6 +125,74 @@ def pending_item(path: Path) -> dict[str, Any]:
         "reviewChecklist": as_dict(draft.get("reviewChecklist")),
         "textComparison": extract_text_comparison(draft),
         "_sourceFile": str(path),
+        "_demo": False,
+    }
+
+
+def demo_pending_item() -> dict[str, Any]:
+    """Return a dashboard-only fake article for exercising the Phase 2A editor."""
+    return {
+        "id": "demo-reserve-intel-editor-preview",
+        "title": "Demo Review — Reserve Training Requirement Update",
+        "publishedAt": utc_now_iso(),
+        "updatedAt": utc_now_iso(),
+        "category": "Training & Readiness",
+        "status": "TRACKING",
+        "priority": "NORMAL",
+        "summary": (
+            "This is a dashboard-only demo article used to test the Reserve Intel "
+            "editor. Change this text freely; it cannot modify the repository."
+        ),
+        "whyItMatters": (
+            "The demo lets you evaluate the Mac editing experience before any Save, "
+            "Reject, or Approve action is connected to GitHub."
+        ),
+        "details": (
+            "Use the editor to change the title and article text. Try the priority, "
+            "status, category, service, Reserve status, date, targeting, and pinned controls.\n\n"
+            "The source and detected evidence areas remain read-only."
+        ),
+        "effectiveDate": None,
+        "sourceName": "Demo Official Source — Read Only",
+        "sourceURL": "https://www.navyreserve.navy.mil/",
+        "audience": {
+            "service": "USN",
+            "reserveStatus": "ALL",
+            "trainingWing": None,
+            "squadron": None,
+        },
+        "isPinned": False,
+        "isActive": False,
+        "draftStatus": "PENDING_HUMAN_REVIEW",
+        "requiresHumanReview": True,
+        "publishReady": False,
+        "reviewChecklist": {
+            "sourceOpenedAndRead": False,
+            "factsVerifiedAgainstSource": False,
+            "statusVerified": False,
+            "effectiveDateVerified": False,
+            "audienceVerified": False,
+            "summaryRewrittenFromSource": False,
+            "whyItMattersRewrittenFromSource": False,
+            "detailsRewrittenFromSource": False,
+            "approvedForPublication": False,
+        },
+        "textComparison": {
+            "available": True,
+            "changed": True,
+            "addedLines": 1,
+            "removedLines": 1,
+            "hunks": [
+                {
+                    "page": 2,
+                    "heading": "Demo Extracted Text Evidence",
+                    "removedLines": ["Annual completion is required."],
+                    "addedLines": ["Completion is required every three years."],
+                }
+            ],
+        },
+        "_sourceFile": None,
+        "_demo": True,
     }
 
 
@@ -143,6 +212,7 @@ def published_items(feed_path: Path) -> list[dict[str, Any]]:
         item = dict(article)
         item["reviewChecklist"] = {}
         item["textComparison"] = None
+        item["_demo"] = False
         result.append(item)
 
     result.sort(
@@ -156,12 +226,17 @@ def generate(
     pending_dir: Path,
     feed_path: Path,
     output_path: Path,
+    *,
+    demo: bool = False,
 ) -> dict[str, Any]:
     pending: list[dict[str, Any]] = []
 
     if pending_dir.exists():
         for path in sorted(pending_dir.glob("*.json")):
             pending.append(pending_item(path))
+
+    if demo:
+        pending.insert(0, demo_pending_item())
 
     pending.sort(
         key=lambda item: (
@@ -172,6 +247,7 @@ def generate(
 
     payload = {
         "generatedAt": utc_now_iso(),
+        "demoMode": demo,
         "pending": pending,
         "published": published_items(feed_path),
     }
@@ -189,15 +265,22 @@ def main() -> int:
     parser.add_argument("--pending-dir", default="drafts/pending")
     parser.add_argument("--feed", default="reserve-content-feed.json")
     parser.add_argument("--output", default="docs/reserve-intel/data.json")
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Inject one dashboard-only fake pending article for editor testing.",
+    )
     args = parser.parse_args()
 
     payload = generate(
         Path(args.pending_dir),
         Path(args.feed),
         Path(args.output),
+        demo=args.demo,
     )
 
     print(f"Dashboard data written: {args.output}")
+    print(f"Demo mode: {'ON' if args.demo else 'OFF'}")
     print(f"Pending reviews: {len(payload['pending'])}")
     print(f"Published articles: {len(payload['published'])}")
     return 0
@@ -205,3 +288,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
