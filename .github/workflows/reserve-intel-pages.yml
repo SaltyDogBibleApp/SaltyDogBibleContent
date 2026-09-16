@@ -1,0 +1,66 @@
+name: Deploy Reserve Intel Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/reserve-intel/**"
+      - "automation/generate_review_dashboard.py"
+      - "drafts/pending/**"
+      - "reserve-content-feed.json"
+      - ".github/workflows/reserve-intel-pages.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: reserve-intel-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Generate dashboard data
+        run: |
+          python automation/generate_review_dashboard.py \
+            --main-ref HEAD \
+            --output docs/reserve-intel/data.json
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site/reserve-intel
+          cp docs/reserve-intel/index.html _site/reserve-intel/index.html
+          cp docs/reserve-intel/app.js _site/reserve-intel/app.js
+          cp docs/reserve-intel/styles.css _site/reserve-intel/styles.css
+          cp docs/reserve-intel/data.json _site/reserve-intel/data.json
+          printf '%s\n' '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reserve-intel/"><title>Reserve Intel</title><a href="reserve-intel/">Open Reserve Intel</a>' > _site/index.html
+          touch _site/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
