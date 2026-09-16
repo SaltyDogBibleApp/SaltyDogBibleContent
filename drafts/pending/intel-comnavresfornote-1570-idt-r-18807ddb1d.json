@@ -1,0 +1,83 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-16T20:26:35Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Drill / Orders",
+      "Readiness Tracker",
+      "Admin Gouge"
+    ],
+    "basis": [
+      "category: Policy",
+      "keyword: IDT",
+      "keyword: READINESS"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "Navy Reserve RESFOR Notices",
+    "sourceType": "reserve_guidance",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf",
+    "listedDate": null,
+    "reserveSignals": [
+      "INACTIVE DUTY TRAINING",
+      "IDT-R",
+      "DRILL",
+      "TRAVEL REIMBURSEMENT",
+      "SELECTED RESERVE",
+      "SELRES",
+      "ACTIVE DUTY TRAINING",
+      "RECRUITING",
+      "RETENTION",
+      "INCENTIVE"
+    ],
+    "categoryHints": [
+      "Policy",
+      "Training & Readiness",
+      "Admin",
+      "Pay & Benefits"
+    ],
+    "detectionKind": "new_linked_document",
+    "sourceFingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
+    "previousFingerprint": null,
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-comnavresfornote-1570-idt-r-18807ddb1d",
+    "publishedAt": "2026-09-16T20:26:35Z",
+    "updatedAt": "2026-09-16T20:26:35Z",
+    "title": "COMNAVRESFORNOTE 1570 IDT-R",
+    "category": "Policy",
+    "status": "TRACKING",
+    "priority": "HIGH",
+    "summary": "Automated draft from an official source: COMNAVRESFORNOTE 1570 IDT-R. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, IDT-R, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "Navy Reserve RESFOR Notices",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}

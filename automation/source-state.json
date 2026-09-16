@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T20:20:53Z",
+  "lastRunAt": "2026-09-16T20:26:26Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -548,7 +548,7 @@
     },
     "navyreserve-resfor-notices": {
       "fingerprint": "446af4bdbc7177b4a557a9c944fde7c0f171d4b7efd55fb1ecc3c20115789848",
-      "itemCount": 10,
+      "itemCount": 11,
       "itemIDs": [
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
@@ -557,12 +557,13 @@
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-bd8580f3a8bb7ab55cdf",
         "reserve_guidance-d03e0015f90169c70d14",
+        "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-d6b0af30b42398460ff1",
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-09-16T20:20:53Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-09-16T20:26:26Z",
+      "lastError": null,
       "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
