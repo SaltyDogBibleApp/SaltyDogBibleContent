@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf",
+  "title": "RESPERSMAN 1570-040",
+  "fingerprint": "88b87163561b97fa1570ba2a98b34477b628f21423c262cd12cf15f3608605b8",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 4034,
+  "lineCount": 80,
+  "textSHA256": "d468a85d5c5fbcd0b2a14cee3dda5d27ab7b090b5d6846abea4f35bc814fa447",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 31
+    },
+    {
+      "page": 2,
+      "startLine": 32,
+      "endLine": 67
+    },
+    {
+      "page": 3,
+      "startLine": 68,
+      "endLine": 80
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NAVY RESERVE FORCE\n1915 FORRESTALDRIVE\nNORFOLK VIRGlNlA 23551-4615\n5215\nCOMNAVRESFOR NIC2\n14 Jun 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written_\nat the top of each article and the date on this change summary.\n~s~ -~\nJ. A. SCHOMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps:/ /www.navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1570-040\nArticle Title\nUnit Inactive Duty Trainin g Record Maintenance\n• Substantial changes have been made to this article and it should be read\nin its entirety.\n• Transitioning the Unit IDT Record to a historical paper record for pre-\nEnhancement for Drill Management (EDM) IDT transactions.\n• There is no requirement to maintain a Unit IDT Record for current drill\noperations.\n• Removed the requirement for DD Form 577s, Unit Recall Rosters, and\nearnings statements to be maintained within the Unit IDT Folder.\n(COG: COMNAVRESFORCOM (NI I))\nCHANGE SUMMARY June 2022\nPage 1 of 1\nRESPERSMAN 1570-040\n1570-040\nCH-12, 14 Jun 2022\nPage 1 of 2\nUNIT INACTIVE DUTY TRAINING (IDT) RECORD MAINTENANCE\nResponsible\nOffice\nReferences\nCOMNA VRESFORCOM (Nl 1) Phone: DSN 262-2002\nCOM (757) 322-2002\nFAX (757) 444-7598\n(a) ASN Memo of29 Jan 15, Revised Document Retention Requirements to\nSupport Department of the Navy Financial Statement Audits\n(b) BUPERSINS T 1001.3 9F, Administrative Procedures for Navy Reservists\n( c) COMNA VRESFORINST 5210.1, Records Management Program\n(d) SECNAVINST 5210.8F, Department of the Navy Records Management\nProgram\n(e) SECNAVINST 5211.5F, Department of the Navy Privacy Program\n1. Purpose. In accordance with references (a) through ( e), this article addresses the proper\nmaintenance of historical unit inactive duty training (IDT) records occurring prior to the full\nestablishment of Enhancement for Drill Management (EDM) in October 2017\n2. Definitions:\na. EDM. An automated Navy Reserve drill management functionality in the Navy Standard\nIntegrated Personnel System (NSIPS). Provides the Navy Reserve with automated 24/7 self­\nservice drill management capability for managing drill periods.\nb. IDT Partici pation Record. NA VRES 1570/21. Historical form used to manually muster\nunit drill period participation outside of EDM.\n3. Navy Reserve Activit y (NRA) Responsibilities. In accordance with references (a) and (c), all\ndocumentation that supports financial statement balances shall be retained in the current records\nmanagement system for 10 years. The Navy Reserve Activity (NRA) will maintain individual\nunit-IDT aecountin-g-reeords for documents-prior to the ful-1-establishment of EDM in October\n2017. Unit IDTs mustered in EDM, and corrective actions taken, are electronically recorded on\nand stored indefinitely in EDM.\na. Unit IDT Partici pation Record. Historical records prior to October 2017 will contain:\n(1) Completed NAVRES 1570/21, Unit IDT Participation Records.\n(2) Unit IDT unadjudicated report with corrective actions taken for unadjudicated IDTs.\n1570-040\nCH-12, 14 Jun 2022\nPage 2 of 2\n(3) NSIPS IDT verification records that were approved, signed, and dated by NRA\nCommanding Officer or designated representative.\n( 4) Any additional historical or relevant key supporting documents, already in the current\nUnit IDT record, such as past earnings statements, designation letters, and unit recall lists.\nb. Records Maintenance. In accordance with reference (c), NRAs will use the Navy's\nauthorized records management system for storage of electronic records. NRAs will establish\nand maintain electronic records in the records management system for each assigned Reserve\nSailor, using the naming convention promulgated in reference ( c ). Local records are authorized\nand encouraged when the Navy is transitioning records management systems or the systems are\ninoperable for an extended duration."
+}

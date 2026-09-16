@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf",
+  "title": "RESPERSMAN 3060-010",
+  "fingerprint": "73626cac65dcf6cac7d473239e6d3ffa4a4599dc95ca017530e00c73fdcd57ce",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 3820,
+  "lineCount": 92,
+  "textSHA256": "94ee97e274981be90d84d0b0a3b2d2c16dd31bbab47744edea2c4546e6ef1709",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 41
+    },
+    {
+      "page": 2,
+      "startLine": 42,
+      "endLine": 76
+    },
+    {
+      "page": 3,
+      "startLine": 77,
+      "endLine": 92
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "3060-010\n5 Jun 12\nPage 1 of 3\nRESPERSMAN 3060-010\nMANPOWER AVAILABILITY STATUS CODES\nResponsible\nOffice\nCOMNAVRESFORCOM (N3) Phone: DSN\nCOM\nFAX\n262-3091\n(757) 322-3091\n(757) 444-7568\n1. General. Manpower Availability Status (MAS) codes are used\nto assist in determining and tracking the pre-mobilization\nadministrative and medical status of Selected Reservists.\nEnsuring that a Selected Reservist’s Navy Standard Integrated\nPersonnel System (NSIPS) and Reserve Headquarters System (RHS)\nrecord reflect correct and updated MAS codes is essential to\nensuring supported commands, Unit Commanding Officers (COs),\nOperational Support Officers (OSOs), and Commander, Navy Reserve\nForces Command (COMNAVRESFORCOM) (N35) can accurately evaluate\nthe current status on each Reservist.\n2. Responsibilities\na. COMNAVRESFORCOM (N35) shall:\n(1) Identify circumstances that affect mobilization\navailability and provide MAS codes that can be used in a\nSelected Reservist’s personnel record to track and evaluate\nmobilization availability.\n(2) Annually provide a Force-wide MAS code report to\nEchelon IV Commands/Navy Reserve Activities (NRAs) identifying\nSelected Reservists with MAS codes that are greater than one\nyear old.\nb. COMNAVRESFOR (N9) shall:\n(1) Review monthly all medical MAS codes assigned to\nSelected Reservists that are greater than six months old to\nensure Medical Retention Review (MRR) packages have been\nsubmitted, as appropriate.\nc. Echelon IV Commanders shall:\n(1) Ensure NRAs are conducting monthly reviews and\nupdating MAS codes for all Selected Reservists assigned.\n3060-010\n5 Jun 12\nPage 2 of 3\n(2) Review the annual COMNAVRESFORCOM MAS code report\nand ensure assigned NRAs update NSIPS, as appropriate.\n(3) Verify MRR packages are submitted, as required.\nd. NRAs shall:\n(1) Assign a MAS Code Coordinator on the command\ncollateral duty notice.\n(2) Ensure NSIPS is updated with appropriate MAS codes.\n(3) Ensure MAS codes designated as Echelon V level\ncontrolled MAS codes are annotated in a Selected Reservist’s\nNSIPS record.\n(4) Provide Unit COs the current medical/dental status\nof each Sailor assigned on a monthly basis.\n(5) Ensure Unit COs review and confirm MAS code status\nmonthly for each assigned Sailor.\ne. NRA MAS Code Coordinator shall:\n(1) Be the point of contact to assign/update MAS codes\nin NSIPS using this article for guidance and information on Navy\nReserve Homeport https://www.navyreserve.navy.mil under the\nCOMNAVRESFORCOM (N35) homepage.\n(2) Provide the “NSIPS MAS Listing” report monthly to\nUnit COs at the beginning of drill weekends. For units that do\nnot drill at the NRA, provide report via encrypted e-mail to the\nUnit CO.\n(3) Initiate a Space and Naval Warfare Systems Command\n(SPAWAR) Help Desk service request for resolution of erroneous\ncodes once an individual or unit has been identified for\nactivation and has a frozen MAS code.\n(4) Coordinate MAS code updates with medical, training,\nand the units as required to ensure accuracy.\nf. Unit COs shall:\n(1) Review MAS codes for assigned unit members every\nmonth for accuracy. This monthly review should include a review\n3060-010\n5 Jun 12\nPage 3 of 3\nof each unit member that has a blank MAS code to ensure a MAS\ncode is not missing.\n(2) Report completion of the monthly MAS code review to\nthe NRA, and ensure all updates are completed at least monthly,\npreferably by the end of the drill weekend.\n3. MAS Code Definitions. MAS code definitions and precedence\nlisting can be found on the Navy Reserve Homeport\nhttps://www.navyreserve.navy.mil under the COMNAVRESFORCOM (N3)\nhomepage. Echelon IV/NRA manpower and mobilization officers\nshould be familiar with this information and ensure MAS code\ninstructions are followed. All questions concerning this\nguidance or MAS codes in general should be directed to\nCOMNAVRESFORCOM (N35)."
+}

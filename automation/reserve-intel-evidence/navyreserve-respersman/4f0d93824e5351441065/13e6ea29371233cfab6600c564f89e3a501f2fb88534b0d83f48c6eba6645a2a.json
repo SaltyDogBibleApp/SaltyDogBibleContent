@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf",
+  "title": "RESPERSMAN 1571-010",
+  "fingerprint": "13e6ea29371233cfab6600c564f89e3a501f2fb88534b0d83f48c6eba6645a2a",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 6450,
+  "lineCount": 144,
+  "textSHA256": "0e4a8414720f9a9a883ff10c78c92e4b547125caa716284cb13e0a50cdee3423",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 46
+    },
+    {
+      "page": 2,
+      "startLine": 47,
+      "endLine": 86
+    },
+    {
+      "page": 3,
+      "startLine": 87,
+      "endLine": 124
+    },
+    {
+      "page": 4,
+      "startLine": 125,
+      "endLine": 144
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "1571-010\nCH-8, 16 Sep 2016\nPage 1 of 4\nRESPERSMAN 1571-010\nANNUAL TRAINING AND ACTIVE DUTY TRAINING\nResponsible\nOffice\nCOMNAVRESFORCOM\n(N31)\nPhone: DSN\nCOMM\nFAX\n262-6748\n(757)322-6748\n(757)444-7568\nReferences (a) BUPERSINST 1001.39F\n(b) COMNAVRESFORINST 4650.1\n(c) COMNAVRESFORNOTE 1001\n(d) COMNAVRESFORINST 1120.3\n1. Definition. Annual Training (AT) and Active Duty Training\n(ADT) are limited periods of Active Duty with an automatic\nreversion to Inactive Duty (ID) when the specified period is\ncompleted. AT orders are involuntary orders.\n2. AT Requirements. Selected Reserve personnel must perform 12\nto 14 days AT/ADT each fiscal year (FY) as scheduled by the Unit\nCommanding Officer (CO) and per COMNAVRESFORCOMNOTE 1001 (Fiscal\nYear (FY) Force Execution Guidance). Failure to perform AT or\nobtain a waiver will result in unsatisfactory participation for\nthe fiscal year per reference (a). AT that overlaps two fiscal\nyears may be considered as satisfying the requirement for either\nfiscal year; however, retirement point credit will be applied\nonly to the anniversary year in which it was earned. Sailors\nassigned to the Individual Ready Reserve (IRR) (Voluntary\nTraining Unit (VTU) or Active Status Pool (ASP)) are not\nauthorized to perform AT.\n3. Exceptions. Exceptions to the AT requirements are included\nin reference (a) and the following:\na. Performance of fewer than 14 days AT in a FY will\nsatisfy the annual requirement under the following\ncircumstances:\n(1) If individual AT is performed at an activity that\noperates on a normal weekday schedule, completion of 12 days\n(first working day of the first week through the last working\nday of the second week) will satisfy the AT requirement.\n(2) If a Sailor, through no fault of their own, is\nreleased from AT prior to completing the minimum 12-14 day\n1571-010\nCH-8, 16 Sep 2016\nPage 2 of 4\nrequirement, the AT requirement is satisfied. It is not\nbeneficial to the Navy or the Sailor to require performance of\none or two days of AT simply to satisfy the day-for-day\nrequirement.\nb. A SELRES Sailor affiliating after 1 June or later is not\nrequired to complete 12 or more days of active duty within the\nFY they affiliate. The NRA CO will ensure the applicable code is\nentered into NSIPS.\n4. Substitution. Any period of 12 or more days of active duty\n(i.e. AT/ADT/Active Duty for Special Works\n(ADSW)/Mobilization/Active Component Service/Initial Active Duty\nfor Training (IADT), Definite Recall, etc…) in a FY meets the\nactive duty participation requirement. Regardless of Reserve\naffiliation date, a Sailor who completes 12 or more days of\nactive duty in a FY has satisfied their active duty\nparticipation requirement.\n5. Active Duty Participation Navy Standard Integrated Personnel\nSystem (NSIPS) Entry Requirements. Navy Reserve Activity\nCommanding Officers shall ensure the following NSIPS entries are\ncompleted for assigned Sailors each FY:\na. C – Active duty completed for FY (Any 12 or more days\nof active duty in a FY)\nb. N – Active duty not required for FY (Sailor affiliating\n1 June or later each year)\nc. W – Active duty Waived for FY (An approved AT Waiver)\nd. Blank – Sailor did not complete active duty\nparticipation requirements\ne. S - Do not use this code\n6. AT Waivers. The NAVRES 1571/15, Annual Training Waiver\nRequest must be submitted in accordance with reference (c).\nSailors with known undue personal hardships shall submit NAVRES\n1571/15, Annual Training Waiver Request by 1 May. Emergent\npersonal hardship situations that occur after 1 May will be\nprocessed per applicable directives. The expectation is for\nSailors to self-report any issue requiring a waiver for\nadjudication or be actively pursuing an active duty period prior\nto 30 September. All waivers, regardless of submission date,\n1571-010\nCH-8, 16 Sep 2016\nPage 3 of 4\nmust be adjudicated by the NOSC CO or Wing Commander prior to 30\nSeptember.\na. Waiver approval guidance factors that shall be\nconsidered by approval authority:\n(1) Undue personal hardship exists that precludes\nactive duty;\n(2) Not medically qualified or prohibited to perform\nactive duty\n(3) Training was cancelled/modified that precluded\nattainment of 12 or more days\nb. Direct Commission Officers (DCO), Limited Duty\nOfficers (LDO), and Chief Warrant Officers (CWO) assigned a DCO\nManpower Availability Status (MAS) code per reference (d) will\nfollow procedures for AT waivers outlined above. If approval of\nthe waiver will result in exceeding the one year allotted for\nDCO Indoctrination Course (DCOIC) completion, a request for\nextension with NAVPERS 1070/613, Administrative Remarks must be\nsubmitted via DCO sponsor.\n(1) DCOs enrolled in Training in Medical Specialties\n(TMS) programs do not require extensions as long as the\nprocedures outlined in RESPERSMAN 1570-020 paragraph 8.b.(1)(k)\nare satisfied. DCOIC will be deferred as long as the officer\nremains enrolled in a TMS program.\n(2) Completion of the extension request on NAVPERS\n1070/613, Administrative Remarks must include DCOIC course date\nfor which a new quota has been obtained and desired length of\nextension not to exceed six months.\nc. Basic guidance follows:\n(1) Approved waivers satisfy requirements for\nsatisfactory participation and advancement eligibility.\n(2) A waiver does not change the requirement to earn\na minimum of 50 retirement points per anniversary year to\nachieve a year of qualifying service creditable toward a non-\nregular (Reserve) retirement (with pay). AT retirement points\nare not credited when AT is waived.\n1571-010\nCH-8, 16 Sep 2016\nPage 4 of 4\n(3) Approved waivers will be retained by the parent\nNRA in individual inactive duty training folder and documented\nin Navy Standard Integrated Personnel System (NSIPS).\n7. ADT. ADT is a period of Active Duty that is intended to\nsupport a specific training requirement and assist a command\nthat has ADT funding available. Sailors may request ADT orders\nwhen they are requested by a command. The command requesting\nADT orders for a Sailor to support the command will provide the\nfunding for the orders. Periods of ADT satisfy the AT\nrequirement per reference (b).\na. ADT for members of the VTU\n(1) Sailors assigned to the IRR (including VTU, ASP and\nStrategic Sealift Readiness Group members) may perform ADT with\npay, funds permitting, or without pay if ADT is desired and\nauthorized.\n(2) USNR-S1 VTU Sailors are limited to non-pay ADT\norders only and may not receive pay or travel allowances."
+}

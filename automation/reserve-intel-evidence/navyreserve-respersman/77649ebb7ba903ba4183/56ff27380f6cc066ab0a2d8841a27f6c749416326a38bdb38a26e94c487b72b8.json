@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERMAN%20Authorization%20Letter.pdf",
+  "title": "Open PDF",
+  "fingerprint": "56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "no_extractable_text",
+  "extractionMethod": "pypdf",
+  "pageCount": 1,
+  "pagesWithText": 0,
+  "characterCount": 0,
+  "lineCount": 0,
+  "textSHA256": null,
+  "truncated": false,
+  "pageLineRanges": [],
+  "warnings": [],
+  "normalizedText": ""
+}

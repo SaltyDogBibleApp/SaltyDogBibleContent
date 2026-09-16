@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
+  "title": "RESPERSMAN 1570-030",
+  "fingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 7055,
+  "lineCount": 128,
+  "textSHA256": "57a6727f92504ddcb84ead238277b5d21c39f26d59cc16d734118c0dff3ece56",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 34
+    },
+    {
+      "page": 2,
+      "startLine": 35,
+      "endLine": 73
+    },
+    {
+      "page": 3,
+      "startLine": 74,
+      "endLine": 107
+    },
+    {
+      "page": 4,
+      "startLine": 108,
+      "endLine": 128
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTAL DRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNAVRESFOR N1C2\n14 Jun 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\n~~- {- ~\nJ. A. s@oMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps://www .navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1570-030\nArticle Title\nIndividual Inactive Duty Trainin2 Record Maintenance\n• Simplifies and updates existing Individual Inactive Duty (IDT) Training\nRecord Maintenance procedures and responsibilities.\n• Removed the requirement for non-IDT orders to be maintained in the\nIndividual IDT Record.\n• Changed requirement for the Individual IDT Records to be transferred to\nthe new NRAs within 14-days of completing the NSIPS check-out\ntransaction vice 5-days.\n• Added the requirement to maintain individual Sailor's drill management\nsystem unit designation letters as specified in RESPERSMAN 1570-010\nparagraph 4. These designation letters are no longer required to be\nmaintained in the Unit IDT Record.\n(COG: COMNA VRESFORCOM (Nl 1 ))\nCHANGE SUMMARY June 2022\nPage 1 of 1\n1570-030\nCH-12, 14 Jun 2022\nPage 1 of 3\nRESPERSMAN 1570-030\nINDIVIDUAL INACTIVE DUTY TRAINING RECORD MAINTENANCE\nResponsible\nOffice\nReferences\nCOMNAVRESFORCOM (Nl 1) Phone: DSN 262-2002\nCOM (757) 322-2002\nFAX (757) 444-7598\n(a) ASN Memo of29 Jan 15, Revised Document Retention Requirements to\nSupport Department of the Navy Financial Statement Audits\n(b) BUPERSINST 1001.39F, Administrative Procedures for Navy Reservists\n(c) COMNAVRESFORINST 5210.1, Records Management Program\n(d) SECNAVINST 5210.8F, Department of the Navy Records Management\nProgram\n(e) SECNAVINST 5211.5F, Department of the Navy Privacy Program\n1. Purpose. This article addresses the proper administration of individual Inactive Duty\nTraining (IDT) record maintenance in accordance with references (a) through (e).\n2. Definitions\na. Administrative Unsatisfacto ry Periods (Admin U). Admin Us are IDT periods where the\nUnit Commanding Officer (CO), or Navy Reserve Activity (NRA) CO determine that the\nSailor's performance does not meet the minimum standards required to maintain the\nproficiency/readiness of the unit and/or the skill of the individual, or when disciplinary action\nhas been taken under the Uniform Code of Military Justice (UCMJ) for violations committed\nduring the IDT period in question, per reference (b ).\nb. IDT Period. Provides individual or unit readiness training to Selected Reservists\n(SELRES) and Voluntary Training Unit (VTU) Sailors, and consists of both regularly scheduled\nIDT periods, additional IDT periods, and voluntary IDT periods.\nc. NAVRES 1570/2. Satisfactor y Participation Requirements/Record of Unexcused\nAbsences. Official form used for SELRES in a drill status to acknowledge the Navy's IDT\nparticipation policy. This form outlines attendance, communication requirements, and\nprocedures for missed IDT periods. Additional satisfactory participation requirements are\noutlined in RESPERSMAN 1001-010 and Fiscal Year Force Execution Guidance.\nd. Unexcused Absences (UA). Absence from scheduled drill periods with no valid reason\nfor absence as determined by Unit CO ( or designated representative).\ne. Unfavorable adjudication. A completed IDT period adjudicated as Unexcused Absence\n(UA) or Admin U.\n1570-030\nCH-12, 14 Jun 2022\nPage 2 of 3\n3. Navy Reserve Activity ( RA) Responsibilities. The NRA will establish and maintain\nindividual IDT records for each Sailor assigned to the NRA. In accordance with references ( a)\nand ( c ), all documentation that supports financial statement balances must be retained in the\ncurrent records management system for 10 years.\na. Individual IDT Participation Record. NRAs will maintain the following documentation,\nas applicable:\n( 1) Copies of strength gain affiliation or accession IDT orders, and any IDT orders\ncreated outside of Reserve Force Management Tool (RFMT). Orders created in RFMT are\nstored indefinitely within RFMT and do not need to be duplicated.\n(2) NA VRES 1570/2, Satisfactory Participation Requirements/Record of Unexcused\nAbsences. The NRA will generate a new form which is signed by the Sailor upon transfer to a\nnew NRA ·to ensure the NRA contact information is current.\n(a) The Original signed NAVRES 1570/2, Satisfactory Participation\nRequirements/Record of Unexcused Absences. This form should remain blank outside of the\nSailors signature. NRA Commanding Officer (CO) will never sign the original.\n(b) Master working copy of the NA VRES 1570/2 will be used to annotate current and\nhistorical unfavorably adjudicated IDTs. NRA CO will not sign this copy to facilitate future use.\n(c) Notification copies of all NRA CO signed NAVRES 1570/2 used to inform the\nSailors of their unfavorable IDT adjudication.\n(3) Copies ofIDT-related correspondence (i.e., UAs/Authorized Absences (AA)/Admin\nU removal letters).\n(4) Montgomery GI Bill-Selected Reserve (MGIB-SR) Statement of Understanding, and\nMGIB-SR Notice of Basic Eligibility (NOBE).\n(5) Standard Form 1199A, Direct Deposit Sign-Up Form, and Employee's Withholding\nCertificate, IRS Form W-4, for new accessions/affiliations only.\n(6) Pay related NAVPERS 1070/613, Administrative Remarks (e.g., Funeral Honors\nDuty EFHD), Direct Deposit, Medical/Dental Non-Drillers).\n(7) Memorandums for the Record (MFRs) submitted for audit or other pay related\nmatters.\n(8) Drill management system unit designation letters as specified in RESPERSMAN\n1570-010.\nb. For members transferring to a new NRA, the current NRA will:\n(1) Generate a copy of the member's IDT history review .\n(2) Duplicate the IDT file for 10-year local retain.\n1570-030\nCH-12, 14 Jun 2022\nPage 3 of 3\n(3) In accordance with references (a) and (c), the current NRA will coordinate the move\nof the electronic or hardcopy individual IDT record to the gaining NRA within 14 days of\ncompleting the NSIPS check-out transaction.\nc. Loss transactions. Refer to RESPERSMAN 1900-010 for key supporting documents and\nretention requirements. The NRA will maintain a copy in the authorized records management\nsystem and mail the original individual IDT record to the Sailor within 14 days of completing the\nNSIPS strength loss transaction.\nd. Gain transactions. Refer to RESPERSMAN 1100-050 for key supporting documents and\nretention requirements.\ne. Records Maintenance. Per reference (c), NRAs will use the Navy's authorized records\nmanagement system for storage of electronic records. NRAs will establish and maintain\nelectronic records in the records management system for each assigned Reserve Sailor, using the\nnaming convention promulgated in reference ( c ). Local records are authorized and encouraged\nwhen the Navy is transitioning records management systems or the systems are inoperable for an\nextended duration."
+}

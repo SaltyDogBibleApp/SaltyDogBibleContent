@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf",
+  "title": "RESPERSMAN 3060-020",
+  "fingerprint": "e5f18f9664ec794ce6bd1a1e1790d89b4389deecdea112654103bf706cbc0380",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 4088,
+  "lineCount": 96,
+  "textSHA256": "67281ac2a73f60dd60c9fdfe4597868a563d34a90f55627ce6fb5d329eac577b",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 45
+    },
+    {
+      "page": 2,
+      "startLine": 46,
+      "endLine": 78
+    },
+    {
+      "page": 3,
+      "startLine": 79,
+      "endLine": 96
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "3060-020\n5 Jun 12\nPage 1 of 3\nRESPERSMAN 3060-020\nINDIVIDUAL MOBILIZATION STATUS CODES\nResponsible\nOffice\nCOMNAVRESFORCOM (N3) Phone: DSN\nCOM\nFAX\n262-3091\n(757) 322-3091\n(757) 444-7568\n1. General. Individual Mobilization Status (IMS) Codes are\nused to track Selected Reservists through the activation\nprocess, from identification for mobilization through the end of\ntheir post deployment dwell time. The codes provide Commander,\nNavy Reserve Forces Command, (COMNAVRESFORCOM) (N35), Echelon IV\nCommands, and Navy Reserve Activities (NRAs) an automated\naccounting of the status of Selected Reservists. IMS codes do\nnot apply to members of the Volunteer Training Unit\n(VTU)/Individual Ready Reserve (IRR).\n2. Selected Reservists identified for mobilization are\nadministratively processed and tracked in the Reserve\nHeadquarters System (RHS)/Navy Standard Integrated Personnel\nSystem (NSIPS) using IMS codes. IMS codes provide a method to\nkeep a detailed, automated accounting of the status of Selected\nReservists during both the activation and post-activation phases\nof mobilization.\n3. IMS codes should not be confused with Manpower Availability\nStatus (MAS) codes, which are used as a tool to identify and\ntrack the pre-mobilization readiness of Selected Reservists.\n4. IMS code entries and updates should be initiated at the\nlevel in the chain of command where the processing takes place,\ne.g. NRAs should update the IMS codes promptly in NSIPS when a\nSelected Reservist has been notified of selection for\nmobilization. This NSIPS transaction will reflect in RHS within\n24 hours informing COMNAVRESFORCOM (N35) that the Selected\nReservist has been notified of their mobilization.\n5. IMS codes should not be changed or deleted outside the\nmobilization chain of command. A Selected Reservist’s pay\nstatus can be affected if IMS codes are assigned out of sequence\nor incorrectly. All questions concerning IMS codes in general\nshould be directed to COMNAVRESFORCOM (N35) and incorrect IMS\ncode assignments should be reported immediately.\n3060-020\n5 Jun 12\nPage 2 of 3\n6. Responsibilities\na. COMNAVRESFORCOM (N3) shall:\n(1) Provide the Mobilization Notification Report daily\nto the Echelon IV’s.\n(2) Monitor IMS code updates and ensure notifications\nand mobilization processing are being reported.\nb. Echelon IV Commanders shall:\n(1) Assign a Mobilization Coordinator.\n(2) Ensure Manpower Officers and Mobilization\nCoordinators are familiar with IMS guidance and that IMS code\ninstructions are followed.\n(3) Ensure Echelon V commands are assigning IMS codes\nas appropriate and within the prescribed time requirements. If\nthe Echelon V command is unable to update the IMS code, the\nEchelon IV shall update IMS code for their respective Echelon V\ncommands. Once a Selected Reservist has been identified for\nmobilization, readiness and availability are tracked using IMS\ncodes only. MAS codes are no longer used to track the status\nuntil they complete or are released from mobilization.\nc. Echelon IV Mobilization Coordinator shall:\n(1) Provide the IMS Mobilization Notification Report to\ntheir NRAs.\n(2) Monitor IMS code updates and direct follow-up\naction by NRAs.\n(3) Report to COMNAVRESFORCOM (N35) any issues with\ncontacting Selected Reservists identified for mobilization.\nd. NRAs shall:\n(1) Assign a Mobilization Coordinator.\n(2) Ensure mobilization notification and processing\noccurs as directed.\n3060-020\n5 Jun 12\nPage 3 of 3\n(3) Ensure Unit COs review and confirm IMS code status\nmonthly for each assigned Sailor.\ne. NRA Mobilization Coordinator shall:\n(1) Review the COMNAVRESFORCOM (N3) Mobilization\nNotification Report daily and ensure mobilization notification\nfor Selected Reservists are conducted per notification guidance\nlocated at Navy Reserve Homeport\nhttps://www.navyreserve.navy.mil under the COMNAVRESFORCOM (N35)\nhomepage.\n(2) Transmit IMS code updates to COMNAVRESFORCOM via\nNSIPS, as required.\n7. IMS Code Definitions. IMS code descriptions and definitions\ncan be found on Navy Reserve Homeport\nhttps://www.navyreserve.navy.mil under the COMNAVRESFORCOM (N35)\nhomepage."
+}

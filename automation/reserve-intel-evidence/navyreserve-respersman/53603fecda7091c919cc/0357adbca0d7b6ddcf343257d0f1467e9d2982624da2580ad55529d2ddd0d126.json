@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN 1300-090.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN%201300-090.pdf",
+  "title": "RESPERSMAN 1300-090",
+  "fingerprint": "0357adbca0d7b6ddcf343257d0f1467e9d2982624da2580ad55529d2ddd0d126",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 7050,
+  "lineCount": 126,
+  "textSHA256": "f812f83ab720bbe190a97898dfccef3f5fef571c798d7e8409607b5363cc17b4",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 27
+    },
+    {
+      "page": 2,
+      "startLine": 28,
+      "endLine": 66
+    },
+    {
+      "page": 3,
+      "startLine": 67,
+      "endLine": 102
+    },
+    {
+      "page": 4,
+      "startLine": 103,
+      "endLine": 126
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTAL DRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNA VRESFOR Nl C2\n9 Nov 2021\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\nJ. A. SCHOMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website :\nhttps:/ /www .navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1300-090\nCH-13\nArticle Title\nKey Employees\nRemove key employee unit assignment; DODI 1235.09 mandates KFE/KE\nare assigned to the ASL\nUpdated PERS 9 responsibilities\nAdded definitions\nUpdate references\nCHANGE SUMMARY November 2021\nPage 1 of 1\nRESPERSMAN 1300-090\n1300-090\nCH-12, 9 Nov 2021\nPage 1 of 3\nKEY EMPLOYEES\nResponsible\nOffice\nReferences\nCOMNA VRESFOR Phone: DSN 262-2442\n(N1C2) COMM (757) 322-2442\nFAX (757) 444-7598\n(a) DODI 1200.07 Screening the Ready Reserve\n(b) DODI 121.5.06 Uniform Reserve, Training and Retirement Categories for\nthe Reserve Components\n(c) DODI 1235.09 Management of the Standby Reserve\n(d) MILPERSMAN 1160-120 High Year Tenure\n(e) BUPERSINST 1001.39F Administrative Procedures for Navy Reservists\n(f) DoDI 1200.15 Assignment to and Transfer Between Reserve Categories\nand Discharge from Reserve Status\n1. Purpose. To issue guidance and procedures, in accordance with references (a) through (f),\nfor administering Sailors identified as key employees (KE).\n2. Definitions\na. \"Key Employee\" means a non-federal employee - particularly in the fields of public\nhealth, safety, and defense support industries - who is essential to national defense, any Federal\nemployee occupying a key position per reference (a).\nb. \"Key Position\" means a Federal position that must not be vacated during a national\nemergency or mobilization without seriously impairing the capability of the parent Federal\nAgency or office to function effectively per reference (a).\n3. Discussion. Per reference (a), it is Department of Defense (DoD) policy that members of the\nReady Reserve be screened annually to provide a Ready Reserve Force composed of members\nwho are available immediately for active duty (AD) during a mobilization or as otherwise\nrequired by law. In most circumstances, KE status precludes immediate availability for AD. As\nsuch, members identified as KEs must be transferred to the standby reserve - active status list\n(ASL) (USNR-S 1 ), or the Retired Reserve, or must be discharged as appropriate. However, per\nreference ( c ), a member of the ASL may be ordered to active duty in time of war or national\nemergency pursuant to 12306 of Title 10, U.S. Code. After a mobilization is ordered, no\ndeferment, delay, or exemption from mobilization will be granted to members because of their\ncivilian employment. Per references (b) and ( e ), KE Sailors may participate voluntarily -\nwithout pay - for retirement points only, and may be considered for promotion.\n1300-090\nCH-12, 9 Nov 2021\nPage 2 of 3\n4. Policy. Commander, Navy Reserve Force Command (COMNA VRESFORCOM) will\ndisestablish Key Federal Employees (KFE) Units on 31 December 2021.\nCOMNA VRESFORCOM will transfer any Sailors remaining in the KFE Units after 31\nDecember 2021 to the Individual Ready Reserve (IRR) as soon as possible. Effective the date of\nthis article, COMNA VRESFORCOM, Career Transition Office (CTO), and Navy Recruiting\nCommand may not assign members to KFE Units.\n5. Identifying and Transferrin g Key Employees. Assistant Secretary of Defense for Reserve\nAffairs, under the Under S~cretary of Defense for Personnel and Readiness will - on an annual\nbasis - provide Federal Agencies with a listing of all Federal employees who are also Ready\nReservists to assist them in conducting employer-screening activities.\n6. Key Employee Screening.\na. At mobilization, Ready Reserve members will only be exempted or deferred from\nmobilization due to civilian employment as specifically directed by DoD. Accordingly, all\nDrilling Ready Reserve members will be screened annually to ensure their availability for\nmobilization.\nb. The Civilian Employer Information (CEI) tab in Navy Standard Integrated Personnel\nSystem is designed to allow Federal and non-Federal employees to inform the Navy Reserve.if\nthey have been so designated by their employer. Ready Reservists who are identified as key\nFederal or non-Federal employees will submit their request to PERS-91B for approval.\nc. The Navy Reporting Activity commanding officer will review their members' CEI\nmonthly by utilizing the reporting tools in NSIPS.\n7. Responsibilities\na. Reserve Personnel Management (PERS-9) responsibilities include:\n(1) Review recommendations for removal of both Federal and other civilian employees\nfrom the Ready Reserve submitted by employers via the members, and take applicable action.\n(2) After making a removal determination in response to a petition for such action,\npromptly transmit the results of that determination to the Ready Reservist concerned and his/her\nemployer, Reserve Officer Administration (PERS-911), COMNAVRESFORCOM, and the\nmember's respective Navy Operational Support Center.\n(3) PERS-911 will transfer Ready Reservists identified as occupying key positions to the\nStandby Reserve, or the Retired Reserve, or discharge them, as applicable.\n(4) Adjudicate members request to return to the Ready Reserve if the KE status is no\nlonger needed.\n1300-090\nCH-12, 9 Nov 2021\nPage 3 of 3\nb. COMNA VRESFORCOM Nl C2 must determine if newly identified key employees have\nan outstanding Transfer of Education Benefits obligation, then adjust, as applicable, the Sailor's\nobligation end date to the Sailor's last day in Selected Reservist (SELRES) status per Office of\nthe Chief of Na val Operations N 12 guidance.\nc. SELRES Sailors must:\n(1) Inform their employers of their Reserve military obligation.\n(2) Update their CEI annually.\n(3) If occupying a Key Position, provide their employer with appropriate guidance and\nthe letter template for Removal from the Ready Reserve .\n(4) Submit their employer's request letter along with NOSC endorsement to PERS-91B.\nInclude a position description and any other pertinent factors which the organization\nwould like to have considered. Send all KE requests to scb_pers91.fct@navy.mil.\n(5) Upon receipt of approval from PERS-91 as a KE, contact PERS-9 for guidance\nregarding voluntary participation for retirement points.\n8. Transferrin g back to the Ready Reserve. Any eligible member of the Standby Reserve may\nbe transferred back to the Ready Reserve when the reason for the member's transfer to the\nStandby Reserve no longer exists per references (a) and (b), provided the member is otherwise\nqualified and a requirement exists per reference (f).\na. Member must submit documentation from employer to PERS-91 B indicating the member\nis allowed to return to an active status.\nb. Member must contact a recruiter for affiliation procedures."
+}

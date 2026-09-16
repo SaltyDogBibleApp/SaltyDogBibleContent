@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf",
+  "title": "RESPERSMAN 1300-070",
+  "fingerprint": "17415b566244a240ed6c329af2b9c2172ed3666ea2cc909ffb18a357b4153ef4",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 3980,
+  "lineCount": 92,
+  "textSHA256": "ae6f00f812f741cb933da28f013bba5727ccd64a5f62a15a82cc3d299204590d",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 31
+    },
+    {
+      "page": 2,
+      "startLine": 32,
+      "endLine": 63
+    },
+    {
+      "page": 3,
+      "startLine": 64,
+      "endLine": 92
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NAVY RESERVE FORCE\n1915 FORRESTAL DRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNA VRESFOR Nl C2\n18 Apr 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\nJ.A. SCHOMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps ://www .navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1300-070\nArticle Title\nDirected Mannin g Assignments\n•\n•\n•\nUpdated references\nRemoves 60 day grace period beyond their PRD before\nbeing. eligible for Direct Assignment. Sailors who are IAP\nor become IAP during an application phase are eligible for\nassignment during the subsequent Directed Assignment\nphase.\nReplaced CMDS-ID with My Navy Assignment (MNA)\nCHANGE SUMMARY April 2022\nPage 1 of 1\n1300-070\nCH-13, 18 Apr 2022\nPage 1 of 2\nRESPERSMAN 1300-070\nDIRECTED ASSIGNMENTS\nResponsible COMNA VRESFORCOM Phone: DSN (757) 262-2261\nOffice (N12) COMM (757) 322-2261\nFAX (757) 444-7598\nReferences (a) OPNAVINST 1000.16L Navy Total Force Manpower Policies and\nProcedures\nRESPERSMAN 1300-010 Selected Reserve Assi ents\n1. Purpose. To issue guidance and procedure for the execution of directed assignments per\nreference (a). The goal is to fill valid, funded Navy requirements with qualified Sailors, enabling\nthe qualification and training of personnel to support Navy Reserve Readiness requirements.\n2. Def\"mitions.\na. In-Assignment Processing (IAP). Sailors not assigned to a billet are IAP. Sailors in a\nbillet with an expired Projected Rotation Date (PRD) are also considered IAP.\nb. Expired Projected Rotation Date (PRD). When a Sailor who remains in a billet beyond\ntheir assigned PRD, i.e.:· they have not been assigned future orders and no other Sailor has been\nassigned to their current billet.\n3. Direct Assignment Process.\na. Sailors are authorized to apply for eligible billets two cycles (6 months) prior to their\nPRD.\nb. Figure-1 below is a depiction of the assignment timeline.\n1st Eligibility Cycte\nPO'.e-;:f;Se«rfe\nn·~~,(,lff\nFigure-1\nZnd Eligibility Cyc\n.3 monlh pc:tioo\nPG:e'l:f;Se:~\nf :_4 A~~: PRO\n1300-070\nCH-13, 18 Apr 2022\nPage 2 of 2\nc. Sailors who do not receive a requested billet assignment prior to expiration of PRD, may\nbe direct assigned, unless a valid reason exists ( e.g. unassignable MAS codes, exceptions to\npolicy).\nd. Junior Officers and Enlisted Personnel.\n(1) Sailors must be assignment eligible per reference (b ).\n(2) All E-4 and below Sailors' initial billet assignment will be coordinated through\nCOMNAVRESFORCOM (N121).\n(3) All newly accessed junior officer initial billet assignments will be coordinated\nthrough CNRFC (N122).\n4. Responsibilities.\na. COMNAVRESFORCOM (Nl) will:\n(1) Update and post the weekly participation report weekly during the main application\nphase. The report, posted on the COMNA VRESFORCOM (N12) homepage at\nhttps://private.navyreserve.navy.mil/cnrfc/N-Codes/Nl/CNRFC_N12/SitePages/Home.aspx,\nprovides Navy Reserve Activities (NRAs), Reserve Program Directives and Unit COs visibility\non those who have submitted applications for billets. Those who have not participated or have\nnot been selected for a billet will be direct assigned.\n(2) Issue Inactive Duty Training (IDT) orders for directed assignments.\nb. Echelon IVs will:\n(1) Ensure NRAs review the participation report.\n(2) Ensure NRAs execute all orders within five working days of the order effective date.\nThe effective date of the transfer in NSIPS will be the effective date that is stated on the IDT\norders. This is normally the first of the month for the next cycle (e.g. 01 Jan, 01 Apr, 01 Jul or\n01 Oct).\nc. NRAs and Navy Reserve Units will educate new affiliates on Reserve Force Manpower\nTools/MyNavy Assignment system functionality and participation requirements."
+}

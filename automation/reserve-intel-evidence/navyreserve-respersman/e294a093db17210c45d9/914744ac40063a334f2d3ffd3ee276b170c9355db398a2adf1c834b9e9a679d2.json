@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1040-010 Reserve Unit Career Counselor Program.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1040-010%20Reserve%20Unit%20Career%20Counselor%20Program.pdf",
+  "title": "RESPERSMAN 1040-010",
+  "fingerprint": "914744ac40063a334f2d3ffd3ee276b170c9355db398a2adf1c834b9e9a679d2",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 4163,
+  "lineCount": 97,
+  "textSHA256": "92384e5adc1297760d2a7b05dfc6d3d493ef835b63be2dd63e223b599d6ab141",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 44
+    },
+    {
+      "page": 2,
+      "startLine": 45,
+      "endLine": 81
+    },
+    {
+      "page": 3,
+      "startLine": 82,
+      "endLine": 97
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "1040-010\nCH-3, 9 Jul 2014\nPage 1 of 3\nRESPERSMAN 1040-010\nRESERVE UNIT CAREER COUNSELOR PROGRAM\nResponsible\nOffice\nCOMNAVRESFORCOM (N15) Phone: DSN\nCOM\nFAX\n262-5774\n(757) 322-5774\n(757) 444-7598\nReferences (a) NAVPERS 15878K, Bureau of Naval Personnel Career\nCounselor Handbook\n(b) OPNAVINST 1040.11D\n1. Purpose\na. The Reserve Unit Career Counselor (UCC) assists Navy\nCounselors (less Career Recruiter Force), Navy Reserve Activity\n(NRA) Command Career Counselors (CCCs), and Unit leadership in\norganizing/implementing an aggressive enlisted career\ndevelopment and retention program. The UCC is the unit\nprincipal advisor on policies and regulations related to Navy\ncareer planning matters and is the focal member of a proactive\ncommand-wide Career Development Team (CDT). Building an entire\nprogram around a single individual (or relatively few\nindividuals) has serious drawbacks when, due to the absence of\nthe key person (permanently or temporarily), the program is\ndisabled. By organizing a command-wide CDT, the UCC assumes a\ntotally different role, that of CDT leader.\nb. Reserve Units are required to meet the directed\ncounselor to personnel ratio (currently 1 counselor per 30\nenlisted), as established in reference (a).\n2. Responsibilities. In addition to the duties outlined in\nreferences (a) and (b), the following responsibilities apply:\na. NRA Commanding Officers (COs) shall:\n(1) Execute the Navy Enlisted Retention and Career\nDevelopment Program per references (a) and (b) for staff and\nReserve Unit Sailors assigned to the NRA.\nb. Unit COs and Officers in Charge shall:\n(1) Coordinate with their Operational Support Officer\n(OSO) to ensure their assigned billets are structured to meet\nthe requirements of reference (a). Units that cannot meet this\nrequirement due to current billet limitations may submit\n1040-010\nCH-3, 9 Jul 2014\nPage 2 of 3\nrequests through their OSO to have their currently assigned\nbillets modified by adding a Navy Enlisted Classification (NEC)\n9592 Reserve Career Information Program Advisor requirement or\nto request additional billets that already require the NEC.\n(2) Use the UCC as the primary source of Career\nInformation; ensure the UCC is apprised of the latest Career\nCounselor functions by enabling UCC attendance at monthly CDT\nmeetings facilitated by the NRA or Immediate Superior in Command\nCCC.\n(3) Ensure the Senior Enlisted Leader (SEL) chairs,\nmonitors, and participates in the Unit's Career Development\nBoard (CDB) program.\n(4) Review CDB minutes after they are loaded in Career\nInformation Management System (CIMS).\n(5) Ensure all new affiliates attend the Reserve\nAffiliation Success Workshop and update CIMS accordingly.\nc. Unit SELs shall:\n(1) Directly supervise and support UCCs in the\nperformance of their duties.\n(2) Support career development program management,\nemphasizing chain of command involvement.\n(3) Coordinate quarterly training for the Chief Petty\nOfficers' Mess on career development programs.\nd. UCCs shall:\n(1) Evaluate enlisted career development programs within\ntheir own unit.\n(2) Provide primary technical assistance and maintain\nawareness of revisions and innovations in career development\nprograms through access to Navy directives, reference materials,\nexperience, and training.\n(3) Counsel Sailors and their family members on the\ncareer opportunities available in the Reserve Component.\n3. Service Requirements\na. Sailors assigned as UCC must be E5 or above.\n1040-010\nCH-3, 9 Jul 2014\nPage 3 of 3\nb. UCC assignments must be for a minimum of 24 months.\nc. UCCs must attend the Reserve CDT Course (R-CDTC) within\n90 days of designation. R-CDTC can be facilitated locally by\nthe NRA CCC. R-CDTC course guides are available on the\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Force\nRetention (N15) website: Navy Reserve Homeport\nhttps://private.navyreserve.navy.mil/cnrfc/N-\nCodes/N1/cnrfc_N15/SitePages/Home.aspx.\nd. UCCs must attend the Reserve Career Information Course\n(R-501-0005).\ne. Career Counselor feedback reports must be submitted via\nthe chain of command for every attendee of the 2-week Career\nCounselor Course within 6 months of completion of the course."
+}

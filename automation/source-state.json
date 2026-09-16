@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T02:07:06Z",
+  "lastRunAt": "2026-09-16T02:46:35Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -595,7 +595,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-09-16T00:50:13Z",
+      "lastCheckedAt": "2026-09-16T02:46:35Z",
       "lastError": null,
       "linkedDocumentCount": 46,
       "linkedDocuments": {
@@ -605,6 +605,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Users/041/97/297/1100-060.pdf",
           "fingerprint": "289e191b34e30e6391c41201ccdb260d9146a42d9ec4c4fa5a9a40bddb332de8",
           "lastModified": "Tue, 13 Jun 2023 14:05:53 GMT",
+          "textEvidence": {
+            "characterCount": 17122,
+            "extractionStatus": "ok",
+            "lineCount": 290,
+            "pageCount": 9,
+            "pagesWithText": 9,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/04f1fc612ab1ec3bb81e/289e191b34e30e6391c41201ccdb260d9146a42d9ec4c4fa5a9a40bddb332de8.json",
+            "textSHA256": "c1a76a3e80a51941cb74589edf3150aabb372788a3aab7e3bd67ce6c172b0107",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/Users/041/97/297/1100-060.pdf"
         },
         "reserve_guidance-05dbd7cbc8870f8da369": {
@@ -613,6 +623,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-020.pdf",
           "fingerprint": "4d32bcd29a57c80f1fa65ff6df89e312bcd3dd911a7089c1ebca445831e28ccf",
           "lastModified": "Tue, 16 Apr 2024 12:26:44 GMT",
+          "textEvidence": {
+            "characterCount": 18701,
+            "extractionStatus": "ok",
+            "lineCount": 306,
+            "pageCount": 9,
+            "pagesWithText": 9,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/05dbd7cbc8870f8da369/4d32bcd29a57c80f1fa65ff6df89e312bcd3dd911a7089c1ebca445831e28ccf.json",
+            "textSHA256": "b163bdabd9868bd8cff9cce8466703dbaa9cfdb9db15b5e01ec721b2a1e0a1ec",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-020.pdf"
         },
         "reserve_guidance-1b4a25b414fb43e9d33a": {
@@ -621,6 +641,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
           "fingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
           "lastModified": "Tue, 16 Apr 2024 13:16:27 GMT",
+          "textEvidence": {
+            "characterCount": 7055,
+            "extractionStatus": "ok",
+            "lineCount": 128,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/1b4a25b414fb43e9d33a/c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3.json",
+            "textSHA256": "57a6727f92504ddcb84ead238277b5d21c39f26d59cc16d734118c0dff3ece56",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf"
         },
         "reserve_guidance-26d6c24c84938d804fab": {
@@ -629,6 +659,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-030.pdf",
           "fingerprint": "345fd9ed7a7bad7997e8de73b42181808af2f1ad66468f5e5262481898154cdc",
           "lastModified": "Tue, 16 Apr 2024 12:27:36 GMT",
+          "textEvidence": {
+            "characterCount": 11719,
+            "extractionStatus": "ok",
+            "lineCount": 189,
+            "pageCount": 6,
+            "pagesWithText": 6,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/26d6c24c84938d804fab/345fd9ed7a7bad7997e8de73b42181808af2f1ad66468f5e5262481898154cdc.json",
+            "textSHA256": "ad3203ca8f4ef5dee56e1a235e8c3cd74a8d20b55cb30edbb9045c2d913aa689",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-030.pdf"
         },
         "reserve_guidance-28d7b7d67457e147bf9c": {
@@ -637,6 +677,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1900-010.pdf",
           "fingerprint": "050c6299aa9de6ea439d62a3edb7424722aabd2806c9024f2f8c72eecc543083",
           "lastModified": "Tue, 16 Apr 2024 12:48:46 GMT",
+          "textEvidence": {
+            "characterCount": 11672,
+            "extractionStatus": "ok",
+            "lineCount": 277,
+            "pageCount": 7,
+            "pagesWithText": 7,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/28d7b7d67457e147bf9c/050c6299aa9de6ea439d62a3edb7424722aabd2806c9024f2f8c72eecc543083.json",
+            "textSHA256": "41f7df31ad0979b6fa3a9b019b592759f959f550d14dce34712b0869e5716826",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1900-010.pdf"
         },
         "reserve_guidance-2e2bdc5df13d5c7a68fe": {
@@ -645,6 +695,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-030.pdf",
           "fingerprint": "0d7146fb84cf02805aa971c7469afac11137140ac72c34f297376de768782e8b",
           "lastModified": "Tue, 16 Apr 2024 13:08:52 GMT",
+          "textEvidence": {
+            "characterCount": 15502,
+            "extractionStatus": "ok",
+            "lineCount": 261,
+            "pageCount": 7,
+            "pagesWithText": 7,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/2e2bdc5df13d5c7a68fe/0d7146fb84cf02805aa971c7469afac11137140ac72c34f297376de768782e8b.json",
+            "textSHA256": "7b545d8293681be8305aca9a0913e12da3a33a0ecd8e2dc1b15bef397131ac75",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-030.pdf"
         },
         "reserve_guidance-3303b402f4e3ed74a86d": {
@@ -653,6 +713,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201100%202%20FY26%20SELRES%20Enlisted%20Recruiting%20and%20Retention%20Incentives%20(19SEPT2025).pdf",
           "fingerprint": "50efe63c209e74a8fa9f65ae8c7c449e659725094b4f20949e9e24e16c20b782",
           "lastModified": "Wed, 24 Sep 2025 20:11:54 GMT",
+          "textEvidence": {
+            "characterCount": 10952,
+            "extractionStatus": "ok",
+            "lineCount": 544,
+            "pageCount": 9,
+            "pagesWithText": 8,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/3303b402f4e3ed74a86d/50efe63c209e74a8fa9f65ae8c7c449e659725094b4f20949e9e24e16c20b782.json",
+            "textSHA256": "0e60b2681fbead40b15b67954d88c4529d0ff62cd51be017875f9d27104cc8ce",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1100 2 FY26 SELRES Enlisted Recruiting and Retention Incentives (19SEPT2025).pdf"
         },
         "reserve_guidance-3eaf2ca4e10309c43b30": {
@@ -661,6 +731,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201001-030%20TRAIN%20TO%20RETAIN.pdf",
           "fingerprint": "3197ee80a4a06900750d7a2ce2ff5e824ddddbd054e2bb50cb77598141877f83",
           "lastModified": "Tue, 16 Apr 2024 12:24:06 GMT",
+          "textEvidence": {
+            "characterCount": 5708,
+            "extractionStatus": "ok",
+            "lineCount": 107,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/3eaf2ca4e10309c43b30/3197ee80a4a06900750d7a2ce2ff5e824ddddbd054e2bb50cb77598141877f83.json",
+            "textSHA256": "12e92de1948ae4afe0486cd2b7caec32af1186bb92a45093a9afd71f872ea9e0",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1001-030 TRAIN TO RETAIN.pdf"
         },
         "reserve_guidance-4725dcbc8998e177e20c": {
@@ -669,6 +749,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-020.pdf",
           "fingerprint": "810eed7a7f861a510799519b7cd2b5747c3393fcf7b9880dd89f7950f5b4d70e",
           "lastModified": "Tue, 16 Apr 2024 12:33:27 GMT",
+          "textEvidence": {
+            "characterCount": 8414,
+            "extractionStatus": "ok",
+            "lineCount": 172,
+            "pageCount": 5,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/4725dcbc8998e177e20c/810eed7a7f861a510799519b7cd2b5747c3393fcf7b9880dd89f7950f5b4d70e.json",
+            "textSHA256": "fa2b3f7885e4752b6234aeef2e5b9c7e853386425faf0e8b097dc6e3ee2793b5",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-020.pdf"
         },
         "reserve_guidance-499e9a4dbb875cf358dd": {
@@ -677,6 +767,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf",
           "fingerprint": "73626cac65dcf6cac7d473239e6d3ffa4a4599dc95ca017530e00c73fdcd57ce",
           "lastModified": "Tue, 16 Apr 2024 12:50:58 GMT",
+          "textEvidence": {
+            "characterCount": 3820,
+            "extractionStatus": "ok",
+            "lineCount": 92,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/499e9a4dbb875cf358dd/73626cac65dcf6cac7d473239e6d3ffa4a4599dc95ca017530e00c73fdcd57ce.json",
+            "textSHA256": "94ee97e274981be90d84d0b0a3b2d2c16dd31bbab47744edea2c4546e6ef1709",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf"
         },
         "reserve_guidance-4bedaed25b24bc1d2e4e": {
@@ -685,6 +785,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN%201300-010.pdf",
           "fingerprint": "f29f56bf4bb0e767b2dd6e6584b6f11a9c629e33e08b612b354d62c63fd70146",
           "lastModified": "Tue, 16 Apr 2024 12:32:36 GMT",
+          "textEvidence": {
+            "characterCount": 21095,
+            "extractionStatus": "ok",
+            "lineCount": 511,
+            "pageCount": 14,
+            "pagesWithText": 14,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/4bedaed25b24bc1d2e4e/f29f56bf4bb0e767b2dd6e6584b6f11a9c629e33e08b612b354d62c63fd70146.json",
+            "textSHA256": "76a726e61544eb4039c100b03b4479533c404e29ca39afa8f6917d5cfc0a99c0",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN 1300-010.pdf"
         },
         "reserve_guidance-4f0d93824e5351441065": {
@@ -693,6 +803,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf",
           "fingerprint": "13e6ea29371233cfab6600c564f89e3a501f2fb88534b0d83f48c6eba6645a2a",
           "lastModified": "Tue, 16 Apr 2024 13:18:58 GMT",
+          "textEvidence": {
+            "characterCount": 6450,
+            "extractionStatus": "ok",
+            "lineCount": 144,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/4f0d93824e5351441065/13e6ea29371233cfab6600c564f89e3a501f2fb88534b0d83f48c6eba6645a2a.json",
+            "textSHA256": "0e4a8414720f9a9a883ff10c78c92e4b547125caa716284cb13e0a50cdee3423",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf"
         },
         "reserve_guidance-53603fecda7091c919cc": {
@@ -701,6 +821,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN%201300-090.pdf",
           "fingerprint": "0357adbca0d7b6ddcf343257d0f1467e9d2982624da2580ad55529d2ddd0d126",
           "lastModified": "Tue, 16 Apr 2024 12:46:49 GMT",
+          "textEvidence": {
+            "characterCount": 7050,
+            "extractionStatus": "ok",
+            "lineCount": 126,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/53603fecda7091c919cc/0357adbca0d7b6ddcf343257d0f1467e9d2982624da2580ad55529d2ddd0d126.json",
+            "textSHA256": "f812f83ab720bbe190a97898dfccef3f5fef571c798d7e8409607b5363cc17b4",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN 1300-090.pdf"
         },
         "reserve_guidance-614abeb91040f1704375": {
@@ -709,6 +839,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf",
           "fingerprint": "25d4fd5405caa58f27036028f27b1b0622401b417be14fa6f392079f8c9928e5",
           "lastModified": "Tue, 16 Apr 2024 12:22:07 GMT",
+          "textEvidence": {
+            "characterCount": 6303,
+            "extractionStatus": "ok",
+            "lineCount": 121,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/614abeb91040f1704375/25d4fd5405caa58f27036028f27b1b0622401b417be14fa6f392079f8c9928e5.json",
+            "textSHA256": "c26df7caefcc22cc9e1682ce632b5bec52a147f1f4202593cf6459fb4d8bf472",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf"
         },
         "reserve_guidance-73e8f3f035c33203ab7e": {
@@ -717,6 +857,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-060.pdf",
           "fingerprint": "665b30cf18145cd239f4a94c068340fdbc89c5dac7a76a739809dec33d9fa6d6",
           "lastModified": "Tue, 16 Apr 2024 12:44:03 GMT",
+          "textEvidence": {
+            "characterCount": 15933,
+            "extractionStatus": "ok",
+            "lineCount": 289,
+            "pageCount": 9,
+            "pagesWithText": 9,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/73e8f3f035c33203ab7e/665b30cf18145cd239f4a94c068340fdbc89c5dac7a76a739809dec33d9fa6d6.json",
+            "textSHA256": "372c13f0c74926495235e9aa973416199166e7c23d4c33326909270480dd1363",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-060.pdf"
         },
         "reserve_guidance-74f0e3d0787d95d5f4e5": {
@@ -725,6 +875,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1001-020%20Ready%20Reserve%20Annual%20Screening.pdf",
           "fingerprint": "a48ac74ef28c735a96bc05dcdf68ab6ac8d95a5910988621302b8de50059eb16",
           "lastModified": "Tue, 16 Apr 2024 12:22:58 GMT",
+          "textEvidence": {
+            "characterCount": 11709,
+            "extractionStatus": "ok",
+            "lineCount": 170,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/74f0e3d0787d95d5f4e5/a48ac74ef28c735a96bc05dcdf68ab6ac8d95a5910988621302b8de50059eb16.json",
+            "textSHA256": "8d1ff02d5604b89bb80791ea04636e94d52f7336826803e6a45b31fff6ef8e3a",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1001-020 Ready Reserve Annual Screening.pdf"
         },
         "reserve_guidance-7674b7ded4b2554ee024": {
@@ -733,6 +893,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-080.pdf",
           "fingerprint": "b641a40d97e869300ce4384a59a2e146496ec44573cf77fea66715bebfc8dc9e",
           "lastModified": "Tue, 16 Apr 2024 12:46:00 GMT",
+          "textEvidence": {
+            "characterCount": 22222,
+            "extractionStatus": "ok",
+            "lineCount": 366,
+            "pageCount": 11,
+            "pagesWithText": 11,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/7674b7ded4b2554ee024/b641a40d97e869300ce4384a59a2e146496ec44573cf77fea66715bebfc8dc9e.json",
+            "textSHA256": "90df5ecb9ccdf047cdcb346cefb125f5bd7eb15dafc06dd1dfc459f90c609558",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-080.pdf"
         },
         "reserve_guidance-771aa799d581e5847956": {
@@ -741,6 +911,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-050.pdf",
           "fingerprint": "33d34abfb4b4823c1705a88e837627832fa5ffee18cea8240d644e8c5d1b0de0",
           "lastModified": "Tue, 16 Apr 2024 12:28:59 GMT",
+          "textEvidence": {
+            "characterCount": 9511,
+            "extractionStatus": "ok",
+            "lineCount": 214,
+            "pageCount": 6,
+            "pagesWithText": 6,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/771aa799d581e5847956/33d34abfb4b4823c1705a88e837627832fa5ffee18cea8240d644e8c5d1b0de0.json",
+            "textSHA256": "b0c786ab593c16e0cac7c2e9de52c4b6ecf8001515fc3efc62b49449cc15e87c",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-050.pdf"
         },
         "reserve_guidance-77649ebb7ba903ba4183": {
@@ -749,6 +929,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERMAN%20Authorization%20Letter.pdf",
           "fingerprint": "56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8",
           "lastModified": "Thu, 18 Jun 2020 11:31:37 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 1,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/77649ebb7ba903ba4183/56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8.json",
+            "textSHA256": null,
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf"
         },
         "reserve_guidance-81347a5556a2190c7fd4": {
@@ -757,6 +947,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf",
           "fingerprint": "9753cda0862d63be3d21219ed1fed6c9764253986f354d7c761acf8ee7372485",
           "lastModified": "Tue, 16 Apr 2024 12:31:17 GMT",
+          "textEvidence": {
+            "characterCount": 4904,
+            "extractionStatus": "ok",
+            "lineCount": 105,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/81347a5556a2190c7fd4/9753cda0862d63be3d21219ed1fed6c9764253986f354d7c761acf8ee7372485.json",
+            "textSHA256": "5a11c4469bd5697a8cce3c28d848fe9548a6c3c3d085b5958ccb306a0e5fda91",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf"
         },
         "reserve_guidance-83172764c818417ea706": {
@@ -765,6 +965,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%206000-010.pdf",
           "fingerprint": "dddd568e8cab93cbb354313bd7691660c9fa0f0738eca23aaba96c8d86105139",
           "lastModified": "Tue, 30 Jun 2026 13:43:29 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 29,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/83172764c818417ea706/dddd568e8cab93cbb354313bd7691660c9fa0f0738eca23aaba96c8d86105139.json",
+            "textSHA256": null,
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 6000-010.pdf"
         },
         "reserve_guidance-8463cf1f75ceb59e8280": {
@@ -773,6 +983,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201300-050%20-%20ADMINISTRATIVE%20PROCESSING%20UNIT.pdf",
           "fingerprint": "2e82110caf2192df41242146cec12aa1584bb05835d2a05ae610bfb5df781f1f",
           "lastModified": "Tue, 11 Aug 2026 13:38:22 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 3,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/8463cf1f75ceb59e8280/2e82110caf2192df41242146cec12aa1584bb05835d2a05ae610bfb5df781f1f.json",
+            "textSHA256": null,
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1300-050 - ADMINISTRATIVE PROCESSING UNIT.pdf"
         },
         "reserve_guidance-8c6a8baff5ebef369879": {
@@ -781,6 +1001,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1500-010.pdf",
           "fingerprint": "dad4314f9bf30c38b9c6f4e4910823043b10e601dae55506d919c6a1f3605cf0",
           "lastModified": "Tue, 16 Apr 2024 13:06:04 GMT",
+          "textEvidence": {
+            "characterCount": 8147,
+            "extractionStatus": "ok",
+            "lineCount": 153,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/8c6a8baff5ebef369879/dad4314f9bf30c38b9c6f4e4910823043b10e601dae55506d919c6a1f3605cf0.json",
+            "textSHA256": "bdf9faa72791f9e78281faef2b5510be8fd177c50b9399a4b1f0243a5f0f09d8",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1500-010.pdf"
         },
         "reserve_guidance-8f4f211488c9d2c21b8e": {
@@ -789,6 +1019,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-010.pdf",
           "fingerprint": "72d7016a43764bee18a6fdf4ab95eb08100745b5fe4fd1e93bbdfc4e4776fafe",
           "lastModified": "Tue, 16 Apr 2024 12:25:55 GMT",
+          "textEvidence": {
+            "characterCount": 30479,
+            "extractionStatus": "ok",
+            "lineCount": 505,
+            "pageCount": 15,
+            "pagesWithText": 15,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/8f4f211488c9d2c21b8e/72d7016a43764bee18a6fdf4ab95eb08100745b5fe4fd1e93bbdfc4e4776fafe.json",
+            "textSHA256": "02842c16998980c1aa7fb4dfe4b4a526a34b7fb9ffb5b203fd53ea9e4395aab9",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-010.pdf"
         },
         "reserve_guidance-8fb1a1904f90069f2a9f": {
@@ -797,6 +1037,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-010.pdf",
           "fingerprint": "cb3731a94cdfb060b0a49d0f251eb605426c0e7aad287cd0b1846108d646654a",
           "lastModified": "Tue, 16 Apr 2024 13:06:58 GMT",
+          "textEvidence": {
+            "characterCount": 11180,
+            "extractionStatus": "ok",
+            "lineCount": 214,
+            "pageCount": 6,
+            "pagesWithText": 6,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/8fb1a1904f90069f2a9f/cb3731a94cdfb060b0a49d0f251eb605426c0e7aad287cd0b1846108d646654a.json",
+            "textSHA256": "629e96ad3a0391905d60fda879498a7630decce7995a21524b00f9812d3fd3fa",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-010.pdf"
         },
         "reserve_guidance-9c5fe72a40625510e719": {
@@ -805,6 +1055,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf",
           "fingerprint": "1b1c75041d7d73efb29e8029819b38dfdc87eb925d242211456fc2108db12fcb",
           "lastModified": "Tue, 16 Apr 2024 12:41:21 GMT",
+          "textEvidence": {
+            "characterCount": 7700,
+            "extractionStatus": "ok",
+            "lineCount": 154,
+            "pageCount": 5,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/9c5fe72a40625510e719/1b1c75041d7d73efb29e8029819b38dfdc87eb925d242211456fc2108db12fcb.json",
+            "textSHA256": "00c02323ccd42da9b40010eb0247315160066a4e04ced8a5e586a3ebd5b21075",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf"
         },
         "reserve_guidance-a2e8796e9f0944cf289a": {
@@ -813,6 +1073,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-050.pdf",
           "fingerprint": "0879b25589baaa3084e845a37c7ffc1d3b01d230133bd2795ce9deb0940011a4",
           "lastModified": "Tue, 16 Apr 2024 13:18:04 GMT",
+          "textEvidence": {
+            "characterCount": 12242,
+            "extractionStatus": "ok",
+            "lineCount": 194,
+            "pageCount": 6,
+            "pagesWithText": 6,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/a2e8796e9f0944cf289a/0879b25589baaa3084e845a37c7ffc1d3b01d230133bd2795ce9deb0940011a4.json",
+            "textSHA256": "d402365241458739e255e3687441ea5a8f5dd1823753fdfc20ec9cc0cc190f96",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1570-050.pdf"
         },
         "reserve_guidance-adad176a26a85b3b6574": {
@@ -821,6 +1091,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201570-010.pdf",
           "fingerprint": "d0c0a48681c45bacdc9c295252efb6602fdf0fccb69961b4e783261231528798",
           "lastModified": "Tue, 16 Apr 2024 13:12:21 GMT",
+          "textEvidence": {
+            "characterCount": 45947,
+            "extractionStatus": "ok",
+            "lineCount": 726,
+            "pageCount": 21,
+            "pagesWithText": 21,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/adad176a26a85b3b6574/d0c0a48681c45bacdc9c295252efb6602fdf0fccb69961b4e783261231528798.json",
+            "textSHA256": "60451e590ad496505c09f1fea88f8e7e9b35d688db8bbe17706f894c0826aecf",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1570-010.pdf"
         },
         "reserve_guidance-bcb7c0258d9091146430": {
@@ -829,6 +1109,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-020.pdf",
           "fingerprint": "dff30b09383a3f60992706e9bd64bbca2afa83ea0e4f217c9c95eab20b0430e1",
           "lastModified": "Tue, 16 Apr 2024 13:07:52 GMT",
+          "textEvidence": {
+            "characterCount": 11895,
+            "extractionStatus": "ok",
+            "lineCount": 230,
+            "pageCount": 7,
+            "pagesWithText": 7,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/bcb7c0258d9091146430/dff30b09383a3f60992706e9bd64bbca2afa83ea0e4f217c9c95eab20b0430e1.json",
+            "textSHA256": "4fe975d9eec55d34cdd12930a8098403eb6e1869efa05cf583cf68437420fdf1",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-020.pdf"
         },
         "reserve_guidance-bcd49d0f26b7c0862b0c": {
@@ -837,6 +1127,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/M1001.5.pdf",
           "fingerprint": "95730b9ff4a235a016ecda5131573d4aa7a88e4416d41fa8eac3409714ef369c",
           "lastModified": "Tue, 16 Apr 2024 11:52:48 GMT",
+          "textEvidence": {
+            "characterCount": 50498,
+            "extractionStatus": "ok",
+            "lineCount": 1420,
+            "pageCount": 31,
+            "pagesWithText": 31,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/bcd49d0f26b7c0862b0c/95730b9ff4a235a016ecda5131573d4aa7a88e4416d41fa8eac3409714ef369c.json",
+            "textSHA256": "b394e07eb6d1124bd7cb75457c7ec3b090fe4a299a346d523fa7a39d235a39ee",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/M1001.5.pdf"
         },
         "reserve_guidance-caf12f7b0665aa16e632": {
@@ -845,6 +1145,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RPM%20Acronyms.pdf",
           "fingerprint": "1a8ad1704a15fb435c26ced1fb7d6bc3cefce5c9c08ece2476ad5297d6a0808d",
           "lastModified": "Thu, 18 Jun 2020 11:31:32 GMT",
+          "textEvidence": {
+            "characterCount": 6736,
+            "extractionStatus": "ok",
+            "lineCount": 210,
+            "pageCount": 9,
+            "pagesWithText": 9,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/caf12f7b0665aa16e632/1a8ad1704a15fb435c26ced1fb7d6bc3cefce5c9c08ece2476ad5297d6a0808d.json",
+            "textSHA256": "674ba1a6b21413f6ba1302b2929443c4684480ebb2c64ffb8f854c07dbf3a1a6",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RPM Acronyms.pdf"
         },
         "reserve_guidance-cc43656cea8b7add90be": {
@@ -853,6 +1163,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-040.pdf",
           "fingerprint": "1048b68d165222c7dc25951370bc60c03b98a5ff358e41110d4e491a5c83ff06",
           "lastModified": "Tue, 16 Apr 2024 12:28:13 GMT",
+          "textEvidence": {
+            "characterCount": 25812,
+            "extractionStatus": "ok",
+            "lineCount": 407,
+            "pageCount": 12,
+            "pagesWithText": 12,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/cc43656cea8b7add90be/1048b68d165222c7dc25951370bc60c03b98a5ff358e41110d4e491a5c83ff06.json",
+            "textSHA256": "7680dde91e5c634c1391c20aea38f5ca4e28d94d38c1d66af0155cf940fa4557",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-040.pdf"
         },
         "reserve_guidance-cc822dd16d6ef6413d3e": {
@@ -861,6 +1181,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERSMAN%20Table%20of%20Contents.pdf",
           "fingerprint": "f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6",
           "lastModified": "Thu, 18 Jun 2020 11:31:34 GMT",
+          "textEvidence": {
+            "characterCount": 2803,
+            "extractionStatus": "ok",
+            "lineCount": 85,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/cc822dd16d6ef6413d3e/f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6.json",
+            "textSHA256": "77da88948b5fa52e79a694d97a5cf84c745c5148ae603a17628802352a636d67",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERSMAN Table of Contents.pdf"
         },
         "reserve_guidance-d7bf8f7bd73b63467ea3": {
@@ -869,6 +1199,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-050.pdf",
           "fingerprint": "dded9f86b6a5b33931430d4d52d1f01afe506a0099d88b612f622697df7fe431",
           "lastModified": "Tue, 16 Apr 2024 13:10:28 GMT",
+          "textEvidence": {
+            "characterCount": 4976,
+            "extractionStatus": "ok",
+            "lineCount": 95,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/d7bf8f7bd73b63467ea3/dded9f86b6a5b33931430d4d52d1f01afe506a0099d88b612f622697df7fe431.json",
+            "textSHA256": "5a12bd409151e0804ef76fca0352bdba818a3cdc94e5334dac27330375c115fb",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-050.pdf"
         },
         "reserve_guidance-dc2d6e027cfade7ef847": {
@@ -877,6 +1217,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf",
           "fingerprint": "b7fefdbee8576e5bd261891e36f6d6c79f9a045231415d14d28565b17b87c9b7",
           "lastModified": "Tue, 16 Apr 2024 13:09:42 GMT",
+          "textEvidence": {
+            "characterCount": 7817,
+            "extractionStatus": "ok",
+            "lineCount": 164,
+            "pageCount": 5,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/dc2d6e027cfade7ef847/b7fefdbee8576e5bd261891e36f6d6c79f9a045231415d14d28565b17b87c9b7.json",
+            "textSHA256": "e1cce51651c478f098f0ac97461562218dfcd1cc20ec8dc6510c774ca6727e2a",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf"
         },
         "reserve_guidance-e164adaf2419d6bbc49c": {
@@ -885,6 +1235,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/7220-010.pdf",
           "fingerprint": "c450b301245b58d56c3523826628c644eeabd33cc4f4d5999175811ffd3759e8",
           "lastModified": "Tue, 16 Apr 2024 12:49:57 GMT",
+          "textEvidence": {
+            "characterCount": 21283,
+            "extractionStatus": "ok",
+            "lineCount": 341,
+            "pageCount": 10,
+            "pagesWithText": 10,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/e164adaf2419d6bbc49c/c450b301245b58d56c3523826628c644eeabd33cc4f4d5999175811ffd3759e8.json",
+            "textSHA256": "06c591af75d62d29fb5ade40adee4ecbf50f6638172c0faa9c3400245d15f278",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/7220-010.pdf"
         },
         "reserve_guidance-e208b32f108dd87b188b": {
@@ -893,6 +1253,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf",
           "fingerprint": "bea2f85be03987a74867653b6681c62b76c2a97319c8ef5eab57a211654ef518",
           "lastModified": "Tue, 16 Apr 2024 12:39:46 GMT",
+          "textEvidence": {
+            "characterCount": 5327,
+            "extractionStatus": "ok",
+            "lineCount": 121,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/e208b32f108dd87b188b/bea2f85be03987a74867653b6681c62b76c2a97319c8ef5eab57a211654ef518.json",
+            "textSHA256": "8615feb26aa8649598477d6c3e9f2f1fd18ebb8694677ec6a1e2bb2de8de865f",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf"
         },
         "reserve_guidance-e294a093db17210c45d9": {
@@ -901,6 +1271,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1040-010%20Reserve%20Unit%20Career%20Counselor%20Program.pdf",
           "fingerprint": "914744ac40063a334f2d3ffd3ee276b170c9355db398a2adf1c834b9e9a679d2",
           "lastModified": "Tue, 16 Apr 2024 12:25:04 GMT",
+          "textEvidence": {
+            "characterCount": 4163,
+            "extractionStatus": "ok",
+            "lineCount": 97,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/e294a093db17210c45d9/914744ac40063a334f2d3ffd3ee276b170c9355db398a2adf1c834b9e9a679d2.json",
+            "textSHA256": "92384e5adc1297760d2a7b05dfc6d3d493ef835b63be2dd63e223b599d6ab141",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1040-010 Reserve Unit Career Counselor Program.pdf"
         },
         "reserve_guidance-e2cd238ab353d9fd0f03": {
@@ -909,6 +1289,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201000-010%20(CH-14)%2014%20JUN%202022.pdf",
           "fingerprint": "ff980528b626c568ea0bbb18bc89a4db4eb17c68901abdef754ac39252ea3743",
           "lastModified": "Tue, 14 Apr 2026 12:59:14 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 9,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/e2cd238ab353d9fd0f03/ff980528b626c568ea0bbb18bc89a4db4eb17c68901abdef754ac39252ea3743.json",
+            "textSHA256": null,
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1000-010 (CH-14) 14 JUN 2022.pdf"
         },
         "reserve_guidance-ed20ed4c35aa5ada290f": {
@@ -917,6 +1307,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf",
           "fingerprint": "56e859f8235ae2133580ea38ee84bbc1d12e4afdc5d5f69303f6e0ef4bbf556d",
           "lastModified": "Tue, 16 Apr 2024 12:29:52 GMT",
+          "textEvidence": {
+            "characterCount": 4248,
+            "extractionStatus": "ok",
+            "lineCount": 89,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/ed20ed4c35aa5ada290f/56e859f8235ae2133580ea38ee84bbc1d12e4afdc5d5f69303f6e0ef4bbf556d.json",
+            "textSHA256": "1e4ff02a18f0cde0bd5898debc2d37ebd88709242943e5b4bed3a8b8e07a515c",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf"
         },
         "reserve_guidance-f04206fb6ef20dc6d713": {
@@ -925,6 +1325,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf",
           "fingerprint": "88b87163561b97fa1570ba2a98b34477b628f21423c262cd12cf15f3608605b8",
           "lastModified": "Tue, 16 Apr 2024 13:17:14 GMT",
+          "textEvidence": {
+            "characterCount": 4034,
+            "extractionStatus": "ok",
+            "lineCount": 80,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/f04206fb6ef20dc6d713/88b87163561b97fa1570ba2a98b34477b628f21423c262cd12cf15f3608605b8.json",
+            "textSHA256": "d468a85d5c5fbcd0b2a14cee3dda5d27ab7b090b5d6846abea4f35bc814fa447",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf"
         },
         "reserve_guidance-f52eceb641f77d93bc3a": {
@@ -933,6 +1343,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201300-085.pdf",
           "fingerprint": "83375af71216dddb6f6ec358d94caa0ea2729ec2bd6aad3494059cc2845c950c",
           "lastModified": "Tue, 16 Apr 2024 12:48:00 GMT",
+          "textEvidence": {
+            "characterCount": 22169,
+            "extractionStatus": "ok",
+            "lineCount": 369,
+            "pageCount": 11,
+            "pagesWithText": 11,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/f52eceb641f77d93bc3a/83375af71216dddb6f6ec358d94caa0ea2729ec2bd6aad3494059cc2845c950c.json",
+            "textSHA256": "c8f6c2515498f78369855fa9958fb95293079d9c2cb1323a2556cbf47da1f007",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1300-085.pdf"
         },
         "reserve_guidance-f638bdcb56094d5740dd": {
@@ -941,6 +1361,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-060.pdf",
           "fingerprint": "f2a57415255d06ef0a5e86a135bc91f90ddf2aa9a492a26d147523377e25b4b2",
           "lastModified": "Tue, 16 Apr 2024 13:11:11 GMT",
+          "textEvidence": {
+            "characterCount": 6309,
+            "extractionStatus": "ok",
+            "lineCount": 127,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/f638bdcb56094d5740dd/f2a57415255d06ef0a5e86a135bc91f90ddf2aa9a492a26d147523377e25b4b2.json",
+            "textSHA256": "439cb9bd37a1484e4b58877f0a144b762e640f786facce5d8b394a88ea34c593",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1534-060.pdf"
         },
         "reserve_guidance-f7ec4977929c0160e77a": {
@@ -949,6 +1379,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-020.pdf",
           "fingerprint": "05e9b4d3dd0c1a4c4d4f4098ae05758bad006803c060eb3028b91080630a5c52",
           "lastModified": "Tue, 16 Apr 2024 13:15:45 GMT",
+          "textEvidence": {
+            "characterCount": 24313,
+            "extractionStatus": "ok",
+            "lineCount": 420,
+            "pageCount": 13,
+            "pagesWithText": 13,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/f7ec4977929c0160e77a/05e9b4d3dd0c1a4c4d4f4098ae05758bad006803c060eb3028b91080630a5c52.json",
+            "textSHA256": "7c1c18512dee7ea553e0ec71af72db6913cba82b36d32adab9904f97ee366b4c",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1570-020.pdf"
         },
         "reserve_guidance-fc023312036a340afab2": {
@@ -957,6 +1397,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf",
           "fingerprint": "17415b566244a240ed6c329af2b9c2172ed3666ea2cc909ffb18a357b4153ef4",
           "lastModified": "Tue, 16 Apr 2024 12:44:59 GMT",
+          "textEvidence": {
+            "characterCount": 3980,
+            "extractionStatus": "ok",
+            "lineCount": 92,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/fc023312036a340afab2/17415b566244a240ed6c329af2b9c2172ed3666ea2cc909ffb18a357b4153ef4.json",
+            "textSHA256": "ae6f00f812f741cb933da28f013bba5727ccd64a5f62a15a82cc3d299204590d",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf"
         },
         "reserve_guidance-ffa0143e45807572f809": {
@@ -965,6 +1415,16 @@
           "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf",
           "fingerprint": "e5f18f9664ec794ce6bd1a1e1790d89b4389deecdea112654103bf706cbc0380",
           "lastModified": "Tue, 16 Apr 2024 12:51:43 GMT",
+          "textEvidence": {
+            "characterCount": 4088,
+            "extractionStatus": "ok",
+            "lineCount": 96,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/ffa0143e45807572f809/e5f18f9664ec794ce6bd1a1e1790d89b4389deecdea112654103bf706cbc0380.json",
+            "textSHA256": "67281ac2a73f60dd60c9fdfe4597868a563d34a90f55627ce6fb5d329eac577b",
+            "truncated": false
+          },
           "url": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf"
         }
       },

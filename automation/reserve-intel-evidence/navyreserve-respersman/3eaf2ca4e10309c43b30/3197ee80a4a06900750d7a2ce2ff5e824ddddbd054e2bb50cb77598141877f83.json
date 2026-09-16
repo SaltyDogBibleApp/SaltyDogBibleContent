@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1001-030 TRAIN TO RETAIN.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201001-030%20TRAIN%20TO%20RETAIN.pdf",
+  "title": "RESPERSMAN 1001-030",
+  "fingerprint": "3197ee80a4a06900750d7a2ce2ff5e824ddddbd054e2bb50cb77598141877f83",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 5708,
+  "lineCount": 107,
+  "textSHA256": "12e92de1948ae4afe0486cd2b7caec32af1186bb92a45093a9afd71f872ea9e0",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 41
+    },
+    {
+      "page": 2,
+      "startLine": 42,
+      "endLine": 75
+    },
+    {
+      "page": 3,
+      "startLine": 76,
+      "endLine": 107
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "1001-030\n6 Apr 2020\nPage 1 of 3\nRESPERSMAN 1001-030\nTrain to Retain\nResponsible\nOffice\nCOMNAVRESFORCOM\n(CNRFC N1C2)\nPhone: DSN\nCOMM\nFAX\n262-2442\n(757) 322-2442\n(757) 444-7598\nReferences (a) MILPERSMAN 1910-156, Separation by Reason of Unsatisfactory\nPerformance\n(b) MILPERSMAN 1440-010, Conversion Authorization\n(c) RESPERSMAN 1100-010, Reserve Incentive Programs\n1. Purpose Train to Retain seeks to increase commissioned/operational units’ mission readiness\nthrough proactive management of Selected Reserve (SELRES) training and qualifications. Type\nCommanders’ (TYCOMs) instructions delineate training and qualification standards by billet to\nmeet mission readiness. Assigned SELRES members must meet these standards within the\nprescribed timeframe to remain in the unit and community. Correspondingly, the unit must\nprovide the members ample opportunity to train and get qualified. Per reference (a), if the Sailor\nis unwilling or unable to complete the training within the associated time, the Sailor may choose\nto convert to a different rating or be removed from pay status. Communication and management\nof expectations for applicable SELRES Sailors entering the Navy Reserve are critical to a fair\nand successful program.\n2. Definitions\na. TYCOM. Type Commander, for this article, specific TYCOMS include Commander,\nNaval Air Force Reserve (CNAFR), Commander, Navy Information Forces Reserve (CNIFR),\nand Navy Expeditionary Combat Command (NECC).\nb. SELRES. For this article, SELRES refers collectively to the drilling members of the\nSelected Reserve.\nc. Train to Retain. A contract between the TYCOM and assigned SELRES that stipulates\nthe mandatory training and qualifications a Sailor must achieve within the required timeframe to\ncontinue participation as a SELRES in the TYCOM’s unit.\nd. Navy Reserve Unit. For the purpose of this instruction, ‘unit’ refers to Navy Reserve\nCommissioned units belonging to CNAFR and NECC, and CNIFR, and can be further identified\nby the Unit Mobilization Unit Identification Code (UMUIC).\n1001-030\n6 Apr 2020\nPage 2 of 3\ne. Navy Reserve Activity (NRA). The command where a Sailor is attached for\nadministrative purposes. Most commonly, it is the regular drill site for SELRES Sailors (e.g., the\nNavy Operational Support Center or the squadron).\n3. Requirements\na. Commander, Navy Reserve Force (CNRF) will provide guidance and oversight to\nTYCOMs on the Train to Retain program.\nb. TYCOM will\n(1) Create policy that specifies training requirements, performance goals, and time limits\nto complete the specified training and/or performance goals for personnel within their area of\nauthority.\n(2) Provide applicable policy to CNRFC (N1C2) for upload to MyNRH.\n(3) Create a Statement of Understanding (SOU) that outlines the training requirements,\nperformance goals, and time limits, and provide to CNRFC (N1C2) for upload to MyNRH.\n(4) Approve or disapprove extension requests and exceptions to policy.\n(5) Track statistical data regarding completed training rates for participating Sailors in the\nTrain to Retain program.\nc. CNRC N1 and PERS Career Transition Office (CTO) will\n(1) Provide the SOU from the applicable TYCOM to the prospective SELRES affiliate.\n(2) Ensure Sailor understands and signs SOU as a condition of accessing to the Navy\nReserve.\nd. NRA will\n(1) Upon gaining Sailor into applicable billet:\n(a) Retain required SOU in Hewlett Packard Enterprise (HPE) or subsequent approved\nsystem Records Management system.\n(b) Process incentive requests as required per reference (c).\n(2) Upon notification by Unit Commanding Officer of the failure of a Sailor to comply\nwith the SOU:\n(a) If the Sailor requests a rating conversion, assist Unit CO and Sailor in submitting\nand processing the request. If the rating conversion is approved, verify rating change in Navy\nStandard Integrated Personnel System (NSIPS).\n(b) If the Sailor received a bonus, initiate bonus recoupment per reference (c).\n1001-030\n6 Apr 2020\nPage 3 of 3\n(c) Support Unit CO, as required, in conducting administrative separation procedures,\nto include the completion of required loss transactions in NSIPS upon receipt of official\nseparation notification.\ne. SELRES Unit (UMUIC) Commanding Officer will\n(1) Use the SOU as the basis to counsel the assigned Sailors on training requirements and\nrequired timelines prescribed by the respective TYCOM.\n(2) Track Sailor training requirement completion progress against prescribed timeline.\n(3) Provide status updates to TYCOM as necessary.\n(4) Review and council members on progress as necessary.\n(5) Provide sufficient training opportunities for Sailors to complete prescribed\nrequirements.\n(6) If SOU requirements are not completed by the Sailor in the required timeline:\n(a) Notify the Sailor and NRA of the failure to complete the requirements.\n(b) If applicable, request an extension/waiver from the TYCOM.\n(c) If a rating conversion is possible and the Sailor requests, assist the Sailor with the\nrequest in coordination with the NRA per reference (b).\n(d) If a rating conversion is not possible, conduct administrative separation procedures\nand request NRA support as needed.\nf. Sailor will\n(1) Review and sign SOU.\n(2) Make every attempt to participate in provided training opportunities.\n(3) Complete mandated training requirements within the timeline prescribed by the\nTYCOM.\n(4) Notify unit chain of command as soon as possible if requirements will not be\ncompleted within the required timeline.\n(5) When applicable, request training requirement waiver or extension via chain of\ncommand.\n(6) If applicable, request rating conversion per reference (b). If approved for rating\nconversion, apply for new billet in MyNavy Assignments."
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf",
+  "title": "RESPERSMAN 1300-030",
+  "fingerprint": "bea2f85be03987a74867653b6681c62b76c2a97319c8ef5eab57a211654ef518",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 5327,
+  "lineCount": 121,
+  "textSHA256": "8615feb26aa8649598477d6c3e9f2f1fd18ebb8694677ec6a1e2bb2de8de865f",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 37
+    },
+    {
+      "page": 2,
+      "startLine": 38,
+      "endLine": 75
+    },
+    {
+      "page": 3,
+      "startLine": 76,
+      "endLine": 107
+    },
+    {
+      "page": 4,
+      "startLine": 108,
+      "endLine": 121
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORREST AL DRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNA VRESFOR NI C2\n10 Jun 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary .\n~cl - ::,\nJ. A. s'6toMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps :/ /www .navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1300-030\nCH-13\nArticle Title\nVoluntary Training Units\n•\n•\n•\n•\n•\n•\n•\nAdded assignment processes for ASP from/to VTU\nAdded readiness support to VTU function/support roles\nUpdated NRC CO responsibilities\nAdded definitions\nAdded purpose\nUpdate references\nUpdated terms\nCHANGE 13 SUMMARY June 2022\nPage 1 of 1\n1300-030\nCH-13, 10 Jun 2022\nPage 1 of 3\nRESPERSMAN 1300-030\nVOLUNTARY TRAINING UNITS\nResponsible\nOffice\nReferences\nCOMNA VRESFORCOM Phone: DSN 262-2261\n(N12) COMM (757) 322-2261\nFAX (757) 444-7598\n(a) RESPERSMAN 1001-010 Satisfactory Participation in the Navy Reserve\n(b) DoDI 1215.13 Reserve Component (RC) Member Participation Policy\n( c) RESPERSMAN 1570-01 0 Inactive Duty Training Administration\n(d) RESPERMAN 1300-010 Selected Reserve (SELRES) Assignments\n(e) MII.,PERMAN 1001-125 Requirements for Transfer From Selected\nReserve or IRR-VTU to the IRR-ASP, Stand Reserve-Active, Standby\nReserve-Inactive\n(f) BUPERSINST 1001.39 Administrative Procedures for Navy Reserve\nPersonnel\n(g) BUPERSINST 1610. l0F Navy Performance Evaluation System\n1. Purpose. This article covers special situations not normally associated or considered with the\nregular assignment process as outlined in references (a) through (g).\n2. Definitions\na. Individual Ready Reserve (IRR). A force that consists of personnel who must fulfill their\nmilitary service obligation under 10 U.S.C., 651 and members fulfilling a service obligation\nincurred via contract. The IRR is composed of the Active Status Pool (ASP) and the Voluntary\nTraining Unit (VTU) per reference (f).\nb. IRR-ASP. A manpower pool consisting of individuals who are serving in a non-pay, non­\ndrill status per reference (f).\nc. VTU. Unique to the Navy Reserve, VTUs are a subset of the IRR and consist of\npersonnel organized into units, who are not in a pay status, but who voluntarily drill for\nretirement point credit.\n3. Responsibilities\na. Navy Reserve Center (NRC) Commanding Officer (CO) will:\n(1) Act as the reporting senior for the VTU, and is responsible for the continual screening\nand management of the NRC's VTU. The CO may delegate this authority, in writing, in\naccordance with reference (g).\n1300-030\nCH.-13, 10 Jun 2022\nPage 2 of 3\n(2) Determine the best use ofVTU Sailors to maximize the support of the Navy Reserve\nand Supported Commands.\n(3) Ensure Sailors transferring to the VTU receive counseling regarding their affected\nbenefits and incentives.\nb. VTU Sailors will:\n(1) Prior to transferring to the VTU, sign a NAVPERS 1070/613, Administrative\nRemarks acknowledging their status change and subsequent affects on benefits and incentives\nper reference (f).\n(2) VTU Sailors must maintain satisfactory participation requirements per references (a)\nand (b).\n(a) VTU Sailors who fail to perform regularly scheduled Inactive Duty for Training\n(IDT) periods are subject to the same policies as Sailors in a Selected Reserve (SELRES) status.\n(b) Accumulation of more than the allocated unauthorized absences (UA) or\nauthorized absences (AA), per references (a) and (c), will result in transfer to the IRR-ASP or\nadministrative separation.\n(c) VTU Sailors may perform Funeral Honors Duty (FHD) in accordance with\nreference (c).\n1- It is not the intention for Sailors assigned to the VTU to only perform FHD;\nregular IDT participation is also required.\n2. Sailors who are only interested in performing FHD may do so as members of\nthe IRR-ASP.\nc. VTU Sailors may request Active Duty Training or Active Duty for Operational Support\norders if funding is available and appropriate training opportunities exist.\n4. VTU Assignment Process\na. Personnel desiring transfer from IRR-ASP status to a VTU should contact their local\nreserve recruiter for assistance.\nb. COMNAVRESFORCOM (N12) assigns Sailors to a VTU attached to the NRC closest to\ntheir residence.\n(1) If the NRC is greater than 50 miles away, then berthing will be provided by the NRC.\n1300-030\nCH-13, 10 Jun 2022\nPage 3 of 3\n(2) If the NRC is greater than 100 miles away, then the Sailor must sign a NAVPERS\n1070/613, Administrative Remarks acknowledging that they freely accept commuting this distance\nor the Sailor will be transferred to the IRR-ASP.\nc. If the Sailor desires to be assigned to an alternate VTU, the Sailor must sign a NAVPERS\n1070/613 Administrative Remarks acknowledging the NRC is greater than 50 miles away and\nthere is another NRC less than 50 miles away. The Sailor must acknowledge that berthing will\nnot be provided.\nd. Request for transfers to the IRR must be submitted via the member's chain of command\nno earlier than 90 days from the requested transfer date, via the NSIPS Retirements &\nSeparations module, with accompanying NAVPERS 1070/613s as required by references (d) and\n(e)."
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf",
+  "title": "RESPERSMAN 1534-040",
+  "fingerprint": "b7fefdbee8576e5bd261891e36f6d6c79f9a045231415d14d28565b17b87c9b7",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 5,
+  "pagesWithText": 5,
+  "characterCount": 7817,
+  "lineCount": 164,
+  "textSHA256": "e1cce51651c478f098f0ac97461562218dfcd1cc20ec8dc6510c774ca6727e2a",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 43
+    },
+    {
+      "page": 2,
+      "startLine": 44,
+      "endLine": 81
+    },
+    {
+      "page": 3,
+      "startLine": 82,
+      "endLine": 115
+    },
+    {
+      "page": 4,
+      "startLine": 116,
+      "endLine": 149
+    },
+    {
+      "page": 5,
+      "startLine": 150,
+      "endLine": 164
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTAL DRlVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNA VRESFOR NI C2\n27 Jun 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\n}.~~~\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps:/ /www.navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1534-040\nArticle Title\nStrategic Sealift Officer Program Selected Reserve and Voluntary\nTrainin g Unit Membershi p\n•\n•\n•\n•\n•\n•\n•\n•\nAdded new COMNA VRESFORNOTE reference and removed\nunnecessary references\nReworded the Purpose\nAdded Definitions of SSOP, SSO, SSRG, Accession, and Affiliation\nRemoved coded billet information as it is referenced in\nRESPERSMAN 1300-085\nReworded Section 3 to add clarity\nAdded Responsibilities in section 3.c under CNRFC for IRR SSOs\ntransitioning to SELRES or VTU. Added 05 and 06 members\ntransitioning to SELRES through APPLY Board\nRemoved SSO SELRES and VTU Procedures as CNRFC N14\nprogram does not manage SELRES or VTU SSO records\nUpdated license requirements per DCO Program Authorization\nCHANGE SUMMARY June 2022\nPage 1 of 1\nRESPERSMAN 1534-040\n1534-040\n27 Jun 2022\nPage 1 of 4\nSTRATEGIC SEALIFT OFFICER PROGRAM SELECTED RESERVE AND\nVOLUNTARY TRAINING UNIT MEMBERSHIP\nResponsible COMNA VRESFORCOM Phone: DSN 262-2613\nOffice (N14) COM (800) 535-2580\nFAX (757) 444-7598\nReferences (a) BUPERSINST 1001.39F Administrative Procedures for Navy Reservists\n(b) RESPERSMAN 1534-020 Strategic Sealift Readiness Group Required\nParticipation\n( c) OPNA VINST 1534.1 E Strategic Sealift Officer Program\n(d) COMNAVRESFORNOTE 5400 National Command and Senior Officer\nCommand or Captain Non-Command Billet Screening and Assignment\nProcedures (Current)\n( e) RESPERSMAN 1001-010 Satisfactory Participation in the Navy Reserve\n(f) Merchant Marine Act, 1936, Title XIII\n1. Purpose. Establish policy for transition from Selected Reserve (SELRES) or Direct\nCommission Officer (DCO) to the Strategic Sealift Readiness Group (SSRG). Additionally,\nissue policy for transition from SSRG to SELRES, per references (a) through (f).\n2. Definitions.\na. Strategic Sealift Officer Program (SSOP). The Strategic Sealift Officer Program (SSOP)\nsupports the national defense sealift requirement and capabilities, as executed by Military\nSealift Command. The SSOP provides naval reserve officers who are licensed merchant\nmarine officers with sealift, maritime operations, and logistics subject matter expertise. The\nSSOP is an Nl Division of Commander, Navy Reserve Forces Command\n(COMNA VRESFORCOM) and is known as COMNAVRESFORCOM (N14).\nb. Strategic Sealift Officer (SSO). SSOs are commissioned officers in the U.S. Navy\nReserve assigned to U.S. Naval activities that support strategic sealift in times of national\ndefense or emergency.\nc. Strategic Sealift Readiness Group (SSRG). SSOs in an Individual Ready Reserve (IRR)\nstatus make up the SSRG. Members of the SSRG will maintain a U.S. Coast Guard unlimited\ndeck or engine officer merchant mariner credential (MMC) with standard for training,\ncertification and watch keeping (STCW) endorsements, and will meet applicable participation\nrequirements per reference (a), and as determined by COMNA VRESFORCOM, per reference\n(b).\nd. Accession. The recruitment of an applicant with no prior service in the armed forces.\n1534-040\n27 Jun2022\nPage 2 of 4\ne. Affiliation. The recruitment of an applicant with prior service in the armed forces. A\nservice member affiliates when he/she changes duty status, such as IRR to SELRES.\n3. IRR SSOs Transitionin g to SELRES.\na. Eligibility.\n(1) Designator is 1665;\n(2) Satisfactorily participate in the SSOP; and\n(3) Possess a valid and current U.S. Coast Guard Merchant Marine Credential (MMC) as\nnoted in reference (c).\nb. Affiliation Procedures. Eligible SSOs (04 and below) may contact a Navy Officer\nRecruiter to identify an available quota. SSOs are required to fill open SSO designated billets,\nor billets with an SSO Reserve Functional Area and Sex code. Only after all open SSO billets\nare filled, will an SSO be allowed to fill other billets. The SSOP Manager (SSOPM) is the\npoint of contact for all SSO SELRES affiliation questions and approves affiliation packages\nfrom Commander, Navy Recruiting Command. This process also includes IRR SSO members\naffiliating with the Voluntary Training Unit (VTU). Eligible 05 and 06 SSOs may apply for\nbillets through the APPLY Board process and must follow procedures outlined in reference ( d).\nc. Responsibilities.\n(1) COMNAVRESFORCOM (N14) will:\n(a) Coordinate with U.S. Navy Recruiter to receive NAVPERS 1200/1, Ready\nReserve Agreement.\n(b) Coordinate with COMNAVRESFORCOM (N12) and assign SSOs to available\nbillets.\n(c) Perform unit loss from Reserve Unit Identification Code (RUIC): 2525M via\nNavy Standard Integrated Personnel System (NSIPS).\n( d) Verify unit loss has been completed.\n(e) For 05 and 06 SSOs, coordinate with COMNAVRESFORCOM (N12) and\nassist SSOs with application submissions in support of the APPLY Board process.\n4. Direct Commission Officer Accessions.\na. Accession Procedures. DCOs may apply, provided there are available SSO IRR quotas.\nDCOs must possess an unlimited tonnage MMC at the minimum level of Second Mate or\n2\n1534-040\n27 Jun2022\nPage 3 of4\nunlimited horsepower at the minimum level of Second Assistant Engineer with commensurate\nStandards of Training, Certification, and Watchkeeping (STCW) endorsement. They must also\nmeet all other Reserve Component requirements per reference ( e ). All DCOs may be\nconsidered for SELRES affiliation after completing Officer Development School and the SSO\nPost Commissioning Indoctrination course. The SSOPM must endorse all DCO accessions into\nthe SSOP.\n5. Reaffiliation Procedures to SSOP from SELRES and VTU.\na. Eligibility.\n(1) Designator is 1665;\n(2) Must have maintained satisfactory participation in the SELRESNTU, per reference\n(a);\n(3) Must meet all participation requirements outlined in reference (b);\n(4) Possess a valid and current USCG MMC with valid and current STCW\nendorsements, per reference (b ); and\n(5) Must not be identified for mobilization.\nb. Responsibilities.\n(1) COMNAVRESFORCOM {N14) will:\n(a) Counsel SELRESNTU members on SSOP requirements, eligibility, and\nprocedures.\n(b) Prepare a NA VPERS 1200/1, Ready Reserve Agreement and NA VPERS\n1070/613, Administrative Remarks for the reaffiliating Officer's signature.\n(c) Route command-endorsed NAVPERS 1200/1, Ready Reserve Agreement to\nCommander, Navy Personnel Command (COMNA VPERSCOM) (PERS-911 C) for\nadjudication.\n( d) Send signed NA VPERS 1070/613, Administrative Remarks to\nCOMNA VPERSCOM Records Support Division (PERS-31) for inclusion in affiliating\nOfficer's Official Military Personnel File (OMPF).\n(e) Generate Inactive Duty Training (IDT) orders in RMFT based on PERS-91 lC\napproved NAVPERS 1200/1, Ready Reserve Agreement.\n(f) Process gain transactions.\n3\n1534-040\n27 Jun 2022\nPage4 of4\n(2) COMNA VRESFORCOM (N12) will approve IDT orders for SELRES and VTU\nmembers reaffiliating with the SSOP RUIC (2525M) upon receipt of approved NA VPERS\n1200/1, Ready Reserve Agreement from COMNAVRESFORCOM N14.\n(3) Navy Reserve Activity's Manpower Department will perform an NSIPS check-out\ntransaction to RUIC 2525M upon receipt of transfer orders to SSOP.\n(4) Eligible SELRES/VTU Officers will:\n(a) Contact the SSOPM to reaffiliate.\n(b) Return the signed NA VPERS 1200/1, Ready Reserve Agreement to\nCOMNAVRESFORCOM N14 for processing.\n(c) Return the signed NA VPERS 1070/613, Administrative Remarks to\nCOMNAVRESFORCOM N14 for inclusion into OMPF.\n4"
+}

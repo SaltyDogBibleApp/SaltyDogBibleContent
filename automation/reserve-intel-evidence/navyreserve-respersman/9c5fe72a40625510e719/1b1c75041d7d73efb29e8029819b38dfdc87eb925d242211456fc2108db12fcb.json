@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf",
+  "title": "RESPERSMAN 1300-040",
+  "fingerprint": "1b1c75041d7d73efb29e8029819b38dfdc87eb925d242211456fc2108db12fcb",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 5,
+  "pagesWithText": 5,
+  "characterCount": 7700,
+  "lineCount": 154,
+  "textSHA256": "00c02323ccd42da9b40010eb0247315160066a4e04ced8a5e586a3ebd5b21075",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 41
+    },
+    {
+      "page": 2,
+      "startLine": 42,
+      "endLine": 78
+    },
+    {
+      "page": 3,
+      "startLine": 79,
+      "endLine": 109
+    },
+    {
+      "page": 4,
+      "startLine": 110,
+      "endLine": 142
+    },
+    {
+      "page": 5,
+      "startLine": 143,
+      "endLine": 154
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTAL DRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNAVRESFOR N1C2\n16 Aug2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps :/ /www .navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1300-040\nCH-13\nArticle Title\nReadiness Support Units\n•\n•\n•\n•\n•\n• •\n•\n•\nUpdated terms\nUpdate references\nAdded purpose\nUpdated NRC CO and SEL responsibilities for RSU since OIC and\nSELs were removed\nUpdated COMNA VRESFOR, REDCOM, RPO, NRA and Sailor\nresponsibilities\nAdded RSU Optimization prioritization order\nAdded unit capacity upper band formula reference\nDiscuss RSU Optimization tool and roles and responsibilities of\nCO's, RPDs, and unit leadership to incorporate units that are not\ngood canidates\nReplaced Cross-Assigned language with Non-locally Assigned\nCHANGE 13 SUMMARY August 2022\nPage 1 of 1\nRESPERSMAN 1300-040\n1300-040\nCH-13, 16 Aug 2022\nPage 1 of 4\nREADINESS SUPPORT UNITS\nResponsible\nOffice\nReferences\nCOMNA VRESFORCOM Phone: DSN 262-2261\n(N12) COMM (757) 322-2261\nFAX (757) 444-7598\n(a) COMNA VRESFORNOTE 1001 Force Execution Guidance\n(b) RESPERSMAN 1300-060 Non-Local Assignments\n(c) BUPERSINST 1610. l0F Navy Performance Evaluation System\n(d) COMNA VRESFORNOTE 5400 National Command and Senior Officer\n(05/06) Non-Command billet screenin and assi ent rocedures\n1. Purpose. This article covers special situations not normally associated or considered with the\nregular assignment process as outlined in references (a) through (d).\n2. Definitions\na. Non-locall y Assigned. A Non-locally Assigned Sailor is Non-locally Assigned Out from\nthe local Training Reserve Unit Identification Code (TRUIC) unit and Non-locally Assigned In\nto the Unit Mobilization Unit Identification Code (UMUIC) unit where the mobilization billet\nresides.\nb. Readiness Support Units (RSU). Have no mobilization billets and serve as TRUICs only\nfor Non-locally Assigned Out and In-Assignment Processing (IAP) Sailors.\n3. Policy\na. RSU administration. RSUs provide administrative support and individual readiness\nsupport for Non-locally Assigned Out personnel, per reference (b), and those in an IAP status.\nCommander, Navy Reserve Forces Command (COMNA VRESFORCOM) (N12) will only\napprove TRUIC assignments to RSUs when there are no other TRUIC assignment options.\nb. RSU Optimization. To better support warfighting, mobilization, and individual readiness,\nNRAs must optimize and reduce the populations of the RSUs to the greatest extent possible.\n(1) Navy Reserve Activity (NRA) commanding officers (CO) will support and submit\nTRUIC change requests for eligible Non-locally Assigned Out and IAP Sailors out of the RSU\nwith the following TRUIC assignment prioritization order:\n(a) RPC match (default, unless better alternative provided by RPD/NRA/NRC)\n(b) Billet title match\n( c) Similar Designator/Rating/Qualifications\n1300-040\nCH-13, 16 Aug 2022\nPage 2 of 4\n( d) Any unit with capacity ( excluding Operational/BUMED/USMC units)\n(e) Remain in the RSU (absolute last choice)\n(2) The mission of Operational Units and Navy Reserve Readiness Units (NRRU) must be\nconsidered when increasing their Non-locally Assigned Out and IAP populations.\n(a) Non-locally Assigned Out and IAP Sailor placement in operational units should be\nlimited to mission equivalent UMUICs or as requested by the unit CO/OIC.\n(b) For all UMUICs, an upper band capacity restriction shall be used.\n( c) The capacity restriction (upper band percentage can be found at\nCOMNAVRESFORCOM (N12) SharePoint site: https://private.navyreserve.navy.mil/cnrfc/N­\nCodes/Nl/CNRFC_N12/SitePages/Home.aspx in the \"RSU Optimization\" folder.\n(3) If Unit CO's are willing to accept more than the upper band capacity, the supporting\nNRA may submit TRUIC change requests for more Non-locally Assigned Out /IAP Sailors.\n(a) NRA COs will retain a record of approval from the affected Unit CO, solidifying this\nagreement.\n(b) This approval is valid until the Reserve Unit CO transfers or withdraws support in\nwriting, whichever occurs first.\n4. Responsibilities\na. COMNA VRESFORCOM (N12) will:\n(1) Adjudicate TRUIC change requests per this article's policy.\n(2) Prnvide NRAs a tool which identifies units that have capacity to support additional\nNon-locally Assigned Out Sailors from the R-SU. This tool incorporates upper band capacity\nlimits.\n(3) While primarily the responsibility ofNRAs to submit TRUIC changes (para 4.c.(6)),\nwhen necessary Direct Assign Sailors out of the RSUs to more appropriate local units,\neach assignment quarter.\n(4) Manage and update a 'do not assign list' to be incorporated into the RSU optimization\ntool.\nb. Readiness and Mobilization Commands (REDCOM ) (Nl ) will:\n1300-040\nCH-13, 16 Aug 2022\nPage 3 of 4\n(1) Monitor and ensure Navy Reserve Activity's (NRA) minimize RSU populations\nthrough TRUIC change requests utilizing the Non-local Assignment prioritization, outlined in\npara. 3.b.(1).\n(2) Monitor and ensure NRAs process IDT orders within five days of effective date.\nc. NRA CO will:\n(1) Serve as reporting senior of the RSU for IAP Sailors. The CO may delegate this\nauthority, in writing, to an officer assigned to the NRA.\n(2) Provide administration and management of all RSU Sailors.\n(3) Act as the Reserve Program Director for assigned RSU Sailors.\n(4) Assist IAP an.d Non-locally Assigned Out Sailors in participating in the quarterly\nassignment cycles, as well as researching and securing AT/ADT opportunities.\n(5) Ensure that Non-locally Assigned Out Sailors of the RSU know their mobilization\nbillet, and engage with UMUIC leadership to maximize training and readiness opportunities\n(Inactive Duty Training Travel (IDTI), Annual Training (AT), Active Duty for Training (ADT))\nfor their supported commands.\n(6) Ensure submission ofTRUIC changes to minimize RSU populations utilizing the\nNon-local Assignment prioritization, outlined in para. 3.b.(1). Every new gain to the RSU should\nbe reviewed for possible (better more appropriate) TRUIC assignment.\n(7) Educate RSU Sailors on Navy Reserve systems (e.g., Reserve Force Manpower\nTools, MyNavy Assignment, Junior Officer APPLY, APPLY, Navy Reserve Order Writing\nSystem, Defense Travel System, Navy Reserve Manpower Management System), and applying\nfor billets.\nd. Senior Enlisted Leader (SEL). In most cases, the NRA SEL will serve as the SEL for the\nRSU; however, the NRA GO may designate a qualified reserve senior enlisted Sailor to be the\nSEL of the RSU.\ne. RSU Non-locall y Assigned Out Sailors will:\n(1) Know their mobilization billet and understand their responsibilities to their UMUIC.\n(2) Coordinate with UMUIC leadership for IDTT, AT, and ADT opportunities, per\nreference (a).\n1300-040\nCH-13, 16 Aug 2022\nPage 4 of 4\n(3) Participate in the application cycle when within six months of PRO or at every\nopportunity if in an IAP status.\nPlease Note: RPDs, NRAs and unit leadership will coordinate with each other to identify\nNRRUs that are not good candidates for RSU Sailor reassignments, due to various reasons (for\nexample, security clearance requirements, off-site drilling, unit make up, etc.). Echelon IV's will\nprovide unit information with the justification to COMNA VRESFOR (Nl2) via the\nCOMNA VRESFORCOM Enlisted assignments Mailbox at CNRFC _Enlisted_ A.fct@navy.mil\nusing the Subject line \"RSU Opt - Do Not Assign List Request\" so that they can be added to the\n'do not assign list'."
+}

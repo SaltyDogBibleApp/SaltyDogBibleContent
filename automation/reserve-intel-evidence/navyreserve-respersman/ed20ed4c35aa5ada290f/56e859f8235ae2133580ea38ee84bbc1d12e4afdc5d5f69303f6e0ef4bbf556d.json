@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf",
+  "title": "RESPERSMAN 1160-010",
+  "fingerprint": "56e859f8235ae2133580ea38ee84bbc1d12e4afdc5d5f69303f6e0ef4bbf556d",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 4248,
+  "lineCount": 89,
+  "textSHA256": "1e4ff02a18f0cde0bd5898debc2d37ebd88709242943e5b4bed3a8b8e07a515c",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 41
+    },
+    {
+      "page": 2,
+      "startLine": 42,
+      "endLine": 72
+    },
+    {
+      "page": 3,
+      "startLine": 73,
+      "endLine": 89
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "1160-010\nCH-11, 22 Nov 2017\nPage 1 of 3\nRESPERSMAN 1160-010\nREENLISTMENTS AND EXTENSIONS FOR SAILORS IN A DRILLING STATUS\nResponsible\nOffice\nCOMNAVRESFORCOM\n(N15)\nPhone: DSN\nCOMM\nFAX\n262-2651\n(757) 322-2651\n(757) 444-7598\nReferences (a) BUPERSINST 1001.39F\n(b) MILPERSMAN 1160-030\n(c) MILPERSMAN 1160-040\n(d) MILPERSMAN 1160-120\n(e) RESPERSMAN 1001-010\n(f) RESPERSMAN 1100-010\n(g) RESPERSMAN 1100-020\n1. Purpose. This article along with references (a) through (g) provides policy and guidance for\nreenlistments and extensions for enlisted drilling reservists assigned to the SELRES and VTUs.\n2. Eligibility Requirements\na. Sailors requesting reenlistment or extension must meet the basic eligibility requirements\noutlined in reference (b) in addition to the following requirements:\n(1) Must currently be under a Navy Reserve contract.\n(2) Sailors at or beyond High Year Tenure (HYT) as outlined in reference (d) must have\nan approved waiver to reenlist or extend current contract.\nb. Sailors that meet all eligibility requirements are authorized to reenlist at any time per\nreference (b).\n3. Obligations\na. Sailors may reenlist for periods as outlined in reference (b) but cannot reenlist to have a\nnew End of Obligated Service (EOS) beyond their paygrade HYT date.\nb. Sailors currently under contract who are in receipt of an enlistment or reenlistment bonus\nmust complete bonus obligation requirements in order to reenlist for an additional bonus if\napplicable.\n4. Reenlistment and Extension Requests. Sailors will route their request to their NRA, via\ntheir assigned unit CO at least 90 days prior to EOS to allow for adjudication. The process and\nrequired documentation is as follows:\n1160-010\nCH-11, 22 Nov 2017\nPage 2 of 3\na. Reenlistment and extension packages will be routed though unit leadership to NRA, and\nwill include the following:\n(1) NAVRES 1160/1, Drilling Reservists Reenlistment and Extension Worksheet.\n(2) Copy of last three evaluations.\n(3) Copy of last 3 years of physical fitness assessment (PFA) data.\n(4) Additional documents as required by NRA and/or unit.\nb. Sailors requesting to reenlist beyond HYT must submit a waiver in accordance with\nreference (d). Waiver request shall be routed to the NRA via the unit CO 12 months prior to\ntheir established HYT date.\n5. Incentives. Eligibility criteria for a SELRES Selective Reenlistment Bonus and guidance on\ncompleting the application for a bonus may be found on the COMNAVRESFORCOM (N112)\nSharePoint site.\n6. Mobilization Assignments. Sailors are authorized to reenlist/extend prior to mobilization\nnot to exceed the HYT date for their current pay grade. Reenlistments/extension that exceeds the\nSailor’s HYT date requires an approved waiver prior to execution of reenlistment/extension in\naccordance with reference (d).\n7. Program Management. The following outlines roles and responsibilities for all echelons\ninvolved in the reenlistment process:\na. COMNAVRESFORCOM (N1) will:\n(1) Monitor Sailors in receipt of a bonus as outlined in reference (g).\n(2) Provide guidance to echelon 4 commanders for all cases not covered under this\ninstruction or its references.\nb. Echelon 4 commanders will:\n(1) Maintain regional tracker for all Reserve Sailors with their EOS and HYT.\n(2) Track timeliness of bonus submission for Sailors in their region.\n(3) Ensure NRA manpower and Command Career Counselors (CCC) have received\nappropriate training on how reenlistments and extensions must be processed.\nc. NRA COs will:\n1160-010\nCH-11, 22 Nov 2017\nPage 3 of 3\n(1) Ensure all reenlistment requests are processed in a timely manner.\n(2) Provide support to units and Sailor with resources to complete required reenlistment\nor extension request.\n(3) Maintain a monthly tracker for all personnel who are within 12 months of their EOS\nand/or HYT.\n(4) If applicable, submit bonus request as outlined in reference (f).\nd. Unit COs will:\n(1) Process requests within one drill weekend of receipt.\n(2) Forward requests regardless of recommendation to the NRA with required\ndocumentation.\ne. Sailors will:\n(1) Inform chain of command of reenlistment/extension intentions.\n(2) Work with unit career counselor and/or CCC to complete required documentation\nwith adequate time to adjudicate request."
+}

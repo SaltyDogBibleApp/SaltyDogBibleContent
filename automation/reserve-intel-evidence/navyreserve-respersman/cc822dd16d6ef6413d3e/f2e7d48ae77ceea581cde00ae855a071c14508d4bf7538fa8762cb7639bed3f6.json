@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERSMAN Table of Contents.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERSMAN%20Table%20of%20Contents.pdf",
+  "title": "Open PDF",
+  "fingerprint": "f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 2803,
+  "lineCount": 85,
+  "textSHA256": "77da88948b5fa52e79a694d97a5cf84c745c5148ae603a17628802352a636d67",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 3
+    },
+    {
+      "page": 2,
+      "startLine": 4,
+      "endLine": 50
+    },
+    {
+      "page": 3,
+      "startLine": 51,
+      "endLine": 85
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "NAVY RESERVE\nPERSONNEL\nMANUAL\nPage 1 of 2\nNAVY RESERVE PERSONNEL MANUAL\nTABLE OF CONTENTS\nPrimary\nArticle Cognizance\n1000-1999 RESERVE MILITARY PERSONNEL\n1000 RESERVE MILITARY PERSONNEL\n1000-010 Reserve Unit Assignment Document (RUAD) Codes N13\n1001-010 Satisfactory Participation in the Navy Reserve N11\n1001-020 Ready Reserve Annual Screening N5\n1040-010 Reserve Unit Career Counselor (UCC) Program N15\n1100 RESERVE PROGRAMS\n1100-010 Reserve Incentive Programs N11\n1100-020 Reserve Enlisted Incentives N11\n1100-030 Reserve Officer Incentives (Non Healthcare\nProfessionals)\nN11\n1100-040 Reserve Officer Incentives for Healthcare\nProfessionals\nN11\n1100-050 Personnel Gain Transactions\n1160-010 Reenlistments and Extensions for Sailors in a Drilling\nStatus\nN15\n1200 RESERVE CLASSIFICATION PROGRAM\n1200-010 Reserve Direct Appointment Program\n1221-010 Reserve Navy Enlisted Classification (NEC) Program N11\n1300 RESERVE ASSIGNMENTS\n1300-010 Selected Reserve Assignments N12\n1300-020 Management of Drilling Reservists Residing Overseas N12\n1300-030 Voluntary Training Unit (VTU) N12\n1300-040 Operational Support Unit (OSU) N12\n1300-050 Administrative Processing Unit (APU) N12\n1300-060 Cross-Assignments N12\n1300-070 Direct- Assignments N12\n1300-080 Special Assignment Categories N12\n1300-090 Key Employees N12\n1500 INACTIVE DUTY TRAINING/ANNUAL TRAINING\n1500-010 Correspondence Courses N11\n1534-010 Strategic Sealift Officer Program (SSOP) N14\n1534-020 Strategic Sealift Readiness Group (SSRG) Required\nParticipation\nN14\n1534-030 Strategic Sealift Readiness Group (SSRG) Voluntary\nParticipation\nN14\n1534-040 Strategic Sealift Officer Program (SSOP) Selected N14\nReserve (SELRES) and Voluntary Training Unit (VTU)\nMembership\n1534-050 Physical Readiness Standards Compliance\nRequirements for Members of the Strategic Sealift\nReadiness Group (SSRG)\nN14\n1534-060 Strategic Sealift Officer Program Warfare Insignia N14\n1570-010 Inactive Duty Training (IDT) Administration N11\n1570-020 Other Inactive Duty Training and Inactive Duty N11\n1570-030 Inactive Duty Training (IDT) Record and Report\nMaintenance\nN11\n1570-040 Unit Inactive Duty Training (IDT) Record Maintenance N11\n1570-050 Inactive Duty Training (IDT) Reports Maintenance N11\n1571-010 Annual Training (AT) and Active Duty for Training\n(ADT)\nN11\nNAVY RESERVE PERSONNEL MANUAL\nTABLE OF CONTENTS\nPrimary\nArticle Cognizance\n1900 RESERVE LOSSES\n1900-010 Personnel Loss Transactions N11\nPage 2 of 2\nNAVY RESERVE PERSONNEL MANUAL\nTABLE OF CONTENTS\nPrimary\nArticle Cognizance\n3000-3999 OPERATIONS AND READINESS\n3060-010 Manpower Availability Status (MAS) Codes N35\n3060-020 Individual Mobilization Status (IMS) Codes N35\n6000-6999 SELECTED RESERVE MEDICAL AND DENTAL\n6000-010 Selected Reserve Medical N9\n7000-7999 FINANCIAL MANAGEMENT\n7220-010 Reserve Pay N11"
+}

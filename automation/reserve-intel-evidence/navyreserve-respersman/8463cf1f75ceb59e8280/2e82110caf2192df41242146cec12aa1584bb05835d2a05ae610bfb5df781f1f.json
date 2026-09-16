@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1300-050 - ADMINISTRATIVE PROCESSING UNIT.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201300-050%20-%20ADMINISTRATIVE%20PROCESSING%20UNIT.pdf",
+  "title": "RESPERSMAN 1300-050",
+  "fingerprint": "2e82110caf2192df41242146cec12aa1584bb05835d2a05ae610bfb5df781f1f",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "no_extractable_text",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 0,
+  "characterCount": 0,
+  "lineCount": 0,
+  "textSHA256": null,
+  "truncated": false,
+  "pageLineRanges": [],
+  "warnings": [],
+  "normalizedText": ""
+}

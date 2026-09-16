@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf",
+  "title": "RESPERSMAN 1221-010",
+  "fingerprint": "9753cda0862d63be3d21219ed1fed6c9764253986f354d7c761acf8ee7372485",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 4904,
+  "lineCount": 105,
+  "textSHA256": "5a11c4469bd5697a8cce3c28d848fe9548a6c3c3d085b5958ccb306a0e5fda91",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 32
+    },
+    {
+      "page": 2,
+      "startLine": 33,
+      "endLine": 68
+    },
+    {
+      "page": 3,
+      "startLine": 69,
+      "endLine": 101
+    },
+    {
+      "page": 4,
+      "startLine": 102,
+      "endLine": 105
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTALDRIVE\nNORFOLK VIRGINIA 23551-4615\n5215\nCOMNA VRESFOR Nl C2\n7 Jun 2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary.\n~ L ~\nJ~~-~HOMMER\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Website:\nhttps://www.navyreserve.navy.mil.\nTable of Contents - Revised to reflect all current changes.\nArticle No.\n1221-010\nArticle Title\nNavy Enlisted Classification\n•\n•\n•\n•\nAdded definition .\nChanged Classifier (PS-2612) position to Program Manager at\nEchelon IV. NEC was removed from Echelon IV command PS\nbillets.\nAdded signature authority for NEC removals and archives .\nThis is minor change in policy .\nCHANGE SUMMARY JUNE 2022\nPage 1 of 1\nRESPERSMAN 1221-010\nRESERVE NA VY ENLISTED CLASSIFICATION (NEC) PROGRAM\nResponsible COMNA VRESFORCOM Phone: DSN\nOffice (Nll) COMM\nFAX\nReferences (a) MILPERSMAN Articles\n(b) NA VPERS 18068F, Volume II, Navy Enlisted Classifications\n1221-010\n7 Jun 2022\nPage 1 of 3\n262-2643\n(757) 322-2643\n(757) 444-7598\n1. General. The purpose of the Reserve Navy Enlisted Classification (NEC) program is to\nachieve the most effective use of available enlisted personnel manpower. References ( a) and (b)\nestablish policy concerning requests to award, remove, or archive Navy Enlisted Classification\n(NEC) codes.\n2. Definition. Navy Enlisted Classifications (NEC) identify a non-rating wide skill, knowledge,\naptitude, or qualification that must be documented to identify both people and billets for\nmanagement purposes. Additionally, an NEC code can be used to identify special circumstances\nor situations with approval via the Navy Enlisted Occupational Classification System (NEOCS)\nprocess.\n3. Responsibilities\na. COMNA VRESFORCOM (Nl 1) will provide Reserve NEC program guidance per\nreferences (a) and (b).\nb. Echelon IV Commanders will designate, in writing, a Personnel Specialist E-6 or above as\nthe Program Manager.\nc. Program Managers will:\n(1) Implement the enlisted classification program for all assigned personnel, staff and\nassigned Selected Reservists (SELRES), in their command.\n(2) Review electronic service records, then submit and monitor NEC requests for staff\npersonnel and assigned inactive personnel in accordance with reference (b ).\n(3) Provide technical guidance at their respective Navy Reserve Activity (NRA)\nClassification Coordinators.\n( 4) Inspect the enlisted classification program for their NRAs to ensure compliance with\nreferences (a) and (b).\nd. The NRA Commanding Officer (CO) will assign a Classification Coordinator.\ne. The Classification Coordinator will:\n1221-010\n7 Jun 2022\nPage 2 of 3\n(1) Implement an Enlisted Classification program for assigned units in accordance with\nreference (b ).\n(2) Maintain close liaison with respective program managers and inform them of all\nclassification matters under their purview.\n(3) Monitor progress of individuals possessing conversion NECs.\n(4) Ensure conversion NECs are requested for personnel who have enlisted/affiliated\nunder any temporary rating program, who have not met conversion requirements.\n(5) Request NECs from Navy Personnel Command (NA VPERSCOM) (PERS-4013)\nmill_ nee _request@navy.mil using NEC Change Request (NAVPERS 1221/6). COs may authorize\nthe Classification Coordinator to sign this form \"By direction.\" NEC removals and archive\nrequests must be signed by the CO or acting Officer in Charge (OIC).\n(6) Review electronic service records upon affiliation to verify the NECs a member has\nobtained while on Active Duty (AD). Request NECs earned on Active Duty upon relevant billet\nassignment or position. Requests must have appropriate justification.\n(7) Ensure NEC sequence codes have been considered when assigning NECs, per\nreference (b ).\n(8) Ensure the individual is in the proper source rate/rating for the requested NEC.\n(9) Maintain copies of NEC requests and approvals, and keep track of statuses.\n(10) Liaise with NRA training department concerning Selected Reservists (SELRES)\nwho are in or have completed any school, On-the-Job Training (OJT) projects, or\ncorrespondence courses which authorize/award an NEC upon completion.\n(11) Assign Defense Group (DG) NECs to all no designated (SN/ AN/FN) personnel per\nreference (b ).\n( 12) Remove DG NECs and add appropriate rating NECs, per reference (b ), for non­\ndesignated members who are authorized/awarded striker identification or advanced to a\ndesignated rate.\n(13) Monitor progress of SELRES who enlisted under special programs. Establish tickler\nfiles to track record of counseling, rating requirement progress, and advancement requirement\nprogress. Coordinate with Command Career Counselor (CCC) as needed.\n1221-010\n7 Jun 2022\nPage 3 of 3"
+}

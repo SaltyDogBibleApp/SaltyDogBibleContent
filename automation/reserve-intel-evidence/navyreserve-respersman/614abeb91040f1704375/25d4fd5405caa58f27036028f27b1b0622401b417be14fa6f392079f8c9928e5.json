@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf",
+  "title": "RESPERSMAN 1001-010",
+  "fingerprint": "25d4fd5405caa58f27036028f27b1b0622401b417be14fa6f392079f8c9928e5",
+  "capturedAt": "2026-09-16T02:39:23Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 4,
+  "characterCount": 6303,
+  "lineCount": 121,
+  "textSHA256": "c26df7caefcc22cc9e1682ce632b5bec52a147f1f4202593cf6459fb4d8bf472",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 31
+    },
+    {
+      "page": 2,
+      "startLine": 32,
+      "endLine": 68
+    },
+    {
+      "page": 3,
+      "startLine": 69,
+      "endLine": 101
+    },
+    {
+      "page": 4,
+      "startLine": 102,
+      "endLine": 121
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NA VY RESERVE FORCE\n1915 FORRESTAL DRNE\nNORFOLK VA23551-4615\n5215\nCOMNA VRESFOR NI C2\n28 Mar2022\nChanges to the identified Navy Reserve Personnel Manual articles are effective the date written\nat the top of each article and the date on this change summary .\n~~~?\nDeputy\nChanges in articles titled and summarized below are incorporated in the electronic copy via\nCommander, Navy Reserve Forces Command Website:\nhttps:/ /www .navyreserve.navy.mil.\nTable of Contents -Revised to reflect all current changes.\nArticle No.\n1001-010\nCH-13\nArticle Title\nSatisfactory Participation\n•\n•\n•\nClarified AAs due to personal choice (Demobilization or Hardship) or\ndue to service (on Mobilization, Active Duty for Training, Recall)\nAdded reference SECNA VINST 1920.6D for officer separation\nguidance.\nRemoved superfluous guidance regarding Administration Separation\nprocedures.\nCHANGE SUMMARY\nPage 1 of 1\nRESPERSMAN 1001-010\n1001-010\n28 March 2022\nPage 1 of 3\nSATISFACTORY PARTICIPATION IN THE NA VY RESERVE\nResponsible\nOffice\nReference\nCOMNA VRESFORCOM Phone: DSN 262-2651\n(Nll) COMM (757)322-2262\nFAX (757)444-7598\n(a) DODI 1215.13, Reserve Component (RC) Member Participation Policy\n(b) BUPERSINST 1001.39F, Administrative Procedures for Navy Reservists\n(c) MILPERSMAN 1910-158, Separation by Reason of Unsatisfactory\nParticipation in the Ready Reserve\n(d) MILPERSMAN 1001-150, Navy Reserve Participation Requirements\n(e) RESPERSMAN 1570-010, Inactive Duty Training (IDT) Administration\n(f) RESPERSMAN 1571-010, Annual Training and Active Duty Training\n(g) MILPERSMAN 1910-402, Administrative Board and Notification\nProcedures\n(h) SECNAVINST 1920.6 (series), Administrative Separation of Officers\n(j) MILPERSMAN 1133-061, Prior Service Re-enlistment Eligibility-Reserve\n(PRISE-R) Program\n1. Purpose. References (a) through (f) establish the requirements for Satisfactory Participation\nfor Navy Reservists and provides policy and procedures for issuing unsatisfactory/unexcused\ndrills. References (b) through (g) outline remedial action required by the Navy Reserve Activity\n(NRA) in coordination with the Unit Commanding Officer (CO) when a Sailor becomes an\nunsatisfactory participant. This article pertains to all Selected Reservists (SELRES) to include\ncross-assigned Sailors and members in the Voluntary Training Unit (VTU).\n2. Definitions.\na. Active Duty includes Annual Training (AT), Active Duty Training (ADT), Active Duty\nOperational Support (ADOS), Mobilization, Initial Active Duty for Training (IADT), and\nDefinite Recall.\nb. Favorable Inactive Duty Training (IDT) adjudication. A completed IDT period\nadjudicated as Present-Satisfactory or Authorized Absence.\nc. Authorized Absence (AA): Assigned when there is not a requirement to make up IDT\nperi_ods and meaningful training is not available per reference ( e ).\n1001-010\n28 March 2022\nPage 2 of 3\n(1) Service-related AA: A planned period of absence from scheduled drill periods due to\nActive Duty Service or Medical/Dental Non-Drilling status.\n(2) Personal AA: A planned period of absence from scheduled drill periods due to\ndemobilization or temporary work conflicts/personal hardships.\nd. Unfavorable adjudication. A completed IDT period adjudicated as Unexcused Absence\n(UA) or Admin Unsatisfactory (ADMIN U) period.\n(1) Unexcused Absence (UA). Absence from scheduled drill periods with no valid\nreason for absence as determined by Unit CO (or designated representative).\ne. ADMIN U Periods. AD MIN Us are IDT periods where the Unit CO or NRA CO\ndetermines the Sailor's performance does not meet the minimum standards required to maintain\nthe proficiency/readiness of the unit and/or the skill of the individual or when disciplinary action\nhas been taken under the Uniform Code of Military Justice (UCMJ) for violations committed\nduring the IDT period in question per reference (a).\n3. Policy. All drilling Navy Reservists, including SELRES and Individual Ready Reserve\n(IRR) members in a VTU, are required to:\na. Have 40 of 48 scheduled regular IDT periods favorably adjudicated per fiscal year.\nb. Perform a minimum of 14 days of AT/ ADT each Fiscal Year (FY) as scheduled by the\nUnit CO and reference (f). This applies to SELRES only (does not include the VTU).\nc. Report for scheduled physical examination(s) and provide medical information and\ndocumentation as requested to determine physical qualification for retention in the Navy\nReserve.\nd. Respond to all official correspondence.\ne. Communicate to the NRA CO via Unit CO on all of the following: current address;\nwork/home telephone numbers; email; changes in medical status; dependency changes; current\nemployment status; any factors that could impact mobilization potential.\nf. Comply with involuntary recall to Active Duty.\ng. Have a signed NA VRES 1570/2, Satisfactory Participation Requirements/Record of\nUnexcused Absences in their individual IDT folder in the current records management system.\n4. Procedures. Sailors who fail to comply with any of the requirements outlined in paragraph 3\nof this article are considered Unsatisfactory Participants per reference (d). NRAs are required to:\n1001-010\n28 March 2022\nPage 3 of 3\na. Refer to reference ( e) IDT Administration for members who fail to meet drill\nrequirements.\nb. Refer to reference (c) for enlisted separation guidance.\nc. Refer to reference (h) for officer separation guidance.\nd. Counsel Sailors via NA VPERS 1070/613, Administrative Remarks, regarding affected\nbenefits and incentives prior to transfer out of SELRES status.\ne. Refer to RESPERSMAN 1100-010 for bonus termination process.\n£ Refer to COMNAVRESFORINST 1780.lD for Montgomery GI Bill-Selected Reserve\n(MGIB-SR) suspension/termination process.\ng. Email COMNAVRESFORCOM (NI 1) (cnrfc_rpat@navy.mil) within three business\ndays of discharging Sailors accessed through the New Accession Training Program.\nh. Email COMNAVRESFORCOM (Nl 1) (cnrfc_priser@navy.mil) within three business\ndays of discharging Prior Service Reenlistment Eligibility-Reserve (PRISE-R) Sailors that have\nnot made their rate permanent. Refer to reference (j) for reversion processing requirements prior\nto transferring.\ni. Email COMNAVRESFORCOM (N12) (cnrfc_apply@navy.mil) within three business\ndays of transferring any officer in an APPLY Board billet."
+}
