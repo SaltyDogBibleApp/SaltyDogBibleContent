@@ -1,7 +1,7 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
+  "draftStatus": "REJECTED",
+  "requiresHumanReview": false,
   "publishReady": false,
   "detectedAt": "2026-09-16T02:01:36Z",
   "appImpact": {
@@ -62,5 +62,13 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "rejectedAt": "2026-09-16T02:09:28Z",
+  "rejection": {
+    "reason": "review_pr_closed_without_merge",
+    "pullRequestNumber": "8",
+    "pullRequestURL": "https://github.com/SaltyDogBibleApp/SaltyDogBibleContent/pull/8",
+    "pullRequestTitle": "Reserve Intel Review: E2E TEST — RESPERSMAN 1570-030 enrichment",
+    "reviewBodySHA256": "c760f79f50ebfc55c55cafdd8e4d274bfb7026ebb5e0e00b3c12e2e27e14a83e"
   }
 }
