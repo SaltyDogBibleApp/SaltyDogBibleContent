@@ -48,9 +48,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "NORMAL",
-    "summary": "Automated draft from an official source: E2E TEST — RESPERSMAN 1570-030 enrichment. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a new version of RESPERSMAN 1570-030 at its official Navy Reserve PDF URL. The current PDF was re-fetched and matches the fingerprint captured at detection. The exact policy-language changes have not been automatically determined.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for RESPERSMAN 1570-030: detection kind `linked_document_changed`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Tue, 16 Apr 2024 13:16:27 GMT; downloaded size: 1,689,319 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected different PDF bytes at an already-known official document URL. The monitor retains document fingerprints, not the prior PDF body, so automated tooling cannot identify which paragraphs, tables, requirements, dates, or policy language changed. Human comparison and source review are required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESPERSMAN",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
@@ -62,5 +62,23 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-09-16T02:07:27Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
+    "detectedFingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+    "observedFingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Tue, 16 Apr 2024 13:16:27 GMT",
+    "contentLength": 1689319,
+    "etag": null,
+    "documentKind": "RESPERSMAN",
+    "documentIdentifier": "1570-030",
+    "sourceFilename": "1570-030.pdf",
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected different PDF bytes at an already-known official document URL. The monitor retains document fingerprints, not the prior PDF body, so automated tooling cannot identify which paragraphs, tables, requirements, dates, or policy language changed. Human comparison and source review are required."
   }
 }
