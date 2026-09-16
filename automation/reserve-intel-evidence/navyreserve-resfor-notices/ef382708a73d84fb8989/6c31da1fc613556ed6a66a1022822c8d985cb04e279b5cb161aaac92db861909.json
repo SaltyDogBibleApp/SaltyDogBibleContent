@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/FY26/FY 26 SELECTED RESERVE OFFICER RECRUITING AND RETENTION INCENTIVE PROGRAM.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/FY26/FY%2026%20SELECTED%20RESERVE%20OFFICER%20RECRUITING%20AND%20RETENTION%20INCENTIVE%20PROGRAM.pdf",
+  "title": "FY 26 SELECTED RESERVE OFFICER RECRUITING AND RETENTION INCENTIVE PROGRAM",
+  "fingerprint": "6c31da1fc613556ed6a66a1022822c8d985cb04e279b5cb161aaac92db861909",
+  "capturedAt": "2026-09-16T20:10:03Z",
+  "extractionStatus": "no_extractable_text",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 0,
+  "characterCount": 0,
+  "lineCount": 0,
+  "textSHA256": null,
+  "truncated": false,
+  "pageLineRanges": [],
+  "warnings": [],
+  "normalizedText": ""
+}

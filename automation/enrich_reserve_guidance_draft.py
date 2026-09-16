@@ -36,7 +36,7 @@ from urllib.parse import unquote, urlparse
 
 
 SOURCE_TYPE = "reserve_guidance"
-EXPECTED_SOURCE_NAME_TOKEN = "respersman"
+EXPECTED_SOURCE_NAME_TOKENS = ("respersman", "resfor notices")
 NAVY_RESERVE_HOST_SUFFIX = "navyreserve.navy.mil"
 ALLOWED_DETECTION_KINDS = {
     "linked_document_changed",
@@ -46,6 +46,7 @@ ALLOWED_DETECTION_KINDS = {
 CHAPTER_RE = re.compile(r"(?<!\d)(\d{4}-\d{3})(?!\d)")
 COMNAVRESFORNOTE_RE = re.compile(r"\bCOMNAVRESFORNOTE\b", re.I)
 DEFAULT_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-respersman")
+RESFOR_NOTICES_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-resfor-notices")
 MAX_DIFF_HUNKS = 12
 MAX_DIFF_LINES_PER_SIDE = 8
 MAX_DIFF_LINE_CHARS = 500
@@ -378,9 +379,12 @@ def validate_draft(draft: dict) -> tuple[dict, dict]:
         )
 
     source_name = str(evidence.get("sourceName") or "")
-    if EXPECTED_SOURCE_NAME_TOKEN not in source_name.lower():
+    if not any(
+        token in source_name.lower()
+        for token in EXPECTED_SOURCE_NAME_TOKENS
+    ):
         raise EnrichmentError(
-            "Reserve-guidance enricher only accepts the Navy Reserve RESPERSMAN source."
+            "Reserve-guidance enricher only accepts supported official Navy Reserve guidance sources."
         )
 
     detection_kind = evidence.get("detectionKind")
@@ -587,7 +591,11 @@ def enrich_draft(
     source_url = evidence["sourceURL"]
     detected_fingerprint = evidence["sourceFingerprint"].strip()
     previous_fingerprint = evidence.get("previousFingerprint")
-    root = evidence_root or DEFAULT_EVIDENCE_ROOT
+    root = evidence_root or (
+        RESFOR_NOTICES_EVIDENCE_ROOT
+        if "resfor notices" in str(evidence.get("sourceName") or "").lower()
+        else DEFAULT_EVIDENCE_ROOT
+    )
 
     fetched = monitor_module.fetch_linked_document(source_url, None)
     if not isinstance(fetched, dict):

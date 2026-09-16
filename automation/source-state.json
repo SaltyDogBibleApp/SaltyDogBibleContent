@@ -541,6 +541,209 @@
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
+    "navyreserve-resfor-notices": {
+      "fingerprint": "446af4bdbc7177b4a557a9c944fde7c0f171d4b7efd55fb1ecc3c20115789848",
+      "itemCount": 10,
+      "itemIDs": [
+        "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
+        "reserve_guidance-1d7fc79ad302d07cb3a6",
+        "reserve_guidance-434edffa72369c87cb49",
+        "reserve_guidance-555e7201b92b5224a802",
+        "reserve_guidance-a949ff10fdb85dfc532a",
+        "reserve_guidance-bd8580f3a8bb7ab55cdf",
+        "reserve_guidance-d03e0015f90169c70d14",
+        "reserve_guidance-d6b0af30b42398460ff1",
+        "reserve_guidance-ef382708a73d84fb8989",
+        "reserve_guidance-fd248faa2485bf578663"
+      ],
+      "lastCheckedAt": null,
+      "lastError": null,
+      "linkedDocumentCount": 10,
+      "linkedDocuments": {
+        "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
+          "contentLength": 5561139,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%205400%20FY27.pdf",
+          "fingerprint": "5c0cc1a2c96128ea1a371f471d2c92142b6f85c54f9125822775f7926582425c",
+          "lastModified": "Fri, 17 Apr 2026 18:10:30 GMT",
+          "textEvidence": {
+            "characterCount": 156841,
+            "extractionStatus": "ok",
+            "lineCount": 2549,
+            "pageCount": 72,
+            "pagesWithText": 71,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/1bcd9f4af6fa3d5c6a7c/5c0cc1a2c96128ea1a371f471d2c92142b6f85c54f9125822775f7926582425c.json",
+            "textSHA256": "409bb1e17b2f5b1c1318cea55aeb207c1dd21c97c27373f7cdde8e80421f1707",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 5400 FY27.pdf"
+        },
+        "reserve_guidance-1d7fc79ad302d07cb3a6": {
+          "contentLength": 701338,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOMNOTE%205420%20(SIGNED).pdf",
+          "fingerprint": "58f0f386e5a8098324ee15bb6e8ed272db9354f5ec2174ea7dfe9b7133f15af6",
+          "lastModified": "Thu, 27 Aug 2026 18:20:28 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 16,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/1d7fc79ad302d07cb3a6/58f0f386e5a8098324ee15bb6e8ed272db9354f5ec2174ea7dfe9b7133f15af6.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOMNOTE 5420 (SIGNED).pdf"
+        },
+        "reserve_guidance-434edffa72369c87cb49": {
+          "contentLength": 502927,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%203500%20-%20NRC%20WARFIGHTER%20SUPPORT%20POLICY.pdf",
+          "fingerprint": "5e2e97fb5c175ac820b81b5eb134b87bd48811ee1c828d774b43a65ccf3a4aa6",
+          "lastModified": "Fri, 17 Apr 2026 19:49:27 GMT",
+          "textEvidence": {
+            "characterCount": 16560,
+            "extractionStatus": "ok",
+            "lineCount": 649,
+            "pageCount": 9,
+            "pagesWithText": 9,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/434edffa72369c87cb49/5e2e97fb5c175ac820b81b5eb134b87bd48811ee1c828d774b43a65ccf3a4aa6.json",
+            "textSHA256": "8cb95ecc21e9622448a72542182a68a81d18d67220dc3a1c4f5a6eb419cec0b4",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 3500 - NRC WARFIGHTER SUPPORT POLICY.pdf"
+        },
+        "reserve_guidance-555e7201b92b5224a802": {
+          "contentLength": 1876609,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE%205354%20-%20EO%20POLICY%20STATEMENTS.pdf",
+          "fingerprint": "bb7466991bb7bf746a01781ea41d4af11762069675bd9114de9ee50655f3a71e",
+          "lastModified": "Thu, 30 Jul 2026 14:40:53 GMT",
+          "textEvidence": {
+            "characterCount": 10615,
+            "extractionStatus": "ok",
+            "lineCount": 152,
+            "pageCount": 5,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/555e7201b92b5224a802/bb7466991bb7bf746a01781ea41d4af11762069675bd9114de9ee50655f3a71e.json",
+            "textSHA256": "78be304889fada9970e5a30423bb8b010a26f76e564659a775fdc9e5a276f134",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE 5354 - EO POLICY STATEMENTS.pdf"
+        },
+        "reserve_guidance-bd8580f3a8bb7ab55cdf": {
+          "contentLength": 587335,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%206000_FY26%20SELRES%20HPO%20CWS.pdf",
+          "fingerprint": "4b9431ed29fb963192c3685cf4bb27b8103421b0296c647656e8981041ac25b1",
+          "lastModified": "Wed, 26 Nov 2025 16:06:10 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 4,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/bd8580f3a8bb7ab55cdf/4b9431ed29fb963192c3685cf4bb27b8103421b0296c647656e8981041ac25b1.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 6000_FY26 SELRES HPO CWS.pdf"
+        },
+        "reserve_guidance-d03e0015f90169c70d14": {
+          "contentLength": 1057422,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/FY27%20FORCE%20EXECUTION%20GUIDANCE.pdf",
+          "fingerprint": "f6c316bd0efc1a4548c752f20606d00f08e5c89b68d16e717ef892da5c21c39c",
+          "lastModified": "Wed, 16 Sep 2026 18:46:42 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 14,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d03e0015f90169c70d14/f6c316bd0efc1a4548c752f20606d00f08e5c89b68d16e717ef892da5c21c39c.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/FY27 FORCE EXECUTION GUIDANCE.pdf"
+        },
+        "reserve_guidance-d29784d34013296ed7e6": {
+          "contentLength": 562628,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201570%20IDT-R.pdf",
+          "fingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
+          "lastModified": "Thu, 29 Jan 2026 16:15:28 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 12,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf"
+        },
+        "reserve_guidance-d6b0af30b42398460ff1": {
+          "contentLength": 499372,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/FY26/FY26%20Selected%20Reserve%20Enlisted%20Recruiting%20and%20Retention%20Incentives%20Mid-Year%20update%201JUN26.pdf",
+          "fingerprint": "d11293aff5860fb5f6e1a867d73a2163e2a92c972138f41ac1aa536907adceb3",
+          "lastModified": "Mon, 10 Aug 2026 17:57:00 GMT",
+          "textEvidence": {
+            "characterCount": 8298,
+            "extractionStatus": "ok",
+            "lineCount": 175,
+            "pageCount": 6,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d6b0af30b42398460ff1/d11293aff5860fb5f6e1a867d73a2163e2a92c972138f41ac1aa536907adceb3.json",
+            "textSHA256": "57eddaeda5b98efc20ad7995ca0c0ffce4572f67b1db2f638b7c152563988714",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/FY26/FY26 Selected Reserve Enlisted Recruiting and Retention Incentives Mid-Year update 1JUN26.pdf"
+        },
+        "reserve_guidance-ef382708a73d84fb8989": {
+          "contentLength": 395756,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/FY26/FY%2026%20SELECTED%20RESERVE%20OFFICER%20RECRUITING%20AND%20RETENTION%20INCENTIVE%20PROGRAM.pdf",
+          "fingerprint": "6c31da1fc613556ed6a66a1022822c8d985cb04e279b5cb161aaac92db861909",
+          "lastModified": "Tue, 14 Jul 2026 15:49:43 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 3,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/ef382708a73d84fb8989/6c31da1fc613556ed6a66a1022822c8d985cb04e279b5cb161aaac92db861909.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/FY26/FY 26 SELECTED RESERVE OFFICER RECRUITING AND RETENTION INCENTIVE PROGRAM.pdf"
+        },
+        "reserve_guidance-fd248faa2485bf578663": {
+          "contentLength": 71907,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOM%201050%20Calendar%20Year%202026%20Holiday%20Observation.pdf",
+          "fingerprint": "27d20f5f7eda0676c21017a5e3dffb0eded9b5093149c3e8358b11c4d197933f",
+          "lastModified": "Wed, 19 Nov 2025 15:51:11 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 2,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/fd248faa2485bf578663/27d20f5f7eda0676c21017a5e3dffb0eded9b5093149c3e8358b11c4d197933f.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOM 1050 Calendar Year 2026 Holiday Observation.pdf"
+        }
+      },
+      "name": "Navy Reserve RESFOR Notices",
+      "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/Notices/"
+    },
     "navyreserve-respersman": {
       "fingerprint": "78a99981ae30b5ca4c991b283bab9a71cb6e5ba2f4a91de7ea964942bdbf9730",
       "itemCount": 47,

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 6000_FY26 SELRES HPO CWS.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%206000_FY26%20SELRES%20HPO%20CWS.pdf",
+  "title": "COMNAVRESFORNOTE 6000_FY26 SELRES HPO CWS",
+  "fingerprint": "4b9431ed29fb963192c3685cf4bb27b8103421b0296c647656e8981041ac25b1",
+  "capturedAt": "2026-09-16T20:10:03Z",
+  "extractionStatus": "no_extractable_text",
+  "extractionMethod": "pypdf",
+  "pageCount": 4,
+  "pagesWithText": 0,
+  "characterCount": 0,
+  "lineCount": 0,
+  "textSHA256": null,
+  "truncated": false,
+  "pageLineRanges": [],
+  "warnings": [],
+  "normalizedText": ""
+}

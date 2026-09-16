@@ -41,6 +41,7 @@ MAX_LINKED_DOCUMENT_BYTES = 25_000_000
 RESERVE_GUIDANCE_MAX_DOCUMENTS = 100
 RESERVE_GUIDANCE_EVIDENCE_SCHEMA_VERSION = 1
 RESERVE_GUIDANCE_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-respersman")
+RESFOR_NOTICES_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-resfor-notices")
 MAX_RESERVE_GUIDANCE_TEXT_CHARS = 3_000_000
 REQUEST_TIMEOUT_SECONDS = 30
 
@@ -514,6 +515,9 @@ def load_reserve_guidance_snapshot_summary(snapshot_path: Path) -> dict | None:
 def reserve_guidance_display_title(title: str, url: str) -> str:
     normalized = normalize_whitespace(title)
     decoded_url = unquote(url)
+    filename = Path(urlparse(decoded_url).path).name
+    filename_stem = normalize_whitespace(Path(filename).stem)
+
     doc_match = re.search(r"\b\d{4}-\d{3}\b", f"{normalized} {decoded_url}")
 
     generic_titles = {
@@ -523,10 +527,15 @@ def reserve_guidance_display_title(title: str, url: str) -> str:
         "open file",
         "view pdf",
         "file",
+        "open notice",
+        "view notice",
+        "notice",
     }
 
-    if normalized.lower() in generic_titles and doc_match:
-        return f"RESPERSMAN {doc_match.group(0)}"
+    if normalized.lower() in generic_titles:
+        if doc_match:
+            return f"RESPERSMAN {doc_match.group(0)}"
+        return filename_stem or url
 
     if normalized:
         return normalized
@@ -534,9 +543,7 @@ def reserve_guidance_display_title(title: str, url: str) -> str:
     if doc_match:
         return f"RESPERSMAN {doc_match.group(0)}"
 
-    filename = Path(urlparse(decoded_url).path).name
-    return normalize_whitespace(filename) or url
-
+    return filename_stem or url
 
 def reserve_guidance_linked_documents(
     items: list[dict],
@@ -1067,6 +1074,11 @@ def run_monitor(args) -> int:
                         str(RESERVE_GUIDANCE_EVIDENCE_ROOT),
                     )
                 )
+                if (
+                    source.get("id") == "navyreserve-resfor-notices"
+                    and evidence_root == RESERVE_GUIDANCE_EVIDENCE_ROOT
+                ):
+                    evidence_root = RESFOR_NOTICES_EVIDENCE_ROOT
                 linked_documents, linked_errors = reserve_guidance_linked_documents(
                     items,
                     previous_linked_documents,
@@ -1298,6 +1310,24 @@ def self_test() -> int:
         ignored,
         {"title": "NAVY RESERVE PROMOTIONS TO THE PERMANENT GRADES OF CAPTAIN"},
     )
+
+    # Generic Navy Reserve notice links must use the official PDF filename
+    # instead of a non-descriptive label such as "Open Notice".
+    notice_items = generic_link_items(
+        [
+            {
+                "title": "Open Notice",
+                "url": (
+                    "https://www.navyreserve.navy.mil/Portals/35/"
+                    "COMNAVRESFORNOTE%201570%20IDT-R.pdf"
+                ),
+            }
+        ],
+        "reserve_guidance",
+    )
+    assert len(notice_items) == 1
+    assert notice_items[0]["title"] == "COMNAVRESFORNOTE 1570 IDT-R"
+    assert notice_items[0]["url"].endswith("COMNAVRESFORNOTE%201570%20IDT-R.pdf")
 
     # Cadence regression fixtures.
     cadence_registry = {"defaultCheckIntervalHours": 12}

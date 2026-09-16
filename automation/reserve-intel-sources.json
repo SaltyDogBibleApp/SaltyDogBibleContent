@@ -60,6 +60,37 @@
       "notes": "Monitor RESPERSMAN index entries and linked chapter revisions for changed Reserve policy."
     },
     {
+      "id": "navyreserve-resfor-notices",
+      "name": "Navy Reserve RESFOR Notices",
+      "enabled": true,
+      "authority": "official",
+      "sourceType": "reserve_guidance",
+      "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/Notices/",
+      "checkIntervalHours": 12,
+      "categories": [
+        "Policy",
+        "Training & Readiness",
+        "Admin",
+        "Pay & Benefits",
+        "Retirement"
+      ],
+      "reserveSignals": [
+        "INACTIVE DUTY TRAINING",
+        "IDT-R",
+        "DRILL",
+        "TRAVEL REIMBURSEMENT",
+        "SELECTED RESERVE",
+        "SELRES",
+        "ANNUAL TRAINING",
+        "ACTIVE DUTY TRAINING",
+        "RECRUITING",
+        "RETENTION",
+        "INCENTIVE",
+        "READINESS"
+      ],
+      "notes": "Monitor official COMNAVRESFOR notices for Reserve policy, travel, training, readiness, pay, and administrative changes."
+    },
+    {
       "id": "govinfo-congressional-bills",
       "name": "GovInfo Congressional Bills",
       "enabled": true,
