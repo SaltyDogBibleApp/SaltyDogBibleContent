@@ -1,8 +1,8 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
-  "publishReady": false,
+  "draftStatus": "PUBLISHED",
+  "requiresHumanReview": false,
+  "publishReady": true,
   "detectedAt": "2026-09-16T20:26:35Z",
   "appImpact": {
     "requiresReview": true,
@@ -60,7 +60,7 @@
   "articleDraft": {
     "id": "intel-comnavresfornote-1570-idt-r-18807ddb1d",
     "publishedAt": "2026-09-16T20:26:35Z",
-    "updatedAt": "2026-09-16T20:26:35Z",
+    "updatedAt": "2026-09-16T21:33:01Z",
     "title": "FY26 IDT-R Travel Reimbursement Rules and DTS Requirements",
     "category": "Policy",
     "status": "EFFECTIVE",
@@ -78,7 +78,7 @@
       "squadron": null
     },
     "isPinned": false,
-    "isActive": false
+    "isActive": true
   },
   "enrichment": {
     "sourceType": "reserve_guidance",
@@ -117,5 +117,18 @@
     "automatedChangeAttributionClaimed": false,
     "effectiveDateInferred": false,
     "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
+  },
+  "approvedAt": "2026-09-16T21:33:01Z",
+  "publicationApproval": {
+    "source": "merged_pull_request_body",
+    "approvedAt": "2026-09-16T21:33:01Z",
+    "checks": {
+      "sourceOpenedAndRead": true,
+      "factsVerifiedAgainstSource": true,
+      "statusAndEffectiveDateVerified": true,
+      "audienceVerified": true,
+      "contentReviewedForPublication": true,
+      "approvedForPublication": true
+    }
   }
 }

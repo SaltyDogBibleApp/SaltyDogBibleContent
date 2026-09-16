@@ -110,12 +110,12 @@ https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf
 
 ## Approval Checklist
 
-- [ ] I opened the official source.
-- [ ] I verified the facts against the official source.
-- [ ] I verified the status and effective date.
-- [ ] I verified the intended audience.
-- [ ] I reviewed the title, summary, Why It Matters, and details.
-- [ ] I approve publication to Reserve Intel.
+- [x] I opened the official source.
+- [x] I verified the facts against the official source.
+- [x] I verified the status and effective date.
+- [x] I verified the intended audience.
+- [x] I reviewed the title, summary, Why It Matters, and details.
+- [x] I approve publication to Reserve Intel.
 
 ### What the buttons mean
 
