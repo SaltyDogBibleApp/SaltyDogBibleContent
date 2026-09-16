@@ -27,12 +27,14 @@ import tempfile
 from datetime import datetime, timedelta, timezone
 from typing import Iterable
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
 
 STATE_SCHEMA_VERSION = 1
 USER_AGENT = "SaltyDogBible-ReserveIntelMonitor/1.0"
 MAX_RESPONSE_BYTES = 5_000_000
+MAX_LINKED_DOCUMENT_BYTES = 25_000_000
+RESERVE_GUIDANCE_MAX_DOCUMENTS = 100
 REQUEST_TIMEOUT_SECONDS = 30
 
 APPROVED_HOST_SUFFIXES = {
@@ -210,6 +212,216 @@ def fetch_html(url: str) -> tuple[str, str]:
     return b"".join(chunks).decode("utf-8", errors="replace"), final_url
 
 
+def is_pdf_url(url: str) -> bool:
+    return (urlparse(url).path or "").lower().endswith(".pdf")
+
+
+def fetch_linked_document(
+    url: str,
+    previous: dict | None = None,
+) -> dict:
+    """
+    Fetch and fingerprint one official linked document.
+
+    Conditional GET headers are reused when the server supplied ETag or
+    Last-Modified metadata on a prior run. A 304 response reuses the prior
+    content fingerprint without downloading the PDF again.
+    """
+    if not host_is_approved(url):
+        raise ValueError(f"Unapproved linked-document hostname: {url}")
+
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/pdf,application/octet-stream,*/*;q=0.1",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+
+    if isinstance(previous, dict):
+        etag = previous.get("etag")
+        last_modified = previous.get("lastModified")
+        if isinstance(etag, str) and etag.strip():
+            headers["If-None-Match"] = etag
+        if isinstance(last_modified, str) and last_modified.strip():
+            headers["If-Modified-Since"] = last_modified
+
+    request = Request(url, headers=headers, method="GET")
+
+    try:
+        response = urlopen(request, timeout=REQUEST_TIMEOUT_SECONDS)
+    except HTTPError as exc:
+        if (
+            exc.code == 304
+            and isinstance(previous, dict)
+            and isinstance(previous.get("fingerprint"), str)
+            and previous["fingerprint"]
+        ):
+            return dict(previous)
+        raise
+
+    with response:
+        final_url = response.geturl()
+        if not host_is_approved(final_url):
+            raise ValueError(f"Linked document redirected to unapproved hostname: {final_url}")
+
+        content_length_header = response.headers.get("Content-Length")
+        if content_length_header:
+            try:
+                declared_size = int(content_length_header)
+            except ValueError:
+                declared_size = None
+            if declared_size is not None and declared_size > MAX_LINKED_DOCUMENT_BYTES:
+                raise ValueError(
+                    f"Linked document exceeded the {MAX_LINKED_DOCUMENT_BYTES} byte monitor limit."
+                )
+
+        digest = hashlib.sha256()
+        total = 0
+
+        while True:
+            chunk = response.read(64 * 1024)
+            if not chunk:
+                break
+            total += len(chunk)
+            if total > MAX_LINKED_DOCUMENT_BYTES:
+                raise ValueError(
+                    f"Linked document exceeded the {MAX_LINKED_DOCUMENT_BYTES} byte monitor limit."
+                )
+            digest.update(chunk)
+
+        return {
+            "url": url,
+            "finalURL": final_url,
+            "fingerprint": digest.hexdigest(),
+            "etag": response.headers.get("ETag"),
+            "lastModified": response.headers.get("Last-Modified"),
+            "contentLength": total,
+        }
+
+
+def reserve_guidance_display_title(title: str, url: str) -> str:
+    normalized = normalize_whitespace(title)
+    decoded_url = unquote(url)
+    doc_match = re.search(r"\b\d{4}-\d{3}\b", f"{normalized} {decoded_url}")
+
+    generic_titles = {
+        "",
+        "open pdf",
+        "pdf",
+        "open file",
+        "view pdf",
+        "file",
+    }
+
+    if normalized.lower() in generic_titles and doc_match:
+        return f"RESPERSMAN {doc_match.group(0)}"
+
+    if normalized:
+        return normalized
+
+    if doc_match:
+        return f"RESPERSMAN {doc_match.group(0)}"
+
+    filename = Path(urlparse(decoded_url).path).name
+    return normalize_whitespace(filename) or url
+
+
+def reserve_guidance_linked_documents(
+    items: list[dict],
+    previous_documents: dict | None,
+) -> tuple[dict[str, dict], list[dict]]:
+    """
+    Fingerprint official RESPERSMAN PDFs without turning a single broken chapter
+    link into a failure for the entire index source.
+
+    When a chapter cannot be fetched, its prior fingerprint is retained when
+    available and the failure is surfaced in the monitor error section.
+    """
+    documents: dict[str, dict] = {}
+    errors: list[dict] = []
+    pdf_items = [item for item in items if is_pdf_url(item.get("url", ""))]
+
+    if len(pdf_items) > RESERVE_GUIDANCE_MAX_DOCUMENTS:
+        raise ValueError(
+            "Reserve-guidance source exposed more linked PDFs than the monitor safety limit."
+        )
+
+    previous_documents = previous_documents if isinstance(previous_documents, dict) else {}
+
+    for item in pdf_items:
+        item_id = item["id"]
+        prior = previous_documents.get(item_id)
+        try:
+            documents[item_id] = fetch_linked_document(item["url"], prior)
+        except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
+            if isinstance(prior, dict) and isinstance(prior.get("fingerprint"), str):
+                documents[item_id] = dict(prior)
+
+            errors.append(
+                {
+                    "name": item.get("title") or item["url"],
+                    "message": str(exc),
+                }
+            )
+
+    return documents, errors
+
+
+def reserve_guidance_changed_candidates(
+    source: dict,
+    items: list[dict],
+    current_documents: dict[str, dict],
+    previous_documents: dict[str, dict] | None,
+) -> list[dict]:
+    """
+    Promote same-URL RESPERSMAN PDF revisions to normal pending-draft candidates.
+
+    A missing previous_documents mapping means this is the migration/baseline run
+    for linked-document fingerprints, so no historical-change claim is made.
+    """
+    if not isinstance(previous_documents, dict):
+        return []
+
+    item_by_id = {item["id"]: item for item in items}
+    candidates: list[dict] = []
+
+    for item_id, current in current_documents.items():
+        previous = previous_documents.get(item_id)
+        item = item_by_id.get(item_id)
+
+        if not isinstance(previous, dict) or item is None:
+            continue
+
+        current_fingerprint = current.get("fingerprint")
+        previous_fingerprint = previous.get("fingerprint")
+
+        if (
+            not isinstance(current_fingerprint, str)
+            or not isinstance(previous_fingerprint, str)
+            or not current_fingerprint
+            or not previous_fingerprint
+            or current_fingerprint == previous_fingerprint
+        ):
+            continue
+
+        title = item.get("title") or source["name"]
+        candidates.append(
+            {
+                "sourceName": source["name"],
+                "sourceType": source["sourceType"],
+                "title": title,
+                "date": item.get("date", ""),
+                "url": item.get("url") or source["url"],
+                "signals": signal_matches(title, source.get("reserveSignals", [])),
+                "categoryHints": source.get("categories", [])[:4],
+                "detectionKind": "linked_document_changed",
+                "sourceFingerprint": current_fingerprint,
+                "previousFingerprint": previous_fingerprint,
+            }
+        )
+
+    return candidates
+
+
 def parse_page(raw_html: str, base_url: str) -> tuple[str, list[dict[str, str]]]:
     parser = TextLinkParser()
     parser.feed(raw_html)
@@ -348,10 +560,16 @@ def generic_link_items(links: list[dict[str, str]], source_type: str) -> list[di
         if not include:
             continue
 
+        display_title = (
+            reserve_guidance_display_title(title, url)
+            if source_type == "reserve_guidance"
+            else (title or url)
+        )
+
         result.append(
             {
                 "id": f"{source_type}-{sha256_text(url)[:20]}",
-                "title": title or url,
+                "title": display_title,
                 "date": "",
                 "url": url,
             }
@@ -577,6 +795,26 @@ def run_monitor(args) -> int:
             items = extract_items(source, page_text, links, final_url)
             fingerprint = source_fingerprint(page_text, items)
 
+            linked_documents: dict[str, dict] = {}
+            previous_linked_documents: dict[str, dict] | None = None
+
+            if source.get("sourceType") == "reserve_guidance":
+                previous_value = (previous or {}).get("linkedDocuments")
+                if isinstance(previous_value, dict):
+                    previous_linked_documents = previous_value
+
+                linked_documents, linked_errors = reserve_guidance_linked_documents(
+                    items,
+                    previous_linked_documents,
+                )
+                for linked_error in linked_errors:
+                    errors.append(
+                        {
+                            "name": f"{source['name']} — {linked_error['name']}",
+                            "message": linked_error["message"],
+                        }
+                    )
+
             previous_item_ids = set((previous or {}).get("itemIDs", []))
             current_item_ids = {item["id"] for item in items}
             new_items = [
@@ -604,16 +842,32 @@ def run_monitor(args) -> int:
                     if source["sourceType"] == "navadmin" and not signals:
                         continue
 
-                    candidates.append(
-                        {
-                            "sourceName": source["name"],
-                            "sourceType": source["sourceType"],
-                            "title": item.get("title") or source["name"],
-                            "date": item.get("date", ""),
-                            "url": item.get("url") or source["url"],
-                            "signals": signals,
-                            "categoryHints": source.get("categories", [])[:4],
-                        }
+                    candidate = {
+                        "sourceName": source["name"],
+                        "sourceType": source["sourceType"],
+                        "title": item.get("title") or source["name"],
+                        "date": item.get("date", ""),
+                        "url": item.get("url") or source["url"],
+                        "signals": signals,
+                        "categoryHints": source.get("categories", [])[:4],
+                    }
+
+                    if source.get("sourceType") == "reserve_guidance":
+                        document = linked_documents.get(item["id"])
+                        if isinstance(document, dict) and document.get("fingerprint"):
+                            candidate["detectionKind"] = "new_linked_document"
+                            candidate["sourceFingerprint"] = document["fingerprint"]
+
+                    candidates.append(candidate)
+
+                if source.get("sourceType") == "reserve_guidance":
+                    candidates.extend(
+                        reserve_guidance_changed_candidates(
+                            source,
+                            items,
+                            linked_documents,
+                            previous_linked_documents,
+                        )
                     )
 
                 if previous.get("fingerprint") != fingerprint and not new_items:
@@ -635,7 +889,7 @@ def run_monitor(args) -> int:
                     if in_place_candidate is not None:
                         candidates.append(in_place_candidate)
 
-            state["sources"][source_id] = {
+            source_state = {
                 "name": source["name"],
                 "url": source["url"],
                 "fingerprint": fingerprint,
@@ -644,6 +898,12 @@ def run_monitor(args) -> int:
                 "lastCheckedAt": iso_z(run_time),
                 "lastError": None,
             }
+
+            if source.get("sourceType") == "reserve_guidance":
+                source_state["linkedDocuments"] = linked_documents
+                source_state["linkedDocumentCount"] = len(linked_documents)
+
+            state["sources"][source_id] = source_state
 
         except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
             message = str(exc)
@@ -945,6 +1205,220 @@ def self_test() -> int:
     finally:
         globals()["fetch_html"] = original_fetch_html
 
+    # RESPERSMAN linked-document regression:
+    # same index URL/title + changed PDF bytes must create one review candidate.
+    respersman_url = (
+        "https://www.navyreserve.navy.mil/Resources/"
+        "Official-RESFOR-Guidance/RESPERSMAN/"
+    )
+    respersman_html = """
+    <html><body>
+      <p>1570-010 INACTIVE DUTY TRAINING (IDT) ADMINISTRATION
+      <a href="/Portals/35/RESPERMAN%201570-010.pdf">Open PDF</a></p>
+      <p>1571-010 ANNUAL TRAINING (AT) AND ACTIVE DUTY TRAINING (ADT)
+      <a href="/Portals/35/RESPERMAN%201571-010.pdf">Open PDF</a></p>
+    </body></html>
+    """
+
+    respersman_page_text, respersman_links = parse_page(respersman_html, respersman_url)
+    respersman_items = generic_link_items(respersman_links, "reserve_guidance")
+    assert len(respersman_items) == 2
+    assert respersman_items[0]["title"] == "RESPERSMAN 1570-010"
+    assert respersman_items[1]["title"] == "RESPERSMAN 1571-010"
+
+    respersman_index_fingerprint = source_fingerprint(
+        respersman_page_text,
+        respersman_items,
+    )
+    respersman_item_ids = sorted(item["id"] for item in respersman_items)
+    item_1570 = next(
+        item for item in respersman_items
+        if "1570-010" in unquote(item["url"])
+    )
+    item_1571 = next(
+        item for item in respersman_items
+        if "1571-010" in unquote(item["url"])
+    )
+
+    respersman_registry = {
+        "defaultCheckIntervalHours": 12,
+        "sources": [
+            {
+                "id": "respersman-test",
+                "name": "Navy Reserve RESPERSMAN",
+                "url": respersman_url,
+                "sourceType": "reserve_guidance",
+                "enabled": True,
+                "checkIntervalHours": 1,
+                "reserveSignals": [
+                    "INACTIVE DUTY TRAINING",
+                    "ANNUAL TRAINING",
+                    "ACTIVE DUTY TRAINING",
+                ],
+                "categories": ["Policy", "Training & Readiness", "Admin"],
+            }
+        ],
+    }
+
+    respersman_state = {
+        "schemaVersion": STATE_SCHEMA_VERSION,
+        "initializedAt": "2026-09-14T00:00:00Z",
+        "lastRunAt": "2026-09-14T00:00:00Z",
+        "sources": {
+            "respersman-test": {
+                "name": "Navy Reserve RESPERSMAN",
+                "url": respersman_url,
+                "fingerprint": respersman_index_fingerprint,
+                "itemIDs": respersman_item_ids,
+                "itemCount": len(respersman_item_ids),
+                "linkedDocuments": {
+                    item_1570["id"]: {
+                        "url": item_1570["url"],
+                        "finalURL": item_1570["url"],
+                        "fingerprint": "OLD-1570-FINGERPRINT",
+                        "etag": None,
+                        "lastModified": None,
+                        "contentLength": 100,
+                    },
+                    item_1571["id"]: {
+                        "url": item_1571["url"],
+                        "finalURL": item_1571["url"],
+                        "fingerprint": "SAME-1571-FINGERPRINT",
+                        "etag": None,
+                        "lastModified": None,
+                        "contentLength": 100,
+                    },
+                },
+                "linkedDocumentCount": 2,
+                "lastCheckedAt": "2000-01-01T00:00:00Z",
+                "lastError": None,
+            }
+        },
+    }
+
+    original_fetch_html = globals()["fetch_html"]
+    original_fetch_linked_document = globals()["fetch_linked_document"]
+
+    def fake_respersman_document(url, previous=None):
+        fingerprint = (
+            "NEW-1570-FINGERPRINT"
+            if "1570-010" in unquote(url)
+            else "SAME-1571-FINGERPRINT"
+        )
+        return {
+            "url": url,
+            "finalURL": url,
+            "fingerprint": fingerprint,
+            "etag": '"test-etag"',
+            "lastModified": "Tue, 15 Sep 2026 12:00:00 GMT",
+            "contentLength": 100,
+        }
+
+    try:
+        globals()["fetch_html"] = lambda url: (respersman_html, respersman_url)
+        globals()["fetch_linked_document"] = fake_respersman_document
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "registry.json"
+            state_path = tmp_path / "state.json"
+            report_path = tmp_path / "report.md"
+            output_path = tmp_path / "github-output.txt"
+
+            registry_path.write_text(
+                json.dumps(respersman_registry, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            state_path.write_text(
+                json.dumps(respersman_state, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            class RespersmanArgs:
+                registry = str(registry_path)
+                state = str(state_path)
+                report = str(report_path)
+                github_output = str(output_path)
+
+            assert run_monitor(RespersmanArgs()) == 0
+
+            output_values = {}
+            for line in output_path.read_text(encoding="utf-8").splitlines():
+                key, value = line.split("=", 1)
+                output_values[key] = value
+
+            assert output_values["candidate_count"] == "1"
+            assert output_values["changed_source_count"] == "0"
+            assert output_values["error_count"] == "0"
+
+            report_text = report_path.read_text(encoding="utf-8")
+            assert "RESPERSMAN 1570-010" in report_text
+            assert "- Type: `reserve_guidance`" in report_text
+            assert "- Detection: `linked_document_changed`" in report_text
+            assert "- Source fingerprint: `NEW-1570-FINGERPRINT`" in report_text
+            assert "- Previous fingerprint: `OLD-1570-FINGERPRINT`" in report_text
+
+            saved_state = json.loads(state_path.read_text(encoding="utf-8"))
+            saved_docs = saved_state["sources"]["respersman-test"]["linkedDocuments"]
+            assert saved_docs[item_1570["id"]]["fingerprint"] == "NEW-1570-FINGERPRINT"
+            assert saved_docs[item_1571["id"]]["fingerprint"] == "SAME-1571-FINGERPRINT"
+
+        # Migration regression: an existing RESPERSMAN state that predates linked-
+        # document fingerprints must establish the baseline without creating 47+
+        # false "changed chapter" candidates.
+        migration_state = {
+            "schemaVersion": STATE_SCHEMA_VERSION,
+            "initializedAt": "2026-09-14T00:00:00Z",
+            "lastRunAt": "2026-09-14T00:00:00Z",
+            "sources": {
+                "respersman-test": {
+                    "name": "Navy Reserve RESPERSMAN",
+                    "url": respersman_url,
+                    "fingerprint": respersman_index_fingerprint,
+                    "itemIDs": respersman_item_ids,
+                    "itemCount": len(respersman_item_ids),
+                    "lastCheckedAt": "2000-01-01T00:00:00Z",
+                    "lastError": None,
+                }
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "registry.json"
+            state_path = tmp_path / "state.json"
+            report_path = tmp_path / "report.md"
+            output_path = tmp_path / "github-output.txt"
+
+            registry_path.write_text(
+                json.dumps(respersman_registry, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            state_path.write_text(
+                json.dumps(migration_state, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+            class MigrationArgs:
+                registry = str(registry_path)
+                state = str(state_path)
+                report = str(report_path)
+                github_output = str(output_path)
+
+            assert run_monitor(MigrationArgs()) == 0
+
+            output_values = {}
+            for line in output_path.read_text(encoding="utf-8").splitlines():
+                key, value = line.split("=", 1)
+                output_values[key] = value
+
+            assert output_values["candidate_count"] == "0"
+            migrated_state = json.loads(state_path.read_text(encoding="utf-8"))
+            assert migrated_state["sources"]["respersman-test"]["linkedDocumentCount"] == 2
+    finally:
+        globals()["fetch_html"] = original_fetch_html
+        globals()["fetch_linked_document"] = original_fetch_linked_document
+
     print("SELF-TEST PASSED")
     return 0
 
@@ -966,3 +1440,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
