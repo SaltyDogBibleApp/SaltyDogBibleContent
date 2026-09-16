@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+from io import BytesIO
 from html.parser import HTMLParser
 import html
 import json
@@ -31,11 +32,16 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, unquote, urljoin, urlparse, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
+from pypdf import PdfReader
+
 STATE_SCHEMA_VERSION = 1
 USER_AGENT = "SaltyDogBible-ReserveIntelMonitor/1.0"
 MAX_RESPONSE_BYTES = 5_000_000
 MAX_LINKED_DOCUMENT_BYTES = 25_000_000
 RESERVE_GUIDANCE_MAX_DOCUMENTS = 100
+RESERVE_GUIDANCE_EVIDENCE_SCHEMA_VERSION = 1
+RESERVE_GUIDANCE_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-respersman")
+MAX_RESERVE_GUIDANCE_TEXT_CHARS = 3_000_000
 REQUEST_TIMEOUT_SECONDS = 30
 
 APPROVED_HOST_SUFFIXES = {
@@ -260,7 +266,10 @@ def fetch_linked_document(
 
     Conditional GET headers are reused when the server supplied ETag or
     Last-Modified metadata on a prior run. A 304 response reuses the prior
-    content fingerprint without downloading the PDF again.
+    content fingerprint without downloading the PDF again. Successful 200
+    responses also expose the downloaded bytes under the private
+    ``_contentBytes`` key so the RESPERSMAN monitor can create a text snapshot.
+    That private key is removed before monitor state is serialized.
     """
     if not host_is_approved(url):
         raise ValueError(f"Unapproved linked-document hostname: {url}")
@@ -312,6 +321,7 @@ def fetch_linked_document(
 
         digest = hashlib.sha256()
         total = 0
+        chunks: list[bytes] = []
 
         while True:
             chunk = response.read(64 * 1024)
@@ -323,6 +333,7 @@ def fetch_linked_document(
                     f"Linked document exceeded the {MAX_LINKED_DOCUMENT_BYTES} byte monitor limit."
                 )
             digest.update(chunk)
+            chunks.append(chunk)
 
         return {
             "url": url,
@@ -331,7 +342,173 @@ def fetch_linked_document(
             "etag": response.headers.get("ETag"),
             "lastModified": response.headers.get("Last-Modified"),
             "contentLength": total,
+            "_contentBytes": b"".join(chunks),
         }
+
+
+def normalize_pdf_text_lines(value: str) -> list[str]:
+    lines: list[str] = []
+    for raw_line in value.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+        normalized = normalize_whitespace(raw_line)
+        if normalized:
+            lines.append(normalized)
+    return lines
+
+
+def extract_pdf_text_snapshot(content: bytes) -> dict:
+    """Extract conservative, normalized text evidence from one PDF body."""
+    reader = PdfReader(BytesIO(content), strict=False)
+    page_count = len(reader.pages)
+    all_lines: list[str] = []
+    page_line_ranges: list[dict] = []
+    warnings: list[str] = []
+    pages_with_text = 0
+    character_count = 0
+    truncated = False
+
+    for page_number, page in enumerate(reader.pages, start=1):
+        start_line = len(all_lines) + 1
+        try:
+            extracted = page.extract_text() or ""
+        except Exception as exc:  # pypdf can fail on one malformed page only.
+            warnings.append(f"Page {page_number}: {type(exc).__name__}: {exc}")
+            extracted = ""
+
+        page_lines = normalize_pdf_text_lines(extracted)
+        if page_lines:
+            pages_with_text += 1
+
+        for line in page_lines:
+            added_chars = len(line) + (1 if all_lines else 0)
+            if character_count + added_chars > MAX_RESERVE_GUIDANCE_TEXT_CHARS:
+                truncated = True
+                break
+            all_lines.append(line)
+            character_count += added_chars
+
+        end_line = len(all_lines)
+        if end_line >= start_line:
+            page_line_ranges.append(
+                {
+                    "page": page_number,
+                    "startLine": start_line,
+                    "endLine": end_line,
+                }
+            )
+
+        if truncated:
+            break
+
+    normalized_text = "\n".join(all_lines)
+
+    if normalized_text:
+        status = "truncated" if truncated else ("partial" if warnings else "ok")
+    else:
+        status = "error" if warnings else "no_extractable_text"
+
+    return {
+        "extractionStatus": status,
+        "extractionMethod": "pypdf",
+        "pageCount": page_count,
+        "pagesWithText": pages_with_text,
+        "characterCount": len(normalized_text),
+        "lineCount": len(all_lines),
+        "textSHA256": sha256_text(normalized_text) if normalized_text else None,
+        "truncated": truncated,
+        "pageLineRanges": page_line_ranges,
+        "warnings": warnings[:20],
+        "normalizedText": normalized_text,
+    }
+
+
+def reserve_guidance_snapshot_path(
+    evidence_root: Path,
+    source_url: str,
+    fingerprint: str,
+) -> Path:
+    url_key = sha256_text(source_url)[:20]
+    return evidence_root / url_key / f"{fingerprint}.json"
+
+
+def reserve_guidance_snapshot_summary(snapshot: dict, snapshot_path: Path) -> dict:
+    return {
+        "snapshotPath": snapshot_path.as_posix(),
+        "extractionStatus": snapshot.get("extractionStatus"),
+        "textSHA256": snapshot.get("textSHA256"),
+        "pageCount": snapshot.get("pageCount"),
+        "pagesWithText": snapshot.get("pagesWithText"),
+        "characterCount": snapshot.get("characterCount"),
+        "lineCount": snapshot.get("lineCount"),
+        "truncated": bool(snapshot.get("truncated")),
+    }
+
+
+def write_reserve_guidance_snapshot(
+    evidence_root: Path,
+    item: dict,
+    fetched: dict,
+    content: bytes,
+    captured_at: str,
+) -> dict:
+    fingerprint = fetched["fingerprint"]
+    snapshot_path = reserve_guidance_snapshot_path(
+        evidence_root,
+        item["url"],
+        fingerprint,
+    )
+
+    if snapshot_path.exists():
+        existing = json.loads(snapshot_path.read_text(encoding="utf-8"))
+        return reserve_guidance_snapshot_summary(existing, snapshot_path)
+
+    try:
+        extracted = extract_pdf_text_snapshot(content)
+    except Exception as exc:
+        extracted = {
+            "extractionStatus": "error",
+            "extractionMethod": "pypdf",
+            "pageCount": None,
+            "pagesWithText": 0,
+            "characterCount": 0,
+            "lineCount": 0,
+            "textSHA256": None,
+            "truncated": False,
+            "pageLineRanges": [],
+            "warnings": [f"{type(exc).__name__}: {exc}"],
+            "normalizedText": "",
+        }
+
+    snapshot = {
+        "schemaVersion": RESERVE_GUIDANCE_EVIDENCE_SCHEMA_VERSION,
+        "sourceType": "reserve_guidance",
+        "sourceURL": item["url"],
+        "finalURL": fetched.get("finalURL") or item["url"],
+        "title": item.get("title") or "",
+        "fingerprint": fingerprint,
+        "capturedAt": captured_at,
+        **extracted,
+    }
+
+    snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path = snapshot_path.with_name(snapshot_path.name + ".tmp")
+    temp_path.write_text(
+        json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temp_path, snapshot_path)
+    return reserve_guidance_snapshot_summary(snapshot, snapshot_path)
+
+
+def load_reserve_guidance_snapshot_summary(snapshot_path: Path) -> dict | None:
+    if not snapshot_path.exists():
+        return None
+    try:
+        snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(snapshot, dict):
+        return None
+    return reserve_guidance_snapshot_summary(snapshot, snapshot_path)
 
 
 def reserve_guidance_display_title(title: str, url: str) -> str:
@@ -364,13 +541,16 @@ def reserve_guidance_display_title(title: str, url: str) -> str:
 def reserve_guidance_linked_documents(
     items: list[dict],
     previous_documents: dict | None,
+    evidence_root: Path,
+    captured_at: str,
 ) -> tuple[dict[str, dict], list[dict]]:
     """
-    Fingerprint official RESPERSMAN PDFs without turning a single broken chapter
-    link into a failure for the entire index source.
+    Fingerprint official RESPERSMAN PDFs and retain normalized text snapshots.
 
-    When a chapter cannot be fetched, its prior fingerprint is retained when
-    available and the failure is surfaced in the monitor error section.
+    A text snapshot is stored once per source URL + PDF fingerprint. If an existing
+    monitor state predates snapshots and the server returns HTTP 304, the monitor
+    performs one unconditional GET so the current version can be backfilled.
+    Individual extraction failures do not suppress fingerprint monitoring.
     """
     documents: dict[str, dict] = {}
     errors: list[dict] = []
@@ -387,7 +567,48 @@ def reserve_guidance_linked_documents(
         item_id = item["id"]
         prior = previous_documents.get(item_id)
         try:
-            documents[item_id] = fetch_linked_document(item["url"], prior)
+            fetched = fetch_linked_document(item["url"], prior)
+            fingerprint = fetched.get("fingerprint")
+            if not isinstance(fingerprint, str) or not fingerprint:
+                raise ValueError("Linked document did not return a fingerprint.")
+
+            snapshot_path = reserve_guidance_snapshot_path(
+                evidence_root,
+                item["url"],
+                fingerprint,
+            )
+            snapshot_summary = load_reserve_guidance_snapshot_summary(snapshot_path)
+
+            content = fetched.get("_contentBytes")
+            if snapshot_summary is None and not isinstance(content, (bytes, bytearray)):
+                # Typical migration/backfill path after a 304 response.
+                fetched = fetch_linked_document(item["url"], None)
+                fingerprint = fetched.get("fingerprint")
+                if not isinstance(fingerprint, str) or not fingerprint:
+                    raise ValueError("Linked document backfill did not return a fingerprint.")
+                snapshot_path = reserve_guidance_snapshot_path(
+                    evidence_root,
+                    item["url"],
+                    fingerprint,
+                )
+                snapshot_summary = load_reserve_guidance_snapshot_summary(snapshot_path)
+                content = fetched.get("_contentBytes")
+
+            if snapshot_summary is None and isinstance(content, (bytes, bytearray)):
+                snapshot_summary = write_reserve_guidance_snapshot(
+                    evidence_root,
+                    item,
+                    fetched,
+                    bytes(content),
+                    captured_at,
+                )
+
+            state_document = dict(fetched)
+            state_document.pop("_contentBytes", None)
+            if snapshot_summary is not None:
+                state_document["textEvidence"] = snapshot_summary
+            documents[item_id] = state_document
+
         except (HTTPError, URLError, TimeoutError, InvalidURL, ValueError, OSError) as exc:
             if isinstance(prior, dict) and isinstance(prior.get("fingerprint"), str):
                 documents[item_id] = dict(prior)
@@ -839,9 +1060,18 @@ def run_monitor(args) -> int:
                 if isinstance(previous_value, dict):
                     previous_linked_documents = previous_value
 
+                evidence_root = Path(
+                    getattr(
+                        args,
+                        "reserve_guidance_evidence_root",
+                        str(RESERVE_GUIDANCE_EVIDENCE_ROOT),
+                    )
+                )
                 linked_documents, linked_errors = reserve_guidance_linked_documents(
                     items,
                     previous_linked_documents,
+                    evidence_root,
+                    iso_z(run_time),
                 )
                 for linked_error in linked_errors:
                     errors.append(
@@ -1350,6 +1580,7 @@ def self_test() -> int:
 
     original_fetch_html = globals()["fetch_html"]
     original_fetch_linked_document = globals()["fetch_linked_document"]
+    original_extract_pdf_text_snapshot = globals()["extract_pdf_text_snapshot"]
 
     def fake_respersman_document(url, previous=None):
         fingerprint = (
@@ -1357,18 +1588,42 @@ def self_test() -> int:
             if "1570-010" in unquote(url)
             else "SAME-1571-FINGERPRINT"
         )
+        body = (
+            b"NEW SECTION\nMembers shall complete 14 drills."
+            if "1570-010" in unquote(url)
+            else b"UNCHANGED SECTION\nAnnual training guidance."
+        )
         return {
             "url": url,
             "finalURL": url,
             "fingerprint": fingerprint,
             "etag": '"test-etag"',
             "lastModified": "Tue, 15 Sep 2026 12:00:00 GMT",
-            "contentLength": 100,
+            "contentLength": len(body),
+            "_contentBytes": body,
+        }
+
+    def fake_extract_pdf_text_snapshot(content):
+        normalized_text = content.decode("utf-8")
+        lines = normalized_text.splitlines()
+        return {
+            "extractionStatus": "ok",
+            "extractionMethod": "pypdf-test-fixture",
+            "pageCount": 1,
+            "pagesWithText": 1,
+            "characterCount": len(normalized_text),
+            "lineCount": len(lines),
+            "textSHA256": sha256_text(normalized_text),
+            "truncated": False,
+            "pageLineRanges": [{"page": 1, "startLine": 1, "endLine": len(lines)}],
+            "warnings": [],
+            "normalizedText": normalized_text,
         }
 
     try:
         globals()["fetch_html"] = lambda url: (respersman_html, respersman_url)
         globals()["fetch_linked_document"] = fake_respersman_document
+        globals()["extract_pdf_text_snapshot"] = fake_extract_pdf_text_snapshot
 
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -1376,6 +1631,21 @@ def self_test() -> int:
             state_path = tmp_path / "state.json"
             report_path = tmp_path / "report.md"
             output_path = tmp_path / "github-output.txt"
+            evidence_root = tmp_path / "evidence"
+
+            # Seed the prior version snapshot so a future enricher can compare
+            # OLD-1570-FINGERPRINT with the newly detected version.
+            write_reserve_guidance_snapshot(
+                evidence_root,
+                item_1570,
+                {
+                    "url": item_1570["url"],
+                    "finalURL": item_1570["url"],
+                    "fingerprint": "OLD-1570-FINGERPRINT",
+                },
+                b"OLD SECTION\nMembers shall complete 12 drills.",
+                "2026-09-14T00:00:00Z",
+            )
 
             registry_path.write_text(
                 json.dumps(respersman_registry, indent=2) + "\n",
@@ -1390,6 +1660,7 @@ def self_test() -> int:
                 registry = str(registry_path)
                 state = str(state_path)
                 report = str(report_path)
+                reserve_guidance_evidence_root = str(evidence_root)
                 github_output = str(output_path)
 
             assert run_monitor(RespersmanArgs()) == 0
@@ -1414,6 +1685,19 @@ def self_test() -> int:
             saved_docs = saved_state["sources"]["respersman-test"]["linkedDocuments"]
             assert saved_docs[item_1570["id"]]["fingerprint"] == "NEW-1570-FINGERPRINT"
             assert saved_docs[item_1571["id"]]["fingerprint"] == "SAME-1571-FINGERPRINT"
+            assert saved_docs[item_1570["id"]]["textEvidence"]["extractionStatus"] == "ok"
+            assert saved_docs[item_1570["id"]]["textEvidence"]["textSHA256"]
+
+            old_snapshot = reserve_guidance_snapshot_path(
+                evidence_root, item_1570["url"], "OLD-1570-FINGERPRINT"
+            )
+            new_snapshot = reserve_guidance_snapshot_path(
+                evidence_root, item_1570["url"], "NEW-1570-FINGERPRINT"
+            )
+            assert old_snapshot.exists()
+            assert new_snapshot.exists()
+            assert "12 drills" in json.loads(old_snapshot.read_text())["normalizedText"]
+            assert "14 drills" in json.loads(new_snapshot.read_text())["normalizedText"]
 
         # Migration regression: an existing RESPERSMAN state that predates linked-
         # document fingerprints must establish the baseline without creating 47+
@@ -1441,6 +1725,7 @@ def self_test() -> int:
             state_path = tmp_path / "state.json"
             report_path = tmp_path / "report.md"
             output_path = tmp_path / "github-output.txt"
+            evidence_root = tmp_path / "evidence"
 
             registry_path.write_text(
                 json.dumps(respersman_registry, indent=2) + "\n",
@@ -1455,6 +1740,7 @@ def self_test() -> int:
                 registry = str(registry_path)
                 state = str(state_path)
                 report = str(report_path)
+                reserve_guidance_evidence_root = str(evidence_root)
                 github_output = str(output_path)
 
             assert run_monitor(MigrationArgs()) == 0
@@ -1467,9 +1753,13 @@ def self_test() -> int:
             assert output_values["candidate_count"] == "0"
             migrated_state = json.loads(state_path.read_text(encoding="utf-8"))
             assert migrated_state["sources"]["respersman-test"]["linkedDocumentCount"] == 2
+            migrated_docs = migrated_state["sources"]["respersman-test"]["linkedDocuments"]
+            assert migrated_docs[item_1570["id"]]["textEvidence"]["snapshotPath"]
+            assert migrated_docs[item_1571["id"]]["textEvidence"]["snapshotPath"]
     finally:
         globals()["fetch_html"] = original_fetch_html
         globals()["fetch_linked_document"] = original_fetch_linked_document
+        globals()["extract_pdf_text_snapshot"] = original_extract_pdf_text_snapshot
 
     print("SELF-TEST PASSED")
     return 0
@@ -1480,6 +1770,10 @@ def main() -> int:
     parser.add_argument("--registry", default="automation/reserve-intel-sources.json")
     parser.add_argument("--state", default="automation/source-state.json")
     parser.add_argument("--report", default="automation/monitor-report.md")
+    parser.add_argument(
+        "--reserve-guidance-evidence-root",
+        default=str(RESERVE_GUIDANCE_EVIDENCE_ROOT),
+    )
     parser.add_argument("--github-output", default=None)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
