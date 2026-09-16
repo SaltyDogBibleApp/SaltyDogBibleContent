@@ -1,12 +1,20 @@
 
+
+  }
+}
+
+bindEditorEvents();
+load();
 const state = {
   data: null,
   selectedId: null,
   selectedKind: null,
   dirty: false,
   saveServiceAvailable: false,
+  rejectServiceAvailable: false,
   saveServiceRepository: null,
   saving: false,
+  rejecting: false,
 };
 
 const CATEGORIES = [
@@ -568,57 +576,179 @@ async function checkSaveService() {
     }
 
     state.saveServiceAvailable = true;
+    state.rejectServiceAvailable = payload?.rejectEnabled === true;
     state.saveServiceRepository = payload.repository || null;
-    status.textContent = "Save service connected";
+    status.textContent = state.rejectServiceAvailable
+      ? "Review service connected"
+      : "Save service connected";
     status.className = "service-status connected";
   } catch {
     state.saveServiceAvailable = false;
+    state.rejectServiceAvailable = false;
     state.saveServiceRepository = null;
-    status.textContent = "Save service unavailable";
+    status.textContent = "Review service unavailable";
     status.className = "service-status unavailable";
   }
 }
 
 function configureActions(item) {
   const saveButton = byId("save-draft-button");
+  const rejectButton = byId("reject-button");
   const modePill = byId("action-mode-pill");
   const actionNote = byId("action-note");
 
   if (!item || state.selectedKind !== "pending") return;
 
   if (item._demo === true) {
-    saveButton.disabled = state.saving;
+    saveButton.disabled = state.saving || state.rejecting;
     saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
+    rejectButton.disabled = false;
+    rejectButton.textContent = "Reject";
     modePill.textContent = "DEMO";
     modePill.className = "preview-only-pill";
-    actionNote.textContent = "Demo Save stays in this browser. Reject and Approve are preview-only.";
+    actionNote.textContent = "Demo Save stays in this browser. Demo Reject is preview-only. Approve remains preview-only.";
     return;
   }
 
   const ready = item._saveEligible === true;
-  const connected = state.saveServiceAvailable === true;
+  const saveConnected = state.saveServiceAvailable === true;
+  const rejectConnected = state.rejectServiceAvailable === true;
 
-  saveButton.disabled = state.saving || !ready || !connected;
+  saveButton.disabled = state.saving || state.rejecting || !ready || !saveConnected;
   saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
 
-  if (ready && connected) {
-    modePill.textContent = "SAVE LIVE";
-    modePill.className = "preview-only-pill live-save";
-    actionNote.textContent = `Save Draft commits only the allowed editorial fields to ${item._reviewBranch}. Reject and Approve remain preview-only.`;
+  rejectButton.disabled = state.saving || state.rejecting || !ready || !rejectConnected;
+  rejectButton.textContent = state.rejecting ? "Rejecting…" : "Reject";
+
+  if (ready && saveConnected && rejectConnected) {
+    modePill.textContent = "SAVE + REJECT LIVE";
+    modePill.className = "preview-only-pill reject-live";
+    actionNote.textContent = `Save Draft commits allowed editorial fields to ${item._reviewBranch}. Reject closes the unique matching Review PR without merge. Approve remains preview-only.`;
   } else if (!ready) {
     modePill.textContent = "WAITING";
     modePill.className = "preview-only-pill waiting";
     actionNote.textContent = "The enriched review branch is not available yet. Regenerate the dashboard after the Review PR is created.";
-  } else {
-    modePill.textContent = "SAVE OFFLINE";
+  } else if (!saveConnected || !rejectConnected) {
+    modePill.textContent = "REVIEW OFFLINE";
     modePill.className = "preview-only-pill waiting";
-    actionNote.textContent = "Start automation/review_dashboard_server.py to enable real Save Draft. Reject and Approve remain preview-only.";
+    actionNote.textContent = "Start automation/review_dashboard_server.py to enable Save Draft and Reject. Approve remains preview-only.";
   }
 }
 
-function previewReject() {
+function closeRejectModal() {
+  byId("reject-modal").classList.add("hidden");
+  byId("reject-reason").value = "";
+}
+
+function openRejectModal() {
   if (state.selectedKind !== "pending") return;
-  showToast("Reject preview only. Nothing was archived or changed in GitHub.", "warning");
+
+  const item = findItem(state.selectedId, "pending");
+  if (!item) return;
+
+  if (item._demo === true) {
+    showToast("Demo Reject is preview-only. Nothing was changed in GitHub.", "warning");
+    return;
+  }
+
+  if (item._saveEligible !== true) {
+    showToast("This review branch is not ready for safe rejection yet.", "warning");
+    return;
+  }
+
+  if (!state.rejectServiceAvailable) {
+    showToast("Reject service is unavailable. Start review_dashboard_server.py.", "warning");
+    return;
+  }
+
+  byId("reject-modal-article").textContent = item.title || item.id;
+  byId("reject-reason").value = "";
+  byId("reject-modal").classList.remove("hidden");
+  setTimeout(() => byId("reject-reason").focus(), 0);
+}
+
+function removeRejectedItemFromDashboard(articleId) {
+  state.data.pending = (state.data.pending || []).filter(item => item.id !== articleId);
+  state.selectedId = null;
+  state.selectedKind = null;
+  setDirty(false);
+
+  renderQueues();
+
+  if ((state.data.pending || []).length) {
+    selectItem(state.data.pending[0].id, "pending");
+    return;
+  }
+
+  if ((state.data.published || []).length) {
+    selectItem(state.data.published[0].id, "published");
+    return;
+  }
+
+  byId("article-view").classList.add("hidden");
+  byId("empty-state").classList.remove("hidden");
+}
+
+async function rejectSelectedArticle() {
+  if (state.selectedKind !== "pending" || state.rejecting) return;
+
+  const item = findItem(state.selectedId, "pending");
+  if (!item || item._demo === true) return;
+
+  const reason = byId("reject-reason").value.trim();
+  if (reason.length > 2000) {
+    showToast("Rejection reason must be 2,000 characters or fewer.", "warning");
+    return;
+  }
+
+  state.rejecting = true;
+  byId("reject-modal-confirm").disabled = true;
+  byId("reject-modal-confirm").textContent = "Rejecting…";
+  configureActions(item);
+
+  try {
+    const response = await fetch("/api/reserve-intel/reject", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        articleId: item.id,
+        sourceFile: item._sourceFile,
+        reviewBranch: item._reviewBranch,
+        reason,
+      }),
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || `Reject failed with HTTP ${response.status}`);
+    }
+
+    const rejectedId = item.id;
+    closeRejectModal();
+    removeRejectedItemFromDashboard(rejectedId);
+
+    showToast(
+      `Closed Review PR #${payload.prNumber} without merge. The rejection workflow can now archive the draft.`,
+      "success"
+    );
+  } catch (error) {
+    showToast(error.message || "Reject failed.", "warning");
+  } finally {
+    state.rejecting = false;
+    byId("reject-modal-confirm").disabled = false;
+    byId("reject-modal-confirm").textContent = "Reject Article";
+
+    const current = state.selectedKind === "pending"
+      ? findItem(state.selectedId, "pending")
+      : null;
+    if (current) configureActions(current);
+  }
 }
 
 function previewApprove() {
@@ -703,8 +833,20 @@ function bindEditorEvents() {
   });
 
   byId("save-draft-button").addEventListener("click", saveDraft);
-  byId("reject-button").addEventListener("click", previewReject);
+  byId("reject-button").addEventListener("click", openRejectModal);
   byId("approve-button").addEventListener("click", previewApprove);
+
+  byId("reject-modal-close").addEventListener("click", closeRejectModal);
+  byId("reject-modal-cancel").addEventListener("click", closeRejectModal);
+  byId("reject-modal-confirm").addEventListener("click", rejectSelectedArticle);
+  byId("reject-modal").addEventListener("click", (event) => {
+    if (event.target === byId("reject-modal")) closeRejectModal();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !byId("reject-modal").classList.contains("hidden")) {
+      closeRejectModal();
+    }
+  });
 }
 
 async function load() {
