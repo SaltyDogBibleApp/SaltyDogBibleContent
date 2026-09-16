@@ -1,3 +1,4 @@
+
 const state = {
   data: null,
   selectedId: null,
@@ -151,7 +152,7 @@ function renderQueues() {
     empty.textContent = "No published history available.";
     publishedList.appendChild(empty);
   } else {
-    published.slice(0, 12).forEach((item) => publishedList.appendChild(createQueueCard(item, "published")));
+    published.slice(0, 8).forEach((item) => publishedList.appendChild(createQueueCard(item, "published")));
   }
 }
 
@@ -443,7 +444,7 @@ function saveDraftLocally() {
     );
   });
   renderArticle(item, "pending");
-  showToast("Saved in this browser preview only. GitHub was not changed.", "success");
+  showToast("Draft changes saved in this browser preview only. GitHub was not changed.", "success");
 }
 
 function previewReject() {
