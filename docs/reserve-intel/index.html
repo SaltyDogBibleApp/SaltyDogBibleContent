@@ -20,7 +20,7 @@
 
   <div id="preview-banner" class="preview-banner hidden">
     <strong>Demo Mode</strong>
-    <span>Demo edits stay in the browser. Real pending articles can Save Draft and Reject when the Codespace review service is connected. Approve remains preview-only.</span>
+    <span>Demo edits stay in the browser. Real pending articles can Save Draft, Reject, and Approve when the Codespace review service is connected.</span>
   </div>
 
   <main class="layout">
@@ -165,7 +165,7 @@
                 <h3>Review Actions</h3>
                 <span id="action-mode-pill" class="preview-only-pill">PREVIEW ONLY</span>
               </div>
-              <div id="action-note" class="action-note">Save Draft is available for real review-branch articles when the Save service is connected. Reject and Approve remain preview-only.</div>
+              <div id="action-note" class="action-note">Save Draft, Reject, and Approve are available for real review-branch articles when the review service is connected.</div>
               <div class="action-buttons">
                 <button id="save-draft-button" class="button secondary" type="button">Save Draft</button>
                 <button id="reject-button" class="button danger" type="button">Reject</button>
@@ -220,6 +220,59 @@
       <div class="modal-actions">
         <button id="reject-modal-cancel" class="button secondary" type="button">Cancel</button>
         <button id="reject-modal-confirm" class="button danger solid-danger" type="button">Reject Article</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="approve-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="approve-modal-title">
+    <div class="modal-card approve-modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow">APPROVE FOR PUBLICATION</div>
+          <h2 id="approve-modal-title">Approve this Reserve Intel article?</h2>
+        </div>
+        <button id="approve-modal-close" class="modal-close" type="button" aria-label="Close approval dialog">×</button>
+      </div>
+
+      <p id="approve-modal-article" class="modal-article-title"></p>
+
+      <p class="modal-approval-warning">
+        Approval checks the six required GitHub review gates, marks the Review PR ready if needed,
+        and merges that exact reviewed branch into <code>main</code>. The existing publish workflow
+        then decides whether publication is allowed. Unsaved browser edits cannot be approved.
+      </p>
+
+      <div class="approval-checklist" id="approval-checklist">
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I opened the official source.</span>
+        </label>
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I verified the facts against the official source.</span>
+        </label>
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I verified the status and effective date.</span>
+        </label>
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I verified the intended audience.</span>
+        </label>
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I reviewed the title, summary, Why It Matters, and details.</span>
+        </label>
+        <label class="approval-check">
+          <input type="checkbox" class="approval-confirmation">
+          <span>I approve publication to Reserve Intel.</span>
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button id="approve-modal-cancel" class="button secondary" type="button">Cancel</button>
+        <button id="approve-modal-confirm" class="button primary" type="button" disabled>Approve &amp; Merge PR</button>
       </div>
     </div>
   </div>
