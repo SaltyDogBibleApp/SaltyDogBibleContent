@@ -1,4 +1,5 @@
 
+
 const state = {
   data: null,
   selectedId: null,
@@ -7,8 +8,11 @@ const state = {
   saveServiceAvailable: false,
   rejectServiceAvailable: false,
   approveServiceAvailable: false,
+  refreshServiceAvailable: false,
   saveServiceRepository: null,
+  dashboardMainRef: "origin/main",
   saving: false,
+  refreshing: false,
   rejecting: false,
   approving: false,
 };
@@ -67,6 +71,30 @@ function formatDateTime(value) {
     hour: "numeric",
     minute: "2-digit",
   }).format(d);
+}
+
+function latestPublishedTimestamp(items) {
+  const timestamps = (items || [])
+    .map((item) => item?.updatedAt || item?.publishedAt)
+    .filter(Boolean)
+    .sort();
+  return timestamps.length ? timestamps[timestamps.length - 1] : null;
+}
+
+function renderOperationalStatus() {
+  const data = state.data || {};
+  byId("ops-refreshed").textContent = formatDateTime(data.generatedAt);
+  byId("ops-pending").textContent = String((data.pending || []).length);
+  byId("ops-published").textContent = String((data.published || []).length);
+  byId("ops-last-published").textContent =
+    formatDateTime(latestPublishedTimestamp(data.published));
+  byId("ops-main-ref").textContent =
+    data.mainRef || state.dashboardMainRef || "origin/main";
+
+  const button = byId("refresh-queue-button");
+  button.disabled = state.refreshing || !state.refreshServiceAvailable;
+  button.textContent = state.refreshing ? "Refreshing…" : "Refresh Queue";
+  button.classList.toggle("refreshing", state.refreshing);
 }
 
 function isoToDateInput(value) {
@@ -506,12 +534,12 @@ async function saveDraft() {
   }
 
   if (item._saveEligible !== true) {
-    showToast("This review branch is not ready for safe saving yet. Regenerate the dashboard after the Review PR is created.", "warning");
+    showToast("This review branch is not ready for safe saving yet. Use Refresh Queue after the Review PR is created.", "warning");
     return;
   }
 
   if (!state.saveServiceAvailable) {
-    showToast("Save service is unavailable. Start review_dashboard_server.py instead of python -m http.server.", "warning");
+    showToast("Save service is unavailable. Start the dashboard with automation/start_review_dashboard.py.", "warning");
     return;
   }
 
@@ -545,6 +573,7 @@ async function saveDraft() {
     item._contentOrigin = "reviewBranch";
     item._saveEligible = true;
     rerenderSelectedPending(item);
+    await syncDashboardAfterAction(payload, { preserveSelection: true });
 
     if (payload.changed === false) {
       showToast("No changes to save. The review branch already matches the editor.", "success");
@@ -579,7 +608,9 @@ async function checkSaveService() {
     state.saveServiceAvailable = true;
     state.rejectServiceAvailable = payload?.rejectEnabled === true;
     state.approveServiceAvailable = payload?.approveEnabled === true;
+    state.refreshServiceAvailable = payload?.manualRefreshEnabled === true;
     state.saveServiceRepository = payload.repository || null;
+    state.dashboardMainRef = payload?.dashboardMainRef || "origin/main";
     status.textContent = (state.rejectServiceAvailable && state.approveServiceAvailable)
       ? "Review service connected"
       : "Save service connected";
@@ -588,9 +619,115 @@ async function checkSaveService() {
     state.saveServiceAvailable = false;
     state.rejectServiceAvailable = false;
     state.approveServiceAvailable = false;
+    state.refreshServiceAvailable = false;
     state.saveServiceRepository = null;
     status.textContent = "Review service unavailable";
     status.className = "service-status unavailable";
+  }
+}
+
+async function fetchDashboardSnapshot() {
+  const response = await fetch(`data.json?ts=${Date.now()}`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Dashboard data failed with HTTP ${response.status}`);
+  return response.json();
+}
+
+function applyDashboardSnapshot(data, { preserveSelection = true } = {}) {
+  const previousId = preserveSelection ? state.selectedId : null;
+  const previousKind = preserveSelection ? state.selectedKind : null;
+
+  state.data = data;
+  byId("generated-at").textContent =
+    `Dashboard generated ${formatDateTime(state.data.generatedAt)}`;
+  byId("preview-banner").classList.toggle("hidden", state.data.demoMode !== true);
+
+  setDirty(false);
+  renderOperationalStatus();
+  renderQueues();
+
+  if (
+    previousId &&
+    previousKind &&
+    findItem(previousId, previousKind)
+  ) {
+    selectItem(previousId, previousKind);
+    return;
+  }
+
+  state.selectedId = null;
+  state.selectedKind = null;
+
+  if ((state.data.pending || []).length) {
+    selectItem(state.data.pending[0].id, "pending");
+  } else if ((state.data.published || []).length) {
+    selectItem(state.data.published[0].id, "published");
+  } else {
+    byId("article-view").classList.add("hidden");
+    byId("empty-state").classList.remove("hidden");
+  }
+}
+
+async function reloadDashboardSnapshot(options = {}) {
+  const data = await fetchDashboardSnapshot();
+  applyDashboardSnapshot(data, options);
+}
+
+async function syncDashboardAfterAction(payload, options = {}) {
+  if (payload?.dashboardRefresh?.ok !== true) return;
+  try {
+    await reloadDashboardSnapshot(options);
+  } catch (error) {
+    console.warn("Dashboard action succeeded but browser refresh failed:", error);
+  }
+}
+
+async function refreshQueue() {
+  if (state.refreshing) return;
+
+  if (!state.refreshServiceAvailable) {
+    showToast("Refresh service is unavailable. Start the dashboard with start_review_dashboard.py.", "warning");
+    return;
+  }
+
+  if (state.dirty) {
+    const discard = window.confirm(
+      "You have unsaved browser edits. Refreshing the queue will discard them. Continue?"
+    );
+    if (!discard) return;
+  }
+
+  state.refreshing = true;
+  renderOperationalStatus();
+
+  try {
+    const response = await fetch("/api/reserve-intel/refresh", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || `Refresh failed with HTTP ${response.status}`);
+    }
+
+    await checkSaveService();
+    await reloadDashboardSnapshot({ preserveSelection: true });
+    showToast(
+      `Queue refreshed: ${payload.pending ?? "?"} pending, ${payload.published ?? "?"} published.`,
+      "success"
+    );
+  } catch (error) {
+    showToast(error.message || "Queue refresh failed.", "warning");
+  } finally {
+    state.refreshing = false;
+    renderOperationalStatus();
   }
 }
 
@@ -640,11 +777,11 @@ function configureActions(item) {
   } else if (!ready) {
     modePill.textContent = "WAITING";
     modePill.className = "preview-only-pill waiting";
-    actionNote.textContent = "The enriched review branch is not available yet. Regenerate the dashboard after the Review PR is created.";
+    actionNote.textContent = "The enriched review branch is not available yet. Use Refresh Queue after the Review PR is created.";
   } else {
     modePill.textContent = "REVIEW OFFLINE";
     modePill.className = "preview-only-pill waiting";
-    actionNote.textContent = "Start automation/review_dashboard_server.py to enable the live review actions.";
+    actionNote.textContent = "Start automation/start_review_dashboard.py to enable the live review actions.";
   }
 }
 
@@ -670,7 +807,7 @@ function openRejectModal() {
   }
 
   if (!state.rejectServiceAvailable) {
-    showToast("Reject service is unavailable. Start review_dashboard_server.py.", "warning");
+    showToast("Reject service is unavailable. Start the dashboard with automation/start_review_dashboard.py.", "warning");
     return;
   }
 
@@ -745,6 +882,7 @@ async function rejectSelectedArticle() {
     const rejectedId = item.id;
     closeRejectModal();
     removeRejectedItemFromDashboard(rejectedId);
+    await syncDashboardAfterAction(payload, { preserveSelection: false });
 
     showToast(
       `Closed Review PR #${payload.prNumber} without merge. The rejection workflow can now archive the draft.`,
@@ -804,7 +942,7 @@ function openApproveModal() {
   }
 
   if (!state.approveServiceAvailable) {
-    showToast("Approve service is unavailable. Start review_dashboard_server.py.", "warning");
+    showToast("Approve service is unavailable. Start the dashboard with automation/start_review_dashboard.py.", "warning");
     return;
   }
 
@@ -886,6 +1024,7 @@ async function approveSelectedArticle() {
     const approvedId = item.id;
     closeApproveModal();
     removeApprovedItemFromDashboard(approvedId);
+    await syncDashboardAfterAction(payload, { preserveSelection: false });
 
     showToast(
       `Merged Review PR #${payload.prNumber}. The existing publication workflow has started; publication is not considered complete until that workflow succeeds.`,
@@ -981,6 +1120,7 @@ function bindEditorEvents() {
     setDirty(true);
   });
 
+  byId("refresh-queue-button").addEventListener("click", refreshQueue);
   byId("save-draft-button").addEventListener("click", saveDraft);
   byId("reject-button").addEventListener("click", openRejectModal);
   byId("approve-button").addEventListener("click", openApproveModal);
@@ -1012,31 +1152,17 @@ function bindEditorEvents() {
 async function load() {
   try {
     await checkSaveService();
-
-    const response = await fetch(`data.json?ts=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    state.data = await response.json();
-
-    byId("generated-at").textContent =
-      `Dashboard generated ${formatDateTime(state.data.generatedAt)}`;
-
-    byId("preview-banner").classList.toggle("hidden", state.data.demoMode !== true);
-
-    renderQueues();
-
-    if ((state.data.pending || []).length) {
-      selectItem(state.data.pending[0].id, "pending");
-    } else if ((state.data.published || []).length) {
-      selectItem(state.data.published[0].id, "published");
-    }
+    const data = await fetchDashboardSnapshot();
+    applyDashboardSnapshot(data, { preserveSelection: false });
   } catch (error) {
     byId("generated-at").textContent = "Dashboard data unavailable";
+    byId("ops-refreshed").textContent = "Unavailable";
     byId("empty-state").innerHTML = `
       <div class="empty-icon">!</div>
       <h2>Could not load dashboard data</h2>
-      <p>Run the dashboard generator and confirm docs/reserve-intel/data.json exists.</p>
+      <p>Start the dashboard with automation/start_review_dashboard.py and refresh the page.</p>
     `;
+    renderOperationalStatus();
     console.error(error);
   }
 }
