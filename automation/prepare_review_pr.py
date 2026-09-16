@@ -28,6 +28,12 @@ def fail(message: str) -> None:
     raise ValueError(message)
 
 
+def fenced_text(lines: list[str]) -> list[str]:
+    text = "\n".join(str(line) for line in lines) or "(none)"
+    text = text.replace("```", "`` `")
+    return ["```text", text, "```"]
+
+
 def load_draft(path: Path) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -111,10 +117,20 @@ def render_markdown(payload: dict) -> str:
             "",
         ]
     elif automated_reserve_guidance_review:
+        text_comparison = enrichment.get("textComparison")
+        comparison_available = (
+            isinstance(text_comparison, dict)
+            and text_comparison.get("available") is True
+        )
+        automation_label = (
+            "Navy Reserve guidance fingerprint verification + extracted-text diff applied"
+            if comparison_available
+            else "Navy Reserve guidance fingerprint verification applied"
+        )
         lines += [
             "### Review Mode",
             "",
-            "- Source-specific automation: **Navy Reserve guidance fingerprint verification applied**",
+            f"- Source-specific automation: **{automation_label}**",
             "- Automated policy-change attribution: **Not claimed**",
             "- Effective-date inference from HTTP metadata: **Not performed**",
             "- Human source verification and rewrite: **Required before approval**",
@@ -276,6 +292,88 @@ def render_markdown(payload: dict) -> str:
             "",
         ]
 
+        current_text = enrichment.get("currentTextEvidence") or {}
+        if isinstance(current_text, dict):
+            lines += [
+                "### Current PDF Text Extraction",
+                "",
+                f"- Snapshot available: {'Yes' if current_text.get('available') else 'No'}",
+                f"- Extraction status: {current_text.get('extractionStatus') or 'Not supplied'}",
+                f"- Extraction method: {current_text.get('extractionMethod') or 'Not supplied'}",
+                f"- Extracted text SHA-256: `{current_text.get('textSHA256') or 'Not supplied'}`",
+                f"- PDF pages: {current_text.get('pageCount') if current_text.get('pageCount') is not None else 'Not supplied'}",
+                f"- Pages with extracted text: {current_text.get('pagesWithText') if current_text.get('pagesWithText') is not None else 'Not supplied'}",
+                f"- Extracted characters: {current_text.get('characterCount') if current_text.get('characterCount') is not None else 'Not supplied'}",
+                f"- Extracted lines: {current_text.get('lineCount') if current_text.get('lineCount') is not None else 'Not supplied'}",
+                f"- Extraction truncated by safety limit: {'Yes' if current_text.get('truncated') else 'No'}",
+                "",
+            ]
+
+        text_comparison = enrichment.get("textComparison")
+        if isinstance(text_comparison, dict):
+            lines += [
+                "### Extracted Text Comparison",
+                "",
+                f"- Comparison available: {'Yes' if text_comparison.get('available') else 'No'}",
+                f"- Policy interpretation claimed: {'Yes' if text_comparison.get('policyInterpretationClaimed') else 'No'}",
+            ]
+
+            if text_comparison.get("available") is True:
+                lines += [
+                    f"- Extracted text changed: {'Yes' if text_comparison.get('extractedTextChanged') else 'No'}",
+                    f"- Previous text SHA-256: `{text_comparison.get('previousTextSHA256') or 'Not supplied'}`",
+                    f"- Current text SHA-256: `{text_comparison.get('currentTextSHA256') or 'Not supplied'}`",
+                    f"- Previous extraction status: {text_comparison.get('previousExtractionStatus') or 'Not supplied'}",
+                    f"- Current extraction status: {text_comparison.get('currentExtractionStatus') or 'Not supplied'}",
+                    f"- Removed extracted lines: {text_comparison.get('removedLineCount', 0)}",
+                    f"- Added extracted lines: {text_comparison.get('addedLineCount', 0)}",
+                    f"- Change hunks detected: {text_comparison.get('totalHunkCount', 0)}",
+                    f"- Change hunks shown: {text_comparison.get('shownHunkCount', 0)}",
+                    f"- Hunk list truncated: {'Yes' if text_comparison.get('hunksTruncated') else 'No'}",
+                    "",
+                    "> **Extraction-level evidence only.** Differences below identify changes in",
+                    "> normalized text extracted from the two PDFs. They do not establish",
+                    "> policy meaning, applicability, effective date, or implementation effect.",
+                    "",
+                ]
+
+                for index, hunk in enumerate(text_comparison.get("hunks") or [], start=1):
+                    if not isinstance(hunk, dict):
+                        continue
+                    context = hunk.get("nearbyHeadingHeuristic")
+                    old_page = hunk.get("oldPage")
+                    new_page = hunk.get("newPage")
+                    lines += [
+                        f"#### Extracted change {index}",
+                        "",
+                        f"- Diff kind: `{hunk.get('kind') or 'unknown'}`",
+                        f"- Previous page: {old_page if old_page is not None else 'Not identified'}",
+                        f"- Current page: {new_page if new_page is not None else 'Not identified'}",
+                        f"- Nearby heading (heuristic): {context or 'Not identified'}",
+                        "",
+                        "**Removed extracted text**",
+                        "",
+                    ]
+                    lines.extend(fenced_text(hunk.get("removed") or []))
+                    lines += ["", "**Added extracted text**", ""]
+                    lines.extend(fenced_text(hunk.get("added") or []))
+                    if hunk.get("removedPreviewTruncated") or hunk.get("addedPreviewTruncated"):
+                        lines += [
+                            "",
+                            "> This hunk preview was truncated by the review-display safety limit.",
+                        ]
+                    lines.append("")
+            else:
+                lines += [
+                    f"- Reason unavailable: {text_comparison.get('unavailableReason') or 'Not supplied'}",
+                    "",
+                ]
+
+            lines += [
+                f"> {text_comparison.get('note') or 'Human review of the official source is required.'}",
+                "",
+            ]
+
     lines += [
         "### Potential Salty Dog Bible Impact",
         "",
@@ -346,3 +444,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
