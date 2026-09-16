@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T16:50:56Z",
+  "lastRunAt": "2026-09-16T20:20:53Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -326,8 +326,8 @@
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "e9a15dc1d9787df8fc809aaedc3f306a1067722dabb2a1bff9aad75b86ce269f",
-      "itemCount": 206,
+      "fingerprint": "5db860f46e6b8d7fe995e0b38b188dc3b9c766bdbc3ed3411bd9f049496c715b",
+      "itemCount": 211,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -534,9 +534,14 @@
         "NAVADMIN-205/26",
         "NAVADMIN-206/26",
         "NAVADMIN-207/26",
-        "NAVADMIN-208/26"
+        "NAVADMIN-208/26",
+        "NAVADMIN-209/26",
+        "NAVADMIN-210/26",
+        "NAVADMIN-211/26",
+        "NAVADMIN-212/26",
+        "NAVADMIN-213/26"
       ],
-      "lastCheckedAt": "2026-09-16T11:27:31Z",
+      "lastCheckedAt": "2026-09-16T20:20:53Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -556,8 +561,8 @@
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": null,
-      "lastError": null,
+      "lastCheckedAt": "2026-09-16T20:20:53Z",
+      "lastError": "The read operation timed out",
       "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
