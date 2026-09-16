@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve Intel Review</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">SALTY DOG BIBLE</div>
+      <h1>Reserve Intel Review</h1>
+    </div>
+    <div class="topbar-meta">
+      <span id="generated-at">Loading…</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="queue-panel">
+      <div class="panel-heading">
+        <div>
+          <div class="eyebrow">QUEUE</div>
+          <h2>Needs Review</h2>
+        </div>
+        <span class="count-pill" id="pending-count">0</span>
+      </div>
+
+      <div id="pending-list" class="queue-list"></div>
+
+      <div class="section-divider"></div>
+
+      <div class="panel-heading compact">
+        <div>
+          <div class="eyebrow">HISTORY</div>
+          <h2>Recently Published</h2>
+        </div>
+      </div>
+      <div id="published-list" class="queue-list compact-list"></div>
+    </aside>
+
+    <section class="article-panel">
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">◎</div>
+        <h2>No article selected</h2>
+        <p>Select an item from the review queue.</p>
+      </div>
+
+      <article id="article-view" class="article-view hidden">
+        <div class="article-header">
+          <div>
+            <div id="article-kicker" class="eyebrow"></div>
+            <h2 id="article-title"></h2>
+          </div>
+          <a id="source-button" class="button secondary" target="_blank" rel="noopener noreferrer">
+            Open Official Source
+          </a>
+        </div>
+
+        <div id="badges" class="badges"></div>
+
+        <div class="content-grid">
+          <div class="content-main">
+            <section class="content-section">
+              <h3>Summary</h3>
+              <p id="article-summary"></p>
+            </section>
+
+            <section class="content-section">
+              <h3>Why It Matters</h3>
+              <p id="article-why"></p>
+            </section>
+
+            <section class="content-section">
+              <h3>Details</h3>
+              <div id="article-details" class="preline"></div>
+            </section>
+
+            <section id="evidence-section" class="content-section hidden">
+              <div class="section-title-row">
+                <h3>Detected Change Evidence</h3>
+                <span class="read-only-pill">READ ONLY</span>
+              </div>
+              <p class="evidence-warning">
+                Extraction-level evidence only. Text differences do not establish policy meaning,
+                applicability, effective date, or implementation effect.
+              </p>
+              <div id="evidence-content"></div>
+            </section>
+          </div>
+
+          <aside class="metadata-panel">
+            <div class="metadata-card">
+              <h3>Article Metadata</h3>
+              <dl id="metadata-list"></dl>
+            </div>
+
+            <div class="metadata-card">
+              <h3>Review Status</h3>
+              <div id="review-status"></div>
+            </div>
+
+            <div class="metadata-card">
+              <h3>Source</h3>
+              <div id="source-name" class="source-name"></div>
+              <div id="source-url" class="source-url"></div>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
