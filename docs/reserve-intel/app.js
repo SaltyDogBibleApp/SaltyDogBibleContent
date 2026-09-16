@@ -632,6 +632,35 @@ async function fetchDashboardSnapshot() {
   return response.json();
 }
 
+function wait(milliseconds) {
+  return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+}
+
+async function fetchInitialDashboardSnapshot({
+  attempts = 10,
+  delayMs = 500,
+} = {}) {
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await fetchDashboardSnapshot();
+    } catch (error) {
+      lastError = error;
+
+      if (attempt === attempts) break;
+
+      byId("generated-at").textContent =
+        `Waiting for dashboard data… (${attempt}/${attempts})`;
+      byId("ops-refreshed").textContent = "Starting…";
+
+      await wait(delayMs);
+    }
+  }
+
+  throw lastError || new Error("Dashboard data did not become available.");
+}
+
 function applyDashboardSnapshot(data, { preserveSelection = true } = {}) {
   const previousId = preserveSelection ? state.selectedId : null;
   const previousKind = preserveSelection ? state.selectedKind : null;
@@ -1152,7 +1181,44 @@ function bindEditorEvents() {
 async function load() {
   try {
     await checkSaveService();
-    const data = await fetchDashboardSnapshot();
+
+    let data = null;
+
+    try {
+      data = await fetchInitialDashboardSnapshot();
+    } catch (initialError) {
+      if (!state.refreshServiceAvailable) throw initialError;
+
+      byId("generated-at").textContent = "Refreshing dashboard data…";
+      byId("ops-refreshed").textContent = "Refreshing…";
+
+      const response = await fetch("/api/reserve-intel/refresh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+
+      let payload = null;
+      try {
+        payload = await response.json();
+      } catch {
+        payload = null;
+      }
+
+      if (!response.ok || !payload?.ok) {
+        throw new Error(
+          payload?.error ||
+          initialError?.message ||
+          `Startup refresh failed with HTTP ${response.status}`
+        );
+      }
+
+      data = await fetchInitialDashboardSnapshot({
+        attempts: 6,
+        delayMs: 350,
+      });
+    }
+
     applyDashboardSnapshot(data, { preserveSelection: false });
   } catch (error) {
     byId("generated-at").textContent = "Dashboard data unavailable";
