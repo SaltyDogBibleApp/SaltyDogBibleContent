@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Generate Reserve Intel review dashboard data.
@@ -7,6 +8,7 @@ Phase 3A:
 - when possible, reads the current enriched draft from its review branch
 - reads the live Reserve Intel feed for recently published items
 - writes docs/reserve-intel/data.json
+- can read main-branch dashboard inputs from an explicit Git ref such as origin/main
 - optionally injects one dashboard-only demo pending article with --demo
 - never modifies drafts, reviews, branches, or reserve-content-feed.json
 
@@ -44,6 +46,50 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{path} root must be a JSON object.")
     return value
+
+
+def git_ref_json(ref: str, path: Path) -> dict[str, Any]:
+    """Read one JSON file from an immutable/local Git ref without changing checkout."""
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path.as_posix()}"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or f"Could not read {path} from {ref}."
+        raise ValueError(detail)
+
+    try:
+        value = json.loads(result.stdout)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"{path} from {ref} is not valid JSON.") from exc
+
+    if not isinstance(value, dict):
+        raise ValueError(f"{path} from {ref} must contain a JSON object.")
+    return value
+
+
+def git_ref_pending_paths(ref: str, pending_dir: Path) -> list[Path]:
+    """List direct drafts/pending/*.json entries from a Git ref."""
+    result = subprocess.run(
+        ["git", "ls-tree", "-r", "--name-only", ref, "--", pending_dir.as_posix()],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or f"Could not list {pending_dir} from {ref}."
+        raise ValueError(detail)
+
+    paths: list[Path] = []
+    for raw in result.stdout.splitlines():
+        candidate = Path(raw.strip())
+        if (
+            candidate.suffix == ".json"
+            and candidate.parent.as_posix() == pending_dir.as_posix()
+        ):
+            paths.append(candidate)
+
+    return sorted(paths)
 
 
 def as_dict(value: Any) -> dict[str, Any]:
@@ -207,8 +253,13 @@ def dashboard_item(
     }
 
 
-def pending_item(path: Path, repo: str | None) -> dict[str, Any]:
-    main_draft = load_json(path)
+def pending_item(
+    path: Path,
+    repo: str | None,
+    *,
+    main_ref: str | None = None,
+) -> dict[str, Any]:
+    main_draft = git_ref_json(main_ref, path) if main_ref else load_json(path)
     main_article = as_dict(main_draft.get("articleDraft"))
     article_id = main_article.get("id") or path.stem
     if not isinstance(article_id, str) or not article_id:
@@ -308,11 +359,17 @@ def demo_pending_item() -> dict[str, Any]:
     }
 
 
-def published_items(feed_path: Path) -> list[dict[str, Any]]:
-    if not feed_path.exists():
-        return []
-
-    feed = load_json(feed_path)
+def published_items(
+    feed_path: Path,
+    *,
+    main_ref: str | None = None,
+) -> list[dict[str, Any]]:
+    if main_ref:
+        feed = git_ref_json(main_ref, feed_path)
+    else:
+        if not feed_path.exists():
+            return []
+        feed = load_json(feed_path)
     articles = feed.get("intelArticles")
     if not isinstance(articles, list):
         raise ValueError("reserve-content-feed.json intelArticles must be an array.")
@@ -341,13 +398,20 @@ def generate(
     *,
     demo: bool = False,
     use_review_branch_content: bool = True,
+    main_ref: str | None = None,
 ) -> dict[str, Any]:
     pending: list[dict[str, Any]] = []
     repo = detect_repo_slug() if use_review_branch_content else None
 
-    if pending_dir.exists():
-        for path in sorted(pending_dir.glob("*.json")):
-            pending.append(pending_item(path, repo))
+    if main_ref:
+        pending_paths = git_ref_pending_paths(main_ref, pending_dir)
+    elif pending_dir.exists():
+        pending_paths = sorted(pending_dir.glob("*.json"))
+    else:
+        pending_paths = []
+
+    for path in pending_paths:
+        pending.append(pending_item(path, repo, main_ref=main_ref))
 
     if demo:
         pending.insert(0, demo_pending_item())
@@ -363,8 +427,9 @@ def generate(
         "generatedAt": utc_now_iso(),
         "demoMode": demo,
         "repository": repo,
+        "mainRef": main_ref,
         "pending": pending,
-        "published": published_items(feed_path),
+        "published": published_items(feed_path, main_ref=main_ref),
     }
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -390,6 +455,14 @@ def main() -> int:
         action="store_true",
         help="Do not attempt to load enriched draft content from remote review branches.",
     )
+    parser.add_argument(
+        "--main-ref",
+        default=None,
+        help=(
+            "Read pending drafts and reserve-content-feed.json from this Git ref "
+            "instead of the working tree, for example origin/main."
+        ),
+    )
     args = parser.parse_args()
 
     payload = generate(
@@ -398,6 +471,7 @@ def main() -> int:
         Path(args.output),
         demo=args.demo,
         use_review_branch_content=not args.no_review_branch_content,
+        main_ref=args.main_ref,
     )
 
     branch_backed = sum(
@@ -406,6 +480,7 @@ def main() -> int:
     )
 
     print(f"Dashboard data written: {args.output}")
+    print(f"Main source: {args.main_ref or 'working tree'}")
     print(f"Demo mode: {'ON' if args.demo else 'OFF'}")
     print(f"Pending reviews: {len(payload['pending'])}")
     print(f"Review-branch drafts loaded: {branch_backed}")
