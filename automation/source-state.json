@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T04:45:35Z",
+  "lastRunAt": "2026-09-16T11:27:31Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -320,14 +320,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-09-15T22:11:42Z",
+      "lastCheckedAt": "2026-09-16T11:27:31Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "3820c694dba874602210f87c84828be7196841be739322c8780c8fe228566239",
-      "itemCount": 208,
+      "fingerprint": "e9a15dc1d9787df8fc809aaedc3f306a1067722dabb2a1bff9aad75b86ce269f",
+      "itemCount": 206,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -534,11 +534,9 @@
         "NAVADMIN-205/26",
         "NAVADMIN-206/26",
         "NAVADMIN-207/26",
-        "NAVADMIN-208/26",
-        "NAVADMIN-209/26",
-        "NAVADMIN-210/26"
+        "NAVADMIN-208/26"
       ],
-      "lastCheckedAt": "2026-09-16T04:45:35Z",
+      "lastCheckedAt": "2026-09-16T11:27:31Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
