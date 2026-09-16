@@ -61,9 +61,9 @@
     "id": "intel-comnavresfornote-1570-idt-r-18807ddb1d",
     "publishedAt": "2026-09-16T20:26:35Z",
     "updatedAt": "2026-09-16T20:26:35Z",
-    "title": "COMNAVRESFORNOTE 1570 IDT-R",
+    "title": "FY26 IDT-R Travel Reimbursement Rules and DTS Requirements",
     "category": "Policy",
-    "status": "TRACKING",
+    "status": "EFFECTIVE",
     "priority": "NORMAL",
     "summary": "The Navy Reserve’s FY26 Inactive Duty Training Travel Reimbursement (IDT-R) policy provides travel reimbursement for eligible Reserve Sailors who live 150 miles or more from their assigned drill location. Eligible participants may receive reimbursement for up to 12 round trips during FY26, subject to available funding. IDT-R travel must be processed through the Defense Travel System (DTS), and participants must have a Government Travel Charge Card (GTCC).",
     "whyItMatters": "IDT-R can significantly reduce the out-of-pocket cost of traveling long distances to drill, but reimbursement is not automatic. Sailors must meet billet and assignment eligibility requirements, enroll in the program, follow DTS procedures, and document their expenses. The program is discretionary and may be restricted by funding availability.",
@@ -73,7 +73,7 @@
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf",
     "audience": {
       "service": "USN",
-      "reserveStatus": "ALL",
+      "reserveStatus": "SELRES",
       "trainingWing": null,
       "squadron": null
     },
