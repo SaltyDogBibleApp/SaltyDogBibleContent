@@ -26,8 +26,9 @@ import sys
 import tempfile
 from datetime import datetime, timedelta, timezone
 from typing import Iterable
+from http.client import InvalidURL
 from urllib.error import HTTPError, URLError
-from urllib.parse import unquote, urljoin, urlparse
+from urllib.parse import quote, unquote, urljoin, urlparse, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 STATE_SCHEMA_VERSION = 1
@@ -216,6 +217,40 @@ def is_pdf_url(url: str) -> bool:
     return (urlparse(url).path or "").lower().endswith(".pdf")
 
 
+def request_safe_url(url: str) -> str:
+    """
+    Percent-encode unsafe characters in a URL before handing it to urllib.
+
+    Navy Reserve RESPERSMAN currently exposes some PDF hrefs with literal spaces
+    in the path (for example "Reserve Military Personnel Manual/RPM Acronyms.pdf").
+    urllib rejects those URLs before a network request is made. Keep existing
+    percent escapes intact while encoding spaces/control characters safely.
+    """
+    parts = urlsplit(url)
+
+    if parts.scheme not in {"http", "https"} or not parts.netloc:
+        raise ValueError(f"Invalid linked-document URL: {url}")
+
+    safe_path = quote(
+        parts.path,
+        safe="/%:@-._~!$&'()*+,;=",
+    )
+    safe_query = quote(
+        parts.query,
+        safe="=&%:@/?-._~!$'()*+,;",
+    )
+
+    return urlunsplit(
+        (
+            parts.scheme,
+            parts.netloc,
+            safe_path,
+            safe_query,
+            parts.fragment,
+        )
+    )
+
+
 def fetch_linked_document(
     url: str,
     previous: dict | None = None,
@@ -244,7 +279,8 @@ def fetch_linked_document(
         if isinstance(last_modified, str) and last_modified.strip():
             headers["If-Modified-Since"] = last_modified
 
-    request = Request(url, headers=headers, method="GET")
+    request_url = request_safe_url(url)
+    request = Request(request_url, headers=headers, method="GET")
 
     try:
         response = urlopen(request, timeout=REQUEST_TIMEOUT_SECONDS)
@@ -352,7 +388,7 @@ def reserve_guidance_linked_documents(
         prior = previous_documents.get(item_id)
         try:
             documents[item_id] = fetch_linked_document(item["url"], prior)
-        except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
+        except (HTTPError, URLError, TimeoutError, InvalidURL, ValueError, OSError) as exc:
             if isinstance(prior, dict) and isinstance(prior.get("fingerprint"), str):
                 documents[item_id] = dict(prior)
 
@@ -905,7 +941,7 @@ def run_monitor(args) -> int:
 
             state["sources"][source_id] = source_state
 
-        except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
+        except (HTTPError, URLError, TimeoutError, InvalidURL, ValueError, OSError) as exc:
             message = str(exc)
             errors.append({"name": source["name"], "message": message})
             old = previous or {}
@@ -1205,6 +1241,22 @@ def self_test() -> int:
     finally:
         globals()["fetch_html"] = original_fetch_html
 
+    # URL-safety regression: Navy Reserve currently exposes some RESPERSMAN
+    # hrefs with literal spaces. They must be encoded before urllib Request().
+    unsafe_respersman_url = (
+        "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/"
+        "Reserve Military Personnel Manual/RPM Acronyms.pdf"
+    )
+    safe_respersman_url = request_safe_url(unsafe_respersman_url)
+    assert "Reserve%20Military%20Personnel%20Manual/RPM%20Acronyms.pdf" in safe_respersman_url
+    assert " " not in safe_respersman_url
+
+    already_encoded_url = (
+        "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/"
+        "Reserve%20Military%20Personnel%20Manual/RPM%20Acronyms.pdf"
+    )
+    assert request_safe_url(already_encoded_url) == already_encoded_url
+
     # RESPERSMAN linked-document regression:
     # same index URL/title + changed PDF bytes must create one review candidate.
     respersman_url = (
@@ -1440,4 +1492,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
