@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-16T00:44:59Z",
+  "lastRunAt": "2026-09-16T00:50:13Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -544,7 +544,7 @@
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
     "navyreserve-respersman": {
-      "fingerprint": "47401c816d6d16f144477b0191bdba49bc550fe1c0a544556be663dba482bea6",
+      "fingerprint": "78a99981ae30b5ca4c991b283bab9a71cb6e5ba2f4a91de7ea964942bdbf9730",
       "itemCount": 47,
       "itemIDs": [
         "reserve_guidance-04f1fc612ab1ec3bb81e",
@@ -595,8 +595,379 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-09-15T22:11:42Z",
+      "lastCheckedAt": "2026-09-16T00:50:13Z",
       "lastError": null,
+      "linkedDocumentCount": 46,
+      "linkedDocuments": {
+        "reserve_guidance-04f1fc612ab1ec3bb81e": {
+          "contentLength": 343980,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Users/041/97/297/1100-060.pdf",
+          "fingerprint": "289e191b34e30e6391c41201ccdb260d9146a42d9ec4c4fa5a9a40bddb332de8",
+          "lastModified": "Tue, 13 Jun 2023 14:05:53 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Users/041/97/297/1100-060.pdf"
+        },
+        "reserve_guidance-05dbd7cbc8870f8da369": {
+          "contentLength": 3980720,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-020.pdf",
+          "fingerprint": "4d32bcd29a57c80f1fa65ff6df89e312bcd3dd911a7089c1ebca445831e28ccf",
+          "lastModified": "Tue, 16 Apr 2024 12:26:44 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1100-020.pdf"
+        },
+        "reserve_guidance-1b4a25b414fb43e9d33a": {
+          "contentLength": 1689319,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf",
+          "fingerprint": "c6b065e4c99c11d919e4f24f44d698021027646a8762d6951453f370d666a9c3",
+          "lastModified": "Tue, 16 Apr 2024 13:16:27 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1570-030.pdf"
+        },
+        "reserve_guidance-26d6c24c84938d804fab": {
+          "contentLength": 2749297,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-030.pdf",
+          "fingerprint": "345fd9ed7a7bad7997e8de73b42181808af2f1ad66468f5e5262481898154cdc",
+          "lastModified": "Tue, 16 Apr 2024 12:27:36 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1100-030.pdf"
+        },
+        "reserve_guidance-28d7b7d67457e147bf9c": {
+          "contentLength": 2686837,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1900-010.pdf",
+          "fingerprint": "050c6299aa9de6ea439d62a3edb7424722aabd2806c9024f2f8c72eecc543083",
+          "lastModified": "Tue, 16 Apr 2024 12:48:46 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1900-010.pdf"
+        },
+        "reserve_guidance-2e2bdc5df13d5c7a68fe": {
+          "contentLength": 4046266,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-030.pdf",
+          "fingerprint": "0d7146fb84cf02805aa971c7469afac11137140ac72c34f297376de768782e8b",
+          "lastModified": "Tue, 16 Apr 2024 13:08:52 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-030.pdf"
+        },
+        "reserve_guidance-3303b402f4e3ed74a86d": {
+          "contentLength": 699502,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201100%202%20FY26%20SELRES%20Enlisted%20Recruiting%20and%20Retention%20Incentives%20(19SEPT2025).pdf",
+          "fingerprint": "50efe63c209e74a8fa9f65ae8c7c449e659725094b4f20949e9e24e16c20b782",
+          "lastModified": "Wed, 24 Sep 2025 20:11:54 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1100 2 FY26 SELRES Enlisted Recruiting and Retention Incentives (19SEPT2025).pdf"
+        },
+        "reserve_guidance-3eaf2ca4e10309c43b30": {
+          "contentLength": 51380,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201001-030%20TRAIN%20TO%20RETAIN.pdf",
+          "fingerprint": "3197ee80a4a06900750d7a2ce2ff5e824ddddbd054e2bb50cb77598141877f83",
+          "lastModified": "Tue, 16 Apr 2024 12:24:06 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1001-030 TRAIN TO RETAIN.pdf"
+        },
+        "reserve_guidance-4725dcbc8998e177e20c": {
+          "contentLength": 2052917,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-020.pdf",
+          "fingerprint": "810eed7a7f861a510799519b7cd2b5747c3393fcf7b9880dd89f7950f5b4d70e",
+          "lastModified": "Tue, 16 Apr 2024 12:33:27 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-020.pdf"
+        },
+        "reserve_guidance-499e9a4dbb875cf358dd": {
+          "contentLength": 105875,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf",
+          "fingerprint": "73626cac65dcf6cac7d473239e6d3ffa4a4599dc95ca017530e00c73fdcd57ce",
+          "lastModified": "Tue, 16 Apr 2024 12:50:58 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/3060-010.pdf"
+        },
+        "reserve_guidance-4bedaed25b24bc1d2e4e": {
+          "contentLength": 5740634,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN%201300-010.pdf",
+          "fingerprint": "f29f56bf4bb0e767b2dd6e6584b6f11a9c629e33e08b612b354d62c63fd70146",
+          "lastModified": "Tue, 16 Apr 2024 12:32:36 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN 1300-010.pdf"
+        },
+        "reserve_guidance-4f0d93824e5351441065": {
+          "contentLength": 41867,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf",
+          "fingerprint": "13e6ea29371233cfab6600c564f89e3a501f2fb88534b0d83f48c6eba6645a2a",
+          "lastModified": "Tue, 16 Apr 2024 13:18:58 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1571-010.pdf"
+        },
+        "reserve_guidance-53603fecda7091c919cc": {
+          "contentLength": 1567326,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN%201300-090.pdf",
+          "fingerprint": "0357adbca0d7b6ddcf343257d0f1467e9d2982624da2580ad55529d2ddd0d126",
+          "lastModified": "Tue, 16 Apr 2024 12:46:49 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERMAN 1300-090.pdf"
+        },
+        "reserve_guidance-614abeb91040f1704375": {
+          "contentLength": 1413778,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf",
+          "fingerprint": "25d4fd5405caa58f27036028f27b1b0622401b417be14fa6f392079f8c9928e5",
+          "lastModified": "Tue, 16 Apr 2024 12:22:07 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1001-010.pdf"
+        },
+        "reserve_guidance-73e8f3f035c33203ab7e": {
+          "contentLength": 4301181,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-060.pdf",
+          "fingerprint": "665b30cf18145cd239f4a94c068340fdbc89c5dac7a76a739809dec33d9fa6d6",
+          "lastModified": "Tue, 16 Apr 2024 12:44:03 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-060.pdf"
+        },
+        "reserve_guidance-74f0e3d0787d95d5f4e5": {
+          "contentLength": 58741,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1001-020%20Ready%20Reserve%20Annual%20Screening.pdf",
+          "fingerprint": "a48ac74ef28c735a96bc05dcdf68ab6ac8d95a5910988621302b8de50059eb16",
+          "lastModified": "Tue, 16 Apr 2024 12:22:58 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1001-020 Ready Reserve Annual Screening.pdf"
+        },
+        "reserve_guidance-7674b7ded4b2554ee024": {
+          "contentLength": 5682855,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-080.pdf",
+          "fingerprint": "b641a40d97e869300ce4384a59a2e146496ec44573cf77fea66715bebfc8dc9e",
+          "lastModified": "Tue, 16 Apr 2024 12:46:00 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-080.pdf"
+        },
+        "reserve_guidance-771aa799d581e5847956": {
+          "contentLength": 1499001,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-050.pdf",
+          "fingerprint": "33d34abfb4b4823c1705a88e837627832fa5ffee18cea8240d644e8c5d1b0de0",
+          "lastModified": "Tue, 16 Apr 2024 12:28:59 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1100-050.pdf"
+        },
+        "reserve_guidance-77649ebb7ba903ba4183": {
+          "contentLength": 542675,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERMAN%20Authorization%20Letter.pdf",
+          "fingerprint": "56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8",
+          "lastModified": "Thu, 18 Jun 2020 11:31:37 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf"
+        },
+        "reserve_guidance-81347a5556a2190c7fd4": {
+          "contentLength": 1299757,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf",
+          "fingerprint": "9753cda0862d63be3d21219ed1fed6c9764253986f354d7c761acf8ee7372485",
+          "lastModified": "Tue, 16 Apr 2024 12:31:17 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1221-010.pdf"
+        },
+        "reserve_guidance-83172764c818417ea706": {
+          "contentLength": 1635421,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%206000-010.pdf",
+          "fingerprint": "dddd568e8cab93cbb354313bd7691660c9fa0f0738eca23aaba96c8d86105139",
+          "lastModified": "Tue, 30 Jun 2026 13:43:29 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 6000-010.pdf"
+        },
+        "reserve_guidance-8463cf1f75ceb59e8280": {
+          "contentLength": 150829,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201300-050%20-%20ADMINISTRATIVE%20PROCESSING%20UNIT.pdf",
+          "fingerprint": "2e82110caf2192df41242146cec12aa1584bb05835d2a05ae610bfb5df781f1f",
+          "lastModified": "Tue, 11 Aug 2026 13:38:22 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1300-050 - ADMINISTRATIVE PROCESSING UNIT.pdf"
+        },
+        "reserve_guidance-8c6a8baff5ebef369879": {
+          "contentLength": 1831543,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1500-010.pdf",
+          "fingerprint": "dad4314f9bf30c38b9c6f4e4910823043b10e601dae55506d919c6a1f3605cf0",
+          "lastModified": "Tue, 16 Apr 2024 13:06:04 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1500-010.pdf"
+        },
+        "reserve_guidance-8f4f211488c9d2c21b8e": {
+          "contentLength": 6859571,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-010.pdf",
+          "fingerprint": "72d7016a43764bee18a6fdf4ab95eb08100745b5fe4fd1e93bbdfc4e4776fafe",
+          "lastModified": "Tue, 16 Apr 2024 12:25:55 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1100-010.pdf"
+        },
+        "reserve_guidance-8fb1a1904f90069f2a9f": {
+          "contentLength": 2913116,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-010.pdf",
+          "fingerprint": "cb3731a94cdfb060b0a49d0f251eb605426c0e7aad287cd0b1846108d646654a",
+          "lastModified": "Tue, 16 Apr 2024 13:06:58 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-010.pdf"
+        },
+        "reserve_guidance-9c5fe72a40625510e719": {
+          "contentLength": 2036589,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf",
+          "fingerprint": "1b1c75041d7d73efb29e8029819b38dfdc87eb925d242211456fc2108db12fcb",
+          "lastModified": "Tue, 16 Apr 2024 12:41:21 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-040.pdf"
+        },
+        "reserve_guidance-a2e8796e9f0944cf289a": {
+          "contentLength": 2691375,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-050.pdf",
+          "fingerprint": "0879b25589baaa3084e845a37c7ffc1d3b01d230133bd2795ce9deb0940011a4",
+          "lastModified": "Tue, 16 Apr 2024 13:18:04 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1570-050.pdf"
+        },
+        "reserve_guidance-adad176a26a85b3b6574": {
+          "contentLength": 650654,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201570-010.pdf",
+          "fingerprint": "d0c0a48681c45bacdc9c295252efb6602fdf0fccb69961b4e783261231528798",
+          "lastModified": "Tue, 16 Apr 2024 13:12:21 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1570-010.pdf"
+        },
+        "reserve_guidance-bcb7c0258d9091146430": {
+          "contentLength": 2697516,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-020.pdf",
+          "fingerprint": "dff30b09383a3f60992706e9bd64bbca2afa83ea0e4f217c9c95eab20b0430e1",
+          "lastModified": "Tue, 16 Apr 2024 13:07:52 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-020.pdf"
+        },
+        "reserve_guidance-bcd49d0f26b7c0862b0c": {
+          "contentLength": 12821628,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/M1001.5.pdf",
+          "fingerprint": "95730b9ff4a235a016ecda5131573d4aa7a88e4416d41fa8eac3409714ef369c",
+          "lastModified": "Tue, 16 Apr 2024 11:52:48 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/M1001.5.pdf"
+        },
+        "reserve_guidance-caf12f7b0665aa16e632": {
+          "contentLength": 26646,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RPM%20Acronyms.pdf",
+          "fingerprint": "1a8ad1704a15fb435c26ced1fb7d6bc3cefce5c9c08ece2476ad5297d6a0808d",
+          "lastModified": "Thu, 18 Jun 2020 11:31:32 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RPM Acronyms.pdf"
+        },
+        "reserve_guidance-cc43656cea8b7add90be": {
+          "contentLength": 5395903,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1100-040.pdf",
+          "fingerprint": "1048b68d165222c7dc25951370bc60c03b98a5ff358e41110d4e491a5c83ff06",
+          "lastModified": "Tue, 16 Apr 2024 12:28:13 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1100-040.pdf"
+        },
+        "reserve_guidance-cc822dd16d6ef6413d3e": {
+          "contentLength": 55601,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERSMAN%20Table%20of%20Contents.pdf",
+          "fingerprint": "f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6",
+          "lastModified": "Thu, 18 Jun 2020 11:31:34 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERSMAN Table of Contents.pdf"
+        },
+        "reserve_guidance-d7bf8f7bd73b63467ea3": {
+          "contentLength": 1191204,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-050.pdf",
+          "fingerprint": "dded9f86b6a5b33931430d4d52d1f01afe506a0099d88b612f622697df7fe431",
+          "lastModified": "Tue, 16 Apr 2024 13:10:28 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-050.pdf"
+        },
+        "reserve_guidance-dc2d6e027cfade7ef847": {
+          "contentLength": 2006400,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf",
+          "fingerprint": "b7fefdbee8576e5bd261891e36f6d6c79f9a045231415d14d28565b17b87c9b7",
+          "lastModified": "Tue, 16 Apr 2024 13:09:42 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-040.pdf"
+        },
+        "reserve_guidance-e164adaf2419d6bbc49c": {
+          "contentLength": 5156872,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/7220-010.pdf",
+          "fingerprint": "c450b301245b58d56c3523826628c644eeabd33cc4f4d5999175811ffd3759e8",
+          "lastModified": "Tue, 16 Apr 2024 12:49:57 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/7220-010.pdf"
+        },
+        "reserve_guidance-e208b32f108dd87b188b": {
+          "contentLength": 1327691,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf",
+          "fingerprint": "bea2f85be03987a74867653b6681c62b76c2a97319c8ef5eab57a211654ef518",
+          "lastModified": "Tue, 16 Apr 2024 12:39:46 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-030.pdf"
+        },
+        "reserve_guidance-e294a093db17210c45d9": {
+          "contentLength": 37527,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1040-010%20Reserve%20Unit%20Career%20Counselor%20Program.pdf",
+          "fingerprint": "914744ac40063a334f2d3ffd3ee276b170c9355db398a2adf1c834b9e9a679d2",
+          "lastModified": "Tue, 16 Apr 2024 12:25:04 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1040-010 Reserve Unit Career Counselor Program.pdf"
+        },
+        "reserve_guidance-e2cd238ab353d9fd0f03": {
+          "contentLength": 488449,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201000-010%20(CH-14)%2014%20JUN%202022.pdf",
+          "fingerprint": "ff980528b626c568ea0bbb18bc89a4db4eb17c68901abdef754ac39252ea3743",
+          "lastModified": "Tue, 14 Apr 2026 12:59:14 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1000-010 (CH-14) 14 JUN 2022.pdf"
+        },
+        "reserve_guidance-ed20ed4c35aa5ada290f": {
+          "contentLength": 24608,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf",
+          "fingerprint": "56e859f8235ae2133580ea38ee84bbc1d12e4afdc5d5f69303f6e0ef4bbf556d",
+          "lastModified": "Tue, 16 Apr 2024 12:29:52 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1160-010.pdf"
+        },
+        "reserve_guidance-f04206fb6ef20dc6d713": {
+          "contentLength": 1039440,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf",
+          "fingerprint": "88b87163561b97fa1570ba2a98b34477b628f21423c262cd12cf15f3608605b8",
+          "lastModified": "Tue, 16 Apr 2024 13:17:14 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1570-040.pdf"
+        },
+        "reserve_guidance-f52eceb641f77d93bc3a": {
+          "contentLength": 378963,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN%201300-085.pdf",
+          "fingerprint": "83375af71216dddb6f6ec358d94caa0ea2729ec2bd6aad3494059cc2845c950c",
+          "lastModified": "Tue, 16 Apr 2024 12:48:00 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/RESPERSMAN 1300-085.pdf"
+        },
+        "reserve_guidance-f638bdcb56094d5740dd": {
+          "contentLength": 1713713,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1534-060.pdf",
+          "fingerprint": "f2a57415255d06ef0a5e86a135bc91f90ddf2aa9a492a26d147523377e25b4b2",
+          "lastModified": "Tue, 16 Apr 2024 13:11:11 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1534-060.pdf"
+        },
+        "reserve_guidance-f7ec4977929c0160e77a": {
+          "contentLength": 5716501,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1570-020.pdf",
+          "fingerprint": "05e9b4d3dd0c1a4c4d4f4098ae05758bad006803c060eb3028b91080630a5c52",
+          "lastModified": "Tue, 16 Apr 2024 13:15:45 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1570-020.pdf"
+        },
+        "reserve_guidance-fc023312036a340afab2": {
+          "contentLength": 1176879,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf",
+          "fingerprint": "17415b566244a240ed6c329af2b9c2172ed3666ea2cc909ffb18a357b4153ef4",
+          "lastModified": "Tue, 16 Apr 2024 12:44:59 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1300-070.pdf"
+        },
+        "reserve_guidance-ffa0143e45807572f809": {
+          "contentLength": 102507,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf",
+          "fingerprint": "e5f18f9664ec794ce6bd1a1e1790d89b4389deecdea112654103bf706cbc0380",
+          "lastModified": "Tue, 16 Apr 2024 12:51:43 GMT",
+          "url": "https://www.navyreserve.navy.mil/Portals/35/3060-020.pdf"
+        }
+      },
       "name": "Navy Reserve RESPERSMAN",
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/RESPERSMAN/"
     },
