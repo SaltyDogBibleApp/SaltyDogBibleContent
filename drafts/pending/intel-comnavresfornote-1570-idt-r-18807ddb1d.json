@@ -65,9 +65,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Automated draft from an official source: COMNAVRESFORNOTE 1570 IDT-R. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, IDT-R, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: COMNAVRESFORNOTE 1570 IDT-R. The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for COMNAVRESFORNOTE 1570 IDT-R: detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201570%20IDT-R.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Thu, 29 Jan 2026 16:15:28 GMT; downloaded size: 562,628 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf",
@@ -79,5 +79,35 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-09-16T20:26:56Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201570%20IDT-R.pdf",
+    "detectedFingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
+    "observedFingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Thu, 29 Jan 2026 16:15:28 GMT",
+    "contentLength": 562628,
+    "etag": null,
+    "documentKind": "COMNAVRESFORNOTE",
+    "documentIdentifier": null,
+    "sourceFilename": "COMNAVRESFORNOTE 1570 IDT-R.pdf",
+    "currentTextEvidence": {
+      "available": false,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json"
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
