@@ -21,6 +21,8 @@ from __future__ import annotations
 
 import argparse
 import copy
+import difflib
+import hashlib
 from datetime import datetime, timezone
 import importlib.util
 import json
@@ -28,6 +30,7 @@ import os
 from pathlib import Path
 import re
 import sys
+import tempfile
 from types import ModuleType
 from urllib.parse import unquote, urlparse
 
@@ -42,6 +45,11 @@ ALLOWED_DETECTION_KINDS = {
 
 CHAPTER_RE = re.compile(r"(?<!\d)(\d{4}-\d{3})(?!\d)")
 COMNAVRESFORNOTE_RE = re.compile(r"\bCOMNAVRESFORNOTE\b", re.I)
+DEFAULT_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-respersman")
+MAX_DIFF_HUNKS = 12
+MAX_DIFF_LINES_PER_SIDE = 8
+MAX_DIFF_LINE_CHARS = 500
+HEADING_RE = re.compile(r"^(?:\d+(?:\.\d+)*\.?\s+|[A-Z][A-Z0-9 /&(),.\'\-]{5,})")
 
 
 class EnrichmentError(ValueError):
@@ -66,6 +74,205 @@ def navy_reserve_host(url: str) -> bool:
 
 def pdf_url(url: str) -> bool:
     return unquote(urlparse(url).path or "").lower().endswith(".pdf")
+
+
+def sha256_text(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def snapshot_path(evidence_root: Path, source_url: str, fingerprint: str) -> Path:
+    return evidence_root / sha256_text(source_url)[:20] / f"{fingerprint}.json"
+
+
+def load_text_snapshot(
+    evidence_root: Path,
+    source_url: str,
+    fingerprint: str | None,
+) -> tuple[dict | None, Path | None, str | None]:
+    if not isinstance(fingerprint, str) or not fingerprint.strip():
+        return None, None, "fingerprint_not_available"
+
+    path = snapshot_path(evidence_root, source_url, fingerprint.strip())
+    if not path.exists():
+        return None, path, "snapshot_not_found"
+
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, path, f"snapshot_unreadable: {exc}"
+
+    if not isinstance(payload, dict):
+        return None, path, "snapshot_root_not_object"
+    if payload.get("fingerprint") != fingerprint.strip():
+        return None, path, "snapshot_fingerprint_mismatch"
+    if payload.get("sourceURL") != source_url:
+        return None, path, "snapshot_source_url_mismatch"
+
+    return payload, path, None
+
+
+def line_page(snapshot: dict, line_number: int | None) -> int | None:
+    if not isinstance(line_number, int) or line_number <= 0:
+        return None
+    ranges = snapshot.get("pageLineRanges")
+    if not isinstance(ranges, list):
+        return None
+    for item in ranges:
+        if not isinstance(item, dict):
+            continue
+        start = item.get("startLine")
+        end = item.get("endLine")
+        page = item.get("page")
+        if isinstance(start, int) and isinstance(end, int) and start <= line_number <= end:
+            return page if isinstance(page, int) else None
+    return None
+
+
+def nearby_heading(lines: list[str], index: int) -> str | None:
+    if not lines:
+        return None
+    index = min(max(index, 0), len(lines) - 1)
+    for pos in range(max(0, index - 20), index + 1)[::-1]:
+        candidate = lines[pos].strip()
+        if 3 <= len(candidate) <= 140 and HEADING_RE.search(candidate):
+            return candidate[:140]
+    return None
+
+
+def clipped_lines(lines: list[str]) -> tuple[list[str], bool]:
+    clipped = [line[:MAX_DIFF_LINE_CHARS] for line in lines[:MAX_DIFF_LINES_PER_SIDE]]
+    return clipped, len(lines) > MAX_DIFF_LINES_PER_SIDE
+
+
+def build_text_comparison(
+    previous_snapshot: dict | None,
+    current_snapshot: dict | None,
+    previous_path: Path | None,
+    current_path: Path | None,
+    unavailable_reason: str | None = None,
+) -> dict:
+    base = {
+        "comparisonKind": "normalized_extracted_text_diff",
+        "available": False,
+        "policyInterpretationClaimed": False,
+        "note": (
+            "This comparison is based on normalized text extracted from two PDF versions. "
+            "PDF layout or extraction behavior can create apparent text differences. Human "
+            "review of the official source is required before describing policy effect."
+        ),
+    }
+
+    if previous_path is not None:
+        base["previousSnapshotPath"] = previous_path.as_posix()
+    if current_path is not None:
+        base["currentSnapshotPath"] = current_path.as_posix()
+
+    if previous_snapshot is None or current_snapshot is None:
+        base["unavailableReason"] = unavailable_reason or "snapshot_not_available"
+        return base
+
+    previous_text = previous_snapshot.get("normalizedText")
+    current_text = current_snapshot.get("normalizedText")
+    if not isinstance(previous_text, str) or not isinstance(current_text, str):
+        base["unavailableReason"] = "normalized_text_missing"
+        return base
+
+    previous_status = previous_snapshot.get("extractionStatus")
+    current_status = current_snapshot.get("extractionStatus")
+    usable = {"ok", "partial", "truncated"}
+    if previous_status not in usable or current_status not in usable:
+        base["unavailableReason"] = (
+            f"unusable_extraction_status: previous={previous_status}, current={current_status}"
+        )
+        return base
+
+    previous_lines = previous_text.splitlines()
+    current_lines = current_text.splitlines()
+    matcher = difflib.SequenceMatcher(
+        a=previous_lines,
+        b=current_lines,
+        autojunk=False,
+    )
+
+    hunks: list[dict] = []
+    removed_line_count = 0
+    added_line_count = 0
+    total_hunks = 0
+
+    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+        if tag == "equal":
+            continue
+        total_hunks += 1
+        removed = previous_lines[i1:i2]
+        added = current_lines[j1:j2]
+        removed_line_count += len(removed)
+        added_line_count += len(added)
+
+        if len(hunks) >= MAX_DIFF_HUNKS:
+            continue
+
+        removed_preview, removed_truncated = clipped_lines(removed)
+        added_preview, added_truncated = clipped_lines(added)
+        old_line = i1 + 1 if i2 > i1 else None
+        new_line = j1 + 1 if j2 > j1 else None
+        context = nearby_heading(current_lines, j1) if current_lines else None
+        if context is None and previous_lines:
+            context = nearby_heading(previous_lines, i1)
+
+        hunks.append(
+            {
+                "kind": tag,
+                "oldStartLine": old_line,
+                "newStartLine": new_line,
+                "oldPage": line_page(previous_snapshot, old_line),
+                "newPage": line_page(current_snapshot, new_line),
+                "nearbyHeadingHeuristic": context,
+                "removed": removed_preview,
+                "added": added_preview,
+                "removedPreviewTruncated": removed_truncated,
+                "addedPreviewTruncated": added_truncated,
+            }
+        )
+
+    base.update(
+        {
+            "available": True,
+            "extractedTextChanged": previous_text != current_text,
+            "previousTextSHA256": previous_snapshot.get("textSHA256"),
+            "currentTextSHA256": current_snapshot.get("textSHA256"),
+            "previousPageCount": previous_snapshot.get("pageCount"),
+            "currentPageCount": current_snapshot.get("pageCount"),
+            "previousExtractionStatus": previous_status,
+            "currentExtractionStatus": current_status,
+            "removedLineCount": removed_line_count,
+            "addedLineCount": added_line_count,
+            "totalHunkCount": total_hunks,
+            "shownHunkCount": len(hunks),
+            "hunksTruncated": total_hunks > len(hunks),
+            "hunks": hunks,
+        }
+    )
+    return base
+
+
+def current_text_evidence(snapshot: dict | None, path: Path | None) -> dict:
+    if snapshot is None:
+        return {
+            "available": False,
+            "snapshotPath": path.as_posix() if path is not None else None,
+        }
+    return {
+        "available": True,
+        "snapshotPath": path.as_posix() if path is not None else None,
+        "extractionStatus": snapshot.get("extractionStatus"),
+        "extractionMethod": snapshot.get("extractionMethod"),
+        "textSHA256": snapshot.get("textSHA256"),
+        "pageCount": snapshot.get("pageCount"),
+        "pagesWithText": snapshot.get("pagesWithText"),
+        "characterCount": snapshot.get("characterCount"),
+        "lineCount": snapshot.get("lineCount"),
+        "truncated": bool(snapshot.get("truncated")),
+    }
 
 
 def load_monitor_module(path: str | None = None) -> ModuleType:
@@ -201,14 +408,27 @@ def document_identity(title: str, source_url: str) -> dict:
     }
 
 
-def human_change_note(detection_kind: str) -> str:
+def human_change_note(detection_kind: str, text_comparison: dict | None = None) -> str:
     if detection_kind == "linked_document_changed":
+        if isinstance(text_comparison, dict) and text_comparison.get("available") is True:
+            if text_comparison.get("extractedTextChanged") is True:
+                return (
+                    "Prior and current normalized extracted-text snapshots are available. "
+                    "Automation identified extraction-level additions and removals for human "
+                    "review, but it has not determined the meaning, applicability, or policy "
+                    "effect of those differences. PDF layout/extraction can also create apparent "
+                    "text changes. Human comparison of the official source is required."
+                )
+            return (
+                "The PDF bytes changed, but the prior and current normalized extracted-text "
+                "snapshots are identical. The difference may be metadata, layout, non-text "
+                "content, or something not represented by text extraction. Human source review "
+                "is required."
+            )
         return (
-            "The monitor detected different PDF bytes at an already-known official "
-            "document URL. The monitor retains document fingerprints, not the prior "
-            "PDF body, so automated tooling cannot identify which paragraphs, tables, "
-            "requirements, dates, or policy language changed. Human comparison and "
-            "source review are required."
+            "The monitor detected different PDF bytes at an already-known official document "
+            "URL, but a usable prior/current extracted-text comparison is not available for "
+            "this detected pair. Human comparison and source review are required."
         )
 
     return (
@@ -218,13 +438,39 @@ def human_change_note(detection_kind: str) -> str:
     )
 
 
-def enriched_summary(label: str, detection_kind: str) -> str:
+def enriched_summary(
+    label: str,
+    detection_kind: str,
+    text_comparison: dict | None = None,
+) -> str:
     if detection_kind == "linked_document_changed":
+        comparison_available = (
+            isinstance(text_comparison, dict)
+            and text_comparison.get("available") is True
+        )
+        if comparison_available:
+            if text_comparison.get("extractedTextChanged") is True:
+                comparison_sentence = (
+                    "A normalized extracted-text comparison is available for human review. "
+                    "No automated conclusion has been made about the policy meaning or effect "
+                    "of those differences."
+                )
+            else:
+                comparison_sentence = (
+                    "The normalized extracted text is unchanged even though the PDF bytes differ; "
+                    "human review is required to determine what changed."
+                )
+        else:
+            comparison_sentence = (
+                "A usable prior/current extracted-text comparison is not available for this "
+                "detected pair."
+            )
+
         return (
             f"The Reserve Intel monitor detected a new version of {label} at its "
             "official Navy Reserve PDF URL. The current PDF was re-fetched and "
-            "matches the fingerprint captured at detection. The exact policy-language "
-            "changes have not been automatically determined."
+            "matches the fingerprint captured at detection. "
+            + comparison_sentence
         )
 
     return (
@@ -233,6 +479,7 @@ def enriched_summary(label: str, detection_kind: str) -> str:
         "the fingerprint captured at detection. Human review is required before "
         "describing its policy effect."
     )
+
 
 
 def enriched_why_it_matters() -> str:
@@ -251,6 +498,7 @@ def enriched_details(
     final_url: str,
     http_last_modified: str | None,
     content_length: int | None,
+    text_comparison: dict | None = None,
 ) -> str:
     metadata_parts = []
     if http_last_modified:
@@ -266,25 +514,38 @@ def enriched_details(
         else ""
     )
 
+    comparison_text = ""
+    if isinstance(text_comparison, dict) and text_comparison.get("available") is True:
+        comparison_text = (
+            " Extracted-text comparison: "
+            f"{text_comparison.get('removedLineCount', 0)} removed line(s), "
+            f"{text_comparison.get('addedLineCount', 0)} added line(s), "
+            f"{text_comparison.get('totalHunkCount', 0)} change hunk(s)."
+        )
+
     return (
         f"Automated evidence verification for {label}: detection kind "
         f"`{detection_kind}`. The official Navy Reserve PDF was re-fetched from "
         f"{final_url} and its SHA-256 fingerprint matched the fingerprint stored "
-        f"with the detected draft.{metadata_text} HTTP Last-Modified metadata is "
-        "not treated as a policy effective date or revision date. "
-        + human_change_note(detection_kind)
+        f"with the detected draft.{metadata_text}{comparison_text} HTTP Last-Modified "
+        "metadata is not treated as a policy effective date or revision date. "
+        + human_change_note(detection_kind, text_comparison)
     )
+
 
 
 def enrich_draft(
     draft: dict,
     monitor_module: ModuleType,
     enriched_at: str | None = None,
+    evidence_root: Path | None = None,
 ) -> dict:
     evidence, article = validate_draft(draft)
 
     source_url = evidence["sourceURL"]
     detected_fingerprint = evidence["sourceFingerprint"].strip()
+    previous_fingerprint = evidence.get("previousFingerprint")
+    root = evidence_root or DEFAULT_EVIDENCE_ROOT
 
     fetched = monitor_module.fetch_linked_document(source_url, None)
     if not isinstance(fetched, dict):
@@ -318,6 +579,44 @@ def enrich_draft(
     label = identity["documentLabel"]
     timestamp = enriched_at or utc_now_iso()
 
+    current_snapshot, current_path, current_error = load_text_snapshot(
+        root, source_url, detected_fingerprint
+    )
+    previous_snapshot = None
+    previous_path = None
+    previous_error = None
+    if detection_kind == "linked_document_changed":
+        previous_snapshot, previous_path, previous_error = load_text_snapshot(
+            root, source_url,
+            previous_fingerprint if isinstance(previous_fingerprint, str) else None,
+        )
+
+    if detection_kind == "linked_document_changed":
+        unavailable_parts = []
+        if previous_error:
+            unavailable_parts.append(f"previous={previous_error}")
+        if current_error:
+            unavailable_parts.append(f"current={current_error}")
+        text_comparison = build_text_comparison(
+            previous_snapshot,
+            current_snapshot,
+            previous_path,
+            current_path,
+            "; ".join(unavailable_parts) if unavailable_parts else None,
+        )
+    else:
+        text_comparison = {
+            "comparisonKind": "normalized_extracted_text_diff",
+            "available": False,
+            "unavailableReason": "new_linked_document_has_no_prior_version",
+            "currentSnapshotPath": current_path.as_posix() if current_path else None,
+            "policyInterpretationClaimed": False,
+            "note": (
+                "This is a newly linked document, so there is no earlier monitored version "
+                "to compare. Human source review is required."
+            ),
+        }
+
     enriched = copy.deepcopy(draft)
 
     # Keep all publication gates closed.
@@ -344,14 +643,17 @@ def enrich_draft(
         "documentKind": identity["documentKind"],
         "documentIdentifier": identity["documentIdentifier"],
         "sourceFilename": identity["sourceFilename"],
+        "currentTextEvidence": current_text_evidence(current_snapshot, current_path),
+        "textComparison": text_comparison,
         "automatedChangeAttributionClaimed": False,
         "effectiveDateInferred": False,
-        "changeAttributionNote": human_change_note(detection_kind),
+        "changeAttributionNote": human_change_note(detection_kind, text_comparison),
     }
 
     enriched["articleDraft"]["summary"] = enriched_summary(
         label,
         detection_kind,
+        text_comparison,
     )
     enriched["articleDraft"]["whyItMatters"] = enriched_why_it_matters()
     enriched["articleDraft"]["details"] = enriched_details(
@@ -360,12 +662,14 @@ def enrich_draft(
         final_url,
         fetched.get("lastModified"),
         fetched.get("contentLength"),
+        text_comparison,
     )
 
-    # Never infer an effective date from HTTP Last-Modified or file metadata.
+    # Never infer an effective date from HTTP Last-Modified, PDF metadata, or text diffs.
     enriched["articleDraft"]["effectiveDate"] = None
 
     return enriched
+
 
 
 def atomic_write_json(path: Path, value: dict) -> None:
@@ -460,11 +764,51 @@ def self_test() -> int:
         },
     }
 
-    enriched = enrich_draft(
-        base_draft,
-        FakeMonitor,
-        "2026-09-16T01:00:00Z",
-    )
+    with tempfile.TemporaryDirectory() as tmp:
+        evidence_root = Path(tmp) / "evidence"
+        source_url = base_draft["sourceEvidence"]["sourceURL"]
+
+        def write_snapshot(fingerprint: str, text: str) -> None:
+            path = snapshot_path(evidence_root, source_url, fingerprint)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            lines = text.splitlines()
+            payload = {
+                "schemaVersion": 1,
+                "sourceType": "reserve_guidance",
+                "sourceURL": source_url,
+                "finalURL": source_url,
+                "title": "RESPERSMAN 1570-010",
+                "fingerprint": fingerprint,
+                "capturedAt": "2026-09-16T00:00:00Z",
+                "extractionStatus": "ok",
+                "extractionMethod": "pypdf-test-fixture",
+                "pageCount": 1,
+                "pagesWithText": 1,
+                "characterCount": len(text),
+                "lineCount": len(lines),
+                "textSHA256": sha256_text(text),
+                "truncated": False,
+                "pageLineRanges": [{"page": 1, "startLine": 1, "endLine": len(lines)}],
+                "warnings": [],
+                "normalizedText": text,
+            }
+            path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+        write_snapshot(
+            "old-fingerprint",
+            "1. Purpose\nMembers shall complete 12 drills.\n2. Administration",
+        )
+        write_snapshot(
+            "new-fingerprint",
+            "1. Purpose\nMembers shall complete 14 drills.\n2. Administration",
+        )
+
+        enriched = enrich_draft(
+            base_draft,
+            FakeMonitor,
+            "2026-09-16T01:00:00Z",
+            evidence_root,
+        )
 
     assert enriched["enrichment"]["sourceType"] == "reserve_guidance"
     assert enriched["enrichment"]["fingerprintMatchesDetection"] is True
@@ -472,15 +816,55 @@ def self_test() -> int:
     assert enriched["enrichment"]["documentIdentifier"] == "1570-010"
     assert enriched["enrichment"]["automatedChangeAttributionClaimed"] is False
     assert enriched["enrichment"]["effectiveDateInferred"] is False
+    comparison = enriched["enrichment"]["textComparison"]
+    assert comparison["available"] is True
+    assert comparison["extractedTextChanged"] is True
+    assert comparison["removedLineCount"] == 1
+    assert comparison["addedLineCount"] == 1
+    assert comparison["hunks"][0]["oldPage"] == 1
+    assert comparison["hunks"][0]["newPage"] == 1
+    assert "12 drills" in comparison["hunks"][0]["removed"][0]
+    assert "14 drills" in comparison["hunks"][0]["added"][0]
+    assert enriched["enrichment"]["currentTextEvidence"]["available"] is True
     assert enriched["articleDraft"]["effectiveDate"] is None
     assert enriched["articleDraft"]["isActive"] is False
     assert enriched["publishReady"] is False
     assert enriched["requiresHumanReview"] is True
     assert enriched["reviewChecklist"]["approvedForPublication"] is False
-    assert "exact policy-language changes have not been automatically determined" in (
+    assert "normalized extracted-text comparison is available" in (
         enriched["articleDraft"]["summary"]
     )
     assert "not treated as a policy effective date" in enriched["articleDraft"]["details"]
+
+    # PDF bytes may change while normalized extracted text remains identical.
+    with tempfile.TemporaryDirectory() as tmp:
+        evidence_root = Path(tmp) / "evidence"
+        source_url = base_draft["sourceEvidence"]["sourceURL"]
+        identical_text = "1. Purpose\nNo textual policy change detected by extraction."
+        for fingerprint in ("old-fingerprint", "new-fingerprint"):
+            path = snapshot_path(evidence_root, source_url, fingerprint)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            lines = identical_text.splitlines()
+            path.write_text(
+                json.dumps(
+                    {
+                        "sourceURL": source_url,
+                        "fingerprint": fingerprint,
+                        "extractionStatus": "ok",
+                        "pageCount": 1,
+                        "textSHA256": sha256_text(identical_text),
+                        "pageLineRanges": [{"page": 1, "startLine": 1, "endLine": len(lines)}],
+                        "normalizedText": identical_text,
+                    }
+                ) + "\n",
+                encoding="utf-8",
+            )
+        identical = enrich_draft(
+            base_draft, FakeMonitor, "2026-09-16T01:00:00Z", evidence_root
+        )
+        assert identical["enrichment"]["textComparison"]["available"] is True
+        assert identical["enrichment"]["textComparison"]["extractedTextChanged"] is False
+        assert "normalized extracted text is unchanged" in identical["articleDraft"]["summary"]
 
     # New linked PDFs use the same verification path but different wording.
     new_document = copy.deepcopy(base_draft)
@@ -490,6 +874,7 @@ def self_test() -> int:
         new_document,
         FakeMonitor,
         "2026-09-16T01:00:00Z",
+        Path(tempfile.mkdtemp()) / "evidence",
     )
     assert "newly linked official Navy Reserve guidance document" in (
         enriched_new["articleDraft"]["summary"]
@@ -564,6 +949,7 @@ def main() -> int:
     parser.add_argument("--input", default=None)
     parser.add_argument("--output", default=None)
     parser.add_argument("--monitor-path", default=None)
+    parser.add_argument("--evidence-root", default=str(DEFAULT_EVIDENCE_ROOT))
     parser.add_argument("--enriched-at", default=None)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
@@ -589,6 +975,7 @@ def main() -> int:
             draft,
             monitor_module,
             args.enriched_at,
+            Path(args.evidence_root),
         )
         atomic_write_json(output_path, enriched)
     except (json.JSONDecodeError, EnrichmentError, OSError) as exc:
@@ -601,3 +988,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
