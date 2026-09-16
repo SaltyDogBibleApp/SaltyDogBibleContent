@@ -78,6 +78,11 @@ def render_markdown(payload: dict) -> str:
         and has_enrichment
         and enrichment.get("sourceType") == "pay_tables"
     )
+    automated_reserve_guidance_review = (
+        source_type == "reserve_guidance"
+        and has_enrichment
+        and enrichment.get("sourceType") == "reserve_guidance"
+    )
 
     lines = [
         "# Reserve Intel Review",
@@ -102,6 +107,16 @@ def render_markdown(payload: dict) -> str:
             "",
             "- Source-specific automation: **DFAS pay-table enrichment applied**",
             "- Automated change attribution: **Not claimed; prior source body is not retained**",
+            "- Human source verification and rewrite: **Required before approval**",
+            "",
+        ]
+    elif automated_reserve_guidance_review:
+        lines += [
+            "### Review Mode",
+            "",
+            "- Source-specific automation: **Navy Reserve guidance fingerprint verification applied**",
+            "- Automated policy-change attribution: **Not claimed**",
+            "- Effective-date inference from HTTP metadata: **Not performed**",
             "- Human source verification and rewrite: **Required before approval**",
             "",
         ]
@@ -203,6 +218,64 @@ def render_markdown(payload: dict) -> str:
                 lines.append(f"- {title} — {url}")
             lines.append("")
 
+    if automated_reserve_guidance_review:
+        match = enrichment.get("fingerprintMatchesDetection")
+        if match is True:
+            fingerprint_status = "Yes"
+        elif match is False:
+            fingerprint_status = "No"
+        else:
+            fingerprint_status = "Not supplied"
+
+        content_length = enrichment.get("contentLength")
+        if isinstance(content_length, int):
+            content_length_text = f"{content_length:,} bytes"
+        elif content_length is None:
+            content_length_text = "Not supplied"
+        else:
+            content_length_text = str(content_length)
+
+        automated_change_attribution = enrichment.get(
+            "automatedChangeAttributionClaimed"
+        )
+        if automated_change_attribution is True:
+            change_attribution_status = "Yes"
+        elif automated_change_attribution is False:
+            change_attribution_status = "No"
+        else:
+            change_attribution_status = "Not supplied"
+
+        effective_date_inferred = enrichment.get("effectiveDateInferred")
+        if effective_date_inferred is True:
+            effective_date_status = "Yes"
+        elif effective_date_inferred is False:
+            effective_date_status = "No"
+        else:
+            effective_date_status = "Not supplied"
+
+        lines += [
+            "### Navy Reserve Guidance Enrichment Evidence",
+            "",
+            f"- Enriched at: {enrichment.get('enrichedAt') or 'Not supplied'}",
+            f"- Document kind: {enrichment.get('documentKind') or 'Not supplied'}",
+            f"- Document identifier: {enrichment.get('documentIdentifier') or 'Not supplied'}",
+            f"- Source filename: {enrichment.get('sourceFilename') or 'Not supplied'}",
+            f"- Fetched URL: {enrichment.get('fetchedURL') or article['sourceURL']}",
+            f"- Detected fingerprint: `{enrichment.get('detectedFingerprint') or 'Not supplied'}`",
+            f"- Observed fingerprint: `{enrichment.get('observedFingerprint') or 'Not supplied'}`",
+            f"- Fingerprint matched detected version: {fingerprint_status}",
+            f"- HTTP Last-Modified: {enrichment.get('httpLastModified') or 'Not supplied'}",
+            f"- Downloaded size: {content_length_text}",
+            f"- ETag: {enrichment.get('etag') or 'Not supplied'}",
+            f"- Automated change attribution claimed: {change_attribution_status}",
+            f"- Effective date inferred from HTTP metadata: {effective_date_status}",
+            f"- Change-attribution note: {enrichment.get('changeAttributionNote') or 'Human determination required.'}",
+            "",
+            "> HTTP Last-Modified is source-server metadata only. It is **not** treated",
+            "> as the document's policy effective date or authoritative revision date.",
+            "",
+        ]
+
     lines += [
         "### Potential Salty Dog Bible Impact",
         "",
@@ -273,4 +346,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
