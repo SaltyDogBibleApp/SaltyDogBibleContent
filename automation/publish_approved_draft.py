@@ -5,7 +5,8 @@ Salty Dog Bible — publish a merged/approved Reserve Intel draft (IT-2D.5).
 Hard safety gate:
 - requires all six PR approval checkboxes to be checked
 - requires an official/verified source flag
-- refuses duplicate article IDs or source URLs
+- refuses duplicate article IDs and ambiguous source matches
+- updates an existing active article when the authoritative source identity matches
 - only then activates the article and updates reserve-content-feed.json
 """
 
@@ -19,6 +20,8 @@ from pathlib import Path
 import re
 import shutil
 import sys
+import tempfile
+from urllib.parse import unquote, urlsplit, urlunsplit
 
 CHECKS = [
     "I opened the official source.",
@@ -28,6 +31,16 @@ CHECKS = [
     "I reviewed the title, summary, Why It Matters, and details.",
     "I approve publication to Reserve Intel.",
 ]
+
+
+NAVADMIN_FILENAME_RE = re.compile(
+    r"^NAV(?P<year>\d{2})(?P<number>\d{3})\.pdf$",
+    re.I,
+)
+NAVADMIN_TEXT_RE = re.compile(
+    r"\bNAVADMIN\s+(?P<number>\d{1,3})\s*[/\-]\s*(?P<year>\d{2,4})\b",
+    re.I,
+)
 
 
 def utc_now_iso() -> str:
@@ -91,6 +104,124 @@ def normalize_article_dates(article: dict) -> None:
 
     # updatedAt is always refreshed at publication, so no draft value is trusted.
 
+
+def canonical_source_url(value: object) -> str | None:
+    """Return a comparison key for an authoritative source URL.
+
+    Query strings and fragments are intentionally excluded because official
+    publishers frequently append cache/version tokens to the same document.
+    """
+
+    if not isinstance(value, str) or not value.strip():
+        return None
+
+    raw = value.strip()
+    parsed = urlsplit(raw)
+    if not parsed.scheme or not parsed.netloc:
+        return None
+
+    path = unquote(parsed.path or "/")
+    path = re.sub(r"/{2,}", "/", path)
+    if path != "/":
+        path = path.rstrip("/")
+
+    return urlunsplit(
+        (
+            parsed.scheme.lower(),
+            parsed.netloc.lower(),
+            path,
+            "",
+            "",
+        )
+    )
+
+
+def navadmin_document_identity(article: dict) -> str | None:
+    """Return a normalized NAVADMIN identity, preferring the source URL.
+
+    MyNavyHR filenames such as NAV26204.pdf encode NAVADMIN 204/26. The source
+    URL is authoritative and therefore takes precedence over generated titles,
+    which may contain stale or incorrect NAVADMIN references.
+    """
+
+    source_url = article.get("sourceURL")
+    if isinstance(source_url, str) and source_url.strip():
+        filename = Path(unquote(urlsplit(source_url.strip()).path)).name
+        match = NAVADMIN_FILENAME_RE.fullmatch(filename)
+        if match:
+            year = int(match.group("year"))
+            number = int(match.group("number"))
+            return f"NAVADMIN-{number:03d}-{year:02d}"
+
+    for field in ("sourceName", "title"):
+        value = article.get(field)
+        if not isinstance(value, str):
+            continue
+        match = NAVADMIN_TEXT_RE.search(value)
+        if not match:
+            continue
+
+        number = int(match.group("number"))
+        raw_year = match.group("year")
+        year = int(raw_year[-2:])
+        return f"NAVADMIN-{number:03d}-{year:02d}"
+
+    return None
+
+
+def source_match_reasons(incoming: dict, existing: dict) -> list[str]:
+    """Describe authoritative-source keys shared by two articles."""
+
+    reasons: list[str] = []
+
+    incoming_url = canonical_source_url(incoming.get("sourceURL"))
+    existing_url = canonical_source_url(existing.get("sourceURL"))
+    if incoming_url and existing_url and incoming_url == existing_url:
+        reasons.append(f"canonicalSourceURL={incoming_url}")
+
+    incoming_document = navadmin_document_identity(incoming)
+    existing_document = navadmin_document_identity(existing)
+    if (
+        incoming_document
+        and existing_document
+        and incoming_document == existing_document
+    ):
+        reasons.append(f"documentIdentity={incoming_document}")
+
+    return reasons
+
+
+def find_active_source_match(article: dict, articles: list[dict]) -> int | None:
+    """Find one active live-feed article representing the same source.
+
+    Multiple matches are refused rather than guessed so publication remains a
+    human-review-controlled operation.
+    """
+
+    matches: list[tuple[int, dict, list[str]]] = []
+
+    for index, existing in enumerate(articles):
+        if not isinstance(existing, dict):
+            continue
+        if existing.get("isActive") is not True:
+            continue
+
+        reasons = source_match_reasons(article, existing)
+        if reasons:
+            matches.append((index, existing, reasons))
+
+    if len(matches) > 1:
+        details = "; ".join(
+            f"{existing.get('id', '<missing-id>')} ({', '.join(reasons)})"
+            for _, existing, reasons in matches
+        )
+        raise ValueError(
+            "Ambiguous live-feed source match. More than one active article "
+            f"matches the approved source: {details}"
+        )
+
+    return matches[0][0] if matches else None
+
 def checkbox_checked(body: str, label: str) -> bool:
     pattern = re.compile(
         r"(?mi)^\s*-\s*\[[xX]\]\s*" + re.escape(label) + r"\s*$"
@@ -151,15 +282,15 @@ def publish(
     if not isinstance(articles, list):
         raise ValueError("Feed intelArticles must be an array.")
 
+    # Article IDs remain globally unique. A repeated ID indicates a publication
+    # replay or collision and is never treated as an update.
     for existing in articles:
         if not isinstance(existing, dict):
             continue
         if existing.get("id") == article_id:
             raise ValueError(f"Article ID already exists in live feed: {article_id}")
-        if existing.get("sourceURL") == source_url:
-            raise ValueError(
-                f"An article with this sourceURL already exists in the live feed: {source_url}"
-            )
+
+    matching_index = find_active_source_match(article, articles)
 
     normalize_article_dates(article)
 
@@ -167,8 +298,32 @@ def publish(
     article["isActive"] = True
     article["updatedAt"] = now
 
+    if matching_index is None:
+        # A genuinely new authoritative source becomes a new live Intel record.
+        feed["intelArticles"] = [article] + articles
+        published_article_id = article_id
+    else:
+        # The authoritative source is already represented by one active article.
+        # Preserve the stable app identity and original publication timestamp,
+        # while replacing the approved content with the newly reviewed version.
+        existing = articles[matching_index]
+
+        existing_id = existing.get("id")
+        if not isinstance(existing_id, str) or not existing_id:
+            raise ValueError("Matched live-feed article is missing a stable ID.")
+
+        existing_published_at = normalize_iso_datetime(
+            existing.get("publishedAt"),
+            "existingArticle.publishedAt",
+        )
+
+        article["id"] = existing_id
+        article["publishedAt"] = existing_published_at
+        articles[matching_index] = article
+        feed["intelArticles"] = articles
+        published_article_id = existing_id
+
     feed["generatedAt"] = now
-    feed["intelArticles"] = [article] + articles
     feed_path.write_text(
         json.dumps(feed, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
@@ -196,18 +351,273 @@ def publish(
             str(review_published_dir / review_marker.name),
         )
 
-    return article_id
+    return published_article_id
+
+
+def self_test() -> int:
+    approval_body = "\n".join(f"- [x] {label}" for label in CHECKS)
+
+    def make_draft(article: dict) -> dict:
+        return {
+            "draftStatus": "PENDING_HUMAN_REVIEW",
+            "requiresHumanReview": True,
+            "publishReady": False,
+            "sourceEvidence": {"officialHostVerified": True},
+            "articleDraft": article,
+        }
+
+    def write_json(path: Path, value: dict) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(value, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+
+    # Canonical URL matching must ignore MyNavyHR version-query noise.
+    assert canonical_source_url(
+        "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+        "NAV2026/NAV26204.pdf?ver=abc#page=1"
+    ) == canonical_source_url(
+        "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+        "NAV2026/NAV26204.pdf"
+    )
+
+    # The authoritative filename must win over an incorrect/stale generated title.
+    identity_fixture = {
+        "sourceURL": (
+            "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+            "NAV2026/NAV26204.pdf?ver=abc"
+        ),
+        "sourceName": "MyNavyHR NAVADMIN",
+        "title": "Modification to NAVADMIN 084/26",
+    }
+    assert navadmin_document_identity(identity_fixture) == "NAVADMIN-204-26"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+
+        # Real-world NAVADMIN 204/26 regression:
+        # an automated article with a ?ver= token updates the already-active
+        # manual article instead of adding a second card.
+        feed_path = root / "feed.json"
+        draft_path = root / "pending" / "navadmin-204-update.json"
+        published_dir = root / "published"
+
+        existing = {
+            "id": "intel-navadmin-204-26-cyber",
+            "publishedAt": "2026-08-31T18:38:00Z",
+            "updatedAt": "2026-09-14T14:35:00Z",
+            "title": (
+                "NAVADMIN 204/26 — Cyber Awareness Moves to Every 3 Years "
+                "for Military Personnel"
+            ),
+            "category": "Training & Readiness",
+            "status": "EFFECTIVE",
+            "priority": "HIGH",
+            "summary": "Old reviewed content.",
+            "whyItMatters": "Old reviewed content.",
+            "details": "Old reviewed content.",
+            "effectiveDate": "2026-08-31T00:00:00Z",
+            "sourceName": "NAVADMIN 204/26 — MyNavyHR",
+            "sourceURL": (
+                "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+                "NAV2026/NAV26204.pdf"
+            ),
+            "audience": {
+                "service": "USN",
+                "reserveStatus": "ALL",
+                "trainingWing": None,
+                "squadron": None,
+            },
+            "isPinned": False,
+            "isActive": True,
+        }
+        write_json(
+            feed_path,
+            {
+                "schemaVersion": 1,
+                "generatedAt": "2026-09-14T14:35:00Z",
+                "intelArticles": [existing],
+                "tipperMessages": [],
+            },
+        )
+
+        incoming = deepcopy(existing)
+        incoming.update(
+            {
+                "id": (
+                    "intel-modification-to-navadmin-084-26-fiscal-year-2026-"
+                    "cybersecurity-a-a282de7970"
+                ),
+                "publishedAt": "2026-09-15T15:17:01Z",
+                "updatedAt": None,
+                "title": "Cybersecurity Awareness Training Changes to Every 3 Years",
+                "summary": "New approved content.",
+                "whyItMatters": "New approved why-it-matters.",
+                "details": "New approved details.",
+                "sourceName": "MyNavyHR NAVADMIN",
+                "sourceURL": (
+                    "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+                    "NAV2026/NAV26204.pdf?ver=Z0SgLUjWKMJuHZr8CPoubQ%3d%3d"
+                ),
+            }
+        )
+        write_json(draft_path, make_draft(incoming))
+
+        result_id = publish(
+            draft_path,
+            feed_path,
+            approval_body,
+            published_dir,
+            None,
+            None,
+        )
+
+        updated_feed = load_json(feed_path)
+        assert len(updated_feed["intelArticles"]) == 1
+        updated = updated_feed["intelArticles"][0]
+        assert result_id == "intel-navadmin-204-26-cyber"
+        assert updated["id"] == "intel-navadmin-204-26-cyber"
+        assert updated["publishedAt"] == "2026-08-31T18:38:00Z"
+        assert updated["title"] == "Cybersecurity Awareness Training Changes to Every 3 Years"
+        assert updated["summary"] == "New approved content."
+        assert updated["sourceURL"].endswith(
+            "NAV26204.pdf?ver=Z0SgLUjWKMJuHZr8CPoubQ%3d%3d"
+        )
+        assert updated["isActive"] is True
+        assert isinstance(updated.get("updatedAt"), str)
+
+        archived = load_json(published_dir / "navadmin-204-update.json")
+        assert archived["articleDraft"]["id"] == "intel-navadmin-204-26-cyber"
+        assert archived["articleDraft"]["publishedAt"] == "2026-08-31T18:38:00Z"
+
+        # NAVADMIN identity is a backup when the canonical URL path changes.
+        feed_path_2 = root / "feed-identity.json"
+        draft_path_2 = root / "pending" / "navadmin-identity-update.json"
+        existing_2 = deepcopy(existing)
+        existing_2["id"] = "intel-navadmin-204-26-existing"
+        write_json(
+            feed_path_2,
+            {
+                "schemaVersion": 1,
+                "generatedAt": "2026-09-14T14:35:00Z",
+                "intelArticles": [existing_2],
+                "tipperMessages": [],
+            },
+        )
+
+        incoming_2 = deepcopy(incoming)
+        incoming_2["id"] = "intel-navadmin-204-26-new-path"
+        incoming_2["sourceURL"] = (
+            "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+            "Archive/NAV26204.pdf?ver=new"
+        )
+        write_json(draft_path_2, make_draft(incoming_2))
+
+        result_id_2 = publish(
+            draft_path_2,
+            feed_path_2,
+            approval_body,
+            root / "published-identity",
+            None,
+            None,
+        )
+        updated_feed_2 = load_json(feed_path_2)
+        assert len(updated_feed_2["intelArticles"]) == 1
+        assert result_id_2 == "intel-navadmin-204-26-existing"
+
+        # Multiple active matches must fail closed instead of choosing one.
+        feed_path_3 = root / "feed-ambiguous.json"
+        draft_path_3 = root / "pending" / "navadmin-ambiguous.json"
+        duplicate_a = deepcopy(existing)
+        duplicate_a["id"] = "duplicate-a"
+        duplicate_b = deepcopy(existing)
+        duplicate_b["id"] = "duplicate-b"
+        duplicate_b["sourceURL"] = (
+            "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/"
+            "Archive/NAV26204.pdf"
+        )
+        write_json(
+            feed_path_3,
+            {
+                "schemaVersion": 1,
+                "generatedAt": "2026-09-14T14:35:00Z",
+                "intelArticles": [duplicate_a, duplicate_b],
+                "tipperMessages": [],
+            },
+        )
+        ambiguous_incoming = deepcopy(incoming)
+        ambiguous_incoming["id"] = "ambiguous-new"
+        write_json(draft_path_3, make_draft(ambiguous_incoming))
+
+        try:
+            publish(
+                draft_path_3,
+                feed_path_3,
+                approval_body,
+                root / "published-ambiguous",
+                None,
+                None,
+            )
+        except ValueError as exc:
+            assert "Ambiguous live-feed source match" in str(exc)
+        else:
+            raise AssertionError("Ambiguous source matches must block publication.")
+
+        # Reusing an existing article ID remains a hard publication failure.
+        feed_path_4 = root / "feed-id-collision.json"
+        draft_path_4 = root / "pending" / "id-collision.json"
+        write_json(
+            feed_path_4,
+            {
+                "schemaVersion": 1,
+                "generatedAt": "2026-09-14T14:35:00Z",
+                "intelArticles": [existing],
+                "tipperMessages": [],
+            },
+        )
+        id_collision = deepcopy(incoming)
+        id_collision["id"] = existing["id"]
+        write_json(draft_path_4, make_draft(id_collision))
+
+        try:
+            publish(
+                draft_path_4,
+                feed_path_4,
+                approval_body,
+                root / "published-id-collision",
+                None,
+                None,
+            )
+        except ValueError as exc:
+            assert "Article ID already exists" in str(exc)
+        else:
+            raise AssertionError("Duplicate article IDs must block publication.")
+
+    print("SELF-TEST PASSED")
+    return 0
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--draft", required=True)
+    parser.add_argument("--draft", default=None)
     parser.add_argument("--feed", default="reserve-content-feed.json")
-    parser.add_argument("--approval-body-file", required=True)
+    parser.add_argument("--approval-body-file", default=None)
     parser.add_argument("--published-dir", default="drafts/published")
     parser.add_argument("--review-marker", default=None)
     parser.add_argument("--review-published-dir", default="reviews/published")
+    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
+
+    if args.self_test:
+        return self_test()
+
+    if not args.draft:
+        print("--draft is required unless --self-test is used.", file=sys.stderr)
+        return 2
+    if not args.approval_body_file:
+        print("--approval-body-file is required unless --self-test is used.", file=sys.stderr)
+        return 2
 
     try:
         body = Path(args.approval_body_file).read_text(encoding="utf-8")
