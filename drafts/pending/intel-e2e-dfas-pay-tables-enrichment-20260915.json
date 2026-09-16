@@ -1,0 +1,74 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-15T23:29:40Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Drill / Orders",
+      "Pay Tracker"
+    ],
+    "basis": [
+      "category: Pay & Benefits",
+      "signal: DRILL PAY",
+      "keyword: PAY TABLE"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "DFAS Military Pay Tables",
+    "sourceType": "pay_tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "listedDate": null,
+    "reserveSignals": [
+      "DRILL PAY",
+      "BASIC PAY",
+      "AVIATION INCENTIVE PAY",
+      "BAS",
+      "ALLOWANCE"
+    ],
+    "categoryHints": [
+      "Pay & Benefits"
+    ],
+    "detectionKind": "source_changed_in_place",
+    "sourceFingerprint": "0922d2ad61558a1a60b47dc3662a8e8e2c369173b79ce45e1598ffc7f97a2077",
+    "previousFingerprint": "SIMULATED-OLD-DFAS-FINGERPRINT",
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-e2e-dfas-pay-tables-enrichment-20260915",
+    "publishedAt": "2026-09-15T23:29:40Z",
+    "updatedAt": "2026-09-15T23:29:40Z",
+    "title": "E2E TEST \u2014 DFAS Military Pay Tables enrichment",
+    "category": "Pay & Benefits",
+    "status": "TRACKING",
+    "priority": "HIGH",
+    "summary": "Automated draft from an official source: DFAS Military Pay Tables \u2014 source content changed. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: DRILL PAY, BASIC PAY, AVIATION INCENTIVE PAY, BAS, ALLOWANCE.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "DFAS Military Pay Tables",
+    "sourceURL": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/",
+    "audience": {
+      "service": "ALL",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}
