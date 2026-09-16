@@ -35,19 +35,6 @@ import check_sources as monitor
 MAX_RELEVANT_LINKS = 30
 MAX_SECTION_SNIPPET_CHARS = 650
 
-PAY_LINK_KEYWORDS = (
-    "drill",
-    "basic pay",
-    "pay table",
-    "allowance",
-    "aviation",
-    "incentive",
-    "bas",
-    "fica",
-    "reserve",
-    "muster",
-)
-
 SECTION_HEADINGS = (
     "Basic Pay Rates",
     "Drill Pay Rates",
@@ -61,15 +48,26 @@ SECTION_HEADINGS = (
 
 MONTHS = (
     "January|February|March|April|May|June|July|August|September|October|"
-    "November|December|Jan\\.?|Feb\\.?|Mar\\.?|Apr\\.?|Jun\\.?|Jul\\.?|"
-    "Aug\\.?|Sep\\.?|Sept\\.?|Oct\\.?|Nov\\.?|Dec\\.?"
+    "November|December|Jan\.?|Feb\.?|Mar\.?|Apr\.?|Jun\.?|Jul\.?|"
+    "Aug\.?|Sep\.?|Sept\.?|Oct\.?|Nov\.?|Dec\.?"
 )
 
 EFFECTIVE_DATE_RE = re.compile(
     rf"\bEffective\s+((?:{MONTHS})\s+\d{{1,2}},\s+\d{{4}})",
     re.I,
 )
-POSTED_DATE_RE = re.compile(r"\(Posted\s+([^)]+)\)", re.I)
+POSTED_MONTH = (
+    r"(?:January|February|March|April|May|June|July|August|September|October|"
+    r"November|December|Jan\.?|Feb\.?|Mar\.?|Apr\.?|Jun\.?|Jul\.?|"
+    r"Aug\.?|Sep\.?|Sept\.?|Oct\.?|Nov\.?|Dec\.?)"
+)
+
+# DFAS has a few entries with imperfect closing punctuation, so stop at the
+# date itself instead of consuming arbitrary text until the next ")".
+POSTED_DATE_RE = re.compile(
+    rf"\(Posted\.?\s+({POSTED_MONTH}\s+(?:\d{{1,2}},\s+)?\d{{4}})\b",
+    re.I,
+)
 
 
 def utc_now_iso() -> str:
@@ -132,17 +130,34 @@ def validate_pending_pay_tables_draft(payload: dict) -> tuple[dict, dict]:
 
 
 def relevant_pay_links(items: list[dict]) -> list[dict[str, str]]:
+    """
+    Keep only concrete descendants of the DFAS Military Pay Tables hub.
+
+    The monitor's generic pay-table discovery intentionally uses broad keyword
+    matching. That is useful for change detection, but too broad for review
+    evidence: words such as "reserve" can pull in travel pages, and the substring
+    "fica" can appear inside unrelated words such as "verification".
+
+    For enrichment evidence, require the authoritative DFAS URL path itself to be
+    under /pay-tables/ and exclude the hub self-link. This keeps the review focused
+    on actual basic-pay, drill-pay, BAS, aviation/incentive, allowance, and other
+    pay-table descendants.
+    """
     results: list[dict[str, str]] = []
     seen: set[str] = set()
 
     for item in items:
         title = str(item.get("title") or "").strip()
         url = str(item.get("url") or "").strip()
-        if not url or url in seen:
+        if not url or url in seen or not is_official_dfas_url(url):
             continue
 
-        searchable = f"{title} {url}".lower()
-        if not any(keyword in searchable for keyword in PAY_LINK_KEYWORDS):
+        path = (urlparse(url).path or "").lower()
+        normalized_path = path.rstrip("/")
+
+        if "/pay-tables/" not in path:
+            continue
+        if normalized_path.endswith("/pay-tables"):
             continue
 
         seen.add(url)
@@ -316,19 +331,24 @@ def self_test() -> int:
     dfas_url = "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
     fixture = """
     <html><body>
+      <a href="/MilitaryMembers/travelpay/Army-TDY/">Army Active Duty &amp; Reserve TDY</a>
+      <a href="/Portals/98/DoD Employment Verification.pdf">DoD Employee Verification</a>
+      <a href="/MilitaryMembers/payentitlements/fsa/">Family Separation Allowance</a>
+
       <h4>Military Pay Tables &amp; Information</h4>
+      <a href="/militarymembers/payentitlements/Pay-Tables/">Pay/Special Pay/Allowance Tables</a>
       <p>Basic Pay Rates:</p>
       <a href="/militarymembers/payentitlements/Pay-Tables/Basic-Pay/CO/">Commissioned Officers</a>
       (Posted Jan 2026)
       <p>Drill Pay Rates:</p>
       <a href="/militarymembers/payentitlements/Pay-Tables/Drill-Pay/Drill-Pay-CO/">Commissioned Officers Drill Pay</a>
-      (Posted Jan 2026)
+      (Posted Jan 2026
       <p>Reserve Component Drill Pay Effective January 1, 2026</p>
       <a href="/militarymembers/payentitlements/Pay-Tables/bas/">Basic Allowance for Subsistence (BAS)</a>
       (Posted Dec 2025)
       <p>Aviation Incentive Pays</p>
       <a href="/militarymembers/payentitlements/Pay-Tables/AVIP/">Monthly Navy Aviation Incentive Pay Rates</a>
-      (Posted Aug 2022)
+      (Posted. Aug. 2022)
       <p>DRILL PAY BASIC PAY AVIATION INCENTIVE PAY BAS ALLOWANCE</p>
     </body></html>
     """
@@ -390,7 +410,20 @@ def self_test() -> int:
     assert enrichment["monitorFingerprintMatch"] is True
     assert enrichment["humanReviewStillRequired"] is True
     assert "January 1, 2026" in enrichment["effectiveDateTextCandidates"]
-    assert len(enrichment["relevantLinks"]) >= 3
+
+    relevant_urls = [item["url"].lower() for item in enrichment["relevantLinks"]]
+    assert len(relevant_urls) == 4
+    assert all("/pay-tables/" in url for url in relevant_urls)
+    assert not any("travelpay" in url for url in relevant_urls)
+    assert not any("verification" in url for url in relevant_urls)
+    assert not any("/fsa/" in url for url in relevant_urls)
+    assert not any(url.rstrip("/").endswith("/pay-tables") for url in relevant_urls)
+
+    assert enrichment["postedDateTextCandidates"] == [
+        "Jan 2026",
+        "Dec 2025",
+        "Aug. 2022",
+    ]
     assert "Drill Pay Rates" in enrichment["sectionSnippets"]
     assert result["articleDraft"]["isActive"] is False
     assert result["publishReady"] is False
