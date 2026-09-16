@@ -49,7 +49,18 @@ DEFAULT_EVIDENCE_ROOT = Path("automation/reserve-intel-evidence/navyreserve-resp
 MAX_DIFF_HUNKS = 12
 MAX_DIFF_LINES_PER_SIDE = 8
 MAX_DIFF_LINE_CHARS = 500
-HEADING_RE = re.compile(r"^(?:\d+(?:\.\d+)*\.?\s+|[A-Z][A-Z0-9 /&(),.\'\-]{5,})")
+ARTICLE_TITLE_LABEL_RE = re.compile(r"^article\s+title\s*:?\s*$", re.I)
+NUMBERED_HEADING_RE = re.compile(
+    r"^\d+(?:\.\d+)*\.?\s+[A-Za-z][^.!?]{0,120}$"
+)
+SECTION_HEADING_RE = re.compile(
+    r"^(?:purpose|scope|background|policy|responsibilit(?:y|ies)|"
+    r"procedures?|requirements?|definitions?|administration|training|"
+    r"records?|reporting|eligibility|applicability|references?|overview|"
+    r"general information|action|discussion|table of contents)"
+    r"(?:\s*[:\-–—]\s*.*|\s+.*)?$",
+    re.I,
+)
 
 
 class EnrichmentError(ValueError):
@@ -128,14 +139,45 @@ def line_page(snapshot: dict, line_number: int | None) -> int | None:
     return None
 
 
+def structural_heading_candidate(lines: list[str], pos: int) -> str | None:
+    candidate = lines[pos].strip()
+    if not 3 <= len(candidate) <= 140:
+        return None
+    if candidate.startswith(("•", "-", "*")):
+        return None
+
+    # RESPERSMAN change summaries often put the real article title immediately
+    # after an "Article Title" label. Prefer that mixed-case title over nearby
+    # signature/OCR noise.
+    if pos > 0 and ARTICLE_TITLE_LABEL_RE.fullmatch(lines[pos - 1].strip()):
+        return candidate[:140]
+
+    # A bare RESPERSMAN article number is structural context even when the PDF
+    # does not expose a conventional section heading nearby.
+    if CHAPTER_RE.fullmatch(candidate):
+        return candidate
+
+    # Normal manual section headings such as "1. Purpose" or "3. Procedures".
+    if NUMBERED_HEADING_RE.fullmatch(candidate):
+        return candidate[:140]
+
+    # Unnumbered structural headings are intentionally restricted to known
+    # manual-style labels. Returning no heading is safer than surfacing a name,
+    # signature block, sentence fragment, or OCR artifact as a section heading.
+    if SECTION_HEADING_RE.fullmatch(candidate):
+        return candidate[:140]
+
+    return None
+
+
 def nearby_heading(lines: list[str], index: int) -> str | None:
     if not lines:
         return None
     index = min(max(index, 0), len(lines) - 1)
     for pos in range(max(0, index - 20), index + 1)[::-1]:
-        candidate = lines[pos].strip()
-        if 3 <= len(candidate) <= 140 and HEADING_RE.search(candidate):
-            return candidate[:140]
+        candidate = structural_heading_candidate(lines, pos)
+        if candidate is not None:
+            return candidate
     return None
 
 
@@ -825,6 +867,24 @@ def self_test() -> int:
     assert comparison["hunks"][0]["newPage"] == 1
     assert "12 drills" in comparison["hunks"][0]["removed"][0]
     assert "14 drills" in comparison["hunks"][0]["added"][0]
+    assert comparison["hunks"][0]["nearbyHeadingHeuristic"] == "1. Purpose"
+
+    # Heading heuristics must prefer structural RESPERSMAN context and reject
+    # signature/OCR noise such as the name-like line seen in real 1570-030 text.
+    heading_fixture = [
+        "J. A. s@oMMER",
+        "Deputy",
+        "Article No.",
+        "1570-030",
+        "Article Title",
+        "Individual Inactive Duty Trainin2 Record Maintenance",
+        "• Simplifies and updates existing procedures.",
+        "• Removed the requirement for non-IDT orders to be maintained in the",
+    ]
+    assert nearby_heading(heading_fixture, len(heading_fixture) - 1) == (
+        "Individual Inactive Duty Trainin2 Record Maintenance"
+    )
+    assert nearby_heading(["J. A. s@oMMER", "Deputy"], 1) is None
     assert enriched["enrichment"]["currentTextEvidence"]["available"] is True
     assert enriched["articleDraft"]["effectiveDate"] is None
     assert enriched["articleDraft"]["isActive"] is False
@@ -988,4 +1048,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
