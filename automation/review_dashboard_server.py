@@ -213,15 +213,60 @@ def refresh_dashboard_data(
             encoding="utf-8",
         )
 
-    pending = payload.get("pending")
-    published = payload.get("published")
+    status = dashboard_payload_status(payload)
     return {
         "ok": True,
-        "mainRef": DASHBOARD_MAIN_REF,
-        "pending": len(pending) if isinstance(pending, list) else None,
-        "published": len(published) if isinstance(published, list) else None,
+        **status,
         "suppressedPending": suppressed_count,
     }
+
+
+def dashboard_payload_status(payload: dict[str, Any]) -> dict[str, Any]:
+    pending = payload.get("pending")
+    published = payload.get("published")
+
+    latest_published_at: str | None = None
+    if isinstance(published, list):
+        timestamps = [
+            str(item.get("updatedAt") or item.get("publishedAt"))
+            for item in published
+            if isinstance(item, dict) and (item.get("updatedAt") or item.get("publishedAt"))
+        ]
+        if timestamps:
+            latest_published_at = max(timestamps)
+
+    return {
+        "generatedAt": payload.get("generatedAt"),
+        "mainRef": payload.get("mainRef") or DASHBOARD_MAIN_REF,
+        "pending": len(pending) if isinstance(pending, list) else None,
+        "published": len(published) if isinstance(published, list) else None,
+        "lastPublishedAt": latest_published_at,
+    }
+
+
+def read_dashboard_status(root: Path) -> dict[str, Any]:
+    path = root / DASHBOARD_OUTPUT
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {
+            "generatedAt": None,
+            "mainRef": DASHBOARD_MAIN_REF,
+            "pending": None,
+            "published": None,
+            "lastPublishedAt": None,
+        }
+
+    if not isinstance(payload, dict):
+        return {
+            "generatedAt": None,
+            "mainRef": DASHBOARD_MAIN_REF,
+            "pending": None,
+            "published": None,
+            "lastPublishedAt": None,
+        }
+
+    return dashboard_payload_status(payload)
 
 
 def refresh_server_dashboard(server: ThreadingHTTPServer) -> dict[str, Any]:
@@ -1024,12 +1069,28 @@ def self_test() -> int:
     assert removed == 1
     assert [item["id"] for item in filtered_payload["pending"]] == ["keep-me"]
 
+    status = dashboard_payload_status(
+        {
+            "generatedAt": "2026-09-16T15:00:00Z",
+            "mainRef": "origin/main",
+            "pending": [{"id": "one"}],
+            "published": [
+                {"id": "old", "updatedAt": "2026-09-15T12:00:00Z"},
+                {"id": "new", "publishedAt": "2026-09-16T12:30:00Z"},
+            ],
+        }
+    )
+    assert status["pending"] == 1
+    assert status["published"] == 2
+    assert status["mainRef"] == "origin/main"
+    assert status["lastPublishedAt"] == "2026-09-16T12:30:00Z"
+
     print("SELF-TEST PASSED")
     return 0
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
-    server_version = "ReserveIntelDashboard/4B"
+    server_version = "ReserveIntelDashboard/4C"
 
     def _json_response(self, status: int, payload: dict[str, Any]) -> None:
         raw = (json.dumps(payload, ensure_ascii=False) + "\n").encode("utf-8")
@@ -1044,6 +1105,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/api/reserve-intel/health":
             repo = getattr(self.server, "repo_slug", None)
+            root = Path(getattr(self.server, "dashboard_root"))
             self._json_response(
                 200,
                 {
@@ -1053,7 +1115,9 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                     "approveEnabled": bool(repo),
                     "rejectEnabled": bool(repo),
                     "autoRefreshEnabled": bool(repo),
+                    "manualRefreshEnabled": bool(repo),
                     "dashboardMainRef": DASHBOARD_MAIN_REF,
+                    "dashboard": read_dashboard_status(root),
                 },
             )
             return
@@ -1061,7 +1125,12 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path not in {"/api/reserve-intel/save", "/api/reserve-intel/reject", "/api/reserve-intel/approve"}:
+        if parsed.path not in {
+            "/api/reserve-intel/save",
+            "/api/reserve-intel/reject",
+            "/api/reserve-intel/approve",
+            "/api/reserve-intel/refresh",
+        }:
             self._json_response(404, {"ok": False, "error": "Unknown API endpoint."})
             return
 
@@ -1086,15 +1155,22 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             if not repo:
                 raise SaveError("Save service is not connected to a GitHub repository.")
 
-            if parsed.path == "/api/reserve-intel/save":
+            if parsed.path == "/api/reserve-intel/refresh":
+                result = refresh_server_dashboard(self.server)
+                action_removes_pending = False
+                action_already_refreshed = True
+            elif parsed.path == "/api/reserve-intel/save":
                 result = save_request(payload, repo)
                 action_removes_pending = False
+                action_already_refreshed = False
             elif parsed.path == "/api/reserve-intel/reject":
                 result = reject_request(payload, repo)
                 action_removes_pending = True
+                action_already_refreshed = False
             else:
                 result = approve_request(payload, repo)
                 action_removes_pending = True
+                action_already_refreshed = False
 
             article_id = payload.get("articleId")
             if (
@@ -1105,17 +1181,18 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 suppressed = getattr(self.server, "suppressed_article_ids")
                 suppressed.add(article_id.strip())
 
-            try:
-                result["dashboardRefresh"] = refresh_server_dashboard(self.server)
-            except Exception as refresh_exc:
-                print(
-                    f"[dashboard-refresh] immediate refresh failed: {refresh_exc}",
-                    file=sys.stderr,
-                )
-                result["dashboardRefresh"] = {
-                    "ok": False,
-                    "error": str(refresh_exc),
-                }
+            if not action_already_refreshed:
+                try:
+                    result["dashboardRefresh"] = refresh_server_dashboard(self.server)
+                except Exception as refresh_exc:
+                    print(
+                        f"[dashboard-refresh] immediate refresh failed: {refresh_exc}",
+                        file=sys.stderr,
+                    )
+                    result["dashboardRefresh"] = {
+                        "ok": False,
+                        "error": str(refresh_exc),
+                    }
 
             if action_removes_pending:
                 schedule_followup_refreshes(self.server)
@@ -1184,3 +1261,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
