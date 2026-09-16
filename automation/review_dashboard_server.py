@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Serve the Reserve Intel dashboard and provide a narrowly scoped Save Draft API.
@@ -11,7 +12,11 @@ Security / safety properties:
 - sourceURL, sourceName, source evidence, fingerprints, review metadata,
   publication gates, draftStatus, and reviewChecklist are never accepted
   from the browser and are never rewritten by the patch function.
-- Reject and Approve are intentionally not implemented here.
+- Reject is allowed only for the unique open Review PR whose head branch is
+  reserve-intel-review/<article_id> and whose base branch is main.
+- Reject closes that PR without merge and leaves archival to the existing
+  reserve-intel-rejected-closed workflow.
+- Approve is intentionally not implemented here.
 """
 
 from __future__ import annotations
@@ -65,6 +70,7 @@ MAX_SUMMARY = 4000
 MAX_WHY = 6000
 MAX_DETAILS = 20000
 MAX_TARGET = 120
+MAX_REJECT_REASON = 2000
 
 ISO_MIDNIGHT_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T00:00:00Z$")
 
@@ -367,6 +373,190 @@ def save_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
     }
 
 
+
+def validate_rejection_reason(value: Any) -> str:
+    if value is None:
+        return ""
+    if not isinstance(value, str):
+        raise SaveError("reason must be text.")
+    cleaned = value.strip()
+    if len(cleaned) > MAX_REJECT_REASON:
+        raise SaveError(f"reason exceeds the {MAX_REJECT_REASON}-character limit.")
+    return cleaned
+
+
+def gh_pr_list_json(repo: str, branch: str) -> list[dict[str, Any]]:
+    result = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "list",
+            "--repo",
+            repo,
+            "--state",
+            "open",
+            "--base",
+            "main",
+            "--head",
+            branch,
+            "--json",
+            "number,headRefName,baseRefName,url,title,isDraft",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "Could not query Review PRs."
+        raise SaveError(detail)
+
+    try:
+        value = json.loads(result.stdout)
+    except json.JSONDecodeError as exc:
+        raise SaveError("GitHub returned invalid Review PR JSON.") from exc
+
+    if not isinstance(value, list):
+        raise SaveError("GitHub returned an unexpected Review PR response.")
+
+    return [item for item in value if isinstance(item, dict)]
+
+
+def find_unique_open_review_pr(repo: str, branch: str) -> dict[str, Any]:
+    candidates = [
+        pr
+        for pr in gh_pr_list_json(repo, branch)
+        if pr.get("headRefName") == branch and pr.get("baseRefName") == "main"
+    ]
+
+    if not candidates:
+        raise SaveError(
+            "No open Review PR matches this article. Reject is blocked until a unique open PR exists."
+        )
+
+    if len(candidates) != 1:
+        numbers = ", ".join(str(pr.get("number")) for pr in candidates)
+        raise SaveError(
+            f"Reject is blocked because more than one open Review PR matches this article: {numbers}"
+        )
+
+    pr = candidates[0]
+    if not isinstance(pr.get("number"), int):
+        raise SaveError("Matching Review PR does not have a valid PR number.")
+    return pr
+
+
+def build_rejection_comment(article_id: str, reason: str) -> str:
+    lines = [
+        "Rejected from the Reserve Intel Mac review dashboard.",
+        "",
+        f"Article ID: `{article_id}`",
+    ]
+    if reason:
+        lines.extend(["", "Reason:", reason])
+    else:
+        lines.extend(["", "Reason: No reason provided."])
+    return "\n".join(lines)
+
+
+def close_review_pr(repo: str, pr_number: int, comment: str) -> dict[str, Any]:
+    result = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "close",
+            str(pr_number),
+            "--repo",
+            repo,
+            "--comment",
+            comment,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or "Could not close Review PR."
+        raise SaveError(detail)
+
+    verify = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "view",
+            str(pr_number),
+            "--repo",
+            repo,
+            "--json",
+            "number,state,mergedAt,headRefName,baseRefName,url",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if verify.returncode != 0:
+        detail = verify.stderr.strip() or verify.stdout.strip() or "Could not verify closed Review PR."
+        raise SaveError(detail)
+
+    try:
+        value = json.loads(verify.stdout)
+    except json.JSONDecodeError as exc:
+        raise SaveError("GitHub returned invalid closed-PR verification JSON.") from exc
+
+    if not isinstance(value, dict):
+        raise SaveError("GitHub returned an unexpected closed-PR verification response.")
+    if value.get("state") != "CLOSED":
+        raise SaveError("Review PR did not reach CLOSED state.")
+    if value.get("mergedAt") is not None:
+        raise SaveError("Safety check failed: rejected Review PR shows a merge timestamp.")
+
+    return value
+
+
+def reject_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
+    article_id = payload.get("articleId")
+    if not isinstance(article_id, str) or not article_id.strip():
+        raise SaveError("articleId is required.")
+    article_id = article_id.strip()
+
+    source_file = validate_pending_path(payload.get("sourceFile"))
+    expected_branch = f"{REVIEW_BRANCH_PREFIX}{article_id}"
+
+    branch = payload.get("reviewBranch")
+    if branch != expected_branch:
+        raise SaveError("Review branch does not match the article ID.")
+
+    reason = validate_rejection_reason(payload.get("reason"))
+
+    # Re-fetch the exact remote draft and re-validate its review gates immediately
+    # before closing the PR. This prevents a stale dashboard from rejecting an
+    # article that is no longer pending human review.
+    remote_draft, _ = fetch_remote_draft(repo, branch, source_file)
+    if remote_draft.get("draftStatus") != "PENDING_HUMAN_REVIEW":
+        raise SaveError("Remote draft is not pending human review.")
+    if remote_draft.get("requiresHumanReview") is not True:
+        raise SaveError("Remote draft must require human review.")
+    if remote_draft.get("publishReady") is not False:
+        raise SaveError("Remote draft is unexpectedly publish-ready.")
+
+    article = remote_draft.get("articleDraft")
+    if not isinstance(article, dict) or article.get("id") != article_id:
+        raise SaveError("Remote draft article ID does not match the requested article.")
+
+    pr = find_unique_open_review_pr(repo, branch)
+    comment = build_rejection_comment(article_id, reason)
+    closed = close_review_pr(repo, pr["number"], comment)
+
+    if closed.get("headRefName") != branch or closed.get("baseRefName") != "main":
+        raise SaveError("Closed PR branch verification failed.")
+
+    return {
+        "ok": True,
+        "prNumber": closed.get("number"),
+        "prURL": closed.get("url") or pr.get("url"),
+        "state": closed.get("state"),
+        "mergedAt": closed.get("mergedAt"),
+        "branch": branch,
+        "sourceFile": source_file,
+    }
+
+
 def self_test() -> int:
     original = {
         "draftStatus": "PENDING_HUMAN_REVIEW",
@@ -447,12 +637,25 @@ def self_test() -> int:
         blocked = True
     assert blocked
 
+    assert validate_rejection_reason(None) == ""
+    assert validate_rejection_reason("  Needs source correction.  ") == "Needs source correction."
+    comment = build_rejection_comment("intel-test", "Needs source correction.")
+    assert "intel-test" in comment
+    assert "Needs source correction." in comment
+
+    too_long_blocked = False
+    try:
+        validate_rejection_reason("x" * (MAX_REJECT_REASON + 1))
+    except SaveError:
+        too_long_blocked = True
+    assert too_long_blocked
+
     print("SELF-TEST PASSED")
     return 0
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
-    server_version = "ReserveIntelDashboard/3A"
+    server_version = "ReserveIntelDashboard/3B"
 
     def _json_response(self, status: int, payload: dict[str, Any]) -> None:
         raw = (json.dumps(payload, ensure_ascii=False) + "\n").encode("utf-8")
@@ -474,7 +677,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                     "saveEnabled": bool(repo),
                     "repository": repo,
                     "approveEnabled": False,
-                    "rejectEnabled": False,
+                    "rejectEnabled": bool(repo),
                 },
             )
             return
@@ -482,7 +685,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path != "/api/reserve-intel/save":
+        if parsed.path not in {"/api/reserve-intel/save", "/api/reserve-intel/reject"}:
             self._json_response(404, {"ok": False, "error": "Unknown API endpoint."})
             return
 
@@ -507,7 +710,10 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             if not repo:
                 raise SaveError("Save service is not connected to a GitHub repository.")
 
-            result = save_request(payload, repo)
+            if parsed.path == "/api/reserve-intel/save":
+                result = save_request(payload, repo)
+            else:
+                result = reject_request(payload, repo)
         except (UnicodeDecodeError, json.JSONDecodeError, SaveError) as exc:
             self._json_response(400, {"ok": False, "error": str(exc)})
             return
@@ -553,7 +759,8 @@ def main() -> int:
     print(f"Reserve Intel dashboard: http://{args.host}:{args.port}/docs/reserve-intel/")
     print(f"Repository: {repo}")
     print("Save Draft: ENABLED for eligible review-branch drafts")
-    print("Reject / Approve: PREVIEW ONLY")
+    print("Reject: ENABLED for eligible review PRs")
+    print("Approve: PREVIEW ONLY")
     print("Press Ctrl-C to stop.")
 
     try:
