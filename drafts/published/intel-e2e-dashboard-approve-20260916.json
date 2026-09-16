@@ -1,8 +1,8 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
-  "publishReady": false,
+  "draftStatus": "PUBLISHED",
+  "requiresHumanReview": false,
+  "publishReady": true,
   "sourceEvidence": {
     "officialHostVerified": true,
     "sourceType": "other",
@@ -23,7 +23,7 @@
   "articleDraft": {
     "id": "intel-e2e-dashboard-approve-20260916",
     "publishedAt": "2026-09-16T00:00:00Z",
-    "updatedAt": "2026-09-16T00:00:00Z",
+    "updatedAt": "2026-09-16T14:59:04Z",
     "title": "Dashboard Approve E2E Test",
     "category": "Admin",
     "status": "TRACKING",
@@ -41,6 +41,7 @@
       "squadron": null
     },
     "isPinned": false,
-    "isActive": false
-  }
+    "isActive": true
+  },
+  "approvedAt": "2026-09-16T14:59:04Z"
 }
