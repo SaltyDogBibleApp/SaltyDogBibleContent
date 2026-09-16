@@ -47,6 +47,13 @@ from typing import Any
 from urllib.parse import quote, urlparse
 
 
+AUTOMATION_DIR = Path(__file__).resolve().parent
+if str(AUTOMATION_DIR) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION_DIR))
+
+from prepare_review_pr import render_markdown
+
+
 CATEGORIES = {
     "Legislation / NDAA",
     "Policy",
@@ -525,6 +532,113 @@ def commit_remote_draft(
     )
 
 
+def fetch_remote_text_file(
+    repo: str,
+    branch: str,
+    path: str,
+) -> tuple[str, str]:
+    api_path = f"repos/{repo}/contents/{quote(path, safe='/')}"
+    response = gh_api_json(
+        [
+            "--method",
+            "GET",
+            api_path,
+            "-f",
+            f"ref={branch}",
+        ]
+    )
+
+    sha = response.get("sha")
+    encoded = response.get("content")
+    if not isinstance(sha, str) or not sha:
+        raise SaveError("GitHub did not return the current review file SHA.")
+    if not isinstance(encoded, str):
+        raise SaveError("GitHub did not return review file content.")
+
+    try:
+        raw = base64.b64decode(encoded).decode("utf-8")
+    except (ValueError, UnicodeDecodeError) as exc:
+        raise SaveError("Could not decode the remote review Markdown.") from exc
+
+    return raw, sha
+
+
+def commit_remote_text_file(
+    repo: str,
+    branch: str,
+    path: str,
+    sha: str,
+    content: str,
+    article_id: str,
+) -> dict[str, Any]:
+    encoded = base64.b64encode(content.encode("utf-8")).decode("ascii")
+    api_path = f"repos/{repo}/contents/{quote(path, safe='/')}"
+
+    return gh_api_json(
+        ["--method", "PUT", api_path],
+        stdin_payload={
+            "message": f"Sync Reserve Intel review: {article_id}",
+            "content": encoded,
+            "sha": sha,
+            "branch": branch,
+        },
+    )
+
+
+def sync_review_artifacts(
+    repo: str,
+    branch: str,
+    article_id: str,
+    draft: dict[str, Any],
+) -> dict[str, Any]:
+    review_path = f"reviews/pending/{article_id}.md"
+    rendered = render_markdown(draft)
+
+    remote_review, review_sha = fetch_remote_text_file(
+        repo,
+        branch,
+        review_path,
+    )
+
+    review_file_changed = remote_review != rendered
+    review_commit_sha = None
+
+    if review_file_changed:
+        response = commit_remote_text_file(
+            repo,
+            branch,
+            review_path,
+            review_sha,
+            rendered,
+            article_id,
+        )
+        commit = (
+            response.get("commit")
+            if isinstance(response.get("commit"), dict)
+            else {}
+        )
+        review_commit_sha = (
+            commit.get("sha")
+            if isinstance(commit.get("sha"), str)
+            else None
+        )
+
+    pr_summary = find_unique_open_review_pr(repo, branch)
+    pr_number = pr_summary["number"]
+    pr = fetch_review_pr(repo, pr_number)
+
+    pr_body_changed = pr.get("body") != rendered
+    if pr_body_changed:
+        update_review_pr_body(repo, pr_number, rendered)
+
+    return {
+        "reviewFileChanged": review_file_changed,
+        "reviewCommitSha": review_commit_sha,
+        "prBodyChanged": pr_body_changed,
+        "prNumber": pr_number,
+    }
+
+
 def save_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
     article_id = payload.get("articleId")
     if not isinstance(article_id, str) or not article_id.strip():
@@ -543,37 +657,62 @@ def save_request(payload: dict[str, Any], repo: str) -> dict[str, Any]:
     remote_draft, sha = fetch_remote_draft(repo, branch, source_file)
     updated = apply_editor_patch(remote_draft, article_id, patch)
 
-    if updated == remote_draft:
-        return {
-            "ok": True,
-            "changed": False,
-            "article": updated["articleDraft"],
-            "branch": branch,
-            "sourceFile": source_file,
-            "commitSha": None,
-        }
+    draft_changed = updated != remote_draft
+    commit_sha = None
+    commit_url = None
 
-    response = commit_remote_draft(
+    if draft_changed:
+        response = commit_remote_draft(
+            repo,
+            branch,
+            source_file,
+            sha,
+            updated,
+            article_id,
+        )
+
+        commit = (
+            response.get("commit")
+            if isinstance(response.get("commit"), dict)
+            else {}
+        )
+        commit_sha = (
+            commit.get("sha")
+            if isinstance(commit.get("sha"), str)
+            else None
+        )
+        commit_url = (
+            commit.get("html_url")
+            if isinstance(commit.get("html_url"), str)
+            else None
+        )
+
+    review_sync = sync_review_artifacts(
         repo,
         branch,
-        source_file,
-        sha,
-        updated,
         article_id,
+        updated,
     )
 
-    commit = response.get("commit") if isinstance(response.get("commit"), dict) else {}
-    commit_sha = commit.get("sha") if isinstance(commit.get("sha"), str) else None
-    commit_url = commit.get("html_url") if isinstance(commit.get("html_url"), str) else None
+    changed = (
+        draft_changed
+        or review_sync["reviewFileChanged"]
+        or review_sync["prBodyChanged"]
+    )
 
     return {
         "ok": True,
-        "changed": True,
+        "changed": changed,
+        "draftChanged": draft_changed,
+        "reviewFileChanged": review_sync["reviewFileChanged"],
+        "prBodyChanged": review_sync["prBodyChanged"],
         "article": updated["articleDraft"],
         "branch": branch,
         "sourceFile": source_file,
         "commitSha": commit_sha,
         "commitURL": commit_url,
+        "reviewCommitSha": review_sync["reviewCommitSha"],
+        "prNumber": review_sync["prNumber"],
     }
 
 
