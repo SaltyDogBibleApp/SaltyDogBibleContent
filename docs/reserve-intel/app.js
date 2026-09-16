@@ -1,3 +1,4 @@
+
 const state = {
   data: null,
   selectedId: null,
@@ -5,9 +6,11 @@ const state = {
   dirty: false,
   saveServiceAvailable: false,
   rejectServiceAvailable: false,
+  approveServiceAvailable: false,
   saveServiceRepository: null,
   saving: false,
   rejecting: false,
+  approving: false,
 };
 
 const CATEGORIES = [
@@ -89,6 +92,11 @@ function showToast(message, tone = "neutral") {
 function setDirty(value) {
   state.dirty = value;
   byId("dirty-pill").classList.toggle("hidden", !value);
+
+  if (state.selectedKind === "pending" && state.data) {
+    const item = findItem(state.selectedId, "pending");
+    if (item) configureActions(item);
+  }
 }
 
 function createQueueCard(item, kind) {
@@ -570,14 +578,16 @@ async function checkSaveService() {
 
     state.saveServiceAvailable = true;
     state.rejectServiceAvailable = payload?.rejectEnabled === true;
+    state.approveServiceAvailable = payload?.approveEnabled === true;
     state.saveServiceRepository = payload.repository || null;
-    status.textContent = state.rejectServiceAvailable
+    status.textContent = (state.rejectServiceAvailable && state.approveServiceAvailable)
       ? "Review service connected"
       : "Save service connected";
     status.className = "service-status connected";
   } catch {
     state.saveServiceAvailable = false;
     state.rejectServiceAvailable = false;
+    state.approveServiceAvailable = false;
     state.saveServiceRepository = null;
     status.textContent = "Review service unavailable";
     status.className = "service-status unavailable";
@@ -587,44 +597,54 @@ async function checkSaveService() {
 function configureActions(item) {
   const saveButton = byId("save-draft-button");
   const rejectButton = byId("reject-button");
+  const approveButton = byId("approve-button");
   const modePill = byId("action-mode-pill");
   const actionNote = byId("action-note");
 
   if (!item || state.selectedKind !== "pending") return;
 
   if (item._demo === true) {
-    saveButton.disabled = state.saving || state.rejecting;
+    saveButton.disabled = state.saving || state.rejecting || state.approving;
     saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
     rejectButton.disabled = false;
     rejectButton.textContent = "Reject";
+    approveButton.disabled = false;
+    approveButton.textContent = "Approve for Publication";
     modePill.textContent = "DEMO";
     modePill.className = "preview-only-pill";
-    actionNote.textContent = "Demo Save stays in this browser. Demo Reject is preview-only. Approve remains preview-only.";
+    actionNote.textContent = "Demo actions stay in this browser. Nothing is changed in GitHub.";
     return;
   }
 
   const ready = item._saveEligible === true;
   const saveConnected = state.saveServiceAvailable === true;
   const rejectConnected = state.rejectServiceAvailable === true;
+  const approveConnected = state.approveServiceAvailable === true;
+  const busy = state.saving || state.rejecting || state.approving;
 
-  saveButton.disabled = state.saving || state.rejecting || !ready || !saveConnected;
+  saveButton.disabled = busy || !ready || !saveConnected;
   saveButton.textContent = state.saving ? "Saving…" : "Save Draft";
 
-  rejectButton.disabled = state.saving || state.rejecting || !ready || !rejectConnected;
+  rejectButton.disabled = busy || !ready || !rejectConnected;
   rejectButton.textContent = state.rejecting ? "Rejecting…" : "Reject";
 
-  if (ready && saveConnected && rejectConnected) {
-    modePill.textContent = "SAVE + REJECT LIVE";
-    modePill.className = "preview-only-pill reject-live";
-    actionNote.textContent = `Save Draft commits allowed editorial fields to ${item._reviewBranch}. Reject closes the unique matching Review PR without merge. Approve remains preview-only.`;
+  approveButton.disabled = busy || state.dirty || !ready || !approveConnected;
+  approveButton.textContent = state.approving ? "Approving…" : "Approve for Publication";
+
+  if (ready && saveConnected && rejectConnected && approveConnected) {
+    modePill.textContent = "ALL ACTIONS LIVE";
+    modePill.className = "preview-only-pill all-live";
+    actionNote.textContent = state.dirty
+      ? "Save the current browser edits before approving. Reject closes without merge; Approve merges the exact Review PR and starts the existing publication workflow."
+      : `Save commits editable fields to ${item._reviewBranch}. Reject closes without merge. Approve requires six confirmations, then merges the exact Review PR and starts the existing publication workflow.`;
   } else if (!ready) {
     modePill.textContent = "WAITING";
     modePill.className = "preview-only-pill waiting";
     actionNote.textContent = "The enriched review branch is not available yet. Regenerate the dashboard after the Review PR is created.";
-  } else if (!saveConnected || !rejectConnected) {
+  } else {
     modePill.textContent = "REVIEW OFFLINE";
     modePill.className = "preview-only-pill waiting";
-    actionNote.textContent = "Start automation/review_dashboard_server.py to enable Save Draft and Reject. Approve remains preview-only.";
+    actionNote.textContent = "Start automation/review_dashboard_server.py to enable the live review actions.";
   }
 }
 
@@ -744,9 +764,145 @@ async function rejectSelectedArticle() {
   }
 }
 
-function previewApprove() {
+function approvalCheckboxes() {
+  return Array.from(document.querySelectorAll(".approval-confirmation"));
+}
+
+function updateApproveConfirmationState() {
+  const checks = approvalCheckboxes();
+  byId("approve-modal-confirm").disabled =
+    state.approving || checks.length !== 6 || checks.some((check) => !check.checked);
+}
+
+function closeApproveModal() {
+  byId("approve-modal").classList.add("hidden");
+  approvalCheckboxes().forEach((check) => {
+    check.checked = false;
+  });
+  updateApproveConfirmationState();
+}
+
+function openApproveModal() {
   if (state.selectedKind !== "pending") return;
-  showToast("Approval preview only. Nothing was published or changed in GitHub.", "success");
+
+  const item = findItem(state.selectedId, "pending");
+  if (!item) return;
+
+  if (item._demo === true) {
+    showToast("Demo Approve is preview-only. Nothing was changed in GitHub.", "warning");
+    return;
+  }
+
+  if (state.dirty) {
+    showToast("Save or discard the current browser edits before approving.", "warning");
+    return;
+  }
+
+  if (item._saveEligible !== true) {
+    showToast("This review branch is not ready for safe approval yet.", "warning");
+    return;
+  }
+
+  if (!state.approveServiceAvailable) {
+    showToast("Approve service is unavailable. Start review_dashboard_server.py.", "warning");
+    return;
+  }
+
+  byId("approve-modal-article").textContent = item.title || item.id;
+  approvalCheckboxes().forEach((check) => {
+    check.checked = false;
+  });
+  updateApproveConfirmationState();
+  byId("approve-modal").classList.remove("hidden");
+}
+
+function removeApprovedItemFromDashboard(articleId) {
+  state.data.pending = (state.data.pending || []).filter((item) => item.id !== articleId);
+  state.selectedId = null;
+  state.selectedKind = null;
+  setDirty(false);
+
+  renderQueues();
+
+  if ((state.data.pending || []).length) {
+    selectItem(state.data.pending[0].id, "pending");
+    return;
+  }
+
+  if ((state.data.published || []).length) {
+    selectItem(state.data.published[0].id, "published");
+    return;
+  }
+
+  byId("article-view").classList.add("hidden");
+  byId("empty-state").classList.remove("hidden");
+}
+
+async function approveSelectedArticle() {
+  if (state.selectedKind !== "pending" || state.approving) return;
+
+  const item = findItem(state.selectedId, "pending");
+  if (!item || item._demo === true) return;
+
+  const checks = approvalCheckboxes();
+  if (checks.length !== 6 || checks.some((check) => !check.checked)) {
+    showToast("All six approval confirmations are required.", "warning");
+    return;
+  }
+
+  if (state.dirty) {
+    showToast("Save or discard the current browser edits before approving.", "warning");
+    return;
+  }
+
+  state.approving = true;
+  byId("approve-modal-confirm").disabled = true;
+  byId("approve-modal-confirm").textContent = "Approving…";
+  configureActions(item);
+
+  try {
+    const response = await fetch("/api/reserve-intel/approve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        articleId: item.id,
+        sourceFile: item._sourceFile,
+        reviewBranch: item._reviewBranch,
+        approvalConfirmed: true,
+      }),
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || `Approve failed with HTTP ${response.status}`);
+    }
+
+    const approvedId = item.id;
+    closeApproveModal();
+    removeApprovedItemFromDashboard(approvedId);
+
+    showToast(
+      `Merged Review PR #${payload.prNumber}. The existing publication workflow has started; publication is not considered complete until that workflow succeeds.`,
+      "success"
+    );
+  } catch (error) {
+    showToast(error.message || "Approve failed.", "warning");
+  } finally {
+    state.approving = false;
+    byId("approve-modal-confirm").textContent = "Approve & Merge PR";
+    updateApproveConfirmationState();
+
+    const current = state.selectedKind === "pending"
+      ? findItem(state.selectedId, "pending")
+      : null;
+    if (current) configureActions(current);
+  }
 }
 
 function renderArticle(item, kind) {
@@ -827,7 +983,7 @@ function bindEditorEvents() {
 
   byId("save-draft-button").addEventListener("click", saveDraft);
   byId("reject-button").addEventListener("click", openRejectModal);
-  byId("approve-button").addEventListener("click", previewApprove);
+  byId("approve-button").addEventListener("click", openApproveModal);
 
   byId("reject-modal-close").addEventListener("click", closeRejectModal);
   byId("reject-modal-cancel").addEventListener("click", closeRejectModal);
@@ -835,10 +991,21 @@ function bindEditorEvents() {
   byId("reject-modal").addEventListener("click", (event) => {
     if (event.target === byId("reject-modal")) closeRejectModal();
   });
+
+  byId("approve-modal-close").addEventListener("click", closeApproveModal);
+  byId("approve-modal-cancel").addEventListener("click", closeApproveModal);
+  byId("approve-modal-confirm").addEventListener("click", approveSelectedArticle);
+  byId("approve-modal").addEventListener("click", (event) => {
+    if (event.target === byId("approve-modal")) closeApproveModal();
+  });
+  approvalCheckboxes().forEach((check) => {
+    check.addEventListener("change", updateApproveConfirmationState);
+  });
+
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !byId("reject-modal").classList.contains("hidden")) {
-      closeRejectModal();
-    }
+    if (event.key !== "Escape") return;
+    if (!byId("reject-modal").classList.contains("hidden")) closeRejectModal();
+    if (!byId("approve-modal").classList.contains("hidden")) closeApproveModal();
   });
 }
 
