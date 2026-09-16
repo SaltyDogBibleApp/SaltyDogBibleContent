@@ -1,7 +1,7 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
+  "draftStatus": "REJECTED",
+  "requiresHumanReview": false,
   "publishReady": false,
   "detectedAt": "2026-09-15T18:00:00Z",
   "appImpact": {
@@ -62,5 +62,13 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "rejectedAt": "2026-09-16T03:11:43Z",
+  "rejection": {
+    "reason": "review_pr_closed_without_merge",
+    "pullRequestNumber": "9",
+    "pullRequestURL": "https://github.com/SaltyDogBibleApp/SaltyDogBibleContent/pull/9",
+    "pullRequestTitle": "Reserve Intel Review: RESPERSMAN 1570-030",
+    "reviewBodySHA256": "d944efae8fdade528da16892ff583243e5e4be41c62713e9a307f659db4fa68b"
   }
 }
