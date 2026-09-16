@@ -52,7 +52,7 @@ https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf
 
 ### Navy Reserve Guidance Enrichment Evidence
 
-- Enriched at: 2026-09-16T20:26:56Z
+- Enriched at: 2026-09-16T20:36:21Z
 - Document kind: COMNAVRESFORNOTE
 - Document identifier: Not supplied
 - Source filename: COMNAVRESFORNOTE 1570 IDT-R.pdf
@@ -72,14 +72,14 @@ https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf
 
 ### Current PDF Text Extraction
 
-- Snapshot available: No
-- Extraction status: Not supplied
-- Extraction method: Not supplied
+- Snapshot available: Yes
+- Extraction status: no_extractable_text
+- Extraction method: pypdf
 - Extracted text SHA-256: `Not supplied`
-- PDF pages: Not supplied
-- Pages with extracted text: Not supplied
-- Extracted characters: Not supplied
-- Extracted lines: Not supplied
+- PDF pages: 12
+- Pages with extracted text: 0
+- Extracted characters: 0
+- Extracted lines: 0
 - Extraction truncated by safety limit: No
 
 ### Extracted Text Comparison

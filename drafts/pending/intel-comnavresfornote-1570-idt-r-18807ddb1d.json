@@ -83,7 +83,7 @@
   "enrichment": {
     "sourceType": "reserve_guidance",
     "enrichmentKind": "navy_reserve_linked_document_verification",
-    "enrichedAt": "2026-09-16T20:26:56Z",
+    "enrichedAt": "2026-09-16T20:36:21Z",
     "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201570%20IDT-R.pdf",
     "detectedFingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
     "observedFingerprint": "48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e",
@@ -95,14 +95,22 @@
     "documentIdentifier": null,
     "sourceFilename": "COMNAVRESFORNOTE 1570 IDT-R.pdf",
     "currentTextEvidence": {
-      "available": false,
-      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json"
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json",
+      "extractionStatus": "no_extractable_text",
+      "extractionMethod": "pypdf",
+      "textSHA256": null,
+      "pageCount": 12,
+      "pagesWithText": 0,
+      "characterCount": 0,
+      "lineCount": 0,
+      "truncated": false
     },
     "textComparison": {
       "comparisonKind": "normalized_extracted_text_diff",
       "available": false,
       "unavailableReason": "new_linked_document_has_no_prior_version",
-      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d29784d34013296ed7e6/48105009764fee4944110b986f17988f7187a04b2fd6dc8ae46bb9fbaeb44f8e.json",
       "policyInterpretationClaimed": false,
       "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
     },
