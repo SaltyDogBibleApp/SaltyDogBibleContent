@@ -2,7 +2,31 @@ const state = {
   data: null,
   selectedId: null,
   selectedKind: null,
+  dirty: false,
 };
+
+const CATEGORIES = [
+  "Legislation / NDAA",
+  "Policy",
+  "Pay & Benefits",
+  "Retirement",
+  "VA / Veteran Benefits",
+  "Training & Readiness",
+  "Admin",
+  "Other",
+];
+
+const STATUSES = [
+  "TRACKING",
+  "PROPOSED",
+  "INTRODUCED",
+  "COMMITTEE",
+  "PASSED HOUSE",
+  "PASSED SENATE",
+  "SIGNED",
+  "EFFECTIVE",
+  "SUPERSEDED",
+];
 
 function byId(id) {
   return document.getElementById(id);
@@ -37,6 +61,31 @@ function formatDateTime(value) {
   }).format(d);
 }
 
+function isoToDateInput(value) {
+  if (!value) return "";
+  const match = String(value).match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? match[1] : "";
+}
+
+function dateInputToIso(value) {
+  return value ? `${value}T00:00:00Z` : null;
+}
+
+function showToast(message, tone = "neutral") {
+  const toast = byId("toast");
+  toast.textContent = message;
+  toast.className = `toast ${tone}`.trim();
+  window.clearTimeout(showToast.timer);
+  showToast.timer = window.setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3600);
+}
+
+function setDirty(value) {
+  state.dirty = value;
+  byId("dirty-pill").classList.toggle("hidden", !value);
+}
+
 function createQueueCard(item, kind) {
   const button = document.createElement("button");
   button.type = "button";
@@ -53,17 +102,19 @@ function createQueueCard(item, kind) {
   const meta = document.createElement("div");
   meta.className = "queue-card-meta";
 
-  const parts = [
-    item.priority,
-    item.status,
-    item.sourceName,
-  ].filter(Boolean);
-
+  const parts = [item.priority, item.status, item.sourceName].filter(Boolean);
   parts.forEach((part) => {
     const span = document.createElement("span");
     span.textContent = part;
     meta.appendChild(span);
   });
+
+  if (item._demo === true) {
+    const demo = document.createElement("span");
+    demo.className = "queue-demo-pill";
+    demo.textContent = "DEMO";
+    meta.appendChild(demo);
+  }
 
   button.appendChild(title);
   button.appendChild(meta);
@@ -90,7 +141,7 @@ function renderQueues() {
     empty.textContent = "No articles currently need review.";
     pendingList.appendChild(empty);
   } else {
-    pending.forEach(item => pendingList.appendChild(createQueueCard(item, "pending")));
+    pending.forEach((item) => pendingList.appendChild(createQueueCard(item, "pending")));
   }
 
   if (!published.length) {
@@ -100,23 +151,29 @@ function renderQueues() {
     empty.textContent = "No published history available.";
     publishedList.appendChild(empty);
   } else {
-    published.slice(0, 12).forEach(item => publishedList.appendChild(createQueueCard(item, "published")));
+    published.slice(0, 12).forEach((item) => publishedList.appendChild(createQueueCard(item, "published")));
   }
 }
 
 function findItem(id, kind) {
   const collection = kind === "pending" ? state.data.pending : state.data.published;
-  return collection.find(item => item.id === id);
+  return collection.find((item) => item.id === id);
 }
 
 function selectItem(id, kind) {
+  if (state.dirty && (id !== state.selectedId || kind !== state.selectedKind)) {
+    const leave = window.confirm("You have unsaved browser-only edits. Discard them and open another article?");
+    if (!leave) return;
+  }
+
   const item = findItem(id, kind);
   if (!item) return;
 
   state.selectedId = id;
   state.selectedKind = kind;
+  setDirty(false);
 
-  document.querySelectorAll(".queue-card").forEach(card => {
+  document.querySelectorAll(".queue-card").forEach((card) => {
     card.classList.toggle(
       "selected",
       card.dataset.id === id && card.dataset.kind === kind
@@ -153,15 +210,17 @@ function renderReviewStatus(item, kind) {
   target.innerHTML = "";
 
   const checklist = item.reviewChecklist || {};
-
   const checks = [
     ["Source opened", checklist.sourceOpenedAndRead],
     ["Facts verified", checklist.factsVerifiedAgainstSource],
     ["Status / date verified", checklist.statusVerified && checklist.effectiveDateVerified],
     ["Audience verified", checklist.audienceVerified],
-    ["Wording reviewed", checklist.summaryRewrittenFromSource &&
-      checklist.whyItMattersRewrittenFromSource &&
-      checklist.detailsRewrittenFromSource],
+    [
+      "Wording reviewed",
+      checklist.summaryRewrittenFromSource &&
+        checklist.whyItMattersRewrittenFromSource &&
+        checklist.detailsRewrittenFromSource,
+    ],
     ["Approved for publication", checklist.approvedForPublication],
   ];
 
@@ -209,7 +268,7 @@ function renderEvidence(item) {
   target.appendChild(summary);
 
   const hunks = Array.isArray(evidence.hunks) ? evidence.hunks : [];
-  hunks.forEach(hunk => {
+  hunks.forEach((hunk) => {
     const box = document.createElement("div");
     box.className = "diff-hunk";
 
@@ -224,14 +283,14 @@ function renderEvidence(item) {
     const removed = Array.isArray(hunk.removedLines) ? hunk.removedLines : [];
     const added = Array.isArray(hunk.addedLines) ? hunk.addedLines : [];
 
-    removed.forEach(line => {
+    removed.forEach((line) => {
       const el = document.createElement("div");
       el.className = "diff-line removed";
       el.textContent = `- ${line}`;
       box.appendChild(el);
     });
 
-    added.forEach(line => {
+    added.forEach((line) => {
       const el = document.createElement("div");
       el.className = "diff-line added";
       el.textContent = `+ ${line}`;
@@ -250,17 +309,181 @@ function renderEvidence(item) {
   }
 }
 
+function populateSelect(select, values, selectedValue) {
+  select.innerHTML = "";
+  values.forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    option.selected = value === selectedValue;
+    select.appendChild(option);
+  });
+}
+
+function renderSegmentedControl(containerId, options, selectedValue, onChange) {
+  const container = byId(containerId);
+  container.innerHTML = "";
+
+  options.forEach(({ value, label }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `segment-button ${value === selectedValue ? "selected" : ""}`.trim();
+    button.textContent = label;
+    button.dataset.value = String(value);
+    button.addEventListener("click", () => {
+      container.querySelectorAll(".segment-button").forEach((el) => el.classList.remove("selected"));
+      button.classList.add("selected");
+      onChange(value);
+      setDirty(true);
+    });
+    container.appendChild(button);
+  });
+}
+
+function selectedSegmentValue(containerId) {
+  const selected = byId(containerId).querySelector(".segment-button.selected");
+  return selected ? selected.dataset.value : null;
+}
+
+function attachDirtyInput(id) {
+  byId(id).addEventListener("input", () => setDirty(true));
+  byId(id).addEventListener("change", () => setDirty(true));
+}
+
+function populateEditor(item) {
+  byId("edit-title").value = item.title || "";
+  byId("edit-summary").value = item.summary || "";
+  byId("edit-why").value = item.whyItMatters || "";
+  byId("edit-details").value = item.details || "";
+  byId("edit-effective-date").value = isoToDateInput(item.effectiveDate);
+  byId("edit-training-wing").value = item.audience?.trainingWing || "";
+  byId("edit-squadron").value = item.audience?.squadron || "";
+
+  populateSelect(byId("edit-category"), CATEGORIES, item.category || "Other");
+  populateSelect(byId("edit-status"), STATUSES, item.status || "TRACKING");
+
+  renderSegmentedControl(
+    "priority-control",
+    [
+      { value: "NORMAL", label: "NORMAL" },
+      { value: "HIGH", label: "HIGH" },
+    ],
+    item.priority || "NORMAL",
+    () => {}
+  );
+
+  renderSegmentedControl(
+    "service-control",
+    [
+      { value: "ALL", label: "ALL" },
+      { value: "USN", label: "USN" },
+      { value: "USMC", label: "USMC" },
+    ],
+    item.audience?.service || "ALL",
+    () => {}
+  );
+
+  renderSegmentedControl(
+    "reserve-status-control",
+    [
+      { value: "ALL", label: "ALL" },
+      { value: "SELRES", label: "SELRES" },
+      { value: "VTU", label: "VTU" },
+    ],
+    item.audience?.reserveStatus || "ALL",
+    () => {}
+  );
+
+  renderSegmentedControl(
+    "pinned-control",
+    [
+      { value: "false", label: "No" },
+      { value: "true", label: "Yes" },
+    ],
+    item.isPinned === true ? "true" : "false",
+    () => {}
+  );
+}
+
+function editorSnapshot() {
+  return {
+    title: byId("edit-title").value.trim(),
+    summary: byId("edit-summary").value.trim(),
+    whyItMatters: byId("edit-why").value.trim(),
+    details: byId("edit-details").value.trim(),
+    category: byId("edit-category").value,
+    status: byId("edit-status").value,
+    priority: selectedSegmentValue("priority-control") || "NORMAL",
+    effectiveDate: dateInputToIso(byId("edit-effective-date").value),
+    audience: {
+      service: selectedSegmentValue("service-control") || "ALL",
+      reserveStatus: selectedSegmentValue("reserve-status-control") || "ALL",
+      trainingWing: byId("edit-training-wing").value.trim() || null,
+      squadron: byId("edit-squadron").value.trim() || null,
+    },
+    isPinned: selectedSegmentValue("pinned-control") === "true",
+  };
+}
+
+function saveDraftLocally() {
+  if (state.selectedKind !== "pending") return;
+  const item = findItem(state.selectedId, "pending");
+  if (!item) return;
+
+  const snapshot = editorSnapshot();
+  Object.assign(item, snapshot);
+  item.audience = snapshot.audience;
+
+  setDirty(false);
+  renderQueues();
+  document.querySelectorAll(".queue-card").forEach((card) => {
+    card.classList.toggle(
+      "selected",
+      card.dataset.id === state.selectedId && card.dataset.kind === state.selectedKind
+    );
+  });
+  renderArticle(item, "pending");
+  showToast("Saved in this browser preview only. GitHub was not changed.", "success");
+}
+
+function previewReject() {
+  if (state.selectedKind !== "pending") return;
+  showToast("Reject preview only. Nothing was archived or changed in GitHub.", "warning");
+}
+
+function previewApprove() {
+  if (state.selectedKind !== "pending") return;
+  showToast("Approval preview only. Nothing was published or changed in GitHub.", "success");
+}
+
 function renderArticle(item, kind) {
+  const editable = kind === "pending";
+
   byId("empty-state").classList.add("hidden");
   byId("article-view").classList.remove("hidden");
-
-  byId("article-kicker").textContent =
-    kind === "pending" ? "PENDING HUMAN REVIEW" : "PUBLISHED";
+  byId("article-kicker").textContent = editable ? "PENDING HUMAN REVIEW" : "PUBLISHED";
 
   byId("article-title").textContent = item.title || item.id;
   byId("article-summary").textContent = safe(item.summary, "No summary provided.");
   byId("article-why").textContent = safe(item.whyItMatters, "No Why It Matters text provided.");
   byId("article-details").textContent = safe(item.details, "No details provided.");
+
+  byId("article-title").classList.toggle("hidden", editable);
+  byId("title-editor-wrap").classList.toggle("hidden", !editable);
+  byId("article-summary").classList.toggle("hidden", editable);
+  byId("edit-summary").classList.toggle("hidden", !editable);
+  byId("article-why").classList.toggle("hidden", editable);
+  byId("edit-why").classList.toggle("hidden", !editable);
+  byId("article-details").classList.toggle("hidden", editable);
+  byId("edit-details").classList.toggle("hidden", !editable);
+  byId("metadata-display-card").classList.toggle("hidden", editable);
+  byId("metadata-editor-card").classList.toggle("hidden", !editable);
+  byId("editor-actions").classList.toggle("hidden", !editable);
+
+  if (editable) {
+    populateEditor(item);
+    setDirty(false);
+  }
 
   const sourceButton = byId("source-button");
   sourceButton.href = item.sourceURL || "#";
@@ -268,6 +491,7 @@ function renderArticle(item, kind) {
 
   const badges = byId("badges");
   badges.innerHTML = "";
+  if (item._demo === true) addBadge("DEMO");
   if (item.priority) addBadge(item.priority, item.priority === "HIGH" ? "high" : "");
   if (item.status) addBadge(item.status);
   if (item.category) addBadge(item.category);
@@ -284,11 +508,32 @@ function renderArticle(item, kind) {
   addMetadata("Article ID", item.id);
 
   renderReviewStatus(item, kind);
-
   byId("source-name").textContent = safe(item.sourceName);
   byId("source-url").textContent = safe(item.sourceURL);
-
   renderEvidence(item);
+}
+
+function bindEditorEvents() {
+  [
+    "edit-title",
+    "edit-summary",
+    "edit-why",
+    "edit-details",
+    "edit-category",
+    "edit-status",
+    "edit-effective-date",
+    "edit-training-wing",
+    "edit-squadron",
+  ].forEach(attachDirtyInput);
+
+  byId("clear-effective-date").addEventListener("click", () => {
+    byId("edit-effective-date").value = "";
+    setDirty(true);
+  });
+
+  byId("save-draft-button").addEventListener("click", saveDraftLocally);
+  byId("reject-button").addEventListener("click", previewReject);
+  byId("approve-button").addEventListener("click", previewApprove);
 }
 
 async function load() {
@@ -300,6 +545,8 @@ async function load() {
 
     byId("generated-at").textContent =
       `Dashboard generated ${formatDateTime(state.data.generatedAt)}`;
+
+    byId("preview-banner").classList.toggle("hidden", state.data.demoMode !== true);
 
     renderQueues();
 
@@ -319,4 +566,5 @@ async function load() {
   }
 }
 
+bindEditorEvents();
 load();
