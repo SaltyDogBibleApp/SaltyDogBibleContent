@@ -75,6 +75,20 @@ jobs:
           cp docs/reserve-intel/styles.css _site/reserve-intel/styles.css
           cp docs/reserve-intel/data.json _site/reserve-intel/data.json
 
+          # Force browsers to fetch the exact assets from this deployment instead
+          # of reusing a previously cached broken bundle under the same filenames.
+          python - <<'PY'
+          from pathlib import Path
+          import os
+
+          path = Path("_site/reserve-intel/index.html")
+          text = path.read_text(encoding="utf-8")
+          version = os.environ["GITHUB_SHA"]
+          text = text.replace('href="styles.css"', f'href="styles.css?v={version}"')
+          text = text.replace('src="app.js"', f'src="app.js?v={version}"')
+          path.write_text(text, encoding="utf-8")
+          PY
+
           cp docs/reserve-intel/app.js /tmp/reserve-intel-base.js
 
           # GitHub Pages is the hosted dashboard surface. The local Codespace
