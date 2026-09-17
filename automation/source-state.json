@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-17T11:36:48Z",
+  "lastRunAt": "2026-09-17T16:57:30Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -320,7 +320,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-09-17T04:48:37Z",
+      "lastCheckedAt": "2026-09-17T16:57:30Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -1077,8 +1077,8 @@
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-09-17T11:36:48Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-09-17T16:57:30Z",
+      "lastError": null,
       "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
