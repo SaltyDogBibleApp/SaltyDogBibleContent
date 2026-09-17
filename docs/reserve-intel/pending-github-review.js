@@ -362,8 +362,8 @@
   function configureHostedRefreshButton() {
     const button = byId("refresh-queue-button");
     if (!button) return;
-    button.disabled = hostedRefreshRunning;
-    button.textContent = hostedRefreshRunning ? "Refreshing…" : "Refresh Queue";
+    setIfDifferent(button, "disabled", hostedRefreshRunning);
+    setIfDifferent(button, "textContent", hostedRefreshRunning ? "Refreshing…" : "Refresh Queue");
   }
 
   document.addEventListener(
