@@ -89,7 +89,14 @@ jobs:
 
           cp docs/reserve-intel/styles.css _site/reserve-intel/styles.css
           cp docs/reserve-intel/data.json _site/reserve-intel/data.json
-          printf '%s\n' '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reserve-intel/"><title>Reserve Intel</title><a href="reserve-intel/">Open Reserve Intel</a>' > _site/index.html
+
+          # Serve the actual dashboard at the Pages root too. This avoids
+          # relying on browser/meta-refresh behavior before the app loads.
+          cp _site/reserve-intel/index.html _site/index.html
+          cp _site/reserve-intel/app.js _site/app.js
+          cp _site/reserve-intel/styles.css _site/styles.css
+          cp _site/reserve-intel/data.json _site/data.json
+
           touch _site/.nojekyll
 
       - name: Configure Pages
