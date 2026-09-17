@@ -32,7 +32,7 @@ function nowIso(){return new Date().toISOString().replace(/\.\d{3}Z$/,"Z");}
 function encode(text){let b="";for(const x of new TextEncoder().encode(text))b+=String.fromCharCode(x);return btoa(b);}
 function decode(text){return new TextDecoder().decode(Uint8Array.from(atob(text.replace(/\s/g,"")),c=>c.charCodeAt(0)));}
 
-export function validatePatch(v){
+export function validatePatch(v,currentEffectiveDate=null){
   exactKeys(v,["title","summary","whyItMatters","details","category","status","priority","effectiveDate","audience","isPinned"],"Article update");
   const out={};
   for(const [k,max] of Object.entries({title:300,summary:4000,whyItMatters:6000,details:20000})){
@@ -46,7 +46,8 @@ export function validatePatch(v){
   };
   for(const [k,a] of Object.entries(choices)){if(!a.includes(v[k]))throw new UpdateError(`Unsupported ${k}.`);out[k]=v[k];}
   const d=v.effectiveDate;
-  if(d!==null&&(typeof d!=="string"||!/^\d{4}-\d{2}-\d{2}T00:00:00Z$/.test(d)||!Number.isFinite(Date.parse(d))||new Date(d).toISOString().replace(".000Z","Z")!==d))throw new UpdateError("Effective date must be a valid calendar date.");
+  const preservingCurrent=d!==null&&d===currentEffectiveDate;
+  if(d!==null&&!preservingCurrent&&(typeof d!=="string"||!/^\d{4}-\d{2}-\d{2}T00:00:00Z$/.test(d)||!Number.isFinite(Date.parse(d))||new Date(d).toISOString().replace(".000Z","Z")!==d))throw new UpdateError("Effective date must be a valid calendar date.");
   out.effectiveDate=d;
   exactKeys(v.audience,["service","reserveStatus","trainingWing","squadron"],"Audience");
   if(!["ALL","USN","USMC"].includes(v.audience.service)||!["ALL","SELRES","VTU"].includes(v.audience.reserveStatus))throw new UpdateError("Unsupported audience.");
@@ -128,7 +129,7 @@ async function reviewAction(body,token,respond){
 async function createCorrection(body,token,session,respond){
   exactKeys(body,["articleId","baseUpdatedAt","patch","confirmations"],"Correction request");if(!validId(body.articleId))throw new UpdateError("Invalid article ID.");if(body.baseUpdatedAt!==null&&(typeof body.baseUpdatedAt!=="string"||body.baseUpdatedAt.length>80))throw new UpdateError("Invalid article version.");if(!Array.isArray(body.confirmations)||body.confirmations.length!==CHECKS.length||body.confirmations.some((c,i)=>c!==CHECKS[i]))throw new UpdateError("Complete all six update confirmations.");
   const existing=await openReview(token,body.articleId);if(existing)throw new UpdateError(`Review PR #${existing.number} is already open for this article. Approve or reject it before creating another correction.`,409);
-  const patch=validatePatch(body.patch),current=await liveArticle(token,body.articleId);if((current.updatedAt||null)!==body.baseUpdatedAt)throw new UpdateError("This article changed after your dashboard snapshot was generated. Cancel editing, refresh the dashboard, and reopen the article before submitting the correction.",409);if(Object.keys(patch).every(k=>same(patch[k],current[k])))throw new UpdateError("No changes to submit.");
+  const current=await liveArticle(token,body.articleId);if((current.updatedAt||null)!==body.baseUpdatedAt)throw new UpdateError("This article changed after your dashboard snapshot was generated. Cancel editing, refresh the dashboard, and reopen the article before submitting the correction.",409);const patch=validatePatch(body.patch,current.effectiveDate??null);if(Object.keys(patch).every(k=>same(patch[k],current[k])))throw new UpdateError("No changes to submit.");
   const now=nowIso(),cid=correctionId(current.id,now),branch=`${REVIEW_PREFIX}${cid}`,dp=`drafts/pending/${cid}.json`,rp=`reviews/pending/${cid}.md`,draft=makeDraft(current,patch,cid,session,now),review=renderReview(current,patch,cid,session,now);
   const ref=await github(`/repos/${REPOSITORY}/git/ref/heads/main`,token),sha=ref?.object?.sha;if(typeof sha!=="string"||!/^[a-f0-9]{40}$/.test(sha))throw new UpdateError("GitHub main branch could not be resolved.",502);
   await github(`/repos/${REPOSITORY}/git/refs`,token,"POST",{ref:`refs/heads/${branch}`,sha});
