@@ -59,9 +59,25 @@ jobs:
             exit 0
           fi
 
+          # Monitor-created review drafts already exist on main. Dashboard-created
+          # published-article corrections intentionally live only on the review
+          # branch until merge, so recover those files from the closed PR branch
+          # before running the existing rejection archive logic.
           if [ ! -f "$DRAFT" ]; then
-            echo "Pending draft not found and no rejected archive exists: $DRAFT"
-            exit 1
+            echo "Pending draft is not on main; recovering it from ${REVIEW_BRANCH}."
+            git fetch origin "$REVIEW_BRANCH"
+
+            mkdir -p "$(dirname "$DRAFT")"
+            if ! git show "origin/${REVIEW_BRANCH}:${DRAFT}" > "$DRAFT"; then
+              echo "Pending draft could not be recovered from review branch: $DRAFT"
+              rm -f "$DRAFT"
+              exit 1
+            fi
+
+            if git cat-file -e "origin/${REVIEW_BRANCH}:${REVIEW_MARKER}" 2>/dev/null; then
+              mkdir -p "$(dirname "$REVIEW_MARKER")"
+              git show "origin/${REVIEW_BRANCH}:${REVIEW_MARKER}" > "$REVIEW_MARKER"
+            fi
           fi
 
           python automation/archive_rejected_draft.py \
