@@ -185,7 +185,6 @@ async function github(path, token, method = "GET", body) {
   try {
     response = await fetch(`${API}${path}`, {
       method,
-      redirect: "error",
       headers: {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${token}`,
@@ -195,8 +194,14 @@ async function github(path, token, method = "GET", body) {
       },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }),
     });
-  } catch {
-    throw new UpdateError("GitHub could not be reached.", 502);
+  } catch (error) {
+    console.error("GitHub fetch failed", {
+      path,
+      method,
+      name: error?.name || "Error",
+      message: error?.message || String(error),
+    });
+    throw new UpdateError(`GitHub request failed before receiving a response (${method} ${path}).`, 502);
   }
 
   let payload = null;
