@@ -10,6 +10,7 @@
   };
 
   let loginPopup = null;
+  let appCheckRunning = false;
 
   function byIdSafe(id) {
     return document.getElementById(id);
@@ -46,6 +47,20 @@
     signOut.type = "button";
     signOut.textContent = "Sign out";
 
+    const appCheck = document.createElement("button");
+    appCheck.id = "github-app-check-button";
+    appCheck.className = "button secondary hidden";
+    appCheck.type = "button";
+    appCheck.textContent = "Check GitHub App";
+
+    const appStatus = document.createElement("span");
+    appStatus.id = "github-app-check-status";
+    appStatus.className = "service-status hidden";
+    appStatus.setAttribute("role", "status");
+    appStatus.setAttribute("aria-live", "polite");
+
+    container.prepend(appStatus);
+    container.prepend(appCheck);
     container.prepend(signOut);
     container.prepend(signIn);
     container.prepend(status);
@@ -94,6 +109,15 @@
 
     if (!status || !signIn || !signOut) return;
 
+    const appCheck = byIdSafe("github-app-check-button");
+    const appStatus = byIdSafe("github-app-check-status");
+    appCheck.classList.toggle("hidden", !authState.authenticated);
+    appCheck.disabled = appCheckRunning || !authState.authenticated;
+    if (!authState.authenticated) {
+      appStatus.textContent = "";
+      appStatus.className = "service-status hidden";
+    }
+
     if (authState.authenticated) {
       status.textContent = `Signed in as ${authState.login || "GitHub user"}`;
       status.className = "service-status connected";
@@ -106,6 +130,61 @@
     status.className = "service-status unavailable";
     signIn.classList.remove("hidden");
     signOut.classList.add("hidden");
+  }
+
+  async function checkGitHubApp() {
+    if (appCheckRunning || !authState.authenticated) return;
+    const tokenAtStart = authState.token;
+    const status = byIdSafe("github-app-check-status");
+    const button = byIdSafe("github-app-check-button");
+    appCheckRunning = true;
+    button.textContent = "Checking GitHub App…";
+    status.textContent = "Checking repository access…";
+    status.className = "service-status";
+    renderAuthState();
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
+
+    try {
+      const response = await authenticatedFetch("/api/github-app-check", {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal,
+      });
+      if (response.status === 401) {
+        notify("Your session expired. Sign in with GitHub and try again.", "warning");
+        return;
+      }
+      const payload = await response.json().catch(() => null);
+      if (authState.token !== tokenAtStart) return;
+      if (!response.ok) {
+        throw new Error(payload?.error || `GitHub App check failed (HTTP ${response.status}).`);
+      }
+      if (
+        payload?.ok !== true ||
+        payload.githubAppReady !== true ||
+        payload.repositoryVerified !== true ||
+        payload.repository !== "SaltyDogBibleApp/SaltyDogBibleContent" ||
+        payload.permissions?.contents !== "read" ||
+        payload.permissions?.pull_requests !== "read"
+      ) {
+        throw new Error("The response did not confirm the expected read-only repository access.");
+      }
+      status.textContent = "GitHub App ready — read-only repository access verified";
+      status.className = "service-status connected";
+      notify("GitHub App check passed.", "success");
+    } catch (error) {
+      if (authState.token !== tokenAtStart) return;
+      status.textContent = error.name === "AbortError"
+        ? "GitHub App check timed out. Try again."
+        : error.message || "Could not reach the GitHub App check. Try again.";
+      status.className = "service-status unavailable";
+    } finally {
+      window.clearTimeout(timeout);
+      appCheckRunning = false;
+      button.textContent = "Check GitHub App";
+      renderAuthState();
+    }
   }
 
   async function validateSession(token) {
@@ -261,6 +340,7 @@
 
   byIdSafe("auth-sign-in-button")?.addEventListener("click", signIn);
   byIdSafe("auth-sign-out-button")?.addEventListener("click", signOut);
+  byIdSafe("github-app-check-button")?.addEventListener("click", checkGitHubApp);
 
   renderAuthState();
   restoreSession();
