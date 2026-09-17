@@ -35,4 +35,3 @@ NAVADMIN 200/26: Annual CBRN Mask Fit Training Required for Reservists
 - [x] I verified the intended audience.
 - [x] I reviewed the title, summary, Why It Matters, and details.
 - [x] I approve publication to Reserve Intel.
-

@@ -1,8 +1,8 @@
 {
   "draftSchemaVersion": 1,
-  "draftStatus": "PENDING_HUMAN_REVIEW",
-  "requiresHumanReview": true,
-  "publishReady": false,
+  "draftStatus": "PUBLISHED",
+  "requiresHumanReview": false,
+  "publishReady": true,
   "detectedAt": "2026-09-17T15:20:43Z",
   "sourceEvidence": {
     "sourceName": "NAVADMIN 200/26 — MyNavyHR",
@@ -31,9 +31,9 @@
     "approvedForPublication": true
   },
   "articleDraft": {
-    "id": "correction-intel-navadmin-200-26-cbrn-mask-20260917152043-j0lrrh",
+    "id": "intel-navadmin-200-26-cbrn-mask",
     "publishedAt": "2026-08-20T16:48:00Z",
-    "updatedAt": "2026-09-14T14:35:00Z",
+    "updatedAt": "2026-09-17T15:21:36Z",
     "title": "NAVADMIN 200/26: Annual CBRN Mask Fit Training Required for Reservists",
     "summary": "All Active and Reserve Navy personnel must complete annual CBRN protective-mask fit and seal training, with Reserve component implementation plans and readiness tracking required.",
     "whyItMatters": "This creates a recurring annual readiness requirement that can affect Reserve training plans and should eventually be represented in Salty Dog's readiness/admin tracking.",
@@ -51,12 +51,25 @@
     "isPinned": false,
     "sourceName": "NAVADMIN 200/26 — MyNavyHR",
     "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26200.pdf",
-    "isActive": false
+    "isActive": true
   },
   "correction": {
     "liveArticleId": "intel-navadmin-200-26-cbrn-mask",
     "submittedBy": "SaltyDogBibleApp",
     "submittedAt": "2026-09-17T15:20:43Z",
     "baseUpdatedAt": "2026-09-14T14:35:00Z"
+  },
+  "approvedAt": "2026-09-17T15:21:36Z",
+  "publicationApproval": {
+    "source": "merged_pull_request_body",
+    "approvedAt": "2026-09-17T15:21:36Z",
+    "checks": {
+      "sourceOpenedAndRead": true,
+      "factsVerifiedAgainstSource": true,
+      "statusAndEffectiveDateVerified": true,
+      "audienceVerified": true,
+      "contentReviewedForPublication": true,
+      "approvedForPublication": true
+    }
   }
 }
