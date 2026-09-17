@@ -13,6 +13,28 @@
   let reviewActionRunning = false;
   let statusRequestId = 0;
 
+  const originalDateInputToIso =
+    typeof dateInputToIso === "function" ? dateInputToIso : null;
+
+  if (originalDateInputToIso) {
+    dateInputToIso = function preservePublishedEffectiveDate(value) {
+      const original =
+        typeof state !== "undefined"
+          ? state.publishedEdit?.article?.effectiveDate
+          : null;
+
+      if (
+        value &&
+        typeof original === "string" &&
+        original.slice(0, 10) === value
+      ) {
+        return original;
+      }
+
+      return originalDateInputToIso(value);
+    };
+  }
+
   function selectedPublishedArticle() {
     if (typeof state === "undefined" || state.selectedKind !== "published") return null;
     return findItem(state.selectedId, "published");
