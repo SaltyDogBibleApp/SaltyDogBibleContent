@@ -18,6 +18,7 @@ ALLOWED_AUTHORITIES = {"official"}
 ALLOWED_SOURCE_TYPES = {
     "navadmin",
     "reserve_guidance",
+    "reserve_board",
     "legislation",
     "pay_tables",
     "va_benefits",
