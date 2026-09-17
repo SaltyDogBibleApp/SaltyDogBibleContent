@@ -68,7 +68,7 @@
       <div class="panel-heading compact">
         <div>
           <div class="eyebrow">HISTORY</div>
-          <h2>Recently Published</h2>
+          <h2>Published Articles</h2>
         </div>
       </div>
       <div id="published-list" class="queue-list compact-list"></div>
@@ -82,6 +82,15 @@
       </div>
 
       <article id="article-view" class="article-view hidden">
+        <div id="published-update-actions" class="metadata-card hidden">
+          <h3>Update Published Article</h3>
+          <p id="published-update-note" role="status">Edit this article, review your changes, then approve the update.</p>
+          <div class="action-buttons">
+            <button id="edit-published-button" class="button secondary" type="button">Edit Article</button>
+            <button id="review-update-button" class="button primary hidden" type="button">Review Update</button>
+            <button id="cancel-update-button" class="button secondary hidden" type="button">Cancel Editing</button>
+          </div>
+        </div>
         <div class="article-header">
           <div class="article-title-block">
             <div id="article-kicker" class="eyebrow"></div>
@@ -304,6 +313,18 @@
       </div>
     </div>
   </div>
+
+  <dialog id="update-dialog" class="modal-card update-dialog" aria-labelledby="update-dialog-title">
+    <h2 id="update-dialog-title">Review Article Update</h2>
+    <p>The current article stays live until you approve these changes. Its original publication date and article ID will be preserved.</p>
+    <div id="update-diff"></div>
+    <div id="update-confirmations" class="approval-checklist"></div>
+    <p id="update-error" role="alert"></p>
+    <div class="modal-actions">
+      <button id="back-to-update-button" class="button secondary" type="button">Back to Editing</button>
+      <button id="publish-update-button" class="button primary" type="button" disabled>Approve &amp; Update</button>
+    </div>
+  </dialog>
 
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 

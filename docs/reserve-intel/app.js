@@ -15,6 +15,9 @@ const state = {
   refreshing: false,
   rejecting: false,
   approving: false,
+  publishedEdit: null,
+  updateLoading: false,
+  updating: false,
 };
 
 const CATEGORIES = [
@@ -120,6 +123,7 @@ function showToast(message, tone = "neutral") {
 function setDirty(value) {
   state.dirty = value;
   byId("dirty-pill").classList.toggle("hidden", !value);
+  if (state.publishedEdit) byId("review-update-button").disabled = !value || state.updating;
 
   if (state.selectedKind === "pending" && state.data) {
     const item = findItem(state.selectedId, "pending");
@@ -192,7 +196,7 @@ function renderQueues() {
     empty.textContent = "No published history available.";
     publishedList.appendChild(empty);
   } else {
-    published.slice(0, 8).forEach((item) => publishedList.appendChild(createQueueCard(item, "published")));
+    published.forEach((item) => publishedList.appendChild(createQueueCard(item, "published")));
   }
 }
 
@@ -202,6 +206,8 @@ function findItem(id, kind) {
 }
 
 function selectItem(id, kind) {
+  if (state.updating || state.updateLoading) return;
+  if (state.publishedEdit && id === state.selectedId && kind === state.selectedKind) return;
   if (state.dirty && (id !== state.selectedId || kind !== state.selectedKind)) {
     const leave = window.confirm("You have unsaved browser-only edits. Discard them and open another article?");
     if (!leave) return;
@@ -210,6 +216,7 @@ function selectItem(id, kind) {
   const item = findItem(id, kind);
   if (!item) return;
 
+  state.publishedEdit = null;
   state.selectedId = id;
   state.selectedKind = kind;
   setDirty(false);
@@ -1074,11 +1081,21 @@ async function approveSelectedArticle() {
 }
 
 function renderArticle(item, kind) {
-  const editable = kind === "pending";
+  const publishedEditing = kind === "published" && state.publishedEdit?.article.id === item.id;
+  const editable = kind === "pending" || publishedEditing;
+  byId("published-update-actions").classList.toggle("hidden", kind !== "published");
+  byId("edit-published-button").classList.toggle("hidden", !!publishedEditing);
+  byId("edit-published-button").disabled = item.isActive !== true;
+  byId("review-update-button").classList.toggle("hidden", !publishedEditing);
+  byId("cancel-update-button").classList.toggle("hidden", !publishedEditing);
+  byId("published-update-note").textContent = publishedEditing
+    ? "Your edits stay in this tab until you approve the update. The published article remains live."
+    : item.isActive !== true ? "This article is inactive and cannot be updated here."
+    : "Edit this article, review your changes, then approve the update. GitHub sign-in is required.";
 
   byId("empty-state").classList.add("hidden");
   byId("article-view").classList.remove("hidden");
-  byId("article-kicker").textContent = editable ? "PENDING HUMAN REVIEW" : "PUBLISHED";
+  byId("article-kicker").textContent = publishedEditing ? "EDITING PUBLISHED ARTICLE" : editable ? "PENDING HUMAN REVIEW" : "PUBLISHED";
 
   byId("article-title").textContent = item.title || item.id;
   byId("article-summary").textContent = safe(item.summary, "No summary provided.");
@@ -1095,7 +1112,7 @@ function renderArticle(item, kind) {
   byId("edit-details").classList.toggle("hidden", !editable);
   byId("metadata-display-card").classList.toggle("hidden", editable);
   byId("metadata-editor-card").classList.toggle("hidden", !editable);
-  byId("editor-actions").classList.toggle("hidden", !editable);
+  byId("editor-actions").classList.toggle("hidden", kind !== "pending");
 
   if (editable) {
     populateEditor(item);
@@ -1132,6 +1149,15 @@ function renderArticle(item, kind) {
 }
 
 function bindEditorEvents() {
+  byId("edit-published-button").addEventListener("click", editPublishedArticle);
+  byId("cancel-update-button").addEventListener("click", cancelPublishedEdit);
+  byId("review-update-button").addEventListener("click", reviewPublishedUpdate);
+  byId("back-to-update-button").addEventListener("click", () => byId("update-dialog").close());
+  byId("publish-update-button").addEventListener("click", publishArticleUpdate);
+  byId("update-dialog").addEventListener("cancel", event => { if (state.updating) event.preventDefault(); });
+  window.addEventListener("beforeunload", event => {
+    if (state.dirty || state.updating) { event.preventDefault(); event.returnValue = ""; }
+  });
   [
     "edit-title",
     "edit-summary",
@@ -1235,3 +1261,132 @@ async function load() {
 
 bindEditorEvents();
 load();
+
+const UPDATE_CHECKS = [
+  "I opened the official source.",
+  "I verified the facts against the official source.",
+  "I verified the status and effective date.",
+  "I verified the intended audience.",
+  "I reviewed the title, summary, Why It Matters, and details.",
+  "I approve this update to the published article.",
+];
+
+async function editPublishedArticle() {
+  if (state.selectedKind !== "published" || state.updateLoading || state.updating) return;
+  if (!window.reserveIntelAuth?.isAuthenticated()) {
+    showToast("Sign in with GitHub, then select Edit Article again.", "warning");
+    return;
+  }
+  state.updateLoading = true;
+  const button = byId("edit-published-button");
+  button.disabled = true;
+  button.textContent = "Loading current article…";
+  try {
+    const response = await window.reserveIntelAuth.authenticatedFetch(`/api/published-article?id=${encodeURIComponent(state.selectedId)}`, {cache:"no-store"});
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.error || "Could not load this article.");
+    const item = findItem(state.selectedId, "published");
+    Object.assign(item, data.article);
+    state.publishedEdit = {article:structuredClone(data.article), baseSha:data.baseSha, patch:null};
+    renderArticle(item, "published");
+  } catch (error) {
+    byId("published-update-note").textContent = error.message || "Could not load the article. Try again.";
+  } finally {
+    state.updateLoading = false;
+    button.disabled = false;
+    button.textContent = "Edit Article";
+  }
+}
+
+function cancelPublishedEdit() {
+  if (state.updating) return;
+  if (state.dirty && !window.confirm("Discard your unpublished edits?")) return;
+  state.publishedEdit = null;
+  setDirty(false);
+  renderArticle(findItem(state.selectedId, "published"), "published");
+}
+
+function reviewPublishedUpdate() {
+  if (!state.publishedEdit || state.updating) return;
+  const patch = editorSnapshot();
+  try { validateEditorSnapshot(patch); }
+  catch (error) { showToast(error.message, "warning"); return; }
+  const original = state.publishedEdit.article;
+  const fields = Object.keys(patch).filter(key => JSON.stringify(patch[key]) !== JSON.stringify(original[key]));
+  if (!fields.length) { showToast("No changes to publish."); return; }
+  state.publishedEdit.patch = structuredClone(patch);
+  const diff = byId("update-diff");
+  diff.replaceChildren();
+  const labels = {title:"Title", summary:"Summary", whyItMatters:"Why It Matters", details:"Details", category:"Category", status:"Status", priority:"Priority", effectiveDate:"Effective Date", audience:"Audience", isPinned:"Pinned"};
+  const display = value => value === null ? "Not specified" : typeof value === "object" ? JSON.stringify(value, null, 2) : String(value);
+  for (const key of fields) {
+    const section = document.createElement("section");
+    section.className = "update-diff-field";
+    const title = document.createElement("h3");
+    title.textContent = labels[key];
+    section.appendChild(title);
+    for (const [label, value] of [["Currently published", original[key]], ["Your update", patch[key]]]) {
+      const heading = document.createElement("strong");
+      heading.textContent = label;
+      const text = document.createElement("pre");
+      text.textContent = display(value);
+      section.append(heading, text);
+    }
+    diff.appendChild(section);
+  }
+  const checks = byId("update-confirmations");
+  checks.replaceChildren();
+  for (const text of UPDATE_CHECKS) {
+    const label = document.createElement("label");
+    label.className = "approval-check";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("change", () => {
+      byId("publish-update-button").disabled = state.updating || !Array.from(checks.querySelectorAll("input")).every(c => c.checked);
+    });
+    const span = document.createElement("span");
+    span.textContent = text;
+    label.append(checkbox, span);
+    checks.appendChild(label);
+  }
+  byId("update-error").textContent = "";
+  byId("publish-update-button").disabled = true;
+  byId("update-dialog").showModal();
+}
+
+async function publishArticleUpdate() {
+  const edit = state.publishedEdit;
+  if (!edit?.patch || state.updating) return;
+  const checks = Array.from(byId("update-confirmations").querySelectorAll("input"));
+  if (checks.length !== 6 || !checks.every(c => c.checked)) return;
+  state.updating = true;
+  const button = byId("publish-update-button");
+  button.disabled = true;
+  button.textContent = "Updating…";
+  byId("back-to-update-button").disabled = true;
+  byId("update-error").textContent = "";
+  try {
+    const response = await window.reserveIntelAuth.authenticatedFetch("/api/published-article", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({articleId:edit.article.id, baseSha:edit.baseSha, patch:edit.patch, confirmations:UPDATE_CHECKS}),
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) throw new Error(payload.error || "Update could not be confirmed. Reopen the article to check its current version.");
+    const item = findItem(edit.article.id, "published");
+    Object.assign(item, payload.article);
+    state.publishedEdit = null;
+    setDirty(false);
+    byId("update-dialog").close();
+    renderQueues();
+    renderArticle(item, "published");
+    byId("published-update-note").textContent = "Update saved. The app will receive it when it next refreshes its feed; the dashboard snapshot may take a moment to rebuild.";
+    showToast("Published article updated successfully.", "success");
+  } catch (error) {
+    byId("update-error").textContent = error.message || "Update could not be confirmed. Reopen the article before retrying.";
+  } finally {
+    state.updating = false;
+    button.disabled = false;
+    button.textContent = "Approve & Update";
+    byId("back-to-update-button").disabled = false;
+  }
+}
