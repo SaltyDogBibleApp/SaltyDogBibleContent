@@ -3,6 +3,7 @@ const API = "https://api.github.com";
 const FEED_PATH = "reserve-content-feed.json";
 const ARCHIVE_PATH = "reserve-content-archive.json";
 const ARCHIVE_PREFIX = "reserve-intel-archive/";
+const CORRECTION_PREFIX = "reserve-intel-review/correction-";
 
 const REASONS = new Set([
   "SUPERSEDED",
@@ -217,6 +218,30 @@ async function openArchiveReview(token, articleId) {
   return matches[0] || null;
 }
 
+async function openCorrectionReview(token, articleId) {
+  const pulls = await github(`/repos/${REPOSITORY}/pulls?state=open&base=main&per_page=100`, token);
+  if (!Array.isArray(pulls)) throw new ArchiveError("GitHub returned an invalid pull-request list.", 502);
+  const prefix = `${CORRECTION_PREFIX}${articleId}-`;
+  return pulls.find(
+    (pr) =>
+      pr?.state === "open" &&
+      pr?.base?.ref === "main" &&
+      pr?.head?.repo?.full_name === REPOSITORY &&
+      typeof pr?.head?.ref === "string" &&
+      pr.head.ref.startsWith(prefix)
+  ) || null;
+}
+
+async function requireNoOpenCorrection(token, articleId) {
+  const correction = await openCorrectionReview(token, articleId);
+  if (correction) {
+    throw new ArchiveError(
+      `Correction PR #${correction.number} is still open for this article. Approve or reject that correction before archiving it.`,
+      409
+    );
+  }
+}
+
 async function createArchive(body, token, session, respond) {
   exactKeys(
     body,
@@ -237,6 +262,7 @@ async function createArchive(body, token, session, respond) {
   if (existingReview) {
     throw new ArchiveError("An archive review is already open for this article.", 409);
   }
+  await requireNoOpenCorrection(token, body.articleId);
 
   const feedFile = await readJsonFile(token, FEED_PATH, "main");
   const archiveFile = await readJsonFile(token, ARCHIVE_PATH, "main");
@@ -358,6 +384,8 @@ async function validatedArchiveReview(token, articleId, prNumber) {
   ) {
     throw new ArchiveError("This archive PR does not match the selected article.", 409);
   }
+
+  await requireNoOpenCorrection(token, articleId);
 
   const files = await github(`/repos/${REPOSITORY}/pulls/${prNumber}/files?per_page=100`, token);
   const names = Array.isArray(files) ? files.map((file) => file?.filename).filter(Boolean) : [];
