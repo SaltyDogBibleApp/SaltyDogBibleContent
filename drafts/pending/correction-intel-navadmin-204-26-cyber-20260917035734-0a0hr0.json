@@ -1,0 +1,62 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-17T03:57:34Z",
+  "sourceEvidence": {
+    "sourceName": "MyNavyHR NAVADMIN",
+    "sourceType": "manual_correction",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf",
+    "listedDate": "2026-08-31",
+    "reserveSignals": [
+      "ADMIN_CORRECTION"
+    ],
+    "categoryHints": [
+      "Training & Readiness"
+    ],
+    "officialHostVerified": true,
+    "verificationMethod": "authenticated-admin-correction-confirmation",
+    "correctionOfArticleId": "intel-navadmin-204-26-cyber"
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": true,
+    "factsVerifiedAgainstSource": true,
+    "statusVerified": true,
+    "effectiveDateVerified": true,
+    "audienceVerified": true,
+    "summaryRewrittenFromSource": true,
+    "whyItMattersRewrittenFromSource": true,
+    "detailsRewrittenFromSource": true,
+    "approvedForPublication": true
+  },
+  "articleDraft": {
+    "id": "correction-intel-navadmin-204-26-cyber-20260917035734-0a0hr0",
+    "publishedAt": "2026-08-31T18:38:00Z",
+    "updatedAt": "2026-09-16T03:28:45Z",
+    "title": "Cybersecurity Awareness Training Changes to Every 3 Years",
+    "summary": "Navy Cybersecurity Awareness Challenge (CAC) training for active-duty and Reserve military personnel is no longer an annual requirement. Effective immediately, members must complete CAC when initially granted network access and every three years thereafter.",
+    "whyItMatters": "Reservists who completed CAC within the previous 36 months fall within the new three-year training cycle. Until Navy training systems are updated, commands must locally track and document qualifying military personnel so compliant members do not have network access erroneously suspended.",
+    "details": "NAVADMIN 204/26 modifies NAVADMIN 084/26 and changes Cybersecurity Awareness Challenge training for active-duty and Reserve military personnel. Military members must complete CAC when initially granted network access and every three years thereafter, replacing the previous annual fiscal-year requirement.\n\nThe relaxed training frequency applies to military personnel. Civilian employees and contractors remain subject to annual CAC training.\n\nFLTMPS and TWMS are being updated to reflect the three-year military training cycle. Until those updates are complete, commands must locally track and document military personnel who completed CAC within the preceding 36 months. Echelon II CIOs must ensure automated account-disablement processes account for the modified frequency.",
+    "category": "Training & Readiness",
+    "status": "EFFECTIVE",
+    "priority": "NORMAL",
+    "effectiveDate": "2026-08-31T00:00:00Z",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "sourceName": "MyNavyHR NAVADMIN",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26204.pdf",
+    "isActive": false
+  },
+  "correction": {
+    "liveArticleId": "intel-navadmin-204-26-cyber",
+    "submittedBy": "SaltyDogBibleApp",
+    "submittedAt": "2026-09-17T03:57:34Z",
+    "baseUpdatedAt": "2026-09-16T03:28:45Z"
+  }
+}
