@@ -1,0 +1,62 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-17T15:11:53Z",
+  "sourceEvidence": {
+    "sourceName": "NAVADMIN 200/26 — MyNavyHR",
+    "sourceType": "manual_correction",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26200.pdf",
+    "listedDate": "2026-08-20",
+    "reserveSignals": [
+      "ADMIN_CORRECTION"
+    ],
+    "categoryHints": [
+      "Training & Readiness"
+    ],
+    "officialHostVerified": true,
+    "verificationMethod": "authenticated-admin-correction-confirmation",
+    "correctionOfArticleId": "intel-navadmin-200-26-cbrn-mask"
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": true,
+    "factsVerifiedAgainstSource": true,
+    "statusVerified": true,
+    "effectiveDateVerified": true,
+    "audienceVerified": true,
+    "summaryRewrittenFromSource": true,
+    "whyItMattersRewrittenFromSource": true,
+    "detailsRewrittenFromSource": true,
+    "approvedForPublication": true
+  },
+  "articleDraft": {
+    "id": "correction-intel-navadmin-200-26-cbrn-mask-20260917151153-uaee26",
+    "publishedAt": "2026-08-20T16:48:00Z",
+    "updatedAt": "2026-09-14T14:35:00Z",
+    "title": "NAVADMIN 200/26: Annual CBRN Mask Fit Training Required for Reservists",
+    "summary": "All Active and Reserve Navy personnel must complete annual CBRN protective-mask fit and seal training, with Reserve component implementation plans and readiness tracking required.",
+    "whyItMatters": "This creates a recurring annual readiness requirement that can affect Reserve training plans and should eventually be represented in Salty Dog's readiness/admin tracking.",
+    "details": "NAVADMIN 200/26 establishes annual CBRN mask fit and seal training for all Navy personnel, including Reserve personnel. Training includes approved fit testing and a negative-pressure seal check, inspection and preventive maintenance of protective equipment, mask donning, clearing, adjustment and use, plus command-applicable confidence training. For Type I, III and VI duty, ashore and Reserve component commanders were directed to submit implementation plans and strive to have personnel complete the requirement no later than December 31, 2026. Annual completion is documented in FLTMPS.",
+    "category": "Training & Readiness",
+    "status": "EFFECTIVE",
+    "priority": "HIGH",
+    "effectiveDate": "2026-08-20T00:00:00Z",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "sourceName": "NAVADMIN 200/26 — MyNavyHR",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26200.pdf",
+    "isActive": false
+  },
+  "correction": {
+    "liveArticleId": "intel-navadmin-200-26-cbrn-mask",
+    "submittedBy": "SaltyDogBibleApp",
+    "submittedAt": "2026-09-17T15:11:53Z",
+    "baseUpdatedAt": "2026-09-14T14:35:00Z"
+  }
+}
