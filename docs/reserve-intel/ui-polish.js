@@ -3,6 +3,27 @@
     return document.getElementById(id);
   }
 
+  function syncPublishedEditAuthState() {
+    if (typeof state === "undefined" || state.selectedKind !== "published" || state.publishedEdit) return;
+    if (byId("published-review-controls")) return;
+
+    const button = byId("edit-published-button");
+    const note = byId("published-update-note");
+    if (!button || !note) return;
+
+    const normalState = button.textContent === "Edit Article" || button.textContent === "Sign In to Edit";
+    if (!normalState) return;
+
+    const authenticated = window.reserveIntelAuth?.isAuthenticated?.() === true;
+    const article = typeof findItem === "function" ? findItem(state.selectedId, "published") : null;
+
+    note.textContent = authenticated
+      ? "Edit this article, review your changes, then approve the update."
+      : "Sign in with GitHub to edit and publish article updates.";
+    button.textContent = authenticated ? "Edit Article" : "Sign In to Edit";
+    button.disabled = article?.isActive !== true;
+  }
+
   function applyPolish() {
     const hostedStatus = byId("save-service-status");
     if (hostedStatus && hostedStatus.textContent !== "Live Dashboard") {
@@ -33,6 +54,8 @@
         verifyButton.classList.add("hidden");
       }
     }
+
+    syncPublishedEditAuthState();
   }
 
   applyPolish();
