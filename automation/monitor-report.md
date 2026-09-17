@@ -1,11 +1,11 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-09-17T16:57:30Z**
+Run time: **2026-09-17T21:19:06Z**
 
 ## Source check cadence
 
-- Checked this run: 2
-- Skipped until configured interval: 9
+- Checked this run: 3
+- Skipped until configured interval: 8
 
 ## New potentially relevant items
 
@@ -13,7 +13,7 @@ None detected.
 
 ## Source-check errors
 
-- **Navy Reserve RESFOR Notices — CNRFCNOTE 5354 - EO POLICY STATEMENTS** — The read operation timed out
+- **MyNavyHR Reserve Officer Continuation and Retention** — The read operation timed out
 
 ## Publishing safety
 
