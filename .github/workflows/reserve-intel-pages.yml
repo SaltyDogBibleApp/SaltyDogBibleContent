@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "docs/reserve-intel/**"
+      - "cloudflare/*.mjs"
       - "automation/generate_review_dashboard.py"
       - "drafts/pending/**"
       - "reserve-content-feed.json"
@@ -37,6 +38,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate dashboard and Worker JavaScript
+        run: |
+          node --check docs/reserve-intel/app.js
+          node --check docs/reserve-intel/auth.js
+          node --check docs/reserve-intel/published-github-edit.js
+          node --check docs/reserve-intel/pending-github-review.js
+          node --check docs/reserve-intel/ui-polish.js
+          node --check cloudflare/worker.mjs
+          node --check cloudflare/published.mjs
+          node --check cloudflare/pending.mjs
+
       - name: Generate dashboard data
         run: |
           python automation/generate_review_dashboard.py \
@@ -52,6 +69,8 @@ jobs:
           cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/published-github-edit.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/pending-github-review.js >> _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/ui-polish.js >> _site/reserve-intel/app.js
 
