@@ -51,7 +51,7 @@
     appCheck.id = "github-app-check-button";
     appCheck.className = "button secondary hidden";
     appCheck.type = "button";
-    appCheck.textContent = "Check GitHub App";
+    appCheck.textContent = "Verify GitHub Connection";
 
     const appStatus = document.createElement("span");
     appStatus.id = "github-app-check-status";
@@ -138,8 +138,8 @@
     const status = byIdSafe("github-app-check-status");
     const button = byIdSafe("github-app-check-button");
     appCheckRunning = true;
-    button.textContent = "Checking GitHub App…";
-    status.textContent = "Checking repository access…";
+    button.textContent = "Verifying GitHub Connection…";
+    status.textContent = "Verifying repository connection…";
     status.className = "service-status";
     renderAuthState();
     const controller = new AbortController();
@@ -158,7 +158,7 @@
       const payload = await response.json().catch(() => null);
       if (authState.token !== tokenAtStart) return;
       if (!response.ok) {
-        throw new Error(payload?.error || `GitHub App check failed (HTTP ${response.status}).`);
+        throw new Error(payload?.error || `GitHub connection check failed (HTTP ${response.status}).`);
       }
       if (
         payload?.ok !== true ||
@@ -168,21 +168,21 @@
         payload.permissions?.contents !== "read" ||
         payload.permissions?.pull_requests !== "read"
       ) {
-        throw new Error("The response did not confirm the expected read-only repository access.");
+        throw new Error("The response did not confirm the expected repository access.");
       }
-      status.textContent = "GitHub App ready — read-only repository access verified";
+      status.textContent = "GitHub connected — repository access verified";
       status.className = "service-status connected";
-      notify("GitHub App check passed.", "success");
+      notify("GitHub connection verified.", "success");
     } catch (error) {
       if (authState.token !== tokenAtStart) return;
       status.textContent = error.name === "AbortError"
-        ? "GitHub App check timed out. Try again."
-        : error.message || "Could not reach the GitHub App check. Try again.";
+        ? "GitHub connection check timed out. Try again."
+        : error.message || "Could not verify the GitHub connection. Try again.";
       status.className = "service-status unavailable";
     } finally {
       window.clearTimeout(timeout);
       appCheckRunning = false;
-      button.textContent = "Check GitHub App";
+      button.textContent = "Verify GitHub Connection";
       renderAuthState();
     }
   }
