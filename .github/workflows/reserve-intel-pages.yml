@@ -68,6 +68,7 @@ jobs:
         run: |
           mkdir -p _site/reserve-intel
           cp docs/reserve-intel/index.html _site/reserve-intel/index.html
+          cp docs/reserve-intel/health.html _site/reserve-intel/health.html
           cat docs/reserve-intel/app.js > _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
@@ -120,6 +121,7 @@ jobs:
           # Serve the actual dashboard at the Pages root too. This avoids
           # relying on browser/meta-refresh behavior before the app loads.
           cp _site/reserve-intel/index.html _site/index.html
+          cp _site/reserve-intel/health.html _site/health.html
           cp _site/reserve-intel/app.js _site/app.js
           cp _site/reserve-intel/styles.css _site/styles.css
           cp _site/reserve-intel/data.json _site/data.json
