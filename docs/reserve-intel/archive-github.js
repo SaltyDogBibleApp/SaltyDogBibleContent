@@ -61,6 +61,7 @@
           <button id="archive-modal-close" class="modal-close" type="button" aria-label="Close archive dialog">×</button>
         </div>
         <p id="archive-modal-article" class="modal-article-title"></p>
+        <div id="archive-error" class="modal-warning hidden" role="alert"></div>
         <div id="archive-form">
           <p class="modal-warning">The article will leave Current Reserve Intel but remain permanently retrievable in the archive. This creates a GitHub review PR before anything changes.</p>
           <label class="modal-label" for="archive-reason">Archive reason</label>
@@ -103,12 +104,28 @@
     });
   }
 
+  function setError(message) {
+    const error = document.getElementById("archive-error");
+    if (!error) return;
+    error.textContent = message || "Archive request failed.";
+    error.classList.remove("hidden");
+  }
+
+  function clearError() {
+    const error = document.getElementById("archive-error");
+    if (!error) return;
+    error.textContent = "";
+    error.classList.add("hidden");
+  }
+
   function closeModal() {
+    clearError();
     document.getElementById("archive-modal")?.classList.add("hidden");
   }
 
   function showForm() {
     activeReview = null;
+    clearError();
     document.getElementById("archive-form").classList.remove("hidden");
     document.getElementById("archive-review").classList.add("hidden");
     document.getElementById("archive-successor").value = "";
@@ -118,6 +135,7 @@
 
   function showReview(review) {
     activeReview = review;
+    clearError();
     document.getElementById("archive-form").classList.add("hidden");
     document.getElementById("archive-review").classList.remove("hidden");
     document.getElementById("archive-review-note").textContent =
@@ -151,8 +169,9 @@
       const status = await api({ action: "archive-status", articleId: activeArticle.id });
       if (status.archiveReview) showReview(status.archiveReview);
     } catch (error) {
-      closeModal();
-      showToast(error.message, "warning");
+      const message = error?.message || "Could not check the archive review state.";
+      setError(message);
+      showToast(message, "warning");
     } finally {
       createButton.disabled = false;
       createButton.textContent = "Create Archive Review";
@@ -162,6 +181,7 @@
   async function createReview() {
     if (!activeArticle) return;
     const button = document.getElementById("archive-create-review");
+    clearError();
     button.disabled = true;
     button.textContent = "Creating Review…";
     try {
@@ -177,7 +197,9 @@
       showReview(payload);
       showToast("Archive review created.", "success");
     } catch (error) {
-      showToast(error.message, "warning");
+      const message = error?.message || "Could not create the archive review.";
+      setError(message);
+      showToast(message, "warning");
     } finally {
       button.disabled = false;
       button.textContent = "Create Archive Review";
@@ -188,6 +210,7 @@
     if (!activeArticle || !activeReview) return;
     if (!window.confirm("Archive this article now? It will leave Current Reserve Intel but remain in Archive.")) return;
     const button = document.getElementById("archive-approve-review");
+    clearError();
     button.disabled = true;
     button.textContent = "Archiving…";
     try {
@@ -210,7 +233,9 @@
       closeModal();
       showToast("Article moved to Archive.", "success");
     } catch (error) {
-      showToast(error.message, "warning");
+      const message = error?.message || "Could not archive the article.";
+      setError(message);
+      showToast(message, "warning");
     } finally {
       button.disabled = false;
       button.textContent = "Archive Article";
@@ -220,6 +245,7 @@
   async function rejectReview() {
     if (!activeArticle || !activeReview) return;
     const button = document.getElementById("archive-reject-review");
+    clearError();
     button.disabled = true;
     button.textContent = "Cancelling…";
     try {
@@ -231,7 +257,9 @@
       showForm();
       showToast("Archive review cancelled. The article remains Current.", "success");
     } catch (error) {
-      showToast(error.message, "warning");
+      const message = error?.message || "Could not cancel the archive review.";
+      setError(message);
+      showToast(message, "warning");
     } finally {
       button.disabled = false;
       button.textContent = "Cancel Archive";
