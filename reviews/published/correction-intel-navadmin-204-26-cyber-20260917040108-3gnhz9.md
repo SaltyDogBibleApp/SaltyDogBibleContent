@@ -35,4 +35,3 @@ NORMAL
 - [x] I verified the intended audience.
 - [x] I reviewed the title, summary, Why It Matters, and details.
 - [x] I approve publication to Reserve Intel.
-
