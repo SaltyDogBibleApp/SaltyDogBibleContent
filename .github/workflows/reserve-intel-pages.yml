@@ -52,10 +52,12 @@ jobs:
           cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/published-github-edit.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/ui-polish.js >> _site/reserve-intel/app.js
 
-          # GitHub Pages is a hosted/read-only dashboard surface. The local
-          # Codespace review-service health check must not block initial data
-          # rendering there. Keep the original behavior unchanged for local use.
+          # GitHub Pages is the hosted dashboard surface. The local Codespace
+          # review-service health check must not block initial data rendering there.
+          # Keep the original behavior unchanged for local use.
           python - <<'PY'
           from pathlib import Path
 
@@ -75,7 +77,7 @@ jobs:
                 state.refreshServiceAvailable = false;
                 state.saveServiceRepository = null;
                 const hostedStatus = byId("save-service-status");
-                hostedStatus.textContent = "GitHub-hosted dashboard";
+                hostedStatus.textContent = "Live Dashboard";
                 hostedStatus.className = "service-status connected";
               } else {
                 await checkSaveService();
