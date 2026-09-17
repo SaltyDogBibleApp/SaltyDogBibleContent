@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve Intel Diagnostics</title>
+</head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:24px;max-width:760px;margin:auto;">
+  <h1>Reserve Intel Diagnostics</h1>
+  <p>This page uses only inline HTML/CSS. It tests each dashboard dependency separately with a 7-second timeout.</p>
+  <div id="results"></div>
+
+  <script>
+    const tests = [
+      ["Dashboard HTML", "index.html", false],
+      ["Stylesheet", "styles.css", false],
+      ["Dashboard JavaScript", "app.js", false],
+      ["Dashboard Data", "data.json?diag=" + Date.now(), false],
+      ["Cloudflare Auth Worker", "https://salty-dog-reserve-intel-auth.saltydogbibleapp.workers.dev/auth/status", true],
+    ];
+
+    const results = document.getElementById("results");
+
+    function row(name) {
+      const el = document.createElement("div");
+      el.style.cssText = "border:1px solid #ddd;border-radius:10px;padding:12px 14px;margin:10px 0";
+      el.innerHTML = `<strong>${name}</strong><div>Testing…</div>`;
+      results.appendChild(el);
+      return el.lastElementChild;
+    }
+
+    async function test(name, url, crossOrigin) {
+      const output = row(name);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 7000);
+      const start = performance.now();
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller.signal,
+          mode: crossOrigin ? "cors" : "same-origin",
+          headers: crossOrigin ? { Authorization: "Bearer diagnostic-invalid-token" } : undefined,
+        });
+        const ms = Math.round(performance.now() - start);
+        output.textContent = `OK — HTTP ${response.status} in ${ms} ms`;
+        output.style.color = "#176b42";
+      } catch (error) {
+        const ms = Math.round(performance.now() - start);
+        output.textContent = `${error.name === "AbortError" ? "TIMEOUT" : "FAILED"} — ${error.message || error.name} after ${ms} ms`;
+        output.style.color = "#9a2f38";
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    (async () => {
+      for (const [name, url, crossOrigin] of tests) {
+        await test(name, url, crossOrigin);
+      }
+      const done = document.createElement("p");
+      done.innerHTML = "<strong>Diagnostics complete.</strong> Send a screenshot of these results.";
+      results.appendChild(done);
+    })();
+  </script>
+</body>
+</html>
