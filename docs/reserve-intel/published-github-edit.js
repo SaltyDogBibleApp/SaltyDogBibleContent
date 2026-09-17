@@ -6,6 +6,8 @@
   const CORRECTION_PATH = "/api/published-article";
   const DEFAULT_NOTE =
     "Edit this article here. Changes are staged for review and do not affect the live article until you approve and publish them.";
+  const SIGNED_OUT_NOTE =
+    "Sign in with GitHub to edit and publish article updates.";
   const reviewsByArticle = new Map();
   const publicationPending = new Set();
   let reviewActionRunning = false;
@@ -80,10 +82,11 @@
       return;
     }
 
-    if (note) note.textContent = DEFAULT_NOTE;
+    const authenticated = window.reserveIntelAuth?.isAuthenticated?.() === true;
+    if (note) note.textContent = authenticated ? DEFAULT_NOTE : SIGNED_OUT_NOTE;
     if (editButton) {
       editButton.disabled = article.isActive !== true;
-      editButton.textContent = "Edit Article";
+      editButton.textContent = authenticated ? "Edit Article" : "Sign In to Edit";
     }
   }
 
@@ -181,7 +184,8 @@
     if (!article || article.isActive !== true) return;
 
     if (!window.reserveIntelAuth?.isAuthenticated()) {
-      showToast("Sign in with GitHub, then select Edit Article again.", "warning");
+      window.reserveIntelAuth?.signIn?.();
+      showToast("Sign in with GitHub to continue editing.", "neutral");
       return;
     }
 
