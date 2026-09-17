@@ -72,18 +72,34 @@ async function boundedJson(input, limit) {
   } finally { reader.releaseLock(); }
 }
 async function github(path, token, method = "GET", body) {
-  const response = await fetch(`${API}${path}`, {
-    method, redirect:"error", signal:AbortSignal.timeout(15000),
-    headers:{Accept:"application/vnd.github+json", Authorization:`Bearer ${token}`,
-      "X-GitHub-Api-Version":"2026-03-10", "User-Agent":"Salty-Dog-Reserve-Intel", "Content-Type":"application/json"},
-    ...(body === undefined ? {} : {body:JSON.stringify(body)}),
-  });
+  let response;
+  try {
+    response = await fetch(`${API}${path}`, {
+      method,
+      redirect:"error",
+      headers:{
+        Accept:"application/vnd.github+json",
+        Authorization:`Bearer ${token}`,
+        "X-GitHub-Api-Version":"2026-03-10",
+        "User-Agent":"Salty-Dog-Reserve-Intel",
+        "Content-Type":"application/json",
+      },
+      ...(body === undefined ? {} : {body:JSON.stringify(body)}),
+    });
+  } catch {
+    throw new UpdateError("GitHub could not be reached.", 502);
+  }
+
   if (!response.ok) {
-    await response.body?.cancel();
     if (response.status === 409) throw new UpdateError("The feed changed while you were editing. Cancel and reopen the article before updating.", 409);
     throw new UpdateError(`GitHub could not complete the request (HTTP ${response.status}).`, 502);
   }
-  return boundedJson(response, 2 * 1024 * 1024);
+
+  try {
+    return await response.json();
+  } catch {
+    throw new UpdateError("GitHub returned an invalid response.", 502);
+  }
 }
 async function installationToken(env, deps, write) {
   const jwt = await deps.createGitHubAppJwt(env);
@@ -105,6 +121,7 @@ function decode(text) {
 }
 export async function handlePublished(request, env, deps) {
   const respond = (payload, status = 200) => deps.jsonResponse(payload, status, env, request);
+  let stage = "request-validation";
   try {
     if (!["GET", "POST"].includes(request.method)) throw new UpdateError("Method not allowed.", 405);
     if (request.headers.get("Origin") !== env.FRONTEND_ORIGIN) throw new UpdateError("Origin is not authorized.", 403);
@@ -117,6 +134,7 @@ export async function handlePublished(request, env, deps) {
     const write = request.method === "POST";
     let body, patch;
     if (write) {
+      stage = "update-request-parse";
       if (request.headers.get("Content-Type")?.split(";")[0].trim() !== "application/json") throw new UpdateError("JSON content type is required.", 415);
       body = await boundedJson(request, 128 * 1024);
       exactKeys(body, ["articleId", "baseSha", "patch", "confirmations"], "Update request");
@@ -126,22 +144,39 @@ export async function handlePublished(request, env, deps) {
     }
     const id = write ? body.articleId : new URL(request.url).searchParams.get("id");
     if (typeof id !== "string" || !/^[a-zA-Z0-9_-]{1,200}$/.test(id)) throw new UpdateError("Invalid article ID.");
+
+    stage = "installation-token";
     const token = await installationToken(env, deps, write);
+
+    stage = "feed-fetch";
     const path = `/repos/${REPOSITORY}/contents/${FEED_PATH}`;
     const file = await github(`${path}?ref=main`, token);
     if (file.encoding !== "base64" || typeof file.content !== "string" || typeof file.sha !== "string") throw new UpdateError("The published feed could not be read.", 502);
-    const feed = JSON.parse(decode(file.content));
+
+    stage = "feed-decode";
+    let feed;
+    try {
+      feed = JSON.parse(decode(file.content));
+    } catch {
+      throw new UpdateError("The published feed could not be decoded.", 502);
+    }
     if (!Array.isArray(feed.intelArticles)) throw new UpdateError("Invalid published feed.", 502);
+
+    stage = "article-lookup";
     const matches = feed.intelArticles.filter(a => a?.id === id);
     if (matches.length !== 1 || matches[0].isActive !== true) throw new UpdateError("This article is missing, inactive, or has a duplicate ID.", 409);
     const article = matches[0];
     if (!write) return respond({ok:true, article, baseSha:file.sha});
+
+    stage = "update-validation";
     if (file.sha !== body.baseSha) throw new UpdateError("The feed changed while you were editing. Cancel and reopen the article before updating.", 409);
     if (Object.keys(patch).every(k => JSON.stringify(patch[k]) === JSON.stringify(article[k]))) throw new UpdateError("No changes to publish.");
     const now = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
     const updated = {...article, ...patch, updatedAt:now};
     feed.intelArticles = feed.intelArticles.map(a => a.id === id ? updated : a);
     feed.generatedAt = now;
+
+    stage = "feed-write";
     const result = await github(path, token, "PUT", {
       branch:"main", sha:file.sha,
       message:`Update published Reserve Intel article ${id}\n\nApproved by ${session.sub} at ${now}\nBase feed: ${file.sha}\n\n${CHECKS.map(c => `- [x] ${c}`).join("\n")}`,
@@ -149,7 +184,13 @@ export async function handlePublished(request, env, deps) {
     });
     return respond({ok:true, article:updated, baseSha:result.content?.sha, commit:result.commit?.sha});
   } catch (error) {
-    if (!(error instanceof UpdateError)) console.error("Published update failed", {name:error.name});
+    if (!(error instanceof UpdateError)) {
+      console.error("Published update failed", {
+        stage,
+        name:error?.name || "Error",
+        message:error?.message || String(error),
+      });
+    }
     return respond({ok:false, error:error instanceof UpdateError ? error.message : "Update could not be confirmed. Reopen the article to check its current version before retrying."}, error instanceof UpdateError ? error.status : 502);
   }
 }
