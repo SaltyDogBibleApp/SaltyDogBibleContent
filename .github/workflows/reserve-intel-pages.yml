@@ -67,20 +67,15 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir -p _site/reserve-intel
+          mkdir -p _site/debug/01-base _site/debug/02-auth _site/debug/03-published _site/debug/04-pending _site/debug/05-archive _site/debug/06-polish
+
           cp docs/reserve-intel/index.html _site/reserve-intel/index.html
           cp docs/reserve-intel/health.html _site/reserve-intel/health.html
           cp docs/reserve-intel/diagnostics.html _site/reserve-intel/diagnostics.html
-          cat docs/reserve-intel/app.js > _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/published-github-edit.js >> _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/pending-github-review.js >> _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/archive-github.js >> _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/ui-polish.js >> _site/reserve-intel/app.js
+          cp docs/reserve-intel/styles.css _site/reserve-intel/styles.css
+          cp docs/reserve-intel/data.json _site/reserve-intel/data.json
+
+          cp docs/reserve-intel/app.js /tmp/reserve-intel-base.js
 
           # GitHub Pages is the hosted dashboard surface. The local Codespace
           # review-service health check must not block initial data rendering there.
@@ -88,7 +83,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
 
-          path = Path("_site/reserve-intel/app.js")
+          path = Path("/tmp/reserve-intel-base.js")
           text = path.read_text(encoding="utf-8")
           old = '''async function load() {
             try {
@@ -116,11 +111,40 @@ jobs:
           path.write_text(text.replace(old, new, 1), encoding="utf-8")
           PY
 
-          cp docs/reserve-intel/styles.css _site/reserve-intel/styles.css
-          cp docs/reserve-intel/data.json _site/reserve-intel/data.json
+          # Build the production bundle from the same hosted base used by the
+          # bisect pages so browser-only regressions can be isolated precisely.
+          cat /tmp/reserve-intel-base.js > _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/published-github-edit.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/pending-github-review.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/archive-github.js >> _site/reserve-intel/app.js
+          printf '\n' >> _site/reserve-intel/app.js
+          cat docs/reserve-intel/ui-polish.js >> _site/reserve-intel/app.js
 
-          # Serve the actual dashboard at the Pages root too. This avoids
-          # relying on browser/meta-refresh behavior before the app loads.
+          # Validate the exact concatenated production bundle too. Individual
+          # source-file checks cannot detect cross-file top-level collisions.
+          node --check _site/reserve-intel/app.js
+
+          # Build cumulative frontend bisect variants.
+          cp /tmp/reserve-intel-base.js _site/debug/01-base/app.js
+          cat _site/debug/01-base/app.js docs/reserve-intel/auth.js > _site/debug/02-auth/app.js
+          cat _site/debug/02-auth/app.js docs/reserve-intel/published-github-edit.js > _site/debug/03-published/app.js
+          cat _site/debug/03-published/app.js docs/reserve-intel/pending-github-review.js > _site/debug/04-pending/app.js
+          cat _site/debug/04-pending/app.js docs/reserve-intel/archive-github.js > _site/debug/05-archive/app.js
+          cat _site/debug/05-archive/app.js docs/reserve-intel/ui-polish.js > _site/debug/06-polish/app.js
+
+          for stage in 01-base 02-auth 03-published 04-pending 05-archive 06-polish; do
+            cp docs/reserve-intel/index.html "_site/debug/$stage/index.html"
+            cp docs/reserve-intel/styles.css "_site/debug/$stage/styles.css"
+            cp docs/reserve-intel/data.json "_site/debug/$stage/data.json"
+            node --check "_site/debug/$stage/app.js"
+          done
+
+          # Serve the actual dashboard at the Pages root too.
           cp _site/reserve-intel/index.html _site/index.html
           cp _site/reserve-intel/health.html _site/health.html
           cp _site/reserve-intel/diagnostics.html _site/diagnostics.html
