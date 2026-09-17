@@ -5,7 +5,7 @@
 (() => {
   const CORRECTION_PATH = "/api/published-article";
   const DEFAULT_NOTE =
-    "Edit this article here. Changes are proposed through a GitHub review PR and do not affect the live article until you approve and publish them.";
+    "Edit this article here. Changes are staged for review and do not affect the live article until you approve and publish them.";
   const reviewsByArticle = new Map();
   const publicationPending = new Set();
   let reviewActionRunning = false;
@@ -47,7 +47,7 @@
     link.href = review.prUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = "Open in GitHub";
+    link.textContent = "View in GitHub";
     container.appendChild(link);
   }
 
@@ -59,11 +59,11 @@
     if (publicationPending.has(article.id)) {
       if (note) {
         note.textContent =
-          "The correction PR was merged. GitHub is running the publication workflow; reload the dashboard after it finishes to see the updated live article.";
+          "Update approved. GitHub is publishing the new version now. Reload after the publication workflow finishes to confirm the live article.";
       }
       if (editButton) {
         editButton.disabled = true;
-        editButton.textContent = "Publication Pending";
+        editButton.textContent = "Publishing…";
       }
       const row = actionRow();
       if (row) {
@@ -71,7 +71,7 @@
         controls.id = "published-review-controls";
         controls.className = "action-buttons";
         controls.appendChild(
-          makeButton("reload-published-button", "Reload Dashboard", "button secondary", () => {
+          makeButton("reload-published-button", "Reload Published Article", "button secondary", () => {
             window.location.reload();
           })
         );
@@ -94,14 +94,14 @@
     const note = byId("published-update-note");
     if (note) {
       note.textContent = review.draft
-        ? `Correction PR #${review.prNumber} is still a GitHub draft. Open it in GitHub to make it ready for review, or reject it.`
-        : `Correction PR #${review.prNumber} is awaiting your decision. Approve & Publish merges it and triggers the existing publication workflow; Reject Update closes it without changing the live article.`;
+        ? `Update #${review.prNumber} is still in draft review. View it in GitHub to make it ready, or reject it.`
+        : `Update #${review.prNumber} is ready for review. Approve & Publish applies it to the live article; Reject Update discards it without changing the published version.`;
     }
 
     const editButton = byId("edit-published-button");
     if (editButton) {
       editButton.disabled = true;
-      editButton.textContent = "Update Pending";
+      editButton.textContent = "Review Pending";
     }
 
     const row = actionRow();
@@ -160,7 +160,7 @@
     const requestId = ++statusRequestId;
     const note = byId("published-update-note");
     const editButton = byId("edit-published-button");
-    if (note) note.textContent = "Checking for an open correction review…";
+    if (note) note.textContent = "Checking for a pending update…";
     if (editButton) editButton.disabled = true;
 
     try {
@@ -170,7 +170,7 @@
       else renderNoReview(article);
     } catch (error) {
       if (requestId !== statusRequestId || state.selectedId !== article.id) return;
-      if (note) note.textContent = error.message || "Could not check correction review status.";
+      if (note) note.textContent = error.message || "Could not check update status.";
       if (editButton) editButton.disabled = false;
     }
   }
@@ -189,11 +189,11 @@
       const review = await getReviewStatus(article.id, true);
       if (review) {
         renderReviewControls(article, review);
-        showToast(`Resolve correction PR #${review.prNumber} before starting another edit.`, "warning");
+        showToast(`Resolve pending update #${review.prNumber} before starting another edit.`, "warning");
         return;
       }
     } catch (error) {
-      showToast(error.message || "Could not check for an open correction PR.", "warning");
+      showToast(error.message || "Could not check for a pending update.", "warning");
       return;
     }
 
@@ -207,7 +207,7 @@
     const note = byId("published-update-note");
     if (note) {
       note.textContent =
-        "Edit the article here. Review your changes before creating a GitHub review PR; the live article stays unchanged until you approve and publish that PR.";
+        "Edit the article here, then review the changes before submitting. The live article stays unchanged until you approve and publish the update.";
     }
   }
 
@@ -229,7 +229,7 @@
     if (!edit?.patch || state.updating) return;
 
     if (!window.reserveIntelAuth?.isAuthenticated()) {
-      showToast("Your GitHub sign-in is required to create the review PR.", "warning");
+      showToast("Your GitHub sign-in is required to submit this update.", "warning");
       return;
     }
 
@@ -240,7 +240,7 @@
     const button = byId("publish-update-button");
     const backButton = byId("back-to-update-button");
     button.disabled = true;
-    button.textContent = "Creating Review PR…";
+    button.textContent = "Submitting Update…";
     backButton.disabled = true;
     byId("update-error").textContent = "";
 
@@ -257,13 +257,13 @@
       byId("update-dialog").close();
       renderArticle(article, "published");
       renderPrResult(article, payload);
-      showToast(`Created GitHub review PR #${payload.prNumber}.`, "success");
+      showToast(`Update #${payload.prNumber} is ready for review.`, "success");
     } catch (error) {
-      byId("update-error").textContent = error.message || "Could not create the GitHub review PR.";
+      byId("update-error").textContent = error.message || "Could not submit the update for review.";
     } finally {
       state.updating = false;
       button.disabled = false;
-      button.textContent = "Create Review PR";
+      button.textContent = "Submit for Review";
       backButton.disabled = false;
     }
   }
@@ -272,14 +272,14 @@
     if (reviewActionRunning) return;
     const approving = action === "approve-review";
     const confirmation = approving
-      ? `Approve and publish correction PR #${review.prNumber}? This will merge the PR and trigger the Reserve Intel publication workflow.`
-      : `Reject correction PR #${review.prNumber}? This will close the PR without changing the live article.`;
+      ? `Approve and publish update #${review.prNumber}? This will apply the reviewed change to Reserve Intel and preserve the GitHub audit history.`
+      : `Reject update #${review.prNumber}? The proposed change will be discarded and the live article will remain unchanged.`;
     if (!window.confirm(confirmation)) return;
 
     reviewActionRunning = true;
     renderReviewControls(article, review);
     const note = byId("published-update-note");
-    if (note) note.textContent = approving ? "Merging correction PR…" : "Closing correction PR…";
+    if (note) note.textContent = approving ? "Publishing approved update…" : "Rejecting update…";
 
     try {
       const payload = await api({
@@ -293,13 +293,13 @@
       if (payload.action === "approved") {
         publicationPending.add(article.id);
         renderNoReview(article);
-        showToast(`Approved PR #${review.prNumber}. Publication workflow started.`, "success");
+        showToast(`Update #${review.prNumber} approved. Publishing started.`, "success");
       } else {
         renderNoReview(article);
-        showToast(`Rejected PR #${review.prNumber}. The live article was not changed.`, "success");
+        showToast(`Update #${review.prNumber} rejected. The live article was not changed.`, "success");
       }
     } catch (error) {
-      showToast(error.message || "Could not update the review PR.", "warning");
+      showToast(error.message || "Could not complete the review action.", "warning");
       renderReviewControls(article, review);
     } finally {
       reviewActionRunning = false;
@@ -328,7 +328,7 @@
       if (reviewButton) {
         queueMicrotask(() => {
           const publishButton = byId("publish-update-button");
-          if (publishButton) publishButton.textContent = "Create Review PR";
+          if (publishButton) publishButton.textContent = "Submit for Review";
         });
         return;
       }
@@ -342,5 +342,5 @@
   );
 
   const publishButton = byId("publish-update-button");
-  if (publishButton) publishButton.textContent = "Create Review PR";
+  if (publishButton) publishButton.textContent = "Submit for Review";
 })();
