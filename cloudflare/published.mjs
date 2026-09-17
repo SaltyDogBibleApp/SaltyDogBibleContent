@@ -1,3 +1,5 @@
+import { handlePendingAction } from "./pending.mjs";
+
 const REPOSITORY="SaltyDogBibleApp/SaltyDogBibleContent";
 const REPOSITORY_NAME="SaltyDogBibleContent";
 const FEED_PATH="reserve-content-feed.json";
@@ -144,7 +146,14 @@ export async function handlePublished(request,env,deps){
     let session;try{session=await deps.verifySession(m[1],env.SESSION_SECRET);}catch{throw new UpdateError("Your session expired. Sign in again; your edits are still in this tab.",401);}if(session.sub?.toLowerCase()!=="saltydogbibleapp"||session.repository!==REPOSITORY||env.GITHUB_REPOSITORY!==REPOSITORY)throw new UpdateError("Session is not authorized.",403);
     if(request.headers.get("Content-Type")?.split(";")[0].trim()!=="application/json")throw new UpdateError("JSON content type is required.",415);
     stage="request-parse";const body=await readJson(request,128*1024);stage="installation-token";const token=await installationToken(env,deps);
-    if(typeof body?.action==="string"){stage=`review-${body.action}`;const r=await reviewAction(body,token,respond);if(r)return r;throw new UpdateError("Unsupported review action.");}
+    if(typeof body?.action==="string"){
+      stage=`review-${body.action}`;
+      if(body.action.startsWith("pending-")){
+        const pending=await handlePendingAction(body,token,respond);
+        if(pending)return pending;
+      }
+      const r=await reviewAction(body,token,respond);if(r)return r;throw new UpdateError("Unsupported review action.");
+    }
     stage="correction-create";return await createCorrection(body,token,session,respond);
   }catch(error){if(!(error instanceof UpdateError))console.error("Published correction failed",{stage,name:error?.name||"Error",message:error?.message||String(error)});return respond({ok:false,error:error instanceof UpdateError?error.message:"The GitHub review action could not be completed. No live content was changed."},error instanceof UpdateError?error.status:502);}
 }
