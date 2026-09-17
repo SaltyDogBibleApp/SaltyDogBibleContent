@@ -1,4 +1,5 @@
 import { handlePendingAction } from "./pending.mjs";
+import { handleArchiveAction, ArchiveError } from "./archive.mjs";
 
 const REPOSITORY="SaltyDogBibleApp/SaltyDogBibleContent";
 const REPOSITORY_NAME="SaltyDogBibleContent";
@@ -148,6 +149,10 @@ export async function handlePublished(request,env,deps){
     stage="request-parse";const body=await readJson(request,128*1024);stage="installation-token";const token=await installationToken(env,deps);
     if(typeof body?.action==="string"){
       stage=`review-${body.action}`;
+      if(["archive-status","create-archive","approve-archive","reject-archive"].includes(body.action)){
+        const archive=await handleArchiveAction(body,token,session,respond);
+        if(archive)return archive;
+      }
       if(body.action.startsWith("pending-")){
         const pending=await handlePendingAction(body,token,respond);
         if(pending)return pending;
@@ -155,5 +160,5 @@ export async function handlePublished(request,env,deps){
       const r=await reviewAction(body,token,respond);if(r)return r;throw new UpdateError("Unsupported review action.");
     }
     stage="correction-create";return await createCorrection(body,token,session,respond);
-  }catch(error){if(!(error instanceof UpdateError))console.error("Published correction failed",{stage,name:error?.name||"Error",message:error?.message||String(error)});return respond({ok:false,error:error instanceof UpdateError?error.message:"The GitHub review action could not be completed. No live content was changed."},error instanceof UpdateError?error.status:502);}
+  }catch(error){const known=error instanceof UpdateError||error instanceof ArchiveError;if(!known)console.error("Published correction failed",{stage,name:error?.name||"Error",message:error?.message||String(error)});return respond({ok:false,error:known?error.message:"The GitHub review action could not be completed. No live content was changed."},known?error.status:502);}
 }
