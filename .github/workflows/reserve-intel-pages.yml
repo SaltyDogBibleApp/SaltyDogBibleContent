@@ -111,8 +111,9 @@ jobs:
           path.write_text(text.replace(old, new, 1), encoding="utf-8")
           PY
 
-          # Build the production bundle from the same hosted base used by the
-          # bisect pages so browser-only regressions can be isolated precisely.
+          # Production intentionally matches the known-good 05-archive bisect
+          # stack. UI polish remains isolated in debug/06-polish until it is
+          # proven safe with the hosted review/archive layers.
           cat /tmp/reserve-intel-base.js > _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/auth.js >> _site/reserve-intel/app.js
@@ -122,8 +123,6 @@ jobs:
           cat docs/reserve-intel/pending-github-review.js >> _site/reserve-intel/app.js
           printf '\n' >> _site/reserve-intel/app.js
           cat docs/reserve-intel/archive-github.js >> _site/reserve-intel/app.js
-          printf '\n' >> _site/reserve-intel/app.js
-          cat docs/reserve-intel/ui-polish.js >> _site/reserve-intel/app.js
 
           # Validate the exact concatenated production bundle too. Individual
           # source-file checks cannot detect cross-file top-level collisions.
