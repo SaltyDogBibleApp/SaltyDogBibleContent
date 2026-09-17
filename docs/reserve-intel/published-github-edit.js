@@ -4,6 +4,8 @@
 (() => {
   const GITHUB_EDIT_URL =
     "https://github.com/SaltyDogBibleApp/SaltyDogBibleContent/edit/main/reserve-content-feed.json";
+  const GITHUB_EDIT_NOTE =
+    "Published corrections are made in GitHub so the commit and pull-request history remain the source of truth.";
 
   function selectedPublishedArticle() {
     if (typeof state === "undefined" || state.selectedKind !== "published") return null;
@@ -12,12 +14,17 @@
 
   function updatePublishedEditCopy() {
     const button = byId("edit-published-button");
-    if (button) button.textContent = "Edit in GitHub";
+    if (button && button.textContent !== "Edit in GitHub") {
+      button.textContent = "Edit in GitHub";
+    }
 
     const note = byId("published-update-note");
-    if (note && state?.selectedKind === "published") {
-      note.textContent =
-        "Published corrections are made in GitHub so the commit and pull-request history remain the source of truth.";
+    if (
+      note &&
+      state?.selectedKind === "published" &&
+      note.textContent !== GITHUB_EDIT_NOTE
+    ) {
+      note.textContent = GITHUB_EDIT_NOTE;
     }
   }
 
@@ -67,6 +74,7 @@
   );
 
   // Keep the published control labeled correctly after article selections rerender it.
+  // Guarded writes above prevent the observer from retriggering itself indefinitely.
   const observer = new MutationObserver(updatePublishedEditCopy);
   const actions = byId("published-update-actions");
   if (actions) observer.observe(actions, {subtree: true, childList: true, characterData: true});
