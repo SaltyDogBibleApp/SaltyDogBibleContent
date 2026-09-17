@@ -2,6 +2,12 @@ name: Deploy Reserve Intel Pages
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Publish Approved Reserve Intel
+      - Archive Rejected Reserve Intel
+    types:
+      - completed
   push:
     branches:
       - main
@@ -25,6 +31,9 @@ concurrency:
 
 jobs:
   deploy:
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -38,6 +47,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Set up Node
@@ -83,7 +93,7 @@ jobs:
 
           path = Path("_site/reserve-intel/index.html")
           text = path.read_text(encoding="utf-8")
-          version = os.environ["GITHUB_SHA"]
+          version = f'{os.environ["GITHUB_SHA"]}-{os.environ["GITHUB_RUN_ID"]}'
           text = text.replace('href="styles.css"', f'href="styles.css?v={version}"')
           text = text.replace('src="app.js"', f'src="app.js?v={version}"')
           path.write_text(text, encoding="utf-8")
