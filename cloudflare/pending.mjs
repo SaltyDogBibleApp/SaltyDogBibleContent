@@ -359,10 +359,12 @@ async function validatedContext(token, body, { allowMissingPr = false } = {}) {
 
   const files = await github(`/repos/${REPOSITORY}/pulls/${pr.number}/files?per_page=100`, token);
   const names = Array.isArray(files) ? files.map((file) => file?.filename).filter(Boolean) : [];
+  const allowedFiles = new Set([identity.sourceFile, identity.reviewFile]);
   if (
-    names.length !== 2 ||
-    !names.includes(identity.sourceFile) ||
-    !names.includes(identity.reviewFile)
+    !names.includes(identity.reviewFile) ||
+    names.length < 1 ||
+    names.length > 2 ||
+    names.some((name) => !allowedFiles.has(name))
   ) {
     throw new PendingError("The Review PR contains unexpected file changes and cannot be managed from the dashboard.", 409);
   }
@@ -521,7 +523,7 @@ async function savePending(body, token, respond) {
   const draftText = `${JSON.stringify(updatedDraft, null, 2)}\n`;
   const oldDraftText = `${JSON.stringify(context.draft, null, 2)}\n`;
   let commitSha = null;
-  let draftChanged = draftText !== oldDraftText;
+  const draftChanged = draftText !== oldDraftText;
   if (draftChanged) {
     commitSha = await writeTextFile(
       token,
@@ -548,7 +550,8 @@ async function savePending(body, token, respond) {
     if (!commitSha) commitSha = reviewCommitSha;
   }
 
-  if (context.pr.body !== reviewText) {
+  const prBodyChanged = context.pr.body !== reviewText;
+  if (prBodyChanged) {
     await updateReviewBody(token, context.pr.number, reviewText);
   }
 
@@ -557,7 +560,7 @@ async function savePending(body, token, respond) {
     action: "pending-save",
     articleId: body.articleId,
     article: updatedDraft.articleDraft,
-    changed: draftChanged || reviewChanged || context.pr.body !== reviewText,
+    changed: draftChanged || reviewChanged || prBodyChanged,
     commitSha,
     prNumber: context.pr.number,
   });
@@ -599,7 +602,7 @@ async function rejectPending(body, token, respond) {
 async function approvePending(body, token, respond) {
   exactKeys(body, ["action", "articleId", "sourceFile", "reviewBranch", "confirmations"], "Approval request");
   confirmChecks(body.confirmations);
-  let context = await validatedContext(token, body);
+  const context = await validatedContext(token, body);
   const approvedReview = rewriteReview(context.reviewText, context.draft, true);
   if (approvedReview !== context.reviewText) {
     await writeTextFile(
