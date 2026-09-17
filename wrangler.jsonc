@@ -1,0 +1,7 @@
+{
+  "name": "salty-dog-reserve-intel-auth",
+  "main": "cloudflare/worker.mjs",
+  "compatibility_date": "2026-09-16",
+  "keep_vars": true,
+  "workers_dev": true
+}
