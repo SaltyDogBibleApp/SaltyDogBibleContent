@@ -23,6 +23,34 @@
     console.log(message);
   }
 
+  function ensureAuthControls() {
+    if (byIdSafe("auth-status")) return;
+
+    const container = document.querySelector(".topbar-meta");
+    if (!container) return;
+
+    const status = document.createElement("span");
+    status.id = "auth-status";
+    status.className = "service-status";
+    status.textContent = "Checking GitHub sign-in…";
+
+    const signIn = document.createElement("button");
+    signIn.id = "auth-sign-in-button";
+    signIn.className = "button secondary";
+    signIn.type = "button";
+    signIn.textContent = "Sign in with GitHub";
+
+    const signOut = document.createElement("button");
+    signOut.id = "auth-sign-out-button";
+    signOut.className = "button secondary hidden";
+    signOut.type = "button";
+    signOut.textContent = "Sign out";
+
+    container.prepend(signOut);
+    container.prepend(signIn);
+    container.prepend(status);
+  }
+
   function loadStoredSession() {
     try {
       const raw = window.sessionStorage.getItem(SESSION_KEY);
@@ -227,13 +255,12 @@
     getExpiresAt: () => authState.expiresAt,
   };
 
+  ensureAuthControls();
+
   window.addEventListener("message", handleAuthMessage);
 
-  const signInButton = byIdSafe("auth-sign-in-button");
-  const signOutButton = byIdSafe("auth-sign-out-button");
-
-  signInButton?.addEventListener("click", signIn);
-  signOutButton?.addEventListener("click", signOut);
+  byIdSafe("auth-sign-in-button")?.addEventListener("click", signIn);
+  byIdSafe("auth-sign-out-button")?.addEventListener("click", signOut);
 
   renderAuthState();
   restoreSession();
