@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-18T04:39:01Z",
+  "lastRunAt": "2026-09-18T11:09:39Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,7 +164,7 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-09-17T04:48:37Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-09-17T04:48:37Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -311,7 +311,7 @@
         "dod_compensation-f2ca29e1481e1c8249d9",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-09-17T04:48:37Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -320,7 +320,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-09-17T16:57:30Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -543,7 +543,7 @@
         "NAVADMIN-214/26",
         "NAVADMIN-215/26"
       ],
-      "lastCheckedAt": "2026-09-18T04:39:01Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -718,7 +718,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-09-18T04:39:01Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -897,7 +897,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-09-18T04:39:01Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": "The read operation timed out",
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1079,8 +1079,8 @@
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-09-17T16:57:30Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
+      "lastError": "The read operation timed out",
       "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
@@ -1319,8 +1319,8 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-09-18T04:39:01Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
+      "lastError": null,
       "linkedDocumentCount": 46,
       "linkedDocuments": {
         "reserve_guidance-04f1fc612ab1ec3bb81e": {
@@ -2231,7 +2231,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-09-17T04:48:37Z",
+      "lastCheckedAt": "2026-09-18T11:09:39Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
