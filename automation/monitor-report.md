@@ -1,11 +1,11 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-09-17T21:19:06Z**
+Run time: **2026-09-18T04:39:01Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 5
+- Skipped until configured interval: 6
 
 ## New potentially relevant items
 
@@ -14,6 +14,7 @@ None detected.
 ## Source-check errors
 
 - **MyNavyHR Reserve Officer Continuation and Retention** — The read operation timed out
+- **Navy Reserve RESPERSMAN** — The read operation timed out
 
 ## Publishing safety
 
