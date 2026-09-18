@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-18T11:09:39Z",
+  "lastRunAt": "2026-09-18T16:21:40Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -897,8 +897,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-09-18T11:09:39Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-09-18T16:21:40Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
@@ -1064,23 +1064,23 @@
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "446af4bdbc7177b4a557a9c944fde7c0f171d4b7efd55fb1ecc3c20115789848",
+      "fingerprint": "815e60eb6307ff5e59ef0a68c28efac8ca99b3120f419f48943ad8fc9db35491",
       "itemCount": 11,
       "itemIDs": [
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
         "reserve_guidance-434edffa72369c87cb49",
         "reserve_guidance-555e7201b92b5224a802",
+        "reserve_guidance-5ecf75092ae0ad84d71c",
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-bd8580f3a8bb7ab55cdf",
-        "reserve_guidance-d03e0015f90169c70d14",
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-d6b0af30b42398460ff1",
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-09-18T11:09:39Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-09-18T16:21:40Z",
+      "lastError": null,
       "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
@@ -1155,6 +1155,24 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE 5354 - EO POLICY STATEMENTS.pdf"
         },
+        "reserve_guidance-5ecf75092ae0ad84d71c": {
+          "contentLength": 243023,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE%201001%20-%20FY27%20FEG.pdf",
+          "fingerprint": "b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc",
+          "lastModified": "Thu, 17 Sep 2026 14:02:34 GMT",
+          "textEvidence": {
+            "characterCount": 45057,
+            "extractionStatus": "ok",
+            "lineCount": 541,
+            "pageCount": 14,
+            "pagesWithText": 13,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/5ecf75092ae0ad84d71c/b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc.json",
+            "textSHA256": "89c55a0acad755f70272eaf0b3514201642918d55c3001dfce797c35f452159f",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
+        },
         "reserve_guidance-bd8580f3a8bb7ab55cdf": {
           "contentLength": 587335,
           "etag": null,
@@ -1172,24 +1190,6 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 6000_FY26 SELRES HPO CWS.pdf"
-        },
-        "reserve_guidance-d03e0015f90169c70d14": {
-          "contentLength": 1057422,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/FY27%20FORCE%20EXECUTION%20GUIDANCE.pdf",
-          "fingerprint": "f6c316bd0efc1a4548c752f20606d00f08e5c89b68d16e717ef892da5c21c39c",
-          "lastModified": "Wed, 16 Sep 2026 18:46:42 GMT",
-          "textEvidence": {
-            "characterCount": 0,
-            "extractionStatus": "no_extractable_text",
-            "lineCount": 0,
-            "pageCount": 14,
-            "pagesWithText": 0,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/d03e0015f90169c70d14/f6c316bd0efc1a4548c752f20606d00f08e5c89b68d16e717ef892da5c21c39c.json",
-            "textSHA256": null,
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/FY27 FORCE EXECUTION GUIDANCE.pdf"
         },
         "reserve_guidance-d29784d34013296ed7e6": {
           "contentLength": 562628,

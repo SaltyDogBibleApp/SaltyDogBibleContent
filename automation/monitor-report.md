@@ -1,23 +1,25 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-09-18T11:09:39Z**
+Run time: **2026-09-18T16:21:40Z**
 
 ## Source check cadence
 
-- Checked this run: 10
-- Skipped until configured interval: 1
+- Checked this run: 2
+- Skipped until configured interval: 9
 
 ## New potentially relevant items
 
-None detected.
+### CNRFNOTE 1001 - FY27 FEG
 
-## Source-check errors
+- Source: **Navy Reserve RESFOR Notices**
+- Type: `reserve_guidance`
+- URL: https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf
+- Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING
+- Category hints: Policy, Training & Readiness, Admin, Pay & Benefits
+- Detection: `new_linked_document`
+- Source fingerprint: `b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc`
 
-- **MyNavyHR Reserve Officer Continuation and Retention** — The read operation timed out
-- **Navy Reserve RESPERSMAN — RESPERSMAN 1221-010** — The read operation timed out
-- **Navy Reserve RESPERSMAN — RESPERSMAN 1001-020** — The read operation timed out
-- **Navy Reserve RESPERSMAN — RESPERSMAN 1040-010** — The read operation timed out
-- **Navy Reserve RESFOR Notices** — The read operation timed out
+**Human review required. Detection does not mean this item should be published.**
 
 ## Publishing safety
 
