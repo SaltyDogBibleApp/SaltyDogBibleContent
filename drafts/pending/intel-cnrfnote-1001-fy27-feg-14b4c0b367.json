@@ -66,9 +66,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Automated draft from an official source: CNRFNOTE 1001 - FY27 FEG. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: CNRFNOTE 1001 - FY27 FEG. The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for CNRFNOTE 1001 - FY27 FEG: detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE%201001%20-%20FY27%20FEG.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Thu, 17 Sep 2026 14:02:34 GMT; downloaded size: 243,023 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf",
@@ -80,5 +80,43 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-09-18T16:22:39Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE%201001%20-%20FY27%20FEG.pdf",
+    "detectedFingerprint": "b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc",
+    "observedFingerprint": "b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Thu, 17 Sep 2026 14:02:34 GMT",
+    "contentLength": 243023,
+    "etag": null,
+    "documentKind": "Navy Reserve guidance",
+    "documentIdentifier": null,
+    "sourceFilename": "CNRFNOTE 1001 - FY27 FEG.pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/5ecf75092ae0ad84d71c/b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "89c55a0acad755f70272eaf0b3514201642918d55c3001dfce797c35f452159f",
+      "pageCount": 14,
+      "pagesWithText": 13,
+      "characterCount": 45057,
+      "lineCount": 541,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/5ecf75092ae0ad84d71c/b28ad5af38f6e8ce66bdbd29a16969659ed9b135b585c40a6f435d7f57f539bc.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
