@@ -1,19 +1,15 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-09-22T04:50:27Z**
+Run time: **2026-09-22T11:33:31Z**
 
 ## Source check cadence
 
-- Checked this run: 4
-- Skipped until configured interval: 7
+- Checked this run: 7
+- Skipped until configured interval: 4
 
 ## New potentially relevant items
 
 None detected.
-
-## Source-check errors
-
-- **MyNavyHR Serving on a Reserve Board** — The read operation timed out
 
 ## Publishing safety
 
