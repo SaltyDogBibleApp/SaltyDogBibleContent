@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-09-23T11:30:17Z",
+  "lastRunAt": "2026-09-23T16:53:57Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -320,7 +320,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-09-23T04:41:31Z",
+      "lastCheckedAt": "2026-09-23T16:53:57Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -1060,7 +1060,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-09-23T04:41:31Z",
+      "lastCheckedAt": "2026-09-23T16:53:57Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1081,7 +1081,7 @@
         "reserve_guidance-ef382708a73d84fb8989",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-09-23T04:41:31Z",
+      "lastCheckedAt": "2026-09-23T16:53:57Z",
       "lastError": null,
       "linkedDocumentCount": 10,
       "linkedDocuments": {
@@ -1321,7 +1321,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-09-23T04:41:31Z",
+      "lastCheckedAt": "2026-09-23T16:53:57Z",
       "lastError": null,
       "linkedDocumentCount": 46,
       "linkedDocuments": {
