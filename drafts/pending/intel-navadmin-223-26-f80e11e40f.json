@@ -1,0 +1,74 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-28T23:14:11Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Readiness Tracker",
+      "Admin Gouge"
+    ],
+    "basis": [
+      "category: Admin",
+      "keyword: READINESS",
+      "keyword: ADMIN POLICY"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "MyNavyHR Reserve Officer Boards",
+    "sourceType": "reserve_board",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26223.pdf?ver=E7XSRYkMRKkmegYJM8jxJA%3d%3d",
+    "listedDate": null,
+    "reserveSignals": [
+      "RESERVE OFFICER",
+      "TAR",
+      "PROMOTION"
+    ],
+    "categoryHints": [
+      "Admin",
+      "Policy",
+      "Training & Readiness"
+    ],
+    "detectionKind": "new_item",
+    "sourceFingerprint": null,
+    "previousFingerprint": null,
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-navadmin-223-26-f80e11e40f",
+    "publishedAt": "2026-09-28T23:14:11Z",
+    "updatedAt": "2026-09-28T23:14:11Z",
+    "title": "NAVADMIN 223/26",
+    "category": "Admin",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Automated draft from an official source: NAVADMIN 223/26. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: RESERVE OFFICER, TAR, PROMOTION.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "MyNavyHR Reserve Officer Boards",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26223.pdf?ver=E7XSRYkMRKkmegYJM8jxJA%3d%3d",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}
