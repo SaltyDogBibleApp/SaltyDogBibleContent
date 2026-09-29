@@ -1,0 +1,75 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-09-29T22:12:21Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Pay Tracker",
+      "Points & Retirement"
+    ],
+    "basis": [
+      "category: Pay & Benefits",
+      "keyword: COMPENSATION",
+      "keyword: RETIREMENT"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "DoD Military Compensation",
+    "sourceType": "dod_compensation",
+    "sourceURL": "https://militarypay.defense.gov/Benefits/Thrift-Savings-Plan/",
+    "listedDate": null,
+    "reserveSignals": [
+      "BASIC PAY",
+      "SPECIAL AND INCENTIVE PAY",
+      "ALLOWANCES",
+      "CONTINUATION PAY"
+    ],
+    "categoryHints": [
+      "Pay & Benefits",
+      "Retirement",
+      "Policy"
+    ],
+    "detectionKind": "new_item",
+    "sourceFingerprint": null,
+    "previousFingerprint": null,
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-thrift-savings-plan-1961698c3f",
+    "publishedAt": "2026-09-29T22:12:21Z",
+    "updatedAt": "2026-09-29T22:12:21Z",
+    "title": "Thrift Savings Plan",
+    "category": "Pay & Benefits",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Automated draft from an official source: Thrift Savings Plan. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: BASIC PAY, SPECIAL AND INCENTIVE PAY, ALLOWANCES, CONTINUATION PAY.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "DoD Military Compensation",
+    "sourceURL": "https://militarypay.defense.gov/Benefits/Thrift-Savings-Plan/",
+    "audience": {
+      "service": "ALL",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}

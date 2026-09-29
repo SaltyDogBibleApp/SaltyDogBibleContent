@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/COMNAVRESFORNOTE 6000 SIGNED 23SEP2026.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/COMNAVRESFORNOTE%206000%20SIGNED%2023SEP2026.pdf",
+  "title": "COMNAVRESFORNOTE 6000 SIGNED 23SEP2026",
+  "fingerprint": "a86b7363f2457f73cc7e7795335235b27ed61b1daec5ddbde031ed93fc5d9712",
+  "capturedAt": "2026-09-29T22:12:18Z",
+  "extractionStatus": "no_extractable_text",
+  "extractionMethod": "pypdf",
+  "pageCount": 7,
+  "pagesWithText": 0,
+  "characterCount": 0,
+  "lineCount": 0,
+  "textSHA256": null,
+  "truncated": false,
+  "pageLineRanges": [],
+  "warnings": [],
+  "normalizedText": ""
+}
