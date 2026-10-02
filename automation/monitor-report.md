@@ -1,21 +1,15 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-01T22:38:44Z**
+Run time: **2026-10-02T05:31:40Z**
 
 ## Source check cadence
 
-- Checked this run: 11
-- Skipped until configured interval: 0
+- Checked this run: 3
+- Skipped until configured interval: 8
 
 ## New potentially relevant items
 
 None detected.
-
-## Official sources changed in place
-
-- **VA Disability Compensation Rates** — https://www.va.gov/disability/compensation-rates/
-
-These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
 
 ## Publishing safety
 
