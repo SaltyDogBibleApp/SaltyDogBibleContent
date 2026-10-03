@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-02T22:10:37Z",
+  "lastRunAt": "2026-10-03T05:13:52Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,7 +164,7 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-10-01T22:38:44Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-10-01T22:38:44Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-10-01T22:38:44Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-02T12:28:06Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -561,7 +561,7 @@
         "NAVADMIN-231/26",
         "NAVADMIN-232/26"
       ],
-      "lastCheckedAt": "2026-10-02T22:10:37Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -735,7 +735,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-02T22:10:37Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -913,13 +913,13 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-02T22:10:37Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
     "mynavyhr-serving-reserve-board": {
-      "fingerprint": "8c270012e6b1095ec3a702d024d67694b2c61820ff11ca13e4faa5347f947f2d",
+      "fingerprint": "a7260ccf76ae6b5118af79b42c22dc83a32f2c9d7859c37f76d8e89763380639",
       "itemCount": 150,
       "itemIDs": [
         "reserve_board-002f7669ddfdd487e401",
@@ -1073,29 +1073,29 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-02T12:28:06Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "34deb3bf94c1ccb82f4eec1bd6c97ba74cdb87567089824ef92da3a9daff65fd",
+      "fingerprint": "56dff5f3dd9208c25499cc54c4368458f52d2a25fa32210394e415506af0b9f7",
       "itemCount": 10,
       "itemIDs": [
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
-        "reserve_guidance-3c3bb827bdeeafd174cf",
         "reserve_guidance-434edffa72369c87cb49",
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
+        "reserve_guidance-73351eefea86b290956a",
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-e3fcc1cd7cab6fa2dc27",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-10-02T12:28:06Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
-      "linkedDocumentCount": 9,
+      "linkedDocumentCount": 8,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
           "contentLength": 5561139,
@@ -1132,24 +1132,6 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOMNOTE 5420 (SIGNED).pdf"
-        },
-        "reserve_guidance-3c3bb827bdeeafd174cf": {
-          "contentLength": 432684,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/COMNAVRESFORNOTE%206000%20SIGNED%2023SEP2026.pdf",
-          "fingerprint": "a86b7363f2457f73cc7e7795335235b27ed61b1daec5ddbde031ed93fc5d9712",
-          "lastModified": "Tue, 29 Sep 2026 14:15:25 GMT",
-          "textEvidence": {
-            "characterCount": 0,
-            "extractionStatus": "no_extractable_text",
-            "lineCount": 0,
-            "pageCount": 7,
-            "pagesWithText": 0,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/3c3bb827bdeeafd174cf/a86b7363f2457f73cc7e7795335235b27ed61b1daec5ddbde031ed93fc5d9712.json",
-            "textSHA256": null,
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/COMNAVRESFORNOTE 6000 SIGNED 23SEP2026.pdf"
         },
         "reserve_guidance-434edffa72369c87cb49": {
           "contentLength": 502927,
@@ -1315,7 +1297,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-02T12:28:06Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "linkedDocumentCount": 46,
       "linkedDocuments": {
@@ -2152,7 +2134,7 @@
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/RESPERSMAN/"
     },
     "va-disability-compensation": {
-      "fingerprint": "737723af168f302e0514c6ec31f6d8677e72177498df30f1b8d8ccf3a4be40a4",
+      "fingerprint": "cd16cfd9495818fb0cb87b33955d11cf9f8741db475c662c6c168c70b0fff696",
       "itemCount": 70,
       "itemIDs": [
         "va_benefits-0802ea71db1add9a1976",
@@ -2226,7 +2208,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-10-01T22:38:44Z",
+      "lastCheckedAt": "2026-10-03T05:13:52Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
