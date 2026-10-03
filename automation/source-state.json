@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-03T16:14:31Z",
+  "lastRunAt": "2026-10-03T21:11:26Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-03T05:13:52Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -561,7 +561,7 @@
         "NAVADMIN-231/26",
         "NAVADMIN-232/26"
       ],
-      "lastCheckedAt": "2026-10-03T11:35:35Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -735,7 +735,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-03T11:35:35Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -913,7 +913,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-03T11:35:35Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1073,7 +1073,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-03T05:13:52Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1093,9 +1093,9 @@
         "reserve_guidance-e3fcc1cd7cab6fa2dc27",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-10-03T05:13:52Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
-      "linkedDocumentCount": 8,
+      "linkedDocumentCount": 9,
       "linkedDocuments": {
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
           "contentLength": 5561139,
@@ -1186,6 +1186,24 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
+        },
+        "reserve_guidance-73351eefea86b290956a": {
+          "contentLength": 754587,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/COMNAVRESFORNOTE%206000%20-%20FY27%20SELRES%20HEALTH%20PROFESSIONS%20OFFICERS%20IN%20CRITICAL%20WARTIME%20SPECIALTIES%20RECRUITING%20AND%20RETENTION%20INCENTIVES%20-%20SIGNED%20FINAL%202.0.pdf",
+          "fingerprint": "8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d",
+          "lastModified": "Fri, 02 Oct 2026 16:16:20 GMT",
+          "textEvidence": {
+            "characterCount": 13207,
+            "extractionStatus": "ok",
+            "lineCount": 336,
+            "pageCount": 8,
+            "pagesWithText": 8,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/73351eefea86b290956a/8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d.json",
+            "textSHA256": "02a91f787283c4df22c15eff5b8c075f06da7c761670e60d0790ab006ce804e6",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/COMNAVRESFORNOTE 6000 - FY27 SELRES HEALTH PROFESSIONS OFFICERS IN CRITICAL WARTIME SPECIALTIES RECRUITING AND RETENTION INCENTIVES - SIGNED FINAL 2.0.pdf"
         },
         "reserve_guidance-d29784d34013296ed7e6": {
           "contentLength": 562628,
@@ -1297,7 +1315,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-03T05:13:52Z",
+      "lastCheckedAt": "2026-10-03T21:11:26Z",
       "lastError": null,
       "linkedDocumentCount": 46,
       "linkedDocuments": {
