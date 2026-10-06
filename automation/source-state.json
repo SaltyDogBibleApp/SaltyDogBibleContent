@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-06T13:19:21Z",
+  "lastRunAt": "2026-10-06T22:38:03Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,13 +164,13 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-10-05T14:30:12Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
     "dfas-military-pay": {
-      "fingerprint": "0922d2ad61558a1a60b47dc3662a8e8e2c369173b79ce45e1598ffc7f97a2077",
+      "fingerprint": "9dac21aa967bdcd7d767845fac8ab2bab7d37b19683d3d8a2a4ff7d559a456b0",
       "itemCount": 91,
       "itemIDs": [
         "pay_tables-01fd7f8403a778fd6c1b",
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-10-05T14:30:12Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-10-05T14:30:12Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -563,7 +563,7 @@
         "NAVADMIN-232/26",
         "NAVADMIN-233/26"
       ],
-      "lastCheckedAt": "2026-10-06T13:19:21Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -737,7 +737,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-06T13:19:21Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -915,7 +915,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-06T13:19:21Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -2228,7 +2228,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-10-05T14:30:12Z",
+      "lastCheckedAt": "2026-10-06T22:38:03Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
