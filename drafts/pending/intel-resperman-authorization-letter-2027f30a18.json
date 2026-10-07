@@ -1,0 +1,71 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-10-07T23:03:09Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Readiness Tracker",
+      "Admin Gouge"
+    ],
+    "basis": [
+      "category: Policy",
+      "keyword: READINESS",
+      "keyword: RESPERSMAN"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "Navy Reserve RESPERSMAN",
+    "sourceType": "reserve_guidance",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/Official RESFOR Guidance/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf",
+    "listedDate": null,
+    "reserveSignals": [],
+    "categoryHints": [
+      "Policy",
+      "Training & Readiness",
+      "Admin",
+      "Pay & Benefits"
+    ],
+    "detectionKind": "new_item",
+    "sourceFingerprint": null,
+    "previousFingerprint": null,
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-resperman-authorization-letter-2027f30a18",
+    "publishedAt": "2026-10-07T23:03:09Z",
+    "updatedAt": "2026-10-07T23:03:09Z",
+    "title": "RESPERMAN Authorization Letter",
+    "category": "Policy",
+    "status": "TRACKING",
+    "priority": "NORMAL",
+    "summary": "Automated draft from an official source: RESPERMAN Authorization Letter. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "Navy Reserve RESPERSMAN",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/Official RESFOR Guidance/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}

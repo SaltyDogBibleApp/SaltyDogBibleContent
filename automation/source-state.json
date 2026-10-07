@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-07T13:16:16Z",
+  "lastRunAt": "2026-10-07T23:02:54Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,13 +164,13 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-10-06T22:38:03Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
     "dfas-military-pay": {
-      "fingerprint": "9dac21aa967bdcd7d767845fac8ab2bab7d37b19683d3d8a2a4ff7d559a456b0",
+      "fingerprint": "f8d52ef343e669ce9c48ccec6d42f9b0e0036e99b6582c0519faceb7700b7b2c",
       "itemCount": 91,
       "itemIDs": [
         "pay_tables-01fd7f8403a778fd6c1b",
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-10-06T22:38:03Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-10-06T22:38:03Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -322,14 +322,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-07T05:53:52Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "481b119fca88e6695f312590809717470130833740aa1354628320d0b65666a5",
-      "itemCount": 231,
+      "fingerprint": "36946db9e25b23f286fcf65b0144c5ab3e64f33a215867332c2e5562a06586a7",
+      "itemCount": 233,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -561,9 +561,11 @@
         "NAVADMIN-230/26",
         "NAVADMIN-231/26",
         "NAVADMIN-232/26",
-        "NAVADMIN-233/26"
+        "NAVADMIN-233/26",
+        "NAVADMIN-234/26",
+        "NAVADMIN-235/26"
       ],
-      "lastCheckedAt": "2026-10-07T13:16:16Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -737,7 +739,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-07T13:16:16Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -915,7 +917,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-07T13:16:16Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1075,30 +1077,47 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-07T05:53:52Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "56dff5f3dd9208c25499cc54c4368458f52d2a25fa32210394e415506af0b9f7",
-      "itemCount": 10,
+      "fingerprint": "906221a353aed87d3796366369a04cad4d73cf405946a7978342359db75deff8",
+      "itemCount": 9,
       "itemIDs": [
+        "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
         "reserve_guidance-434edffa72369c87cb49",
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
-        "reserve_guidance-73351eefea86b290956a",
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-d29784d34013296ed7e6",
-        "reserve_guidance-e3fcc1cd7cab6fa2dc27",
         "reserve_guidance-fd248faa2485bf578663"
       ],
-      "lastCheckedAt": "2026-10-07T05:53:52Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
-      "linkedDocumentCount": 9,
+      "linkedDocumentCount": 8,
       "linkedDocuments": {
+        "reserve_guidance-12225f1285922a7b3982": {
+          "contentLength": 754587,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Official%20RESFOR%20Guidance/N01A%20Documents/COMNAVRESFOR%20NOTICES/FY27/COMNAVRESFORNOTE%206000%20-%20FY27%20SELRES%20HEALTH%20PROFESSIONS%20OFFICERS%20IN%20CRITICAL%20WARTIME%20SPECIALTIES%20RECRUITING%20AND%20RETENTION%20INCENTIVES%20-%20SIGNED%20FINAL%202.0.pdf",
+          "fingerprint": "8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d",
+          "lastModified": "Fri, 02 Oct 2026 16:16:20 GMT",
+          "textEvidence": {
+            "characterCount": 13207,
+            "extractionStatus": "ok",
+            "lineCount": 336,
+            "pageCount": 8,
+            "pagesWithText": 8,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/12225f1285922a7b3982/8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d.json",
+            "textSHA256": "02a91f787283c4df22c15eff5b8c075f06da7c761670e60d0790ab006ce804e6",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Official RESFOR Guidance/N01A Documents/COMNAVRESFOR NOTICES/FY27/COMNAVRESFORNOTE 6000 - FY27 SELRES HEALTH PROFESSIONS OFFICERS IN CRITICAL WARTIME SPECIALTIES RECRUITING AND RETENTION INCENTIVES - SIGNED FINAL 2.0.pdf"
+        },
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c": {
           "contentLength": 5561139,
           "etag": null,
@@ -1189,24 +1208,6 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
         },
-        "reserve_guidance-73351eefea86b290956a": {
-          "contentLength": 754587,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/COMNAVRESFORNOTE%206000%20-%20FY27%20SELRES%20HEALTH%20PROFESSIONS%20OFFICERS%20IN%20CRITICAL%20WARTIME%20SPECIALTIES%20RECRUITING%20AND%20RETENTION%20INCENTIVES%20-%20SIGNED%20FINAL%202.0.pdf",
-          "fingerprint": "8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d",
-          "lastModified": "Fri, 02 Oct 2026 16:16:20 GMT",
-          "textEvidence": {
-            "characterCount": 13207,
-            "extractionStatus": "ok",
-            "lineCount": 336,
-            "pageCount": 8,
-            "pagesWithText": 8,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/73351eefea86b290956a/8285455b5e65ba5f3dda92406e597e6bc86dd48b3664c8b61728dc7f2134902d.json",
-            "textSHA256": "02a91f787283c4df22c15eff5b8c075f06da7c761670e60d0790ab006ce804e6",
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/COMNAVRESFORNOTE 6000 - FY27 SELRES HEALTH PROFESSIONS OFFICERS IN CRITICAL WARTIME SPECIALTIES RECRUITING AND RETENTION INCENTIVES - SIGNED FINAL 2.0.pdf"
-        },
         "reserve_guidance-d29784d34013296ed7e6": {
           "contentLength": 562628,
           "etag": null,
@@ -1224,24 +1225,6 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf"
-        },
-        "reserve_guidance-e3fcc1cd7cab6fa2dc27": {
-          "contentLength": 211094,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICES/COMNAVRESFORNOTE%201001%20SIGNED%2023SEP2026.pdf",
-          "fingerprint": "0402b7784d8f9660825d2b95d353dccb8d7a0771195856526a50b7917957bd41",
-          "lastModified": "Tue, 29 Sep 2026 14:11:38 GMT",
-          "textEvidence": {
-            "characterCount": 0,
-            "extractionStatus": "no_extractable_text",
-            "lineCount": 0,
-            "pageCount": 4,
-            "pagesWithText": 0,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/e3fcc1cd7cab6fa2dc27/0402b7784d8f9660825d2b95d353dccb8d7a0771195856526a50b7917957bd41.json",
-            "textSHA256": null,
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICES/COMNAVRESFORNOTE 1001 SIGNED 23SEP2026.pdf"
         },
         "reserve_guidance-fd248faa2485bf578663": {
           "contentLength": 71907,
@@ -1266,12 +1249,13 @@
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/Notices/"
     },
     "navyreserve-respersman": {
-      "fingerprint": "98138571aa5785ba6856a2501e0e8c795a87bee2c52bd3a41ba2c49a44158692",
+      "fingerprint": "f8253e9b949591ac5af135fdfd8a6e1f1a5e1dbfe9326c5371a8386ea9635472",
       "itemCount": 47,
       "itemIDs": [
         "reserve_guidance-04f1fc612ab1ec3bb81e",
         "reserve_guidance-05dbd7cbc8870f8da369",
         "reserve_guidance-1b4a25b414fb43e9d33a",
+        "reserve_guidance-2027f30a186a1bac4b81",
         "reserve_guidance-26d6c24c84938d804fab",
         "reserve_guidance-28d7b7d67457e147bf9c",
         "reserve_guidance-2e2bdc5df13d5c7a68fe",
@@ -1287,22 +1271,21 @@
         "reserve_guidance-74f0e3d0787d95d5f4e5",
         "reserve_guidance-7674b7ded4b2554ee024",
         "reserve_guidance-771aa799d581e5847956",
-        "reserve_guidance-77649ebb7ba903ba4183",
         "reserve_guidance-81347a5556a2190c7fd4",
         "reserve_guidance-83172764c818417ea706",
         "reserve_guidance-8463cf1f75ceb59e8280",
         "reserve_guidance-8c6a8baff5ebef369879",
+        "reserve_guidance-8dd7cff92fbc0ccbb8ed",
         "reserve_guidance-8f4f211488c9d2c21b8e",
         "reserve_guidance-8fb1a1904f90069f2a9f",
         "reserve_guidance-9c5fe72a40625510e719",
         "reserve_guidance-a2e8796e9f0944cf289a",
         "reserve_guidance-a949ff10fdb85dfc532a",
+        "reserve_guidance-aa81c03330171ddd33ce",
         "reserve_guidance-adad176a26a85b3b6574",
         "reserve_guidance-bcb7c0258d9091146430",
         "reserve_guidance-bcd49d0f26b7c0862b0c",
-        "reserve_guidance-caf12f7b0665aa16e632",
         "reserve_guidance-cc43656cea8b7add90be",
-        "reserve_guidance-cc822dd16d6ef6413d3e",
         "reserve_guidance-d7bf8f7bd73b63467ea3",
         "reserve_guidance-dc2d6e027cfade7ef847",
         "reserve_guidance-e164adaf2419d6bbc49c",
@@ -1317,9 +1300,9 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-07T05:53:52Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
-      "linkedDocumentCount": 46,
+      "linkedDocumentCount": 43,
       "linkedDocuments": {
         "reserve_guidance-04f1fc612ab1ec3bb81e": {
           "contentLength": 343980,
@@ -1645,24 +1628,6 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-050.pdf"
         },
-        "reserve_guidance-77649ebb7ba903ba4183": {
-          "contentLength": 542675,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERMAN%20Authorization%20Letter.pdf",
-          "fingerprint": "56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8",
-          "lastModified": "Thu, 18 Jun 2020 11:31:37 GMT",
-          "textEvidence": {
-            "characterCount": 0,
-            "extractionStatus": "no_extractable_text",
-            "lineCount": 0,
-            "pageCount": 1,
-            "pagesWithText": 0,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/77649ebb7ba903ba4183/56ff27380f6cc066ab0a2d8841a27f6c749416326a38bdb38a26e94c487b72b8.json",
-            "textSHA256": null,
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERMAN Authorization Letter.pdf"
-        },
         "reserve_guidance-81347a5556a2190c7fd4": {
           "contentLength": 1299757,
           "etag": null,
@@ -1861,24 +1826,6 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/M1001.5.pdf"
         },
-        "reserve_guidance-caf12f7b0665aa16e632": {
-          "contentLength": 26646,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RPM%20Acronyms.pdf",
-          "fingerprint": "1a8ad1704a15fb435c26ced1fb7d6bc3cefce5c9c08ece2476ad5297d6a0808d",
-          "lastModified": "Thu, 18 Jun 2020 11:31:32 GMT",
-          "textEvidence": {
-            "characterCount": 6736,
-            "extractionStatus": "ok",
-            "lineCount": 210,
-            "pageCount": 9,
-            "pagesWithText": 9,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/caf12f7b0665aa16e632/1a8ad1704a15fb435c26ced1fb7d6bc3cefce5c9c08ece2476ad5297d6a0808d.json",
-            "textSHA256": "674ba1a6b21413f6ba1302b2929443c4684480ebb2c64ffb8f854c07dbf3a1a6",
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RPM Acronyms.pdf"
-        },
         "reserve_guidance-cc43656cea8b7add90be": {
           "contentLength": 5395903,
           "etag": null,
@@ -1896,24 +1843,6 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/1100-040.pdf"
-        },
-        "reserve_guidance-cc822dd16d6ef6413d3e": {
-          "contentLength": 55601,
-          "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve%20Military%20Personnel%20Manual/RESPERSMAN%20Table%20of%20Contents.pdf",
-          "fingerprint": "f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6",
-          "lastModified": "Thu, 18 Jun 2020 11:31:34 GMT",
-          "textEvidence": {
-            "characterCount": 2803,
-            "extractionStatus": "ok",
-            "lineCount": 85,
-            "pageCount": 3,
-            "pagesWithText": 3,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-respersman/cc822dd16d6ef6413d3e/f2e7d48ae77ceea581cde00ae855a071c14508d4bf7538fa8762cb7639bed3f6.json",
-            "textSHA256": "77da88948b5fa52e79a694d97a5cf84c745c5148ae603a17628802352a636d67",
-            "truncated": false
-          },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/Documents/RESPERMAN/Reserve Military Personnel Manual/RESPERSMAN Table of Contents.pdf"
         },
         "reserve_guidance-d7bf8f7bd73b63467ea3": {
           "contentLength": 1191204,
@@ -2154,12 +2083,13 @@
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/RESPERSMAN/"
     },
     "va-disability-compensation": {
-      "fingerprint": "cd16cfd9495818fb0cb87b33955d11cf9f8741db475c662c6c168c70b0fff696",
+      "fingerprint": "e1b996ce9228378d535b7311f76568d6100274039c6ea5d078e4f9be877517ce",
       "itemCount": 70,
       "itemIDs": [
         "va_benefits-0802ea71db1add9a1976",
         "va_benefits-0809fe0c388b4120629a",
         "va_benefits-0823a909e5f105366342",
+        "va_benefits-144d88914feb70baf485",
         "va_benefits-163f053a9dbd1658ff3f",
         "va_benefits-16421145880b674966e7",
         "va_benefits-1a7325325460490f950e",
@@ -2202,7 +2132,6 @@
         "va_benefits-96fbbc0a057bfd6bbe98",
         "va_benefits-9dd2f93907d405d58773",
         "va_benefits-9dd6e3f92924f150a3f1",
-        "va_benefits-9e97238676b52013a4ec",
         "va_benefits-a1912db9d68dcb05e223",
         "va_benefits-a63f38a5d5bc487b4c55",
         "va_benefits-a85d3ec5588928c59cc7",
@@ -2228,7 +2157,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-10-06T22:38:03Z",
+      "lastCheckedAt": "2026-10-07T23:02:54Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
