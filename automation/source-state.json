@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-07T23:02:54Z",
+  "lastRunAt": "2026-10-08T05:57:52Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -565,7 +565,7 @@
         "NAVADMIN-234/26",
         "NAVADMIN-235/26"
       ],
-      "lastCheckedAt": "2026-10-07T23:02:54Z",
+      "lastCheckedAt": "2026-10-08T05:57:52Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -739,7 +739,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-07T23:02:54Z",
+      "lastCheckedAt": "2026-10-08T05:57:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -917,7 +917,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-07T23:02:54Z",
+      "lastCheckedAt": "2026-10-08T05:57:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
