@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-08T23:18:14Z",
+  "lastRunAt": "2026-10-09T06:03:46Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-08T13:22:59Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -566,7 +566,7 @@
         "NAVADMIN-235/26",
         "NAVADMIN-236/26"
       ],
-      "lastCheckedAt": "2026-10-08T23:18:14Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -740,7 +740,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-08T23:18:14Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -918,7 +918,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-08T23:18:14Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1078,14 +1078,14 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-08T13:22:59Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "906221a353aed87d3796366369a04cad4d73cf405946a7978342359db75deff8",
-      "itemCount": 9,
+      "fingerprint": "23a42647eaa323ef8d6b93bb491eadff80989942e75e8877bf94e87d54046f58",
+      "itemCount": 10,
       "itemIDs": [
         "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
@@ -1094,12 +1094,13 @@
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
         "reserve_guidance-a949ff10fdb85dfc532a",
+        "reserve_guidance-c24b1419149d343e768f",
         "reserve_guidance-d29784d34013296ed7e6",
-        "reserve_guidance-fd248faa2485bf578663"
+        "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-10-08T13:22:59Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
-      "linkedDocumentCount": 8,
+      "linkedDocumentCount": 9,
       "linkedDocuments": {
         "reserve_guidance-12225f1285922a7b3982": {
           "contentLength": 754587,
@@ -1209,6 +1210,24 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
         },
+        "reserve_guidance-c24b1419149d343e768f": {
+          "contentLength": 109316,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1050%20FY27%20HOLIDAY%20OBSERVATION%20GUIDANCE.pdf",
+          "fingerprint": "a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01",
+          "lastModified": "Thu, 08 Oct 2026 15:27:05 GMT",
+          "textEvidence": {
+            "characterCount": 3432,
+            "extractionStatus": "ok",
+            "lineCount": 66,
+            "pageCount": 2,
+            "pagesWithText": 2,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/c24b1419149d343e768f/a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01.json",
+            "textSHA256": "d661a69bd7767589b6907f7a95824b160f899c1e54e77fcc05a0fd5f9cf18970",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf"
+        },
         "reserve_guidance-d29784d34013296ed7e6": {
           "contentLength": 562628,
           "etag": null,
@@ -1227,23 +1246,23 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf"
         },
-        "reserve_guidance-fd248faa2485bf578663": {
-          "contentLength": 71907,
+        "reserve_guidance-fdd8a0c2e344ac424d66": {
+          "contentLength": 77030,
           "etag": null,
-          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOM%201050%20Calendar%20Year%202026%20Holiday%20Observation.pdf",
-          "fingerprint": "27d20f5f7eda0676c21017a5e3dffb0eded9b5093149c3e8358b11c4d197933f",
-          "lastModified": "Wed, 19 Nov 2025 15:51:11 GMT",
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE%201001%20SIGNED%2023SEP2026.pdf",
+          "fingerprint": "9dc7cdf0e2b008dea1d9414f0d6a633a63e0d1cd6ca8371ccfb6265ed7545a15",
+          "lastModified": "Thu, 08 Oct 2026 17:34:49 GMT",
           "textEvidence": {
-            "characterCount": 0,
-            "extractionStatus": "no_extractable_text",
-            "lineCount": 0,
-            "pageCount": 2,
-            "pagesWithText": 0,
-            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/fd248faa2485bf578663/27d20f5f7eda0676c21017a5e3dffb0eded9b5093149c3e8358b11c4d197933f.json",
-            "textSHA256": null,
+            "characterCount": 7193,
+            "extractionStatus": "ok",
+            "lineCount": 128,
+            "pageCount": 4,
+            "pagesWithText": 4,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/fdd8a0c2e344ac424d66/9dc7cdf0e2b008dea1d9414f0d6a633a63e0d1cd6ca8371ccfb6265ed7545a15.json",
+            "textSHA256": "73a10bac1786ecd2fd36bd156cab2ed446371c38150ec30ca31dcbcd923c73ef",
             "truncated": false
           },
-          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOM 1050 Calendar Year 2026 Holiday Observation.pdf"
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1001 SIGNED 23SEP2026.pdf"
         }
       },
       "name": "Navy Reserve RESFOR Notices",
@@ -1301,7 +1320,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-08T13:22:59Z",
+      "lastCheckedAt": "2026-10-09T06:03:46Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {

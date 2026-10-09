@@ -1,0 +1,84 @@
+{
+  "draftSchemaVersion": 1,
+  "draftStatus": "PENDING_HUMAN_REVIEW",
+  "requiresHumanReview": true,
+  "publishReady": false,
+  "detectedAt": "2026-10-09T06:03:57Z",
+  "appImpact": {
+    "requiresReview": true,
+    "features": [
+      "Readiness Tracker",
+      "Admin Gouge"
+    ],
+    "basis": [
+      "category: Policy",
+      "keyword: READINESS"
+    ],
+    "note": "Automated first-pass only. Human review is required before making any Salty Dog Bible app or content change."
+  },
+  "sourceEvidence": {
+    "sourceName": "Navy Reserve RESFOR Notices",
+    "sourceType": "reserve_guidance",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf",
+    "listedDate": null,
+    "reserveSignals": [
+      "INACTIVE DUTY TRAINING",
+      "DRILL",
+      "TRAVEL REIMBURSEMENT",
+      "SELECTED RESERVE",
+      "SELRES",
+      "ACTIVE DUTY TRAINING",
+      "RECRUITING",
+      "RETENTION",
+      "INCENTIVE",
+      "APPLY",
+      "NATIONAL COMMAND",
+      "SENIOR OFFICER",
+      "BILLET SCREENING"
+    ],
+    "categoryHints": [
+      "Policy",
+      "Training & Readiness",
+      "Admin",
+      "Pay & Benefits"
+    ],
+    "detectionKind": "new_linked_document",
+    "sourceFingerprint": "a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01",
+    "previousFingerprint": null,
+    "officialHostVerified": true
+  },
+  "reviewChecklist": {
+    "sourceOpenedAndRead": false,
+    "factsVerifiedAgainstSource": false,
+    "statusVerified": false,
+    "effectiveDateVerified": false,
+    "audienceVerified": false,
+    "summaryRewrittenFromSource": false,
+    "whyItMattersRewrittenFromSource": false,
+    "detailsRewrittenFromSource": false,
+    "approvedForPublication": false
+  },
+  "articleDraft": {
+    "id": "intel-1050-fy27-holiday-observation-guidance-054b173dcf",
+    "publishedAt": "2026-10-09T06:03:57Z",
+    "updatedAt": "2026-10-09T06:03:57Z",
+    "title": "1050 FY27 HOLIDAY OBSERVATION GUIDANCE",
+    "category": "Policy",
+    "status": "TRACKING",
+    "priority": "HIGH",
+    "summary": "Automated draft from an official source: 1050 FY27 HOLIDAY OBSERVATION GUIDANCE. Review the source before publishing any policy conclusion.",
+    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
+    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "effectiveDate": null,
+    "sourceName": "Navy Reserve RESFOR Notices",
+    "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf",
+    "audience": {
+      "service": "USN",
+      "reserveStatus": "ALL",
+      "trainingWing": null,
+      "squadron": null
+    },
+    "isPinned": false,
+    "isActive": false
+  }
+}

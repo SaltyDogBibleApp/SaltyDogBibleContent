@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1050%20FY27%20HOLIDAY%20OBSERVATION%20GUIDANCE.pdf",
+  "title": "1050 FY27 HOLIDAY OBSERVATION GUIDANCE",
+  "fingerprint": "a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01",
+  "capturedAt": "2026-10-09T06:03:46Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 2,
+  "pagesWithText": 2,
+  "characterCount": 3432,
+  "lineCount": 66,
+  "textSHA256": "d661a69bd7767589b6907f7a95824b160f899c1e54e77fcc05a0fd5f9cf18970",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 37
+    },
+    {
+      "page": 2,
+      "startLine": 38,
+      "endLine": 66
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NAVY RESERVE FORCES COMMAND\n1915 FORRESTAL DRIVE\nNORFOLK VA 23551-4615\nCanc: Dec 2027\nCOMNAVRESFORNOTE 1050\nN00\n1 Oct 2026\nCOMNAVRESFORCOM NOTICE 1050\nFrom: Commander, Navy Reserve Forces Command\nSubj: FISCAL YEAR 2027 HOLIDAY OBSERVATION GUIDANCE\nRef: (a) COMNAVRESFORCOMINST 1050.1C\n1. Purpose. To publish the Commander, Navy Reserve Force (COMNAVRESFOR) and\nCommander, Navy Reserve Forces Command (COMNAVRESFORCOM) Fiscal Year (FY)\n2027 holiday liberty schedule and tentative FY 2028 first quarter holiday liberty schedule.\n2. Scope and Applicability. This notice applies to all personnel assigned to\nCOMNAVRESFOR and COMNAVRESFORCOM except for designated personnel.\n3. Action. COMNAVRESFOR and COMNAVRESFORCOM staff members will adhere to\nreference (a) before executing holiday liberty. This notice supersedes\nCOMNAVRESFORCOMNOTE 1050 of 15 October 2025.\n4. Holiday Liberty. The holidays listed below will be observed by COMNAVRESFOR and\nCOMNAVRESFORCOM during FY 2027. In conjunction with some observed holidays, there\nare additional days where holiday routine is authorized.\nHoliday Observed Holiday Routine\nColumbus Day 12 Oct 2026 9 - 12 Oct 2026 *+\n96-hour Special Liberty N/A 30 Oct - 2 Nov 2026 *+\nVeterans Day 11 Nov 2026 11 Nov 2026\nThanksgiving 26 Nov 2026 26 - 29 Nov 2026 *+\nChristmas 25 Dec 2026 24 - 27 Dec 2026 *+\nNew Year’s Day 1 Jan 2027 31 Dec 2026 - 3 Jan 2027 *+\nMartin Luther King, Jr. Day 18 Jan 2027 15 - 18 Jan 2027 *+\nPresident’s Day 15 Feb 2027 12 - 15 Feb 2027 *+\nCommand Spring Holiday N/A 26 - 29 Mar 2027 *+\nMemorial Day 31 May 2027 28 - 31 May 2027 *+\nJuneteenth 18 Jun 2027 18 - 21 Jun 2027 *+\nIndependence Day 5 Jul 2027 2 - 5 Jul 2027 *+\nLabor Day 6 Sep 2027 3 - 6 Sep 2027 *+\nCOMNAVRESFORNOTE 1050\n1 Oct 2026\n2\n5. Tentative First Quarter Fiscal Year 2028 Holiday Liberty\nHoliday Observed Holiday Routine\nColumbus Day 11 Oct 2027 8 - 11 Oct 2027 *+\nVeterans Day 11 Nov 2027 11-12 Nov 2027 *+\nThanksgiving 25 Nov 2027 25 - 28 Nov 2027 *+\nChristmas 24 Dec 2027 24 - 27 Dec 2027 *+\n* 96-hour liberty authorized for military personnel\n+ Liberal leave authorized for civilians\n6. December 2026 through January 2027 Holiday Leave Period. The holiday leave period for\ncalendar year 2026 will begin at the close of business on Friday, 11 December 2026, and will\nend at the beginning of the day on Monday, 11 January 2027. The deadline for submission of\nleave requests will be Friday, 13 November 2026. Military personnel assigned to a duty section\nor command duty officers desiring leave during this period will submit requests to their duty\nsection leader and senior watch officer before routing it through their chain of command. This\nmust be completed by Monday, 2 November 2026. This is not a standdown period. Deputy\nchiefs of staff (DCOS) and special assistants will ensure there is appropriate manning to execute\nthe mission, functions, and tasks of COMNAVRESFOR and COMNAVRESFORCOM\nthroughout the leave period. Deviations from the prescribed leave period will be approved at the\nDCOS level.\n7. Records Management. Records created as a result of this notice, regardless of media or\nformat, must be managed per Secretary of the Navy Manual 5210.1 of September 2019.\nJ. M. DROLL\nChief of Staff\nReleasability and distribution:\nThis notice is cleared for public release and is available electronically only via\nCOMNAVRESFORCOM Web site, https://navyreserve.navy.mil."
+}
