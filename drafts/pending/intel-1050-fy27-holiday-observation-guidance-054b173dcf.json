@@ -66,9 +66,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Automated draft from an official source: 1050 FY27 HOLIDAY OBSERVATION GUIDANCE. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: 1050 FY27 HOLIDAY OBSERVATION GUIDANCE. The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for 1050 FY27 HOLIDAY OBSERVATION GUIDANCE: detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/1050%20FY27%20HOLIDAY%20OBSERVATION%20GUIDANCE.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Thu, 08 Oct 2026 15:27:05 GMT; downloaded size: 109,316 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf",
@@ -80,5 +80,43 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-10-09T06:04:20Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/1050%20FY27%20HOLIDAY%20OBSERVATION%20GUIDANCE.pdf",
+    "detectedFingerprint": "a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01",
+    "observedFingerprint": "a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Thu, 08 Oct 2026 15:27:05 GMT",
+    "contentLength": 109316,
+    "etag": null,
+    "documentKind": "Navy Reserve guidance",
+    "documentIdentifier": null,
+    "sourceFilename": "1050 FY27 HOLIDAY OBSERVATION GUIDANCE.pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/c24b1419149d343e768f/a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "d661a69bd7767589b6907f7a95824b160f899c1e54e77fcc05a0fd5f9cf18970",
+      "pageCount": 2,
+      "pagesWithText": 2,
+      "characterCount": 3432,
+      "lineCount": 66,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/c24b1419149d343e768f/a516b7d29689166cfb2c6f34e7f630d9b179344683213210f3ee30813c1eec01.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
