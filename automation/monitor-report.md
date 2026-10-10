@@ -1,21 +1,23 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-10T12:26:11Z**
+Run time: **2026-10-10T21:39:10Z**
 
 ## Source check cadence
 
-- Checked this run: 7
-- Skipped until configured interval: 4
+- Checked this run: 3
+- Skipped until configured interval: 8
 
 ## New potentially relevant items
 
-None detected.
+### Navy Personnel Command
 
-## Source-check errors
+- Source: **MyNavyHR Reserve Officer Boards**
+- Type: `reserve_board`
+- URL: https://www.mynavyhr.navy.mil/About-MyNavy-HR/Commands/Navy-Personnel-Command/
+- Reserve signals: RESERVE OFFICER, TAR, PROMOTION
+- Category hints: Admin, Policy, Training & Readiness
 
-- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
+**Human review required. Detection does not mean this item should be published.**
 
 ## Publishing safety
 
