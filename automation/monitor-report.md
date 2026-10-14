@@ -1,15 +1,22 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-14T11:46:31Z**
+Run time: **2026-10-14T17:06:53Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 4
+- Skipped until configured interval: 7
 
 ## New potentially relevant items
 
 None detected.
+
+## Source-check errors
+
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN 1100-030** — The read operation timed out
 
 ## Publishing safety
 
