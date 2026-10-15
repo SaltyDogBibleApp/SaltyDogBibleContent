@@ -1,15 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-14T21:37:51Z**
+Run time: **2026-10-15T04:32:46Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 7
+- Skipped until configured interval: 4
 
 ## New potentially relevant items
 
 None detected.
+
+## Official sources changed in place
+
+- **BLS Consumer Price Index** — https://www.bls.gov/news.release/cpi.nr0.htm
+
+These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
 
 ## Publishing safety
 
