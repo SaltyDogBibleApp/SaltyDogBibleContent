@@ -1,6 +1,6 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-15T04:32:46Z**
+Run time: **2026-10-15T11:22:31Z**
 
 ## Source check cadence
 
@@ -11,11 +11,11 @@ Run time: **2026-10-15T04:32:46Z**
 
 None detected.
 
-## Official sources changed in place
+## Source-check errors
 
-- **BLS Consumer Price Index** — https://www.bls.gov/news.release/cpi.nr0.htm
-
-These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
