@@ -1,6 +1,6 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-16T21:03:23Z**
+Run time: **2026-10-17T04:20:31Z**
 
 ## Source check cadence
 
@@ -13,7 +13,7 @@ Run time: **2026-10-16T21:03:23Z**
 
 - Source: **MyNavyHR Reserve Officer Continuation and Retention**
 - Type: `reserve_board`
-- URL: https://www.mynavyhr.navy.mil/About-MyNavy-HR/Commands/Navy-Personnel-Command/
+- URL: https://www.mynavyhr.navy.mil/Navy-Personnel-Command/
 - Reserve signals: CONTINUATION, RETENTION, TAR, RESERVE OFFICER
 - Category hints: Policy, Admin, Retirement
 
