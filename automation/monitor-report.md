@@ -1,23 +1,15 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-17T15:29:29Z**
+Run time: **2026-10-17T20:33:08Z**
 
 ## Source check cadence
 
-- Checked this run: 4
-- Skipped until configured interval: 7
+- Checked this run: 3
+- Skipped until configured interval: 8
 
 ## New potentially relevant items
 
-### Health Profession Officer and Clinical Phycologist Board Certification Pay
-
-- Source: **DFAS Military Pay Tables**
-- Type: `pay_tables`
-- URL: https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/HPO6/
-- Reserve signals: DRILL PAY, BASIC PAY, BAS, ALLOWANCE
-- Category hints: Pay & Benefits
-
-**Human review required. Detection does not mean this item should be published.**
+None detected.
 
 ## Publishing safety
 
