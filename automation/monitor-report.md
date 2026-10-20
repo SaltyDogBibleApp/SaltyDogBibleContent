@@ -1,33 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-20T04:44:03Z**
+Run time: **2026-10-20T11:30:31Z**
 
 ## Source check cadence
 
-- Checked this run: 6
-- Skipped until configured interval: 5
+- Checked this run: 4
+- Skipped until configured interval: 7
 
 ## New potentially relevant items
 
-### Chief of Navy Reserve
+None detected.
 
-- Source: **MyNavyHR Serving on a Reserve Board**
-- Type: `reserve_board`
-- URL: https://www.navyreserve.navy.mil/
-- Reserve signals: RESERVE BOARD, SPOT PROMOTION, COMMAND
-- Category hints: Admin, Training & Readiness
+## Source-check errors
 
-**Human review required. Detection does not mean this item should be published.**
-
-### Navy Reserve Homeport
-
-- Source: **MyNavyHR Serving on a Reserve Board**
-- Type: `reserve_board`
-- URL: https://nrh.navyreserve.navy.mil/
-- Reserve signals: RESERVE BOARD, SPOT PROMOTION, COMMAND
-- Category hints: Admin, Training & Readiness
-
-**Human review required. Detection does not mean this item should be published.**
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
