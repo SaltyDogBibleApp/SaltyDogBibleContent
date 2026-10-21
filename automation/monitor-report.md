@@ -1,24 +1,30 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-20T21:34:19Z**
+Run time: **2026-10-21T04:40:50Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 8
+- Skipped until configured interval: 3
 
 ## New potentially relevant items
 
-### FY-28 ACTIVE-DUTY NAVY AND NAVY RESERVE E9, E8, AND E7 ADVANCEMENT SELECTION AND MARKETPLACE SCREEN BOARD MEMBERSHIP APPLICATIONS
+### RENEWAL AND RESTRUCTURING OF EXPLOSIVE ORDNANCE DISPOSAL WARFARE OFFICER RETENTION BONUS
 
 - Source: **MyNavyHR NAVADMIN**
 - Type: `navadmin`
-- URL: https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26249.pdf?ver=JFboZ-AYQjv2-7p6X2nHdQ%3d%3d
-- Reserve signals: RESERVE
+- URL: https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26250.pdf?ver=bga6x4n9P_p4rLa7or_6lA%3d%3d
+- Reserve signals: RETENTION
 - Category hints: Policy, Training & Readiness, Admin, Pay & Benefits
 - Listed date: 10/20/2026
 
 **Human review required. Detection does not mean this item should be published.**
+
+## Source-check errors
+
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
