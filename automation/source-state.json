@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-21T11:42:39Z",
+  "lastRunAt": "2026-10-21T17:07:55Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -1340,7 +1340,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-21T04:40:50Z",
+      "lastCheckedAt": "2026-10-21T17:07:55Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
