@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-22T17:06:53Z",
+  "lastRunAt": "2026-10-22T21:32:02Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -328,8 +328,8 @@
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "f793d894908121428e5491322984620c8b8ac51a16547b18486db7e961b41ce5",
-      "itemCount": 248,
+      "fingerprint": "96649005c16dd597b42fb3a9776d206e53d33f55ac7b1a37a3d3c47456463eab",
+      "itemCount": 250,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -578,9 +578,11 @@
         "NAVADMIN-247/26",
         "NAVADMIN-248/26",
         "NAVADMIN-249/26",
-        "NAVADMIN-250/26"
+        "NAVADMIN-250/26",
+        "NAVADMIN-251/26",
+        "NAVADMIN-252/26"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-22T21:32:02Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -754,7 +756,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-22T21:32:02Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -932,7 +934,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-22T21:32:02Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"

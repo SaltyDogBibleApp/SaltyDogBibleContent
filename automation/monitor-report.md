@@ -1,6 +1,6 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-22T17:06:53Z**
+Run time: **2026-10-22T21:32:02Z**
 
 ## Source check cadence
 
@@ -9,15 +9,14 @@ Run time: **2026-10-22T17:06:53Z**
 
 ## New potentially relevant items
 
-### FY27 SELECTED RESERVE ENLISTED RECRUITING AND RETENTION INCENTIVES PROGRAM
+### NAVY WINNERS OF THE 2026 SECRETARY OF WAR MAINTENANCE AWARDS
 
-- Source: **Navy Reserve RESFOR Notices**
-- Type: `reserve_guidance`
-- URL: https://www.navyreserve.navy.mil/Portals/35/Official RESFOR Guidance/N01A Documents/COMNAVRESFOR NOTICES/FY27/FY27 SELECTED RESERVE ENLISTED RECRUITING AND RETENTION INCENTIVES PROGRAM.pdf
-- Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, SELRES, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING
+- Source: **MyNavyHR NAVADMIN**
+- Type: `navadmin`
+- URL: https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26251.pdf?ver=z4KfuRTOknw18jt8dXb8bw%3d%3d
+- Reserve signals: TAR
 - Category hints: Policy, Training & Readiness, Admin, Pay & Benefits
-- Detection: `new_linked_document`
-- Source fingerprint: `bd269de4648527cfc643172667b7d279829278f2e427780be002a7bfca8bfb8a`
+- Listed date: 10/22/2026
 
 **Human review required. Detection does not mean this item should be published.**
 
