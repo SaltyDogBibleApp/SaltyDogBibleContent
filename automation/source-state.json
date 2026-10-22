@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-22T11:45:48Z",
+  "lastRunAt": "2026-10-22T17:06:53Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-22T04:37:52Z",
+      "lastCheckedAt": "2026-10-22T17:06:53Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -1092,19 +1092,20 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-22T04:37:52Z",
+      "lastCheckedAt": "2026-10-22T17:06:53Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "23a42647eaa323ef8d6b93bb491eadff80989942e75e8877bf94e87d54046f58",
-      "itemCount": 10,
+      "fingerprint": "e0a8d89ad44038f676151214f30e6eea66f981022c9e407f7848bb22d3446753",
+      "itemCount": 11,
       "itemIDs": [
         "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
         "reserve_guidance-434edffa72369c87cb49",
+        "reserve_guidance-53e861293df08df9e3c8",
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
         "reserve_guidance-a949ff10fdb85dfc532a",
@@ -1112,9 +1113,9 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-10-22T04:37:52Z",
+      "lastCheckedAt": "2026-10-22T17:06:53Z",
       "lastError": null,
-      "linkedDocumentCount": 9,
+      "linkedDocumentCount": 10,
       "linkedDocuments": {
         "reserve_guidance-12225f1285922a7b3982": {
           "contentLength": 754587,
@@ -1187,6 +1188,24 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 3500 - NRC WARFIGHTER SUPPORT POLICY.pdf"
+        },
+        "reserve_guidance-53e861293df08df9e3c8": {
+          "contentLength": 306577,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/Official%20RESFOR%20Guidance/N01A%20Documents/COMNAVRESFOR%20NOTICES/FY27/FY27%20SELECTED%20RESERVE%20ENLISTED%20RECRUITING%20AND%20RETENTION%20INCENTIVES%20PROGRAM.pdf",
+          "fingerprint": "bd269de4648527cfc643172667b7d279829278f2e427780be002a7bfca8bfb8a",
+          "lastModified": "Thu, 22 Oct 2026 14:43:56 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 8,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/53e861293df08df9e3c8/bd269de4648527cfc643172667b7d279829278f2e427780be002a7bfca8bfb8a.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/Official RESFOR Guidance/N01A Documents/COMNAVRESFOR NOTICES/FY27/FY27 SELECTED RESERVE ENLISTED RECRUITING AND RETENTION INCENTIVES PROGRAM.pdf"
         },
         "reserve_guidance-555e7201b92b5224a802": {
           "contentLength": 1876609,
