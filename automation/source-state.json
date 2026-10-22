@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-21T21:38:27Z",
+  "lastRunAt": "2026-10-22T04:37:52Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-10-21T11:42:39Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -580,7 +580,7 @@
         "NAVADMIN-249/26",
         "NAVADMIN-250/26"
       ],
-      "lastCheckedAt": "2026-10-21T21:38:27Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -754,7 +754,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-21T21:38:27Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -932,14 +932,14 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-21T21:38:27Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
     "mynavyhr-serving-reserve-board": {
-      "fingerprint": "be0a905463e82810bc903bdbc888cb08e864b3b6c2f96fda7e4ad2457589541a",
-      "itemCount": 152,
+      "fingerprint": "ad9dff3e8b63a9175631fd84f6ceaa7d379976c846a4268736a6f9d6d161d0a0",
+      "itemCount": 150,
       "itemIDs": [
         "reserve_board-002f7669ddfdd487e401",
         "reserve_board-00472f1cce57aacec2a7",
@@ -1046,7 +1046,6 @@
         "reserve_board-b3b6ce9450b875be8523",
         "reserve_board-b3c637b0889170c96916",
         "reserve_board-b3ff70a693dcb75e76b9",
-        "reserve_board-b56c54ec39a1ff3416fb",
         "reserve_board-b76ccff0df7497a30072",
         "reserve_board-b8fb810c4e7a9b2fca1c",
         "reserve_board-b96d27d388e8e0598f24",
@@ -1067,7 +1066,6 @@
         "reserve_board-cf421ae22bad8054d587",
         "reserve_board-cf788f8d05131d25d062",
         "reserve_board-d07d08cb6229a387c470",
-        "reserve_board-d0836b3ab7a04fa80fa1",
         "reserve_board-d1cb68ae17705be0e217",
         "reserve_board-d36e618807c8162a4b11",
         "reserve_board-d3a95307a24c53019d65",
@@ -1094,7 +1092,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-21T11:42:39Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1114,7 +1112,7 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-10-21T11:42:39Z",
+      "lastCheckedAt": "2026-10-22T04:37:52Z",
       "lastError": null,
       "linkedDocumentCount": 9,
       "linkedDocuments": {

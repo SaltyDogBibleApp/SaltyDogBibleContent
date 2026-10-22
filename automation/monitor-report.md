@@ -1,28 +1,19 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-21T21:38:27Z**
+Run time: **2026-10-22T04:37:52Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 6
+- Skipped until configured interval: 5
 
 ## New potentially relevant items
 
-### Sample Letter to the Board
-
-- Source: **MyNavyHR Reserve Officer Boards**
-- Type: `reserve_board`
-- URL: https://www.mynavyhr.navy.mil/Portals/55/Boards/ReserveOfficer/Documents/Sample_LTB_RESV.pdf?ver=KJxNZMJP0D7ykbdG72WYmw%3d%3d
-- Reserve signals: RESERVE OFFICER, TAR, PROMOTION, LETTER TO THE BOARD
-- Category hints: Admin, Policy, Training & Readiness
-
-**Human review required. Detection does not mean this item should be published.**
+None detected.
 
 ## Official sources changed in place
 
-- **MyNavyHR NAVADMIN** — https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/
-- **MyNavyHR Reserve Officer Continuation and Retention** — https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/
+- **MyNavyHR Serving on a Reserve Board** — https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/
 
 These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
 
