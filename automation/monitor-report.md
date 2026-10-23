@@ -1,24 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-22T21:32:02Z**
+Run time: **2026-10-23T04:43:50Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 4
+- Skipped until configured interval: 7
 
 ## New potentially relevant items
 
-### NAVY WINNERS OF THE 2026 SECRETARY OF WAR MAINTENANCE AWARDS
+None detected.
 
-- Source: **MyNavyHR NAVADMIN**
-- Type: `navadmin`
-- URL: https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26251.pdf?ver=z4KfuRTOknw18jt8dXb8bw%3d%3d
-- Reserve signals: TAR
-- Category hints: Policy, Training & Readiness, Admin, Pay & Benefits
-- Listed date: 10/22/2026
+## Source-check errors
 
-**Human review required. Detection does not mean this item should be published.**
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
