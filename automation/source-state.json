@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-23T11:32:56Z",
+  "lastRunAt": "2026-10-23T17:02:51Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,13 +164,13 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-23T17:02:51Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
     "dfas-military-pay": {
-      "fingerprint": "72782b2d67b717be715db75b3028c1daef772cf3b4759f91cead08ea51319867",
+      "fingerprint": "648891ad72a43fc6173e2b9ac6f82adb6b8f21415fe95b4bb9c394b72891c5a4",
       "itemCount": 91,
       "itemIDs": [
         "pay_tables-01fd7f8403a778fd6c1b",
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-23T17:02:51Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-23T17:02:51Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -1355,7 +1355,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-23T04:43:50Z",
+      "lastCheckedAt": "2026-10-23T17:02:51Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
@@ -2212,7 +2212,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-10-22T11:45:48Z",
+      "lastCheckedAt": "2026-10-23T17:02:51Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
