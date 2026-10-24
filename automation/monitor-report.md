@@ -1,31 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-23T21:21:36Z**
+Run time: **2026-10-24T04:30:57Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 6
+- Skipped until configured interval: 5
 
 ## New potentially relevant items
 
 ### PERS Information Team
 
-- Source: **MyNavyHR Reserve Officer Boards**
+- Source: **MyNavyHR Serving on a Reserve Board**
 - Type: `reserve_board`
 - URL: https://www.mynavyhr.navy.mil/Career-Management/Detailing/Enlisted/PERS-Information-Team/
-- Reserve signals: RESERVE OFFICER, TAR, PROMOTION
-- Category hints: Admin, Policy, Training & Readiness
-
-**Human review required. Detection does not mean this item should be published.**
-
-### PERS Information Team
-
-- Source: **MyNavyHR Reserve Officer Continuation and Retention**
-- Type: `reserve_board`
-- URL: https://www.mynavyhr.navy.mil/Career-Management/Detailing/Enlisted/PERS-Information-Team/
-- Reserve signals: CONTINUATION, RETENTION, TAR, RESERVE OFFICER
-- Category hints: Policy, Admin, Retirement
+- Reserve signals: RESERVE BOARD, SPOT PROMOTION, COMMAND
+- Category hints: Admin, Training & Readiness
 
 **Human review required. Detection does not mean this item should be published.**
 
