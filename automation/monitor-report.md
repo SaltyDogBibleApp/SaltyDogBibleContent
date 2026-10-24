@@ -1,23 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-24T04:30:57Z**
+Run time: **2026-10-24T10:53:07Z**
 
 ## Source check cadence
 
-- Checked this run: 6
-- Skipped until configured interval: 5
+- Checked this run: 4
+- Skipped until configured interval: 7
 
 ## New potentially relevant items
 
-### PERS Information Team
+None detected.
 
-- Source: **MyNavyHR Serving on a Reserve Board**
-- Type: `reserve_board`
-- URL: https://www.mynavyhr.navy.mil/Career-Management/Detailing/Enlisted/PERS-Information-Team/
-- Reserve signals: RESERVE BOARD, SPOT PROMOTION, COMMAND
-- Category hints: Admin, Training & Readiness
+## Source-check errors
 
-**Human review required. Detection does not mean this item should be published.**
+- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
+- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
