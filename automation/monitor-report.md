@@ -1,21 +1,15 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-10-27T22:09:08Z**
+Run time: **2026-10-28T05:34:43Z**
 
 ## Source check cadence
 
-- Checked this run: 3
-- Skipped until configured interval: 8
+- Checked this run: 10
+- Skipped until configured interval: 1
 
 ## New potentially relevant items
 
 None detected.
-
-## Official sources changed in place
-
-- **MyNavyHR NAVADMIN** — https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/
-
-These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
 
 ## Publishing safety
 
