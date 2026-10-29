@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-10-29T12:54:58Z",
+  "lastRunAt": "2026-10-29T22:42:15Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -328,8 +328,8 @@
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "0ecc4d37bd5c64a31107741b5af5efff5c8d585889d061e4b71d388e906d72cd",
-      "itemCount": 254,
+      "fingerprint": "f68f9eb5d27013a29b2cd0e6747fea638762279a273f08d516414d1ea288d202",
+      "itemCount": 256,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -584,9 +584,11 @@
         "NAVADMIN-253/26",
         "NAVADMIN-254/26",
         "NAVADMIN-255/26",
-        "NAVADMIN-256/26"
+        "NAVADMIN-256/26",
+        "NAVADMIN-257/26",
+        "NAVADMIN-258/26"
       ],
-      "lastCheckedAt": "2026-10-29T12:54:58Z",
+      "lastCheckedAt": "2026-10-29T22:42:15Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -761,7 +763,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-29T12:54:58Z",
+      "lastCheckedAt": "2026-10-29T22:42:15Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -940,7 +942,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-10-29T12:54:58Z",
+      "lastCheckedAt": "2026-10-29T22:42:15Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1362,7 +1364,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-10-29T05:42:04Z",
+      "lastCheckedAt": "2026-10-29T22:42:15Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
