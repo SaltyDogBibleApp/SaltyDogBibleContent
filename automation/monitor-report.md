@@ -1,6 +1,6 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-03T00:55:19Z**
+Run time: **2026-11-03T14:05:41Z**
 
 ## Source check cadence
 
@@ -9,15 +9,7 @@ Run time: **2026-11-03T00:55:19Z**
 
 ## New potentially relevant items
 
-### VA claim exam (C&P exam)
-
-- Source: **VA Disability Compensation Rates**
-- Type: `va_benefits`
-- URL: https://www.va.gov/resources/va-claim-exam/
-- Reserve signals: DISABILITY COMPENSATION, COMPENSATION RATE, DEPENDENT, SPECIAL MONTHLY COMPENSATION
-- Category hints: VA / Veteran Benefits
-
-**Human review required. Detection does not mean this item should be published.**
+None detected.
 
 ## Source-check errors
 
