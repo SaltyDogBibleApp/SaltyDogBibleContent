@@ -1,11 +1,11 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-03T14:05:41Z**
+Run time: **2026-11-03T23:16:52Z**
 
 ## Source check cadence
 
-- Checked this run: 10
-- Skipped until configured interval: 1
+- Checked this run: 9
+- Skipped until configured interval: 2
 
 ## New potentially relevant items
 
