@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-03T23:16:52Z",
+  "lastRunAt": "2026-11-04T06:10:25Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,7 +164,7 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -322,7 +322,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-03T14:05:41Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -588,7 +588,7 @@
         "NAVADMIN-257/26",
         "NAVADMIN-258/26"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -763,7 +763,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -942,7 +942,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1103,7 +1103,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1124,7 +1124,7 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "linkedDocumentCount": 10,
       "linkedDocuments": {
@@ -1364,7 +1364,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-03T23:16:52Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": "HTTP Error 403: Forbidden",
       "linkedDocumentCount": 43,
       "linkedDocuments": {
@@ -2147,8 +2147,8 @@
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/RESPERSMAN/"
     },
     "va-disability-compensation": {
-      "fingerprint": "56677b7ef1a869dc87a7652e0fae158c6865d0717b3d6ccafaf8cd022143af2b",
-      "itemCount": 70,
+      "fingerprint": "53612727fb79a3d9e36c86c64e7107674071bde46f19a464334f5b9a98d7e218",
+      "itemCount": 67,
       "itemIDs": [
         "va_benefits-0802ea71db1add9a1976",
         "va_benefits-0809fe0c388b4120629a",
@@ -2164,7 +2164,6 @@
         "va_benefits-2893eeda1c6d9566420a",
         "va_benefits-2b14741b9fc7e6f9793a",
         "va_benefits-3323a218e66da48db207",
-        "va_benefits-33585fb15e2f80b51d86",
         "va_benefits-3377868218b8789cbcdc",
         "va_benefits-3a38b953590752a00a2f",
         "va_benefits-3be5970384ccdc1ffdbe",
@@ -2183,7 +2182,6 @@
         "va_benefits-6f5e3891091fb93beea0",
         "va_benefits-715b84ba319b040af96c",
         "va_benefits-74f39c8162f35867ec2b",
-        "va_benefits-7536f5842b9bd51c8361",
         "va_benefits-7588e5de6357f2448ce5",
         "va_benefits-768d641ae18697e235c4",
         "va_benefits-7691cb22eb80226d5bc8",
@@ -2217,11 +2215,10 @@
         "va_benefits-e803d1baf0651e76b725",
         "va_benefits-ef28ed60dae0f231d745",
         "va_benefits-f16525d3a1c4ee78cb48",
-        "va_benefits-f44424f088bebecd57b3",
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-03T00:55:19Z",
+      "lastCheckedAt": "2026-11-04T06:10:25Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
