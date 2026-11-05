@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-05T06:38:45Z",
+  "lastRunAt": "2026-11-05T19:53:50Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,13 +164,13 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
     "dfas-military-pay": {
-      "fingerprint": "648891ad72a43fc6173e2b9ac6f82adb6b8f21415fe95b4bb9c394b72891c5a4",
+      "fingerprint": "bd45a1347693e3115cf928ce4e596253d42136127ebfb324fd7a78dd1d3a3f64",
       "itemCount": 91,
       "itemIDs": [
         "pay_tables-01fd7f8403a778fd6c1b",
@@ -265,8 +265,8 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
     },
@@ -313,8 +313,8 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
     },
@@ -322,14 +322,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-04T23:37:34Z",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "f68f9eb5d27013a29b2cd0e6747fea638762279a273f08d516414d1ea288d202",
-      "itemCount": 256,
+      "fingerprint": "bc9b8ed2240890f908a44360d3dec1a79903958ab20b8916d0aae77c0f053481",
+      "itemCount": 264,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -586,10 +586,18 @@
         "NAVADMIN-255/26",
         "NAVADMIN-256/26",
         "NAVADMIN-257/26",
-        "NAVADMIN-258/26"
+        "NAVADMIN-258/26",
+        "NAVADMIN-259/26",
+        "NAVADMIN-260/26",
+        "NAVADMIN-261/26",
+        "NAVADMIN-262/26",
+        "NAVADMIN-263/26",
+        "NAVADMIN-264/26",
+        "NAVADMIN-265/26",
+        "NAVADMIN-266/26"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
@@ -763,8 +771,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
     },
@@ -942,8 +950,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
@@ -1103,14 +1111,14 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "e0a8d89ad44038f676151214f30e6eea66f981022c9e407f7848bb22d3446753",
-      "itemCount": 11,
+      "fingerprint": "07eb37d4595853da4f249c767da43061ec3f9cbee6c55bb2f87ae2205c52e3c5",
+      "itemCount": 13,
       "itemIDs": [
         "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
@@ -1119,14 +1127,16 @@
         "reserve_guidance-53e861293df08df9e3c8",
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
+        "reserve_guidance-959345f9887618bc2d54",
+        "reserve_guidance-97131d1aa7c6066922b4",
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-c24b1419149d343e768f",
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
-      "linkedDocumentCount": 10,
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
+      "linkedDocumentCount": 12,
       "linkedDocuments": {
         "reserve_guidance-12225f1285922a7b3982": {
           "contentLength": 754587,
@@ -1254,6 +1264,42 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
         },
+        "reserve_guidance-959345f9887618bc2d54": {
+          "contentLength": 977871,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/1000.1G%20(s).pdf",
+          "fingerprint": "75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f",
+          "lastModified": "Wed, 03 Apr 2024 14:48:10 GMT",
+          "textEvidence": {
+            "characterCount": 3688,
+            "extractionStatus": "ok",
+            "lineCount": 126,
+            "pageCount": 2,
+            "pagesWithText": 2,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/959345f9887618bc2d54/75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f.json",
+            "textSHA256": "2d2ea647f0f4535e516f42d9890050ae81450542ffee79d2a2b6c215eb9b58f8",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/1000.1G (s).pdf"
+        },
+        "reserve_guidance-97131d1aa7c6066922b4": {
+          "contentLength": 165376,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE%205050%20-%202026%20HOLIDAY%20PARTY%20updated%20(COS%20signed).pdf",
+          "fingerprint": "4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468",
+          "lastModified": "Wed, 04 Nov 2026 18:09:47 GMT",
+          "textEvidence": {
+            "characterCount": 1973,
+            "extractionStatus": "ok",
+            "lineCount": 50,
+            "pageCount": 2,
+            "pagesWithText": 2,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/97131d1aa7c6066922b4/4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468.json",
+            "textSHA256": "9ad57ed36a5bb8cffa85d51769cb28efcd0d2ae7440da54f1980d1137eed4de2",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed).pdf"
+        },
         "reserve_guidance-c24b1419149d343e768f": {
           "contentLength": 109316,
           "etag": null,
@@ -1364,8 +1410,8 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
         "reserve_guidance-04f1fc612ab1ec3bb81e": {

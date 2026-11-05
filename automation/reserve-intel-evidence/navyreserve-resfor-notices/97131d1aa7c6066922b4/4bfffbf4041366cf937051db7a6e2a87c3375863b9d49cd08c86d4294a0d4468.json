@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed).pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE%205050%20-%202026%20HOLIDAY%20PARTY%20updated%20(COS%20signed).pdf",
+  "title": "CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed)",
+  "fingerprint": "4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468",
+  "capturedAt": "2026-11-05T19:53:50Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 2,
+  "pagesWithText": 2,
+  "characterCount": 1973,
+  "lineCount": 50,
+  "textSHA256": "9ad57ed36a5bb8cffa85d51769cb28efcd0d2ae7440da54f1980d1137eed4de2",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 32
+    },
+    {
+      "page": 2,
+      "startLine": 33,
+      "endLine": 50
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NAVY RESERVE FORCES COMMAND\n1915 FORRESTAL DRIVE\nNORFOLK VA 23551-4615\nCanc: Dec 2026\nCOMNAVRESFORCOMNOTE 5050\nN01\n28 Oct 2026\nCOMNAVRESFORCOM NOTICE 5050\nFrom: Commander, Navy Reserve Forces Command\nSubj: 2026 HOLIDAY PARTY\nEncl: (1) Schedule of Events\n1. Purpose. To provide information and assign responsibilities for the Commander, Navy\nReserve Forces Command (COMNAVRESFORCOM), Commander, Navy Reserve Force\n(COMNAVRESFOR), and Commander, Naval Air Forces Command (COMNAVAIRESFOR)\nholiday party to be held Friday, 11 December 2026. The event will be held from 1800 to 2400 at\nthe Westin Hotel at 4535 Commerce St, Virginia Beach, VA 23462.\n2. Scope and Applicability. This notice applies to all COMNAVRESFORCOM,\nCOMNAVRESFOR, and COMNAVAIRESFOR personnel and guests.\n3. Responsibilities\na. Points of Contact: PSC Vanessa Wells and YN1 Naomi Chaney\nb. Official Party: RADM Luke Frost; Mr. Randy Johnson; Mr. Garett Edmonds; CAPT\nJoseph Droll; CMDCM Robert Lyons\nc. Masters of Ceremony: LCDR Jeremy Thomas and Chief Joseph Jedding\nd. Coordinators: PSC Wells; YN1 Chaney; YN1 Lavonne Parsons; LS1 Marketa Roundtree;\nYN2 Lidia Wolf\ne. Public Affairs Officer: COMNAVRESFORCOM Public Affairs Office\nf. Invocation: Chaplain\n5. Records Management. Records created as a result of this notice regardless of media and\nformat, will be managed per Secretary of the Navy Manual 5210.1 of September 2019.\nJ. M. DROLL\nChief of Staff\nCOMNAVRESFORCOMNOTE 5050\n28 Oct 2026\nEnclosure (1)\nSCHEDULE OF EVENTS\nDate Time Event\n11 December 2026 1800 Check-in/Standing Cocktail Hour/Photos\n1830 Welcome by the Master of Ceremonies\n1840 Address from COMNAVAIRFORES Executive Director\n1845 Address from COMNAVRESFORCOM\n1850 Invocation\n1900 Dinner and Music\n2000 First Gift Raffle\n2030 Sailors of the Year Announcement/Dinner Ends\n2130 Best Dancer\n2200 Second Gift Raffle/New MWR Cabinet Announced\n2300 Best Dressed\n2330 Third Gift Raffle\n2400 End of Holiday Party"
+}
