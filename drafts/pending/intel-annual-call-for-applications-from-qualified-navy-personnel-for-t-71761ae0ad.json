@@ -34,7 +34,8 @@
     "detectionKind": "new_item",
     "sourceFingerprint": null,
     "previousFingerprint": null,
-    "officialHostVerified": true
+    "officialHostVerified": true,
+    "sourceTextSHA256": "ec756f5d7d3d4dfce68c07fc4ac9e4e4176b38c9a9702f7d6fd527dae94a7f48"
   },
   "reviewChecklist": {
     "sourceOpenedAndRead": false,
@@ -50,14 +51,14 @@
   "articleDraft": {
     "id": "intel-annual-call-for-applications-from-qualified-navy-personnel-for-t-71761ae0ad",
     "publishedAt": "2026-11-05T19:53:58Z",
-    "updatedAt": "2026-11-05T19:53:58Z",
-    "title": "ANNUAL CALL FOR APPLICATIONS FROM QUALIFIED NAVY PERSONNEL FOR THE SYRACUSE UNIVERSITY ADVANCED MILITARY VISUAL JOURNALISM TRAINING PROGRAM 2027",
-    "category": "Policy",
+    "updatedAt": "2026-11-05T19:54:33Z",
+    "title": "Annual Call For Applications From Qualified Navy Personnel For The Syracuse University Advanced Military Visual Journalism Training Program",
+    "category": "Training & Readiness",
     "status": "TRACKING",
     "priority": "NORMAL",
-    "summary": "Automated draft from an official source: ANNUAL CALL FOR APPLICATIONS FROM QUALIFIED NAVY PERSONNEL FOR THE SYRACUSE UNIVERSITY ADVANCED MILITARY VISUAL JOURNALISM TRAINING PROGRAM 2027. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: TAR.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "Applications must be submitted no later than 15 January 2027. Applications must include the following: a.",
+    "whyItMatters": "This NAVADMIN contains a Reserve-relevant requirement. Review the official source to confirm who is affected and what action, if any, is required.",
+    "details": "The Navy is soliciting applications from Mass Communication Specialists (MC) for the Syracuse University Newhouse School's Advanced Military Visual Journalism (AMVJ) training program for academic year 2027-2028. The class reporting date for the photojournalism, videography and graphic design programs is tentatively scheduled for 29 July 2027 with a projected graduation date on or around 04 May 2028.\n\nApplications must be submitted no later than 15 January 2027. For complete directions and guidance for electronic submission, contact POC listed above. Applications must include the following: a.\n\nCourse scope, prerequisites and portfolio requirements are found in CANTRAC, which can be accessed via the Navy Education and Training Command website at https://www.netc.navy.mil/. Click on the CANTRAC icon at the bottom of the webpage and search for course information using either Course Identification Number listed in paragraph 1 or the title, Advanced Military Visual Journalism. AMVJ program information is found at https://amvj.newhouse.syr.edu/programs/advanced-photojournalism.\n\nPrior to acceptance to the program and distribution of orders, applicants must: a. Be approved to reenlist or extend in the MC Rating through June 2032. This obligated service will account for the time on station for AMVJ, and a three-year follow-on tour aligned with their current sea/shore flow. b.",
     "effectiveDate": null,
     "sourceName": "MyNavyHR NAVADMIN",
     "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26262.pdf?ver=cmyTKoyqq5PpwVo2iCNEkw%3d%3d",
@@ -69,5 +70,35 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "schemaVersion": 1,
+    "method": "deterministic-navadmin-source-extraction-v1",
+    "enrichedAt": "2026-11-05T19:54:33Z",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26262.pdf?ver=cmyTKoyqq5PpwVo2iCNEkw%3d%3d",
+    "sourceTextSHA256": "ec756f5d7d3d4dfce68c07fc4ac9e4e4176b38c9a9702f7d6fd527dae94a7f48",
+    "navadminNumber": "262/26",
+    "subject": "ANNUAL CALL FOR APPLICATIONS FROM QUALIFIED NAVY PERSONNEL FOR THE SYRACUSE UNIVERSITY ADVANCED MILITARY VISUAL JOURNALISM TRAINING PROGRAM 2027",
+    "extractedSections": {
+      "1": "The Navy is soliciting applications from Mass Communication Specialists (MC) for the Syracuse University Newhouse School's Advanced Military Visual Journalism (AMVJ) training program for academic year 2027-2028. The class reporting date for the photojournalism, videography and graphic design programs is tentatively scheduled for 29 July 2027 with a projected graduation date on or around 04 May 2028.",
+      "2": "Applications must be submitted no later than 15 January 2027. For complete directions and guidance for electronic submission, contact POC listed above. Applications must include the following: a. A command endorsement on letterhead summarizing the candidate's qualifications, including a statement certifying the portfolio is the sole work of the applicant, and recommendation for the candidate's acceptance in the program. Parent commands are responsible for eligibility verification of endorsed candidates and submission of applicable waivers. Waivers of prerequisites (e.g., TIS, PG, TOS, etc.) will be considered on a case-by-case basis. Commanding Officers should address applicant's maturity, ability to work independently, financial security, and academic ability when recommending a nominee, particularly when requesting waivers. b. An essay explaining why a candidate is interested in the AMVJ program and preferred course of study. Essay should include motivations, influences, expectations, and post-course desires, and a prioritized list of programs: Photo Journalism, Motion Media, or Graphics. c. A portfolio demonstrating sufficient technical ability to successfully complete the course. An applicant must submit a portfolio with communication products from across the full spectrum of media disciplines. Each product must meet the applicable category definitions and requirements outlined in the Navy Public Affairs Awards Program Standard Operating Procedures, issued pursuant to CHINFOINST 5305.1A. d. Photojournalism program portfolio requirements. Candidates must submit a portfolio consisting of seven examples of their work. Portfolio must contain the following; if an interested applicant does not have each of the following examples, they may contact the POC for alternative submission options: (1) One writing product from the Individual Writing category. (2) One video story from the Individual Video category. (3) Four photo products from the Individual Photo category (must have one photo series, one portrait, and two photos from any other Individual Photo category). (4) One graphic design product from any of the Individual Graphic Design categories. e. Videography program portfolio requirements. Candidates must submit a portfolio consisting of four examples of their work. Portfolio must contain the following; if an interested applicant does not have each of the following examples, they may contact the POC for alternative submission options: (1) One video story from the Individual Video category. (2) One multimedia product from the Individual Video category. (3) One video spot from the Individual Video category. (4) One b-roll product from the Individual Video category. f. Graphics program portfolio requirements. Candidates must submit a portfolio consisting of seven examples of their work. Portfolio must contain the following; if an interested applicant does not have each of the following examples, they may contact the POC for alternative submission options: (1) One animation product. (2) Two layout and design products. (3) Two digital art products. (4) One identity design product. (5) One writing product from the Individual Writing category. g. Applicants are required to provide a biography as part of the submission process. The biography is not part of the selection process but will be used to identify and introduce the selectees to the faculty and staff at the University if selected. No biography photo required.",
+      "3": "Course scope, prerequisites and portfolio requirements are found in CANTRAC, which can be accessed via the Navy Education and Training Command website at https://www.netc.navy.mil/. Click on the CANTRAC icon at the bottom of the webpage and search for course information using either Course Identification Number listed in paragraph 1 or the title, Advanced Military Visual Journalism. AMVJ program information is found at https://amvj.newhouse.syr.edu/programs/advanced-photojournalism.",
+      "4": "Prior to acceptance to the program and distribution of orders, applicants must: a. Be approved to reenlist or extend in the MC Rating through June 2032. This obligated service will account for the time on station for AMVJ, and a three-year follow-on tour aligned with their current sea/shore flow. b. Have a command endorsed 1306. c. Be within physical fitness assessment standards to include no PFA failures in the past three years. d. Not have any civil or Non-Judicial Punishment violations in the past three years. e. Advancement eligible candidates must complete paygrade-equivalent Enlisted Leadership Development course prior to reporting. Advancement examinations will be available on station.",
+      "5": "Applicants in their orders window, and not yet selected for orders, must contact the detailer with their intentions. Applicants who have executed orders and are en route to their next command are not eligible. Navy Personnel Command has the final approval prior to final selection.",
+      "6": "The selection board will convene in February 2027. Selectees will be notified via Naval message in February 2027.",
+      "7": "Point of contact is MCCM Holly Boynton Gray who can be reached by email at holly.a.boyntongray.mil(AT)us.navy.mil or by phone at (703) 692-4704.",
+      "8": "Contact Master Chief Gray directly for the submission process.",
+      "9": "Request widest dissemination.",
+      "10": "Released by CAPT Tamara Lawrence, Chief of Information.// BT #0001 NNNN CLASSIFICATION: UNCLASSIFIED/"
+    },
+    "humanReviewStillRequired": true
+  },
+  "shaping": {
+    "schemaVersion": 1,
+    "method": "deterministic-human-friendly-navadmin-v1",
+    "shapedAt": "2026-11-05T19:54:33Z",
+    "sourceTextSHA256": "ec756f5d7d3d4dfce68c07fc4ac9e4e4176b38c9a9702f7d6fd527dae94a7f48",
+    "specializedTemplate": null,
+    "humanReviewStillRequired": true
   }
 }
