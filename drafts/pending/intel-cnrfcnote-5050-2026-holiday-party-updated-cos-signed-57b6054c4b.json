@@ -65,9 +65,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "NORMAL",
-    "summary": "Automated draft from an official source: CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed). Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed). The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed): detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE%205050%20-%202026%20HOLIDAY%20PARTY%20updated%20(COS%20signed).pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Wed, 04 Nov 2026 18:09:47 GMT; downloaded size: 165,376 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed).pdf",
@@ -79,5 +79,43 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-11-05T19:54:40Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/CNRFCNOTE%205050%20-%202026%20HOLIDAY%20PARTY%20updated%20(COS%20signed).pdf",
+    "detectedFingerprint": "4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468",
+    "observedFingerprint": "4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Wed, 04 Nov 2026 18:09:47 GMT",
+    "contentLength": 165376,
+    "etag": null,
+    "documentKind": "Navy Reserve guidance",
+    "documentIdentifier": null,
+    "sourceFilename": "CNRFCNOTE 5050 - 2026 HOLIDAY PARTY updated (COS signed).pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/97131d1aa7c6066922b4/4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "9ad57ed36a5bb8cffa85d51769cb28efcd0d2ae7440da54f1980d1137eed4de2",
+      "pageCount": 2,
+      "pagesWithText": 2,
+      "characterCount": 1973,
+      "lineCount": 50,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/97131d1aa7c6066922b4/4bfffbf4041366cf937051db7a6e2a87c3375863b9d49cd08c86d4294a0d4468.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
