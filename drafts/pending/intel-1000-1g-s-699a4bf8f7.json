@@ -65,9 +65,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "NORMAL",
-    "summary": "Automated draft from an official source: 1000.1G (s). Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: 1000.1G (s). The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for 1000.1G (s): detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/1000.1G%20(s).pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Wed, 03 Apr 2024 14:48:10 GMT; downloaded size: 977,871 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/1000.1G (s).pdf",
@@ -79,5 +79,43 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-11-05T19:54:21Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/1000.1G%20(s).pdf",
+    "detectedFingerprint": "75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f",
+    "observedFingerprint": "75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Wed, 03 Apr 2024 14:48:10 GMT",
+    "contentLength": 977871,
+    "etag": null,
+    "documentKind": "Navy Reserve guidance",
+    "documentIdentifier": null,
+    "sourceFilename": "1000.1G (s).pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/959345f9887618bc2d54/75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "2d2ea647f0f4535e516f42d9890050ae81450542ffee79d2a2b6c215eb9b58f8",
+      "pageCount": 2,
+      "pagesWithText": 2,
+      "characterCount": 3688,
+      "lineCount": 126,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/959345f9887618bc2d54/75e5606260995b0f9f4dd058c51e4d4a7fcc1942932e78ad84a190b02a3f8f4f.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
