@@ -34,7 +34,8 @@
     "detectionKind": "new_item",
     "sourceFingerprint": null,
     "previousFingerprint": null,
-    "officialHostVerified": true
+    "officialHostVerified": true,
+    "sourceTextSHA256": "c7fcaf24b8bc1146d431f1a8b6b7cb5acbe18a491f46a458c39b78826dfc24f2"
   },
   "reviewChecklist": {
     "sourceOpenedAndRead": false,
@@ -50,14 +51,14 @@
   "articleDraft": {
     "id": "intel-adjustement-of-the-cryptologic-technician-maintenance-rating-to--2fb577e5d6",
     "publishedAt": "2026-11-05T19:53:58Z",
-    "updatedAt": "2026-11-05T19:53:58Z",
-    "title": "ADJUSTEMENT OF THE CRYPTOLOGIC TECHNICIAN-MAINTENANCE RATING TO THE RESERVE COMPONENT",
-    "category": "Policy",
+    "updatedAt": "2026-11-05T19:54:28Z",
+    "title": "Adjustement Of The Cryptologic Technician-Maintenance Rating To The Reserve Component",
+    "category": "Admin",
     "status": "TRACKING",
     "priority": "HIGH",
-    "summary": "Automated draft from an official source: ADJUSTEMENT OF THE CRYPTOLOGIC TECHNICIAN-MAINTENANCE RATING TO THE RESERVE COMPONENT. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: RESERVE.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "Navy Manpower Analysis Center (NAVMAC) is authorized to make appropriate changes in the Total Force Manpower Management System (TFMMS). In line with reference (a), this NAVADMIN directs revision of the Cryptologic Technician-Maintenance (CTM) rating into the Reserve Component.",
+    "whyItMatters": "In line with reference (a), this NAVADMIN directs revision of the Cryptologic Technician-Maintenance (CTM) rating into the Reserve Component.",
+    "details": "In line with reference (a), this NAVADMIN directs revision of the Cryptologic Technician-Maintenance (CTM) rating into the Reserve Component. The adjusted service ratings will apply to Selected Reserve (SELRES) Sailors and billets.\n\nNavy Manpower Analysis Center (NAVMAC) is authorized to make appropriate changes in the Total Force Manpower Management System (TFMMS).\n\nIf required, SELRES personnel realignment will be coordinated by BUPERS-\n\nPoints of contact for revision are as follows: a. Enlisted Community Manager (BUPERS 3152): (1) CDR Christopher Reid, SELRES Enlisted Community Manager christopher.r.reid8.mil@us.navy.mil (2) ISCM Brad Hayes, SELRES Enlisted Community Manager Bradrick.w.hayes.mil@us.navy.mil",
     "effectiveDate": null,
     "sourceName": "MyNavyHR NAVADMIN",
     "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26261.pdf?ver=I5FOmdCQLQELgSAiiix0mA%3d%3d",
@@ -69,5 +70,30 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "schemaVersion": 1,
+    "method": "deterministic-navadmin-source-extraction-v1",
+    "enrichedAt": "2026-11-05T19:54:28Z",
+    "sourceURL": "https://www.mynavyhr.navy.mil/Portals/55/Messages/NAVADMIN/NAV2026/NAV26261.pdf?ver=I5FOmdCQLQELgSAiiix0mA%3d%3d",
+    "sourceTextSHA256": "c7fcaf24b8bc1146d431f1a8b6b7cb5acbe18a491f46a458c39b78826dfc24f2",
+    "navadminNumber": "261/26",
+    "subject": "ADJUSTEMENT OF THE CRYPTOLOGIC TECHNICIAN-MAINTENANCE RATING TO THE RESERVE COMPONENT",
+    "extractedSections": {
+      "1": "In line with reference (a), this NAVADMIN directs revision of the Cryptologic Technician-Maintenance (CTM) rating into the Reserve Component. The adjusted service ratings will apply to Selected Reserve (SELRES) Sailors and billets.",
+      "2": "Navy Manpower Analysis Center (NAVMAC) is authorized to make appropriate changes in the Total Force Manpower Management System (TFMMS).",
+      "3": "If required, SELRES personnel realignment will be coordinated by BUPERS-",
+      "4": "Points of contact for revision are as follows: a. Enlisted Community Manager (BUPERS 3152): (1) CDR Christopher Reid, SELRES Enlisted Community Manager christopher.r.reid8.mil@us.navy.mil (2) ISCM Brad Hayes, SELRES Enlisted Community Manager Bradrick.w.hayes.mil@us.navy.mil",
+      "5": "Released by Vice Admiral Jeffrey J. Czerewko, N1.// BT #0001 NNNN CLASSIFICATION: UNCLASSIFIED/"
+    },
+    "humanReviewStillRequired": true
+  },
+  "shaping": {
+    "schemaVersion": 1,
+    "method": "deterministic-human-friendly-navadmin-v1",
+    "shapedAt": "2026-11-05T19:54:28Z",
+    "sourceTextSHA256": "c7fcaf24b8bc1146d431f1a8b6b7cb5acbe18a491f46a458c39b78826dfc24f2",
+    "specializedTemplate": null,
+    "humanReviewStillRequired": true
   }
 }
