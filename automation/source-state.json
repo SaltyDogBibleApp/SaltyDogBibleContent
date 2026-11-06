@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-06T06:34:46Z",
+  "lastRunAt": "2026-11-06T19:19:55Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -322,14 +322,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "bc9b8ed2240890f908a44360d3dec1a79903958ab20b8916d0aae77c0f053481",
-      "itemCount": 264,
+      "fingerprint": "961742090a3a34da273314a228344d6ee5a296ac16a512b2b89aa710defd6b21",
+      "itemCount": 265,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -594,10 +594,11 @@
         "NAVADMIN-263/26",
         "NAVADMIN-264/26",
         "NAVADMIN-265/26",
-        "NAVADMIN-266/26"
+        "NAVADMIN-266/26",
+        "NAVADMIN-267/26"
       ],
-      "lastCheckedAt": "2026-11-06T06:34:46Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
+      "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
@@ -771,8 +772,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-06T06:34:46Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
     },
@@ -950,8 +951,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-06T06:34:46Z",
-      "lastError": "HTTP Error 403: Forbidden",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
@@ -1111,7 +1112,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1134,7 +1135,7 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
       "lastError": null,
       "linkedDocumentCount": 12,
       "linkedDocuments": {
@@ -1410,7 +1411,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
@@ -2264,7 +2265,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-05T06:38:45Z",
+      "lastCheckedAt": "2026-11-06T19:19:55Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
