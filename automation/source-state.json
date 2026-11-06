@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-05T19:53:50Z",
+  "lastRunAt": "2026-11-06T06:34:46Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -596,8 +596,8 @@
         "NAVADMIN-265/26",
         "NAVADMIN-266/26"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-06T06:34:46Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
@@ -771,8 +771,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-06T06:34:46Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
     },
@@ -950,8 +950,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-05T19:53:50Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-06T06:34:46Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
