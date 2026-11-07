@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-07T12:54:27Z",
+  "lastRunAt": "2026-11-07T21:46:01Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -597,7 +597,7 @@
         "NAVADMIN-266/26",
         "NAVADMIN-267/26"
       ],
-      "lastCheckedAt": "2026-11-07T12:54:27Z",
+      "lastCheckedAt": "2026-11-07T21:46:01Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -772,7 +772,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-07T12:54:27Z",
+      "lastCheckedAt": "2026-11-07T21:46:01Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -951,7 +951,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-07T12:54:27Z",
+      "lastCheckedAt": "2026-11-07T21:46:01Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -2265,7 +2265,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-06T19:19:55Z",
+      "lastCheckedAt": "2026-11-07T21:46:01Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
