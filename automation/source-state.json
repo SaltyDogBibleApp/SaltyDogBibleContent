@@ -1,10 +1,10 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-10T01:29:03Z",
+  "lastRunAt": "2026-11-10T14:48:23Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
-      "fingerprint": "566b86b3339f2a9abe0fcdfdf0ad0f7d888f626be0281fe378843d2913332f33",
+      "fingerprint": "844fb4cc5666134d41c12ac47a4a5b23340305528d7183568c870dd689688b2c",
       "itemCount": 156,
       "itemIDs": [
         "economic_release-05fa1da931d408dc31ea",
@@ -164,7 +164,7 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-11-09T06:17:06Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
@@ -265,7 +265,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-11-09T06:17:06Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +313,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-11-09T06:17:06Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -322,13 +322,13 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "3196f1d2efcadf23bb326e789193d9d77ff9d10c76a2875ab70f930faf29306e",
+      "fingerprint": "aecc0cd1798ae917f7c81529c60f5dd6fc6ed271f1a51564bfb44919b60ccff6",
       "itemCount": 267,
       "itemIDs": [
         "NAVADMIN-002/26",
@@ -599,7 +599,7 @@
         "NAVADMIN-268/26",
         "NAVADMIN-269/26"
       ],
-      "lastCheckedAt": "2026-11-10T01:29:03Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -774,7 +774,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-10T01:29:03Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -953,7 +953,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-10T01:29:03Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1114,7 +1114,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1137,7 +1137,7 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "linkedDocumentCount": 12,
       "linkedDocuments": {
@@ -1413,7 +1413,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T14:48:23Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
