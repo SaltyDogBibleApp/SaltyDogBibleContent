@@ -1,21 +1,21 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-09T16:27:16Z**
+Run time: **2026-11-10T01:29:03Z**
 
 ## Source check cadence
 
-- Checked this run: 7
-- Skipped until configured interval: 4
+- Checked this run: 4
+- Skipped until configured interval: 7
 
 ## New potentially relevant items
 
 None detected.
 
-## Source-check errors
+## Official sources changed in place
 
-- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
+- **VA Disability Compensation Rates** — https://www.va.gov/disability/compensation-rates/
+
+These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
 
 ## Publishing safety
 

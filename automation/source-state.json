@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-09T16:27:16Z",
+  "lastRunAt": "2026-11-10T01:29:03Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -328,8 +328,8 @@
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "961742090a3a34da273314a228344d6ee5a296ac16a512b2b89aa710defd6b21",
-      "itemCount": 265,
+      "fingerprint": "3196f1d2efcadf23bb326e789193d9d77ff9d10c76a2875ab70f930faf29306e",
+      "itemCount": 267,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -595,9 +595,11 @@
         "NAVADMIN-264/26",
         "NAVADMIN-265/26",
         "NAVADMIN-266/26",
-        "NAVADMIN-267/26"
+        "NAVADMIN-267/26",
+        "NAVADMIN-268/26",
+        "NAVADMIN-269/26"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T01:29:03Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -772,7 +774,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T01:29:03Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -951,7 +953,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-09T16:27:16Z",
+      "lastCheckedAt": "2026-11-10T01:29:03Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -2194,7 +2196,7 @@
       "url": "https://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/RESPERSMAN/"
     },
     "va-disability-compensation": {
-      "fingerprint": "53612727fb79a3d9e36c86c64e7107674071bde46f19a464334f5b9a98d7e218",
+      "fingerprint": "e357973330aa6972619eacff1b31db567c966920c3b97fe9fd04e6d8557923bb",
       "itemCount": 67,
       "itemIDs": [
         "va_benefits-0802ea71db1add9a1976",
@@ -2265,7 +2267,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-08T21:59:06Z",
+      "lastCheckedAt": "2026-11-10T01:29:03Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
