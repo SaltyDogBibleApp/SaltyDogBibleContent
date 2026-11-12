@@ -1,27 +1,15 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-12T15:05:58Z**
+Run time: **2026-11-12T23:33:59Z**
 
 ## Source check cadence
 
-- Checked this run: 8
-- Skipped until configured interval: 3
+- Checked this run: 3
+- Skipped until configured interval: 8
 
 ## New potentially relevant items
 
 None detected.
-
-## Official sources changed in place
-
-- **MyNavyHR NAVADMIN** — https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/
-
-These pages changed without exposing a clean new linked item. Review the official source before drafting Intel.
-
-## Source-check errors
-
-- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
 
 ## Publishing safety
 
