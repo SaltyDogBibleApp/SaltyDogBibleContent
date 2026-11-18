@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-17T20:51:25Z",
+  "lastRunAt": "2026-11-18T07:20:11Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,14 +164,14 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-11-16T21:57:36Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
     "dfas-military-pay": {
-      "fingerprint": "bd45a1347693e3115cf928ce4e596253d42136127ebfb324fd7a78dd1d3a3f64",
-      "itemCount": 91,
+      "fingerprint": "f3f8a2b1133c0d29cbd8a19e456fff56e435c8c80b953598cf7ee003897bd87d",
+      "itemCount": 92,
       "itemIDs": [
         "pay_tables-01fd7f8403a778fd6c1b",
         "pay_tables-02f443ee652fe3ff513b",
@@ -257,6 +257,7 @@
         "pay_tables-d825a087b30648e91031",
         "pay_tables-d8ae3c3fae40262d0ba2",
         "pay_tables-daa05e3cca4200403f97",
+        "pay_tables-db476ab4bc73f96c9d39",
         "pay_tables-dcf22a520bb74ddb1203",
         "pay_tables-e77f225e73fb29085d22",
         "pay_tables-e8e45752fc6f2984096f",
@@ -265,7 +266,7 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-11-16T21:57:36Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
@@ -313,7 +314,7 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-11-16T21:57:36Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
@@ -602,7 +603,7 @@
         "NAVADMIN-271/26",
         "NAVADMIN-272/26"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -777,7 +778,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -956,7 +957,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T07:20:11Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"

@@ -1,21 +1,23 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-17T20:51:25Z**
+Run time: **2026-11-18T07:20:11Z**
 
 ## Source check cadence
 
-- Checked this run: 7
-- Skipped until configured interval: 4
+- Checked this run: 6
+- Skipped until configured interval: 5
 
 ## New potentially relevant items
 
-None detected.
+### Critically Short Wartime Accession Bonus (CSWAB)
 
-## Source-check errors
+- Source: **DFAS Military Pay Tables**
+- Type: `pay_tables`
+- URL: https://www.dfas.mil/MilitaryMembers/payentitlements/Pay-Tables/HPO1/
+- Reserve signals: DRILL PAY, BASIC PAY, BAS, ALLOWANCE
+- Category hints: Pay & Benefits
 
-- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
+**Human review required. Detection does not mean this item should be published.**
 
 ## Publishing safety
 
