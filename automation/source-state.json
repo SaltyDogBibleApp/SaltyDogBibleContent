@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-18T07:20:11Z",
+  "lastRunAt": "2026-11-18T20:26:42Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -323,14 +323,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "c9471dc8ecc91b12dabb7b2967d01ba0c3f3e91387954059efcc0102e37ae596",
-      "itemCount": 270,
+      "fingerprint": "13a4df02a0014bdbd7b47aa443ae0efe102f4071a7946c8f2480bf842be61c3f",
+      "itemCount": 272,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -601,9 +601,11 @@
         "NAVADMIN-269/26",
         "NAVADMIN-270/26",
         "NAVADMIN-271/26",
-        "NAVADMIN-272/26"
+        "NAVADMIN-272/26",
+        "NAVADMIN-273/26",
+        "NAVADMIN-274/26"
       ],
-      "lastCheckedAt": "2026-11-18T07:20:11Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -778,7 +780,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-18T07:20:11Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -957,7 +959,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-18T07:20:11Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1118,7 +1120,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
@@ -1141,7 +1143,7 @@
         "reserve_guidance-d29784d34013296ed7e6",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "linkedDocumentCount": 12,
       "linkedDocuments": {
@@ -1417,7 +1419,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-17T20:51:25Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
@@ -2271,7 +2273,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-17T07:49:25Z",
+      "lastCheckedAt": "2026-11-18T20:26:42Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
