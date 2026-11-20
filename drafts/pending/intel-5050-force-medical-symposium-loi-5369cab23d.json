@@ -65,9 +65,9 @@
     "category": "Policy",
     "status": "TRACKING",
     "priority": "NORMAL",
-    "summary": "Automated draft from an official source: 5050 - FORCE MEDICAL SYMPOSIUM LOI. Review the source before publishing any policy conclusion.",
-    "whyItMatters": "This official-source item may affect Reserve policy, readiness, pay, benefits, retirement, or administration. Human review is required to determine the actual Reserve impact before publication. Detected Reserve signals: INACTIVE DUTY TRAINING, DRILL, TRAVEL REIMBURSEMENT, SELECTED RESERVE, ACTIVE DUTY TRAINING, RECRUITING, RETENTION, INCENTIVE, APPLY, NATIONAL COMMAND, SENIOR OFFICER, BILLET SCREENING.",
-    "details": "This draft was created automatically from Reserve Intel source monitoring. Open and review the authoritative source before publication. Confirm what changed, who is affected, whether the item is proposed or effective, the applicable dates, and any implementation guidance. Replace this placeholder with a sourced explanation before approving the article.",
+    "summary": "The Reserve Intel monitor detected a newly linked official Navy Reserve guidance document: 5050 - FORCE MEDICAL SYMPOSIUM LOI. The current PDF was re-fetched and matches the fingerprint captured at detection. Human review is required before describing its policy effect.",
+    "whyItMatters": "Official Navy Reserve personnel guidance can affect Reserve administration, training, readiness, pay or benefits, retirement, assignments, and related member requirements. The automated detection does not establish which of those areas changed or who is affected. Review the source before making any Salty Dog Bible content or app change.",
+    "details": "Automated evidence verification for 5050 - FORCE MEDICAL SYMPOSIUM LOI: detection kind `new_linked_document`. The official Navy Reserve PDF was re-fetched from https://www.navyreserve.navy.mil/Portals/35/5050%20-%20FORCE%20MEDICAL%20SYMPOSIUM%20LOI.pdf and its SHA-256 fingerprint matched the fingerprint stored with the detected draft. Source-server metadata observed during verification: HTTP Last-Modified: Fri, 20 Nov 2026 19:01:40 GMT; downloaded size: 176,858 bytes. HTTP Last-Modified metadata is not treated as a policy effective date or revision date. The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required.",
     "effectiveDate": null,
     "sourceName": "Navy Reserve RESFOR Notices",
     "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/5050 - FORCE MEDICAL SYMPOSIUM LOI.pdf",
@@ -79,5 +79,43 @@
     },
     "isPinned": false,
     "isActive": false
+  },
+  "enrichment": {
+    "sourceType": "reserve_guidance",
+    "enrichmentKind": "navy_reserve_linked_document_verification",
+    "enrichedAt": "2026-11-20T20:08:00Z",
+    "fetchedURL": "https://www.navyreserve.navy.mil/Portals/35/5050%20-%20FORCE%20MEDICAL%20SYMPOSIUM%20LOI.pdf",
+    "detectedFingerprint": "7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc",
+    "observedFingerprint": "7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc",
+    "fingerprintMatchesDetection": true,
+    "httpLastModified": "Fri, 20 Nov 2026 19:01:40 GMT",
+    "contentLength": 176858,
+    "etag": null,
+    "documentKind": "Navy Reserve guidance",
+    "documentIdentifier": null,
+    "sourceFilename": "5050 - FORCE MEDICAL SYMPOSIUM LOI.pdf",
+    "currentTextEvidence": {
+      "available": true,
+      "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/797513d3db07fe524d83/7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc.json",
+      "extractionStatus": "ok",
+      "extractionMethod": "pypdf",
+      "textSHA256": "59bea51e08858e9d0e557267aad628530a713e563c8a070dcdfdb689b43e4fa9",
+      "pageCount": 3,
+      "pagesWithText": 3,
+      "characterCount": 5051,
+      "lineCount": 86,
+      "truncated": false
+    },
+    "textComparison": {
+      "comparisonKind": "normalized_extracted_text_diff",
+      "available": false,
+      "unavailableReason": "new_linked_document_has_no_prior_version",
+      "currentSnapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/797513d3db07fe524d83/7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc.json",
+      "policyInterpretationClaimed": false,
+      "note": "This is a newly linked document, so there is no earlier monitored version to compare. Human source review is required."
+    },
+    "automatedChangeAttributionClaimed": false,
+    "effectiveDateInferred": false,
+    "changeAttributionNote": "The monitor detected a new linked official Navy Reserve guidance PDF. Automated tooling verified the current document fingerprint but has not determined the document's policy effect. Human source review is required."
   }
 }
