@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceType": "reserve_guidance",
+  "sourceURL": "https://www.navyreserve.navy.mil/Portals/35/5050 - FORCE MEDICAL SYMPOSIUM LOI.pdf",
+  "finalURL": "https://www.navyreserve.navy.mil/Portals/35/5050%20-%20FORCE%20MEDICAL%20SYMPOSIUM%20LOI.pdf",
+  "title": "5050 - FORCE MEDICAL SYMPOSIUM LOI",
+  "fingerprint": "7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc",
+  "capturedAt": "2026-11-20T20:07:28Z",
+  "extractionStatus": "ok",
+  "extractionMethod": "pypdf",
+  "pageCount": 3,
+  "pagesWithText": 3,
+  "characterCount": 5051,
+  "lineCount": 86,
+  "textSHA256": "59bea51e08858e9d0e557267aad628530a713e563c8a070dcdfdb689b43e4fa9",
+  "truncated": false,
+  "pageLineRanges": [
+    {
+      "page": 1,
+      "startLine": 1,
+      "endLine": 35
+    },
+    {
+      "page": 2,
+      "startLine": 36,
+      "endLine": 69
+    },
+    {
+      "page": 3,
+      "startLine": 70,
+      "endLine": 86
+    }
+  ],
+  "warnings": [],
+  "normalizedText": "DEPARTMENT OF THE NAVY\nCOMMANDER NAVY RESERVE FORCES COMMAND\n1915 FORRESTAL DRIVE\nNORFOLK VA 23551-4615\nCanc frp: May 2027\nCOMNAVRESFORCOMNOTE 5050\nN9\n17 Nov 2026\nCOMNAVRESFORCOM NOTICE 5050\nFrom: Commander, Navy Reserve Forces Command\nSubj: FORCE MEDICAL SYMPOSIUM LETTER OF INSTRUCTION\nRef: (a) RESPERSMAN 6000-010\n(b) DoD 7000.14-R Volume 7A\n(c) Joint Travel Regulations\n1. Purpose. Provide information on the execution of the Commander, Navy Reserve Forces\nCommand (COMNAVRESFORCOM) Force Medical Symposium.\n2. Background. The COMNAVRESFORCOM Force Surgeon is responsible for developing\nhealth policies and issuing guidance for Navy Reserve Force health protection and management.\nTo establish absolute alignment with the Chief of Naval Operations' \"Foundry, Fleet, Fight\"\nstrategic vision, this symposium will restructure health protection guidance into three operational\npillars to ensure peak warfighter readiness as well as provide training to force medical personnel\nper reference (a).\n3. Scope and Applicability. This notice applies to all COMNAVRESFORCOM, Navy Reserve\nRegion Readiness and Mobilization Commands (REDCOM), Navy Reserve Centers (NRC), and\nStrategic Sealift Officer force medical personnel.\n4. Event Details\na. Date and Time: 20 April 2027, 0800. Event check-in will be conducted from 0715 to\n0750 at the NRC Norfolk auditorium. REDCOM representatives will be available to assist their\nrespective attendees.\nb. Location: NRC Norfolk Auditorium, One Navy Drive, Virginia Beach, Virgina 23455\nc. Uniform: Navy Working Uniform, Type III\n5. Transportation. The authorized travel dates are 19 April 2027 for arrival at Norfolk\nInternational Airport and 23 April 2027 for departure. Travel dates and flights will not be\nscheduled during the symposium. Each REDCOM is responsible for arranging transportation to\nand from the airport for participants within their region.\nCOMNAVRESFORESCOMNOTE 5050\n17 Nov 2026\n2\nNote: Attendees traveling from Alaska, Guam, Hawaii, and Puerto Rico, as well as\ndesignated guest speakers, may be authorized alternate travel dates based on mission\nrequirements and applicable travel regulations.\na. Rental vehicles are authorized for designated duty drivers identified by REDCOM N9s.\nOne rental van per every six medical department representatives is authorized. Personnel who\nobtain a rental vehicle outside of this requirement will be at the member’s expense and will not\nbe reimbursed. Duty drivers will provide transportation to and from the airport, lodging,\nsymposium, and meal locations.\nb. Due to limited parking availability, all designated duty drivers will park in authorized\nsymposium parking spaces only.\nc. Each REDCOM N9 must provide a consolidated list of designated duty drivers to HMC\nChristopher Harris at CNRFC_FORCE_HEALTH_N9@us.navy.mil no later than\n29 March 2027, 1500, eastern standard time.\n6. Lodging. COMNAVRESFORCOM has reserved mandatory lodging for approved\nparticipants at Navy Inn Little Creek, 1120 A Street, Virginia Beach, VA 23459. Each approved\nattendee must contact the Department of Defense Reservation Center at 1-800-858-2128 to make\na reservation. Attendees must provide their name and Government Travel Charge Card\ninformation and reference the group information in paragraph 6a through 6d. Reservations must\nbe completed no later than 29 March 2027.\na. Group Name: FORCE MEDICAL SYMPOSIUM\nb. Group ID Number: 30230103860\nc. Group Dates: 19 through 23 April 2027\nd. Deadline: 29 March 2027\nNote: Approved attendees traveling from Hawaii, Guam, Puerto Rico, and Alaska may\nbe authorized alternate travel dates of 18 and 24 April 2027, subject to approval and\napplicable travel regulations.\n7. Defense Travel System. Each attendee is responsible for making individual travel\nreservations. Travel requests must be routed through the respective REDCOM N3 for approval.\nEach REDCOM N3 will provide the appropriate line of accounting for authorized attendees.\nCOMNAVRESFORCOM has coordinated group lodging at Navy Inn Little Creek. Refer to\nparagraph 6 for the group reservation information.\nCOMNAVRESFORESCOMNOTE 5050\n17 Nov 2026\n3\n8. Dining. Full per diem is authorized and justified per references (b) and (c) for all in-person\nattendees of the Force Medical Symposium. The symposium will be onboard Joint\nExpeditionary Base Little Creek-Fort Story, Virginia. Due to transportation limitations, the\ndistance to available dining facilities and the symposium schedule, attendees may have limited\nopportunities to access government dining facilities.\n9. Records Management. Records created as a result of this notice regardless of media and\nformat, will be managed per Secretary of the Navy Manual 5210.1 of January 2019.\n10. Cancellation Contingency. This notice will remain in effect until completion of the Force\nMedical Symposium.\nJ. M. DROLL\nChief of Staff\nReleasability and distribution:\nThis instruction is cleared for public release and is available only via Navy Reserve Web site\nhttps://www.navyreserve.navy.mil/Resources/Official-RESFOR-Guidance/Notices/"
+}

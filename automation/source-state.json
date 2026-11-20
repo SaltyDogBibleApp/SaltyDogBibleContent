@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-20T07:06:41Z",
+  "lastRunAt": "2026-11-20T20:07:28Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -324,7 +324,7 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-19T20:30:09Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
@@ -609,7 +609,7 @@
         "NAVADMIN-276/26",
         "NAVADMIN-277/26"
       ],
-      "lastCheckedAt": "2026-11-20T07:06:41Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -784,7 +784,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-20T07:06:41Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
@@ -963,7 +963,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-20T07:06:41Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1124,14 +1124,14 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-19T20:30:09Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "07eb37d4595853da4f249c767da43061ec3f9cbee6c55bb2f87ae2205c52e3c5",
-      "itemCount": 13,
+      "fingerprint": "4d7586970a3dd7d88c8201ea22c399dbcfb8cd0633de45492813cd587b23e4c7",
+      "itemCount": 15,
       "itemIDs": [
         "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
@@ -1140,16 +1140,18 @@
         "reserve_guidance-53e861293df08df9e3c8",
         "reserve_guidance-555e7201b92b5224a802",
         "reserve_guidance-5ecf75092ae0ad84d71c",
+        "reserve_guidance-797513d3db07fe524d83",
         "reserve_guidance-959345f9887618bc2d54",
         "reserve_guidance-97131d1aa7c6066922b4",
         "reserve_guidance-a949ff10fdb85dfc532a",
         "reserve_guidance-c24b1419149d343e768f",
         "reserve_guidance-d29784d34013296ed7e6",
+        "reserve_guidance-f92d5630944ec7574b8a",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-20T07:06:41Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
-      "linkedDocumentCount": 12,
+      "linkedDocumentCount": 14,
       "linkedDocuments": {
         "reserve_guidance-12225f1285922a7b3982": {
           "contentLength": 754587,
@@ -1277,6 +1279,24 @@
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/CNRFNOTE 1001 - FY27 FEG.pdf"
         },
+        "reserve_guidance-797513d3db07fe524d83": {
+          "contentLength": 176858,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/5050%20-%20FORCE%20MEDICAL%20SYMPOSIUM%20LOI.pdf",
+          "fingerprint": "7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc",
+          "lastModified": "Fri, 20 Nov 2026 19:01:40 GMT",
+          "textEvidence": {
+            "characterCount": 5051,
+            "extractionStatus": "ok",
+            "lineCount": 86,
+            "pageCount": 3,
+            "pagesWithText": 3,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/797513d3db07fe524d83/7554303b0d901bd72a1036300986109e9bd54789d07fa71bf720e973dd6281cc.json",
+            "textSHA256": "59bea51e08858e9d0e557267aad628530a713e563c8a070dcdfdb689b43e4fa9",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/5050 - FORCE MEDICAL SYMPOSIUM LOI.pdf"
+        },
         "reserve_guidance-959345f9887618bc2d54": {
           "contentLength": 977871,
           "etag": null,
@@ -1348,6 +1368,24 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORNOTE 1570 IDT-R.pdf"
+        },
+        "reserve_guidance-f92d5630944ec7574b8a": {
+          "contentLength": 197807,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR%20NOTICE%201001.pdf",
+          "fingerprint": "c1c4c22015da214e03bc0f04488f6964f2c4257175c7bc14778f547223323f96",
+          "lastModified": "Fri, 20 Nov 2026 18:19:20 GMT",
+          "textEvidence": {
+            "characterCount": 9943,
+            "extractionStatus": "ok",
+            "lineCount": 255,
+            "pageCount": 6,
+            "pagesWithText": 5,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/f92d5630944ec7574b8a/c1c4c22015da214e03bc0f04488f6964f2c4257175c7bc14778f547223323f96.json",
+            "textSHA256": "7b0997727e63aa26ec00e2d3cee20698df59a912df651539e39c8a925e24fd45",
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFOR NOTICE 1001.pdf"
         },
         "reserve_guidance-fdd8a0c2e344ac424d66": {
           "contentLength": 77030,
@@ -1423,7 +1461,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-19T20:30:09Z",
+      "lastCheckedAt": "2026-11-20T20:07:28Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
