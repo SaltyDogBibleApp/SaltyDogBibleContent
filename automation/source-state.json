@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-24T09:48:27Z",
+  "lastRunAt": "2026-11-24T22:21:09Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -324,14 +324,14 @@
       "fingerprint": "6519fb84b21bbde4505803a664add116ded72f1243e1580f7f784d997bf159da",
       "itemCount": 0,
       "itemIDs": [],
-      "lastCheckedAt": "2026-11-23T23:49:08Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
       "name": "GovInfo Congressional Bills",
       "url": "https://www.govinfo.gov/app/collection/BILLS"
     },
     "mynavyhr-navadmin": {
-      "fingerprint": "1354245b565acce90229a961d94ef722042771c72c0cfdbfba0c57ee28c60fa8",
-      "itemCount": 275,
+      "fingerprint": "2a14d9229caa768312915629a9d9a02c0434f2eb2632d053a424b9286357b19f",
+      "itemCount": 276,
       "itemIDs": [
         "NAVADMIN-002/26",
         "NAVADMIN-003/26",
@@ -607,9 +607,10 @@
         "NAVADMIN-274/26",
         "NAVADMIN-275/26",
         "NAVADMIN-276/26",
-        "NAVADMIN-277/26"
+        "NAVADMIN-277/26",
+        "NAVADMIN-278/26"
       ],
-      "lastCheckedAt": "2026-11-24T09:48:27Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
@@ -784,8 +785,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-24T09:48:27Z",
-      "lastError": "The read operation timed out",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
+      "lastError": null,
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
     },
@@ -963,7 +964,7 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-24T09:48:27Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
@@ -1124,18 +1125,19 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-23T23:49:08Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
       "name": "MyNavyHR Serving on a Reserve Board",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/General-Board-Info/Serving-Reserve-Board/"
     },
     "navyreserve-resfor-notices": {
-      "fingerprint": "4d7586970a3dd7d88c8201ea22c399dbcfb8cd0633de45492813cd587b23e4c7",
-      "itemCount": 15,
+      "fingerprint": "e1c9d1a3b6b182c2342f996d12b8a1a4329cc4d678a8c4e709bafa88e65f667d",
+      "itemCount": 16,
       "itemIDs": [
         "reserve_guidance-12225f1285922a7b3982",
         "reserve_guidance-1bcd9f4af6fa3d5c6a7c",
         "reserve_guidance-1d7fc79ad302d07cb3a6",
+        "reserve_guidance-2aec1569d6ada6a5d7df",
         "reserve_guidance-434edffa72369c87cb49",
         "reserve_guidance-53e861293df08df9e3c8",
         "reserve_guidance-555e7201b92b5224a802",
@@ -1149,9 +1151,9 @@
         "reserve_guidance-f92d5630944ec7574b8a",
         "reserve_guidance-fdd8a0c2e344ac424d66"
       ],
-      "lastCheckedAt": "2026-11-23T23:49:08Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
-      "linkedDocumentCount": 14,
+      "linkedDocumentCount": 15,
       "linkedDocuments": {
         "reserve_guidance-12225f1285922a7b3982": {
           "contentLength": 754587,
@@ -1206,6 +1208,24 @@
             "truncated": false
           },
           "url": "https://www.navyreserve.navy.mil/Portals/35/COMNAVRESFORCOMNOTE 5420 (SIGNED).pdf"
+        },
+        "reserve_guidance-2aec1569d6ada6a5d7df": {
+          "contentLength": 150051,
+          "etag": null,
+          "finalURL": "https://www.navyreserve.navy.mil/Portals/35/FISCAL%20YEAR%202027%20CIVILIAN%20AWARDS%20POLICY.pdf",
+          "fingerprint": "1dad191a7e3eced6928571b8966f7412ac1d5112f53c96e68687b66a8b4b7be7",
+          "lastModified": "Tue, 24 Nov 2026 19:25:34 GMT",
+          "textEvidence": {
+            "characterCount": 0,
+            "extractionStatus": "no_extractable_text",
+            "lineCount": 0,
+            "pageCount": 3,
+            "pagesWithText": 0,
+            "snapshotPath": "automation/reserve-intel-evidence/navyreserve-resfor-notices/2aec1569d6ada6a5d7df/1dad191a7e3eced6928571b8966f7412ac1d5112f53c96e68687b66a8b4b7be7.json",
+            "textSHA256": null,
+            "truncated": false
+          },
+          "url": "https://www.navyreserve.navy.mil/Portals/35/FISCAL YEAR 2027 CIVILIAN AWARDS POLICY.pdf"
         },
         "reserve_guidance-434edffa72369c87cb49": {
           "contentLength": 502927,
@@ -1461,7 +1481,7 @@
         "reserve_guidance-fc023312036a340afab2",
         "reserve_guidance-ffa0143e45807572f809"
       ],
-      "lastCheckedAt": "2026-11-23T23:49:08Z",
+      "lastCheckedAt": "2026-11-24T22:21:09Z",
       "lastError": null,
       "linkedDocumentCount": 43,
       "linkedDocuments": {
