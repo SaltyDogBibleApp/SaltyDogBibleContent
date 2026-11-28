@@ -1,6 +1,6 @@
 # Reserve Intel Monitor Report
 
-Run time: **2026-11-27T21:11:00Z**
+Run time: **2026-11-28T07:40:15Z**
 
 ## Source check cadence
 
@@ -13,9 +13,12 @@ None detected.
 
 ## Source-check errors
 
-- **Navy Reserve RESPERSMAN — RPM Acronyms** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERMAN Authorization Letter** — HTTP Error 404: Not Found
-- **Navy Reserve RESPERSMAN — RESPERSMAN Table of Contents** — HTTP Error 404: Not Found
+- **MyNavyHR NAVADMIN** — HTTP Error 403: Forbidden
+- **MyNavyHR Reserve Officer Boards** — HTTP Error 403: Forbidden
+- **MyNavyHR Reserve Officer Continuation and Retention** — HTTP Error 403: Forbidden
+- **DFAS Military Pay Tables** — HTTP Error 403: Forbidden
+- **BLS Consumer Price Index** — HTTP Error 403: Forbidden
+- **DoD Military Compensation** — HTTP Error 403: Forbidden
 
 ## Publishing safety
 

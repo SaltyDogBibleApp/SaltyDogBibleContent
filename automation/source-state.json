@@ -1,6 +1,6 @@
 {
   "initializedAt": "2026-09-14T16:24:31Z",
-  "lastRunAt": "2026-11-27T21:11:00Z",
+  "lastRunAt": "2026-11-28T07:40:15Z",
   "schemaVersion": 1,
   "sources": {
     "bls-cpi": {
@@ -164,8 +164,8 @@
         "economic_release-fa52bfe73d7a06ceef05",
         "economic_release-fd6f71ca42d8c31add16"
       ],
-      "lastCheckedAt": "2026-11-26T21:26:42Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "BLS Consumer Price Index",
       "url": "https://www.bls.gov/news.release/cpi.nr0.htm"
     },
@@ -266,8 +266,8 @@
         "pay_tables-ec1641ecbe0d85fe9198",
         "pay_tables-eec66a027cfaac28d71a"
       ],
-      "lastCheckedAt": "2026-11-26T21:26:42Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "DFAS Military Pay Tables",
       "url": "https://www.dfas.mil/militarymembers/payentitlements/Pay-Tables/"
     },
@@ -315,8 +315,8 @@
         "dod_compensation-efc91960ce9a8f182f46",
         "dod_compensation-fa09eb700e492447f41f"
       ],
-      "lastCheckedAt": "2026-11-26T21:26:42Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "DoD Military Compensation",
       "url": "https://militarypay.defense.gov/"
     },
@@ -611,8 +611,8 @@
         "NAVADMIN-278/26",
         "NAVADMIN-279/26"
       ],
-      "lastCheckedAt": "2026-11-27T21:11:00Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR NAVADMIN",
       "url": "https://www.mynavyhr.navy.mil/References/Messages/NAVADMIN-2026/"
     },
@@ -786,8 +786,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-27T21:11:00Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Boards",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Boards/Reserve-Officer/"
     },
@@ -965,8 +965,8 @@
         "reserve_board-ffd7a5f9027cd4eee312",
         "reserve_board-ffede1273d22a2784a31"
       ],
-      "lastCheckedAt": "2026-11-27T21:11:00Z",
-      "lastError": null,
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
+      "lastError": "HTTP Error 403: Forbidden",
       "name": "MyNavyHR Reserve Officer Continuation and Retention",
       "url": "https://www.mynavyhr.navy.mil/Career-Management/Reserve-Personnel-Mgmt/Officers/Continuation-Retention/"
     },
@@ -2336,7 +2336,7 @@
         "va_benefits-f44ff5a693921d4e8492",
         "va_benefits-fa8841f21936abd8d784"
       ],
-      "lastCheckedAt": "2026-11-26T21:26:42Z",
+      "lastCheckedAt": "2026-11-28T07:40:15Z",
       "lastError": null,
       "name": "VA Disability Compensation Rates",
       "url": "https://www.va.gov/disability/compensation-rates/"
